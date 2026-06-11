@@ -1,0 +1,11 @@
+nombre: Caso Garver 6 barras
+tipo: caso_didactico
+uso_sugerido:
+  - GEP
+  - TNEP
+  - OPF
+formatos:
+  - dat
+  - csv
+publica_modelos_ampl: false
+nota: Datos adaptados con fines docentes para la asignatura Planificación y Operación de Sistemas Eléctricos de Potencia.

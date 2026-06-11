@@ -1,0 +1,133 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{Laboratorio interactivo de planificación de expansión de generación}
+\subtitle{Caso Garver con AMPL e IA}
+\author{Ing. Wilian Guamán Cuenca, M.Sc.}
+\institute{ESPOCH -- Electricidad}
+\date{2026}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Propósito de la sesión}
+  \begin{itemize}
+    \item Usar un caso de estudio para comprender un modelo GEP.
+    \item Explorar datos de tecnologías, demanda, reserva y ENS.
+    \item Interpretar resultados de AMPL.
+    \item Auditar explicaciones generadas por IA.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Repositorio docente}
+  \begin{block}{Repositorio}
+  \url{https://github.com/ESPOCH-Electricidad/power-systems-planning-operation}
+  \end{block}
+  \begin{itemize}
+    \item Casos de estudio.
+    \item Guías de modelos matemáticos.
+    \item Notebooks de exploración.
+    \item Actividades y rúbricas.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Organización por bloques}
+  \begin{enumerate}
+    \item Fundamentos de optimización.
+    \item Operación de corto plazo.
+    \item Flujo óptimo de potencia.
+    \item Expansión de transmisión.
+    \item Expansión de generación.
+    \item Casos de estudio, evaluación e IA.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Actividad inicial}
+  \textbf{Pregunta Mentimeter:}
+
+  En un modelo GEP, ¿qué parámetro condiciona más la decisión de expansión?
+
+  \begin{itemize}
+    \item Demanda.
+    \item Inversión.
+    \item Costo operativo.
+    \item Reserva.
+    \item ENS.
+    \item Emisiones.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Modelo GEP: idea general}
+  \begin{equation*}
+  \min \sum_t\sum_g C_g P_{g,t} + \sum_t\sum_c IC_c I_{c,t} + \sum_t C^{ENS} ENS_t
+  \end{equation*}
+
+  El modelo decide capacidad nueva, despacho y energía no servida para atender demanda futura al menor costo.
+\end{frame}
+
+\begin{frame}{Restricciones principales}
+  \begin{align*}
+  Cap_{g,t} &= P_g^0 + \sum_{\tau\leq t} I_{g,\tau} \\
+  \sum_g P_{g,t}+ENS_t &= D_t \\
+  P_{g,t} &\leq Cap_{g,t} \\
+  \sum_g firm_g Cap_{g,t} &\geq (1+RM)D_t
+  \end{align*}
+\end{frame}
+
+\begin{frame}{Caso Garver}
+  \begin{itemize}
+    \item Tecnologías existentes: gas, hidro, térmica.
+    \item Tecnologías candidatas: solar, eólica, ciclo combinado, hidro.
+    \item Periodos: 2025, 2030, 2035.
+    \item Restricciones: demanda, reserva, emisiones y ENS.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Notebook de exploración}
+  \begin{itemize}
+    \item Lectura de datos del caso.
+    \item Gráficos de demanda.
+    \item Comparación de costos, emisiones y capacidad firme.
+    \item Verificación previa antes de resolver AMPL.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Actividad colaborativa}
+  En Padlet o Google Docs, responder:
+  \begin{enumerate}
+    \item ¿Qué tecnología parece atractiva y por qué?
+    \item ¿Qué pasa si aumenta la demanda?
+    \item ¿Qué pasa si baja la disponibilidad hidroeléctrica?
+    \item ¿Qué error podría cometer una IA al interpretar el caso?
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Desconfía del chatbot}
+  \begin{quote}
+  ``Como ENS es cero, el sistema es completamente seguro y no requiere análisis de red.''
+  \end{quote}
+
+  \textbf{Tarea:} detectar el error, corregirlo y justificarlo técnicamente.
+\end{frame}
+
+\begin{frame}{Evaluación final}
+  \begin{itemize}
+    \item Quiz en Google Forms, Kahoot o Quizizz.
+    \item Preguntas sobre capacidad, despacho, reserva, ENS y uso crítico de IA.
+    \item Reflexión final: ¿qué conclusión de IA fue más peligrosa?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Cierre}
+  La misma lógica de laboratorio puede extenderse a ED, UC, OPF, TNEP y GEP multianual.
+\end{frame}
+
+\end{document}

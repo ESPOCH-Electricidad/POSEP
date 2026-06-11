@@ -1,0 +1,30 @@
+# Python / notebooks
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.env
+.venv/
+
+# AMPL privado: no publicar modelos ni ejecución completa
+*.mod
+*.run
+*.nl
+*.sol
+*.log
+*.bak
+
+# Resultados que pueden revelar soluciones completas
+resultados_privados/
+soluciones_docente/
+*_solution.*
+
+# Archivos temporales Office/LaTeX
+~$*
+*.aux
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.toc
+*.vrb
+*.synctex.gz
