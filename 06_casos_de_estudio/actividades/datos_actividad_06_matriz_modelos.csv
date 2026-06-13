@@ -1,0 +1,7 @@
+pregunta_tecnica,modelo_sugerido
+Cuanto genera cada unidad en una hora,ED
+Que unidades se encienden durante un horizonte horario,UC
+La red limita el despacho,OPF-DC / OPF-AC
+Que lineas deben construirse,TNEP
+Que generacion debe instalarse en el largo plazo,GEP
+Como cambia el sistema ante escenarios,Modelo base + sensibilidad

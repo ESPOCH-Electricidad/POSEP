@@ -1,0 +1,5 @@
+criterio,peso,excelente,competente,basico,insuficiente
+Formulacion ED_UC_hidro,35,"Integra ED, UC, rampas, reserva e hidro con coherencia temporal.",Modelo completo con errores menores.,Modelo parcial.,No representa operacion de corto plazo.
+Implementacion AMPL,25,"Archivos dat, mod y run ejecutan todos los escenarios y generan salidas trazables.",Ejecuta la mayoria de escenarios.,Ejecucion parcial.,No ejecuta.
+Resultados,20,"Presenta resultados horarios, costos, estados, ENS y uso hidro en tablas y graficos.",Resultados principales completos.,Resultados incompletos.,Sin resultados verificables.
+Analisis tecnico,20,"Discute costo marginal, reserva, uso hidro, arranques y sensibilidad con criterio operativo.",Analisis adecuado.,Descripcion superficial.,No interpreta.

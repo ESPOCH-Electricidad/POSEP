@@ -1,0 +1,11 @@
+tipo,id,descripcion,costo_usd_mwh,pmin_mw,pmax_mw,emisiones_tco2_mwh
+generador,G1,Termica eficiente,18,20,120,0.55
+generador,G2,Termica flexible,24,0,90,0.72
+generador,G3,Hidroelectrica,6,0,80,0.0
+generador,G4,Solar fotovoltaica,0,0,50,0.0
+
+parametro,demanda_base_mw,210
+parametro,demanda_alta_mw,245
+parametro,participacion_min_renovable_pct,25
+parametro,limite_emisiones_tco2_h,95
+parametro,penalizacion_ens_usd_mwh,1000

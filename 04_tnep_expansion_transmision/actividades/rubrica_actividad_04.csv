@@ -1,0 +1,5 @@
+criterio,peso,excelente,competente,basico,insuficiente
+Formulacion TNEP,40,"Compara transporte, DC, hibrido y disyuntivo con variables y restricciones consistentes.",Modelos completos con errores menores.,Solo algunas formulaciones correctas.,Formulacion incompleta o incorrecta.
+Implementacion AMPL,20,"Estructura archivos por formulacion, ejecuta todos los escenarios y reporta resultados trazables.",Ejecuta la mayoria.,Ejecucion parcial.,No ejecuta.
+Decision de inversion,25,"Interpreta circuitos seleccionados, costo, ENS y diferencias entre formulaciones.",Interpreta resultados principales.,Analisis superficial.,No interpreta inversion.
+Excel e informe,15,Excel comparativo con graficos claros e informe tecnico bien argumentado.,Entregables adecuados.,Incompletos.,Deficientes.

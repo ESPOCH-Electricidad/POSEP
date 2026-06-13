@@ -1,0 +1,6 @@
+criterio,peso,excelente,competente,basico,insuficiente
+Seleccion y justificacion del modelo,25,Selecciona modelo apropiado y justifica con criterios tecnicos y matematicos.,Justificacion adecuada.,Justificacion parcial.,Modelo mal seleccionado.
+Formulacion matematica,30,"Formula claramente conjuntos, parametros, variables, objetivo y restricciones del caso elegido.",Formulacion completa con errores menores.,Parcial.,Incorrecta.
+Implementacion y ejecucion,20,"Archivos dat, mod, run y out consistentes, reproducibles y trazables.",Ejecuta con errores menores.,Ejecucion parcial.,No ejecuta.
+Analisis comparativo,15,"Compara base y extension con indicadores, graficos y criterio ingenieril.",Analisis adecuado.,Descripcion superficial.,No compara.
+Informe y Excel,10,"Entregables claros, ordenados y profesionalmente presentados.",Adecuados.,Incompletos.,Deficientes.

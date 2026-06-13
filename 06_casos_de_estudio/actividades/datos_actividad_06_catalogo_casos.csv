@@ -1,0 +1,6 @@
+caso,barras,lineas_corredores,generadores,uso_recomendado
+Caso A - Sistema didactico 3 barras,3,3,2,"ED, OPF-DC basico"
+Caso B - Sistema didactico 5 barras,5,7,4,"OPF-DC, OPF-AC"
+Caso C - Garver 6 barras,6,11,3 zonas,"TNEP, GEP simplificado"
+Caso D - IEEE 14 adaptado,14,segun repositorio,segun repositorio,OPF-DC/AC
+Caso E - IEEE 24 RTS adaptado,24,segun repositorio,segun repositorio,"UC, OPF, confiabilidad"

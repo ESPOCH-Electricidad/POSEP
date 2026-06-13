@@ -1,0 +1,5 @@
+criterio,peso,excelente,competente,basico,insuficiente
+Formulacion OPF,35,"Formula balance nodal, flujos, referencia, limites y ENS con coherencia de red.",Formula OPF-DC completo con errores menores.,OPF parcial.,No representa la red.
+Implementacion AMPL,25,"Archivos dat, mod y run ejecutan escenarios y reportan flujos y generacion.",Ejecuta caso base y parte de escenarios.,Ejecucion parcial.,No ejecuta.
+Interpretacion electrica,25,"Identifica congestion, cambios de despacho, ENS y diferencias DC/AC con criterio tecnico.",Interpreta resultados principales.,Analisis superficial.,No interpreta.
+Excel y comunicacion,15,"Excel claro con graficos de flujos, congestion y costos; informe estructurado.",Excel/informe adecuados.,Incompleto.,Deficiente.

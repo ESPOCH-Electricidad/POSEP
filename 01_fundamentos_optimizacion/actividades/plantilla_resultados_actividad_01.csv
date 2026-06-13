@@ -1,0 +1,6 @@
+escenario,Pg_G1,Pg_G2,Pg_G3,Pg_G4,ENS,Costo_total,Emisiones,Comentario_tecnico
+Base,,,,,,,,
+S1_Demanda_alta,,,,,,,,
+S2_Hidro_baja,,,,,,,,
+S3_Costo_termico_alto,,,,,,,,
+S4_Emisiones_estrictas,,,,,,,,

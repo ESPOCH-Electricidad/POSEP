@@ -1,0 +1,5 @@
+gen,barra,costo_usd_mwh,pmin_mw,pmax_mw,qmin_mvar,qmax_mvar
+G1,1,20,30,220,-80,120
+G2,2,28,20,160,-60,90
+G3,3,45,0,100,-40,70
+G4,5,55,0,90,-30,60

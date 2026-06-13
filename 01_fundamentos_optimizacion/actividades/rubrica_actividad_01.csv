@@ -1,0 +1,5 @@
+criterio,peso,excelente,competente,basico,insuficiente
+Formulacion matematica,40,"Define conjuntos, parametros, variables, objetivo y restricciones con consistencia dimensional y tecnica.",Presenta formulacion completa con errores menores.,Formula parcialmente el modelo.,No formula el problema de forma coherente.
+Implementacion AMPL,25,"Los archivos dat, mod y run son consistentes, ejecutan sin errores y estan documentados.",Ejecutan con ajustes menores.,Ejecutan parcialmente o tienen errores de estructura.,No ejecutan o no corresponden al problema.
+Resultados y archivo out,20,"Presenta salida completa, identifica valor objetivo y variables clave.",Presenta resultados principales.,Resultados incompletos.,No genera resultados verificables.
+Analisis tecnico,15,"Interpreta sensibilidad, restricciones activas y limitaciones del modelo con criterio ingenieril.",Analiza resultados principales.,Describe sin interpretar.,No hay analisis tecnico.
