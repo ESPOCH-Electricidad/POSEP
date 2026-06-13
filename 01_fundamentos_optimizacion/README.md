@@ -1,11 +1,29 @@
-# 01 Fundamentos de optimización
+# 01 — Fundamentos de optimización
 
-Este bloque introduce la formulación algebraica de problemas de optimización antes de estudiar aplicaciones eléctricas. Los ejemplos se apoyan en modelos revisados en clase: fábrica de pinturas, transporte de energía, localización de antenas y forma matricial general.
+[Inicio](../README.md) | [Sitio](../docs/index.md) | [Bloque siguiente](../02_operacion_corto_plazo/README.md)
+
+![Figura del bloque](assets/figuras/flujo_fundamentos.svg)
+
+## Propósito del bloque
+
+Introduce la transición entre un problema técnico y su representación como modelo de optimización. Se trabaja con programación lineal, programación lineal entera mixta y forma matricial, usando ejemplos de producción, transporte de energía y localización.
+
+## Mapa de contenidos
+
+| Sección | Acceso |
+|---|---|
+| Modelos matemáticos | [modelos/README.md](modelos/README.md) |
+| Notebooks | [notebooks/](notebooks/) |
+| Actividades | [actividades/README.md](actividades/README.md) |
 
 ## Secuencia sugerida
 
-1. Revisar `modelos/01_LP_fabrica_pinturas.md`.
-2. Revisar `modelos/02_LP_transporte_energia.md`.
-3. Revisar `modelos/03_MILP_localizacion_antenas.md`.
-4. Revisar `modelos/04_forma_matricial_lp.md`.
-5. Resolver la actividad en `actividades/`.
+1. Revisar los modelos matemáticos documentados.
+2. Explorar los datos disponibles en casos o actividades.
+3. Ejecutar los notebooks de exploración, cuando corresponda.
+4. Desarrollar la actividad integradora del bloque.
+5. Preparar informe técnico y archivo Excel de interpretación.
+
+## Resultado esperado
+
+Al finalizar este bloque, el estudiante debe poder explicar el problema, formular el modelo, construir datos, ejecutar la implementación computacional y defender técnicamente los resultados.

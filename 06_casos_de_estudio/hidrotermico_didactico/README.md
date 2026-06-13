@@ -1,13 +1,33 @@
 # Caso hidrotérmico didáctico
 
-## Descripción
+[Inicio](../../README.md) | [Casos de estudio](../README.md)
 
-Conjunto de casos para hidrotérmico simple, cascada y rampas.
+## Estado
 
-## Archivos de datos
+**Completo.**
 
-Ver carpeta `datos_dat/`.
+## Propósito
 
-## Uso didáctico
+Casos progresivos para despacho hidrotérmico, cascadas y rampas.
 
-El estudiante debe transformar estos datos en el formato requerido por su propio archivo `.dat`, formular el modelo y validar resultados.
+## Datos disponibles
+
+| Archivo | Descripción |
+|---|---|
+| `datos/hidrotermico_simple.dat` | Caso hidrotérmico básico. |
+| `datos/cascada_base.dat` | Cascada hidroeléctrica base. |
+| `datos/cascada_rampas.dat` | Cascada con restricciones de rampa. |
+
+## Usos recomendados
+
+| Modelo | Uso |
+|---|---|
+| Despacho hidrotérmico | Gestión de agua y generación térmica. |
+| Cascadas | Dinámica de embalses y operación temporal. |
+
+## Recomendaciones de uso
+
+1. Revisar el archivo de datos antes de construir el `.dat` propio.
+2. Verificar unidades y escalas económicas.
+3. Documentar toda adaptación realizada.
+4. Comparar los resultados con el comportamiento esperado del sistema.

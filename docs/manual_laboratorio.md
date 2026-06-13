@@ -1,27 +1,24 @@
 # Manual del laboratorio de modelación
 
-## Propósito
+[Inicio del sitio](index.md) | [README principal](../README.md)
 
-Desarrollar competencias de formulación, implementación, ejecución e interpretación de modelos de optimización aplicados a sistemas eléctricos.
-
-## Flujo estándar
+## Flujo de trabajo
 
 1. Leer el modelo matemático del bloque.
-2. Revisar el caso de estudio.
-3. Construir el archivo `.dat` desde las tablas.
+2. Revisar los datos del caso de estudio.
+3. Construir el archivo `.dat`.
 4. Formular el archivo `.mod`.
 5. Crear el archivo `.run`.
-6. Ejecutar el modelo.
-7. Guardar el archivo `.out`.
-8. Postprocesar resultados en Excel.
-9. Redactar un informe técnico.
+6. Resolver el modelo y guardar el archivo `.out`.
+7. Organizar resultados en Excel.
+8. Redactar el informe técnico.
 
-## Criterios mínimos de calidad
+## Criterio de calidad
 
-- Consistencia de unidades.
-- Declaración clara de conjuntos e índices.
-- Parámetros con dominios y unidades.
-- Variables con dominio físico o lógico.
-- Restricciones interpretables.
-- Resultados reproducibles.
-- Figuras y tablas con título, unidad y fuente.
+Un resultado computacional no es suficiente. El estudiante debe demostrar que entiende:
+
+- qué decisión representa cada variable;
+- qué restricción controla la solución;
+- qué unidades usa cada parámetro;
+- qué cambia al modificar un escenario;
+- qué limitaciones tiene el modelo.

@@ -1,13 +1,31 @@
-# Caso IEEE 24 RTS
+# Caso IEEE 24 RTS adaptado
 
-## Descripción
+[Inicio](../../README.md) | [Casos de estudio](../README.md)
 
-Caso parcial documentado para TNEP. Incluye datos en formulaciones transporte, heurística, híbrida y disyuntiva.
+## Estado
 
-## Archivos de datos
+**Parcial; ampliable.**
 
-Ver carpeta `datos_dat/`.
+## Propósito
 
-## Uso didáctico
+Sistema de prueba para estudios de confiabilidad, operación y planificación. En este repositorio se usa como base para expansión de transmisión.
 
-El estudiante debe transformar estos datos en el formato requerido por su propio archivo `.dat`, formular el modelo y validar resultados.
+## Datos disponibles
+
+| Archivo | Descripción |
+|---|---|
+| `datos/ieee24_tnep_transporte.dat` | Datos adaptados para TNEP de transporte. |
+
+## Usos recomendados
+
+| Modelo | Uso |
+|---|---|
+| TNEP | Comparación de corredores candidatos. |
+| UC/OPF | Puede ampliarse con datos de generación y demanda horaria. |
+
+## Recomendaciones de uso
+
+1. Revisar el archivo de datos antes de construir el `.dat` propio.
+2. Verificar unidades y escalas económicas.
+3. Documentar toda adaptación realizada.
+4. Comparar los resultados con el comportamiento esperado del sistema.

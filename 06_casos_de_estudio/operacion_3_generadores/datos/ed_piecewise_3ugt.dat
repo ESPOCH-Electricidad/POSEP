@@ -1,0 +1,17 @@
+
+param: UGT: a 		b 		c 		Pmin	Pmax:=
+		1	500		5.4		0.004	200		455
+		2	400		5.5		0.006	150		350
+		3	200		5.8		0.009	100		225;
+
+
+param D:=800;
+
+param S:=1;
+
+for {t in UGT} {
+	let dt_max[t]:=Pmax[t]/S;
+	for {s in 1..S} {
+		let m[t,s]:=(2*s-1)*dt_max[t];
+	}
+}

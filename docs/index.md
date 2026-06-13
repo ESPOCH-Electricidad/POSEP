@@ -1,24 +1,24 @@
-# Planificación y Operación de Sistemas Eléctricos de Potencia
+# Power Systems Planning and Operation
 
-![Banner](assets/img/banner_operacion_planificacion_sep.png)
+## Learning-oriented repository
 
-Este sitio acompaña el repositorio académico de la asignatura. Presenta una ruta ordenada para estudiar modelos de optimización aplicados a la operación y planificación de sistemas eléctricos de potencia.
+![Course map](../assets/global_course_map.svg)
 
-## Ruta de estudio
+This repository is structured as an integrated learning system for electrical engineering students.
 
-1. **Fundamentos de optimización**: LP, MILP, NLP, transporte y localización.
-2. **Operación de corto plazo**: despacho económico, compromiso de unidades e hidrotérmico.
-3. **Flujo óptimo de potencia**: OPF-DC y OPF-AC.
-4. **Expansión de transmisión**: transporte, DC, híbrido, disyuntivo y multietapa.
-5. **Expansión de generación**: GEP base, bloques y multianual.
-6. **Casos de estudio**: Garver, IEEE 14, IEEE 24 RTS, IEEE 30 y casos didácticos.
+## Navigation
 
-## Secciones del sitio
+- [Course model catalog](modelos.md)
+- [Fundamentals](../01_fundamentos_optimizacion/modelos/README.md)
+- [Operation](../02_operacion_corto_plazo/modelos/README.md)
+- [OPF](../03_opf_flujo_optimo_potencia/modelos/README.md)
+- [TNEP](../04_tnep_expansion_transmision/modelos/README.md)
+- [GEP](../05_gep_expansion_generacion/modelos/README.md)
 
-- [Introducción a operación y planificación](introduccion_operacion_planificacion.md)
-- [Modelos de optimización](modelos.md)
-- [Casos de estudio](casos_de_estudio.md)
-- [Actividades de evaluación por bloque](evaluacion.md)
-- [Manual del laboratorio](manual_laboratorio.md)
-- [Roadmap del repositorio](roadmap.md)
-- [Figuras y recursos visuales](figuras.md)
+## Learning logic
+
+Students progress through:
+1. Mathematical formulation
+2. Physical interpretation
+3. Computational implementation
+4. Case study application

@@ -1,23 +1,17 @@
+# Archivos generados localmente
 __pycache__/
-*.py[cod]
 .ipynb_checkpoints/
-.venv/
-venv/
-~$*
+*.log
 *.tmp
 *.bak
+
+# Resultados y soluciones locales
 *.out
 *.sol
-*.nl
-*.row
-*.col
-*.log
+resultados_locales/
+soluciones_docente/
+
+# Modelos AMPL de trabajo local
+# Si el docente decide publicar algun .mod o .run especifico, puede forzar su inclusion manualmente.
 *.mod
 *.run
-soluciones_docente/
-soluciones_docente_privadas/
-resultados_privados/
-claves/
-licencias/
-.DS_Store
-Thumbs.db

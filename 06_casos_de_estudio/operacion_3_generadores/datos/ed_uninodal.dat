@@ -1,0 +1,9 @@
+#Datos del problema
+set UGT:= 1 2 3;
+
+param: UGT: a 		b 		c 		Pmin	Pmax:=		#ingresar todos los parametros que dependen del conjunto UGT
+		1	320		16		0.08	0		100
+		2	450		9		0.18	0		200
+		3	400		5		0.15	0		50	;
+		
+param demanda:=150;

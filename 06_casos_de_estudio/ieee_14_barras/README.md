@@ -1,13 +1,31 @@
 # Caso IEEE 14 barras
 
-## Descripción
+[Inicio](../../README.md) | [Casos de estudio](../README.md)
 
-Caso parcial documentado para OPF-AC y adaptación OPF-DC. Incluye datos usados en clase.
+## Estado
 
-## Archivos de datos
+**Completo.**
 
-Ver carpeta `datos_dat/`.
+## Propósito
 
-## Uso didáctico
+Sistema de prueba para flujo de potencia y OPF. Se usa como primer caso de red con datos AC.
 
-El estudiante debe transformar estos datos en el formato requerido por su propio archivo `.dat`, formular el modelo y validar resultados.
+## Datos disponibles
+
+| Archivo | Descripción |
+|---|---|
+| `datos/ieee14_opf_ac.dat` | Datos adaptados para OPF-AC. |
+
+## Usos recomendados
+
+| Modelo | Uso |
+|---|---|
+| OPF-AC | Análisis de tensión, potencia activa/reactiva y límites. |
+| OPF-DC | Puede derivarse una aproximación DC a partir de los datos. |
+
+## Recomendaciones de uso
+
+1. Revisar el archivo de datos antes de construir el `.dat` propio.
+2. Verificar unidades y escalas económicas.
+3. Documentar toda adaptación realizada.
+4. Comparar los resultados con el comportamiento esperado del sistema.

@@ -1,4 +1,8 @@
-# Actividades — 02 Operación de corto plazo
+# Actividades — 02 operacion corto plazo
+
+[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](../modelos/README.md)
+
+Actividades — 02 Operación de corto plazo
 
 Evaluación integradora de despacho económico, compromiso de unidades y coordinación hidrotérmica simplificada.
 
@@ -11,3 +15,12 @@ Evaluación integradora de despacho económico, compromiso de unidades y coordin
 - `rubrica_actividad_02.csv`
 - `plantilla_resultados_actividad_02.csv`
 - `figuras/flujo_actividad_02.svg`
+
+## Uso sugerido
+
+1. Revisar primero los modelos documentados.
+2. Leer el enunciado de la actividad.
+3. Construir los datos `.dat` desde las tablas.
+4. Implementar `.mod` y `.run`.
+5. Generar `.out`.
+6. Elaborar Excel e informe PDF.

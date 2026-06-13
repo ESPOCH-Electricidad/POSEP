@@ -1,20 +1,9 @@
 cff-version: 1.2.0
-title: "Planificación y Operación de Sistemas Eléctricos de Potencia"
-message: "Si utilizas este repositorio en docencia o investigación, cita esta referencia."
-type: dataset
+title: Power Systems Planning and Operation Teaching Repository
+message: Please cite this repository when used for academic purposes.
 authors:
-  - family-names: Guamán Cuenca
+  - family-names: Guamán
     given-names: Wilian
-affiliation: "Escuela Superior Politécnica de Chimborazo"
-repository-code: "https://github.com/ESPOCH-Electricidad/power-systems-planning-operation"
-keywords:
-  - sistemas eléctricos de potencia
-  - optimización
-  - despacho económico
-  - unit commitment
-  - optimal power flow
-  - transmisión
-  - generación
-  - AMPL
-  - docencia
-license: "CC-BY-4.0"
+    affiliation: ESPOCH
+version: 7.0
+license: CC-BY-4.0

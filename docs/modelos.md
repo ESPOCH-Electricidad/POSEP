@@ -1,15 +1,13 @@
-# Modelos de optimización de la asignatura
+# Catálogo de modelos
 
-Los modelos están documentados por bloque en la carpeta `modelos/` de cada sección. Cada documento explica propósito, supuestos, conjuntos, índices, parámetros, variables, función objetivo, restricciones, interpretación técnica, errores frecuentes y relación con los modelos AMPL usados en clase.
+[Inicio del sitio](index.md) | [README principal](../README.md)
 
-## Separación modelo-datos-ejecución
+Este catálogo permite navegar por los modelos documentados. Cada modelo incluye teoría introductoria, tabla de interpretación, formulación matemática y guía de implementación.
 
-La formulación matemática, los datos y la ejecución se tratan por separado. Esto permite que un mismo modelo pueda evaluarse con varios casos de estudio.
-
-| Bloque | Modelos principales |
+| Bloque | Modelos |
 |---|---|
-| Fundamentos | Fábrica de pinturas, transporte de energía, localización de antenas, forma matricial LP |
-| Operación | Despacho económico, despacho por tramos, hidrotérmico, cascada con rampas |
-| OPF | OPF-DC y OPF-AC |
-| TNEP | Transporte, heurístico, DC, híbrido, lineal disyuntivo y multietapa |
-| GEP | Base Garver, estático con bloques y multianual |
+| Fundamentos | [Modelos de optimización básica](../01_fundamentos_optimizacion/modelos/README.md) |
+| Operación | [Despacho económico, UC e hidrotérmico](../02_operacion_corto_plazo/modelos/README.md) |
+| OPF | [OPF-DC y OPF-AC](../03_opf_flujo_optimo_potencia/modelos/README.md) |
+| TNEP | [Expansión de transmisión](../04_tnep_expansion_transmision/modelos/README.md) |
+| GEP | [Expansión de generación](../05_gep_expansion_generacion/modelos/README.md) |

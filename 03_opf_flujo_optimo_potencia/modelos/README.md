@@ -1,6 +1,8 @@
-# Modelos del bloque 03
+# Modelos — Flujo óptimo de potencia
 
-| Documento | Modelo |
-|---|---|
-| `01_OPF_DC.md` | Flujo óptimo DC |
-| `02_OPF_AC.md` | Flujo óptimo AC |
+[Inicio](../../README.md) | [Bloque 03](../README.md) | [Actividades](../actividades/README.md)
+
+| Modelo | Enlace | Propósito |
+|---|---|---|
+| Flujo óptimo de potencia DC | [01_flujo_optimo_potencia_dc.md](01_flujo_optimo_potencia_dc.md) | Representar despacho con red mediante aproximación lineal |
+| Flujo óptimo de potencia AC | [02_flujo_optimo_potencia_ac.md](02_flujo_optimo_potencia_ac.md) | Incorporar tensión, reactivos, pérdidas y no linealidad |

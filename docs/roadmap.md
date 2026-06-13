@@ -1,23 +1,19 @@
-# Roadmap del repositorio
+# Roadmap académico del repositorio
+
+[Inicio del sitio](index.md) | [README principal](../README.md)
 
 ## Versión actual
 
-- Organización por bloques temáticos.
-- Modelos matemáticos documentados.
-- Casos Garver, IEEE y didácticos.
-- Actividades por bloque.
-- Notebooks de exploración de datos.
+- Navegación interna mediante enlaces relativos.
+- Modelos documentados por bloque.
+- Actividades integradoras por bloque.
+- Casos de estudio con datos públicos.
+- Notebooks de exploración.
 
 ## Próximas mejoras
 
-### Corto plazo
-- Completar diagramas de red para IEEE 14, IEEE 24 y IEEE 30.
-- Homologar unidades económicas en todos los casos.
-
-### Mediano plazo
-- Agregar validadores automáticos de datos.
-- Crear plantillas Excel por actividad.
-
-### Largo plazo
-- Mantener repositorio privado paralelo para solucionarios docentes.
-- Integrar rúbricas institucionales y guías de evaluación.
+1. Completar diagramas específicos para todos los casos IEEE.
+2. Ampliar notebooks con visualizaciones de red y resultados.
+3. Agregar ejemplos de postproceso en Excel.
+4. Consolidar metadatos y fuentes por caso.
+5. Mantener soluciones y respuestas docentes en un entorno privado.

@@ -1,13 +1,30 @@
 # Caso operación 101 generadores
 
-## Descripción
+[Inicio](../../README.md) | [Casos de estudio](../README.md)
 
-Caso de mayor escala para ED por tramos.
+## Estado
 
-## Archivos de datos
+**Completo.**
 
-Ver carpeta `datos_dat/`.
+## Propósito
 
-## Uso didáctico
+Caso de mayor escala para probar la escalabilidad de formulaciones de despacho.
 
-El estudiante debe transformar estos datos en el formato requerido por su propio archivo `.dat`, formular el modelo y validar resultados.
+## Datos disponibles
+
+| Archivo | Descripción |
+|---|---|
+| `datos/ed_piecewise_101ugt.dat` | Datos para despacho por tramos con 101 unidades. |
+
+## Usos recomendados
+
+| Modelo | Uso |
+|---|---|
+| ED por tramos | Escalabilidad y procesamiento de resultados. |
+
+## Recomendaciones de uso
+
+1. Revisar el archivo de datos antes de construir el `.dat` propio.
+2. Verificar unidades y escalas económicas.
+3. Documentar toda adaptación realizada.
+4. Comparar los resultados con el comportamiento esperado del sistema.

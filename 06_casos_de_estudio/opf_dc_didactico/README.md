@@ -1,13 +1,30 @@
 # Caso OPF-DC didáctico
 
-## Descripción
+[Inicio](../../README.md) | [Casos de estudio](../README.md)
 
-Caso pequeño para formular y ejecutar OPF-DC.
+## Estado
 
-## Archivos de datos
+**Completo.**
 
-Ver carpeta `datos_dat/`.
+## Propósito
 
-## Uso didáctico
+Caso simplificado para introducir balance nodal, ángulos y congestión.
 
-El estudiante debe transformar estos datos en el formato requerido por su propio archivo `.dat`, formular el modelo y validar resultados.
+## Datos disponibles
+
+| Archivo | Descripción |
+|---|---|
+| `datos/opf_dc_base.dat` | Datos base para OPF-DC. |
+
+## Usos recomendados
+
+| Modelo | Uso |
+|---|---|
+| OPF-DC | Primer ejercicio de red con flujo lineal. |
+
+## Recomendaciones de uso
+
+1. Revisar el archivo de datos antes de construir el `.dat` propio.
+2. Verificar unidades y escalas económicas.
+3. Documentar toda adaptación realizada.
+4. Comparar los resultados con el comportamiento esperado del sistema.
