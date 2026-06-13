@@ -1,90 +1,57 @@
 # Modelo lineal de producción con recursos limitados
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/modelo_produccion_lineal.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-Este modelo representa una situación elemental de asignación de recursos: se dispone de una capacidad limitada y se debe decidir cuánto producir de cada alternativa. Aunque el ejemplo puede ser de producción industrial, su estructura es la misma que aparece en despacho económico, selección de tecnologías y asignación de energía.
+Este modelo permite introducir la programación lineal mediante una decisión de asignación de recursos. Cada alternativa consume capacidad y aporta beneficio o costo. El objetivo es encontrar la combinación factible que optimiza el criterio económico.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Tipo de problema | Programación lineal si las variables son continuas; MILP si se exige producción entera. |
-| Decisión | Cantidad a producir o suministrar. |
-| Restricción central | Uso de capacidad o recurso disponible. |
-| Resultado esperado | Producción óptima y recurso limitante. |
+| Conjunto | $P$: productos o alternativas. |
+| Índice | $p \in P$. |
+| Parámetros | $c_p$: beneficio; $a_p$: consumo de recurso; $R$: recurso disponible; $\overline{x}_p$: producción máxima. |
+| Variable | $x_p$: cantidad producida del producto $p$. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Función objetivo
 
-- `P`: conjunto de productos o alternativas.
+Maximizar beneficio total.
 
-### 3.2 Índices
+$$
+\max Z = \sum_{p \in P} c_p x_p
+$$
 
-- `p ∈ P`: producto o alternativa de producción.
+### Recurso disponible
 
-### 3.3 Parámetros
+El consumo total no puede superar el recurso disponible.
 
-- `c_p`: beneficio o costo unitario.
-- `a_p`: consumo de recurso por unidad.
-- `R`: recurso disponible.
-- `u_p`: producción máxima permitida.
+$$
+\sum_{p \in P} a_p x_p \leq R
+$$
 
-### 3.4 Variables de decisión
+### Límite de producción
 
-- `x_p ≥ 0`: cantidad producida del producto `p`.
+Cada alternativa respeta su capacidad máxima.
 
-### 3.5 Función objetivo
+$$
+0 \leq x_p \leq \overline{x}_p \quad \forall p \in P
+$$
 
-Maximizar beneficio o minimizar costo total. En forma de maximización:  
+## 4. Interpretación técnica
 
-```text
-max Z = sum_{p in P} c_p x_p
-```
+La solución muestra qué alternativas son económicamente atractivas y qué restricción limita el sistema. Si la restricción de recurso está activa, aumentar $R$ podría mejorar el objetivo.
 
-### 3.6 Restricciones
+## 5. Actividad relacionada
 
-### R1. Disponibilidad de recurso
+- [Ir a la actividad](../actividades/actividad_01_fundamentos_optimizacion.md)
+---
 
-El uso total del recurso no puede superar la capacidad disponible.
-
-```text
-sum_{p in P} a_p x_p <= R
-```
-### R2. Límite de producción
-
-Cada alternativa puede tener una producción máxima.
-
-```text
-0 <= x_p <= u_p
-```
-### R3. Dominio
-
-Las variables son continuas salvo que el problema exija unidades enteras.
-
-```text
-x_p >= 0
-```
-
-## 4. Construcción del archivo `.dat`
-
-El archivo `.dat` debe declarar el conjunto `P` y los parámetros `c`, `a`, `u` y `R`. Se recomienda usar nombres de parámetros con unidades explícitas.
-
-## 5. Interpretación del archivo `.out`
-
-El archivo `.out` debe permitir identificar valor objetivo, producción por alternativa y restricción activa. Si una restricción está activa, su holgura debe ser cero o muy cercana a cero.
-
-## 6. Errores frecuentes
-
-- Confundir maximización con minimización.
-- No verificar unidades del recurso.
-- Escribir restricciones explícitas que no escalan.
-- No analizar holguras.
-
-## 7. Actividades relacionadas
-
-- [Actividad 01](../actividades/actividad_01_fundamentos_optimizacion.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

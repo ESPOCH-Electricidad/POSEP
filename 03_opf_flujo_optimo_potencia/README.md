@@ -1,31 +1,50 @@
 # 03 — Flujo óptimo de potencia
 
-[Inicio](../README.md) | [Sitio](../docs/index.md) | [Bloque anterior](../02_operacion_corto_plazo/README.md) | [Bloque siguiente](../04_tnep_expansion_transmision/README.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
 
-![Figura del bloque](assets/figuras/red_opf.svg)
 
-## Propósito del bloque
 
-Relaciona el despacho económico con las restricciones físicas de la red. El bloque diferencia OPF-DC y OPF-AC, destacando balance nodal, flujos, límites de líneas, tensión, potencia reactiva y congestión.
+![Mapa visual del bloque](../docs/assets/img/bloques/03_opf.svg)
 
-## Mapa de contenidos
+## 1. Propósito del bloque
 
-| Sección | Acceso |
+El OPF conecta el despacho económico con la física de la red. A diferencia del despacho uninodal, aquí la ubicación de la generación y la demanda importa. Una solución barata puede no ser factible si las líneas se congestionan o si las tensiones salen de rango.
+
+![Del ED al OPF](assets/figuras/teoria/opf_de_ed_a_red.svg)
+
+## 2. Idea central
+
+En OPF-DC, cada barra cumple un balance nodal:
+
+$$
+\sum_{g \in G_n} P_g - P^D_n + ENS_n =
+\sum_{\ell \in \delta(n)} A_{n,\ell} F_\ell
+$$
+
+y cada flujo se aproxima como:
+
+$$
+F_\ell = \frac{\theta_i - \theta_j}{x_\ell}
+$$
+
+En OPF-AC, el modelo incorpora tensiones, ángulos, potencia reactiva y pérdidas mediante ecuaciones no lineales.
+
+## 3. Modelos del bloque
+
+| Modelo | Uso |
 |---|---|
-| Modelos matemáticos | [modelos/README.md](modelos/README.md) |
-| OPF-DC | [OPF_DC/README.md](OPF_DC/README.md) |
-| OPF-AC | [OPF_AC/README.md](OPF_AC/README.md) |
-| Notebooks | [notebooks/](notebooks/) |
-| Actividades | [actividades/README.md](actividades/README.md) |
+| [Flujo óptimo de potencia DC](modelos/01_flujo_optimo_potencia_dc.md) | análisis lineal de congestión |
+| [Flujo óptimo de potencia AC](modelos/02_flujo_optimo_potencia_ac.md) | análisis con tensión, reactivos y pérdidas |
 
-## Secuencia sugerida
+## 4. Carpetas del bloque
 
-1. Revisar los modelos matemáticos documentados.
-2. Explorar los datos disponibles en casos o actividades.
-3. Ejecutar los notebooks de exploración, cuando corresponda.
-4. Desarrollar la actividad integradora del bloque.
-5. Preparar informe técnico y archivo Excel de interpretación.
+| Carpeta | Uso |
+|---|---|
+| [modelos](modelos/README.md) | Formulaciones OPF |
+| [OPF_DC](OPF_DC/README.md) | Material específico OPF-DC |
+| [OPF_AC](OPF_AC/README.md) | Material específico OPF-AC |
+| [notebooks](notebooks/) | Visualización de datos de red |
+| [actividades](actividades/README.md) | Evaluación aplicada |
+---
 
-## Resultado esperado
-
-Al finalizar este bloque, el estudiante debe poder explicar el problema, formular el modelo, construir datos, ejecutar la implementación computacional y defender técnicamente los resultados.
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)

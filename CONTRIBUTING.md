@@ -1,5 +1,8 @@
 # Contributing Guidelines
 
+> [Menú principal](./README.md) · [Índice del sitio](./docs/index.md) · [Ruta de aprendizaje](./docs/learning_path.md) · [Modelos](./docs/modelos.md) · [Casos](./docs/casos_de_estudio.md) · [Evaluación](./docs/evaluacion.md)
+
+
 This repository is structured for academic teaching.
 
 ## Structure rules
@@ -10,3 +13,6 @@ This repository is structured for academic teaching.
 ## Do not include
 - External scripts unrelated to teaching
 - Redundant files not referenced in the documentation
+---
+
+> [Menú principal](./README.md) · [Índice del sitio](./docs/index.md) · [Ruta de aprendizaje](./docs/learning_path.md) · [Modelos](./docs/modelos.md) · [Casos](./docs/casos_de_estudio.md) · [Evaluación](./docs/evaluacion.md)

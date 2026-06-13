@@ -1,99 +1,64 @@
 # Compromiso de unidades térmicas
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/unit_commitment.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-El unit commitment decide qué unidades se encienden y cuánto generan en cada periodo. Agrega variables binarias, costos de arranque, rampas y reserva.
+Decide qué unidades se encienden, cuándo arrancan y cuánto generan. Es un MILP por sus variables binarias.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Horizonte | Corto plazo: horas o días. |
-| Decisión | Generación, estado o uso de recursos por periodo. |
-| Salida clave | Costo operativo, despacho, ENS y restricciones activas. |
+| Conjuntos | $G$: unidades; $T$: horas. |
+| Parámetros | $c_g$, $SU_g$, $\underline{P}_g$, $\overline{P}_g$, $RU_g$, $RD_g$, $D_t$. |
+| Variables | $P_{g,t}$, $u_{g,t}$, $v_{g,t}$, $ENS_t$. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Objetivo
 
-- `G`: unidades térmicas.
-- `T`: horas.
+Minimizar generación, arranques y ENS.
 
-### 3.2 Índices
+$$
+\min Z=\sum_{g,t}c_gP_{g,t}+\sum_{g,t}SU_gv_{g,t}+\sum_t VOLL\,ENS_t
+$$
 
-- `g`: generador
-- `t`: periodo horario
-- `h`: unidad hidroeléctrica si aplica
-
-### 3.3 Parámetros
-
-- `Pmin_g`, `Pmax_g`.
-- `c_g`: costo variable.
-- `SU_g`: costo de arranque.
-- `RU_g`, `RD_g`: rampas.
-- `D_t`: demanda.
-
-### 3.4 Variables de decisión
-
-- `Pg_{g,t}`: generación.
-- `u_{g,t}`: estado encendido.
-- `startup_{g,t}`: arranque.
-- `ENS_t`: energía no servida.
-
-### 3.5 Función objetivo
-
-Minimizar costo variable, costos de arranque y penalización ENS.
-
-### 3.6 Restricciones
-
-### R1. Balance
-
-Generación y ENS cubren demanda.
-
-```text
-sum_g Pg[g,t] + ENS[t] = D[t]
-```
-### R2. Límites con estado
+### Límites con estado
 
 La generación depende de si la unidad está encendida.
 
-```text
-Pmin[g] u[g,t] <= Pg[g,t] <= Pmax[g] u[g,t]
-```
-### R3. Arranque
+$$
+\underline{P}_g u_{g,t}\leq P_{g,t}\leq \overline{P}_g u_{g,t}
+$$
+
+### Arranque
 
 La variable de arranque captura transición de apagado a encendido.
 
-```text
-startup[g,t] >= u[g,t] - u[g,t-1]
-```
-### R4. Rampas
+$$
+v_{g,t}\geq u_{g,t}-u_{g,t-1}
+$$
 
-La generación no cambia abruptamente entre periodos.
+### Rampa
 
-```text
-Pg[g,t] - Pg[g,t-1] <= RU[g]
-```
+La generación no cambia más que la rampa permitida.
 
-## 4. Construcción del archivo `.dat`
+$$
+P_{g,t}-P_{g,t-1}\leq RU_g
+$$
 
-El `.dat` debe separar demanda horaria, datos técnicos de unidades, costos y parámetros temporales. Use unidades explícitas: MW, MWh, USD/MWh.
+## 4. Interpretación técnica
 
-## 5. Interpretación del archivo `.out`
+El resultado debe analizar estados, arranques, rampas activas, reserva y costo operativo.
 
-El `.out` debe reportar generación por hora, costo total, energía no servida, estados binarios y uso de recursos hídricos cuando aplique.
+## 5. Actividad relacionada
 
-## 6. Errores frecuentes
+- [Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+---
 
-- No vincular generación y estado binario en UC.
-- No revisar rampas entre horas.
-- Mezclar MW y MWh.
-- No interpretar la energía hidro como recurso limitado.
-
-## 7. Actividades relacionadas
-
-- [Actividad 02](../actividades/actividad_02_operacion_corto_plazo.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

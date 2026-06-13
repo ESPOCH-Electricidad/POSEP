@@ -1,91 +1,56 @@
 # Operación de cascada hidroeléctrica
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/hidrotermico.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-Modela varios embalses conectados. La decisión de turbinamiento en una central puede afectar disponibilidad aguas abajo.
+Representa embalses conectados. El agua turbinada o vertida en una central puede influir en centrales aguas abajo.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Horizonte | Corto plazo: horas o días. |
-| Decisión | Generación, estado o uso de recursos por periodo. |
-| Salida clave | Costo operativo, despacho, ENS y restricciones activas. |
+| Conjuntos | $R$: embalses; $T$: periodos. |
+| Parámetros | $A_{r,t}$: aportes; $\underline{V}_r$, $\overline{V}_r$; $\rho_r$. |
+| Variables | $V_{r,t}$, $Q_{r,t}$, $S_{r,t}$, $H_{r,t}$. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Balance hídrico
 
-- `R`: embalses.
-- `T`: periodos.
-- `A`: relaciones aguas arriba/abajo.
+Conservación de volumen en cada embalse.
 
-### 3.2 Índices
+$$
+V_{r,t}=V_{r,t-1}+A_{r,t}+Q^{up}_{r,t}-Q_{r,t}-S_{r,t}
+$$
 
-- `g`: generador
-- `t`: periodo horario
-- `h`: unidad hidroeléctrica si aplica
+### Producción hidro
 
-### 3.3 Parámetros
+Generación proporcional al caudal turbinado.
 
-- `Inflow_{r,t}`: aportes.
-- `Vmin_r`, `Vmax_r`: límites de volumen.
-- `ProdCoef_r`: coeficiente de producción.
+$$
+H_{r,t}=\rho_r Q_{r,t}
+$$
 
-### 3.4 Variables de decisión
+### Límites de volumen
 
-- `Vol_{r,t}`: volumen.
-- `Turb_{r,t}`: turbinamiento.
-- `Spill_{r,t}`: vertimiento.
-- `Ph_{r,t}`: generación.
+El embalse opera dentro de límites.
 
-### 3.5 Función objetivo
+$$
+\underline{V}_r\leq V_{r,t}\leq \overline{V}_r
+$$
 
-Minimizar costo térmico o maximizar valor hidro, según el caso de estudio.
+## 4. Interpretación técnica
 
-### 3.6 Restricciones
+El análisis debe interpretar el valor temporal del agua y el efecto de restricciones de volumen.
 
-### R1. Balance hídrico
+## 5. Actividad relacionada
 
-Volumen actual depende del volumen anterior, aportes, turbinamiento y vertimiento.
+- [Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+---
 
-```text
-Vol[r,t] = Vol[r,t-1] + Inflow[r,t] + upstream[r,t] - Turb[r,t] - Spill[r,t]
-```
-### R2. Producción hidro
-
-La generación depende del caudal turbinado.
-
-```text
-Ph[r,t] = ProdCoef[r] * Turb[r,t]
-```
-### R3. Límites de volumen
-
-El embalse respeta límites operativos.
-
-```text
-Vmin[r] <= Vol[r,t] <= Vmax[r]
-```
-
-## 4. Construcción del archivo `.dat`
-
-El `.dat` debe separar demanda horaria, datos técnicos de unidades, costos y parámetros temporales. Use unidades explícitas: MW, MWh, USD/MWh.
-
-## 5. Interpretación del archivo `.out`
-
-El `.out` debe reportar generación por hora, costo total, energía no servida, estados binarios y uso de recursos hídricos cuando aplique.
-
-## 6. Errores frecuentes
-
-- No vincular generación y estado binario en UC.
-- No revisar rampas entre horas.
-- Mezclar MW y MWh.
-- No interpretar la energía hidro como recurso limitado.
-
-## 7. Actividades relacionadas
-
-- [Actividad 02](../actividades/actividad_02_operacion_corto_plazo.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

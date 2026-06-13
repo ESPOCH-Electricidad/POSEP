@@ -1,5 +1,8 @@
 # Introducción a la operación y planificación de SEP
 
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+
+
 ![Clasificación](assets/img/clasificacion_operacion_planificacion.svg)
 
 La operación y la planificación de sistemas eléctricos de potencia agrupan problemas de decisión con diferentes horizontes, restricciones y objetivos.
@@ -17,3 +20,6 @@ La planificación estudia decisiones de mediano y largo plazo: expansión de gen
 ![Horizontes temporales](assets/img/horizontes_temporales_sep.svg)
 
 Un plan de expansión debe ser validado mediante modelos de operación. Por ejemplo, una expansión de generación puede ser económicamente atractiva, pero su factibilidad debe analizarse considerando red, restricciones operativas, reserva y escenarios de demanda.
+---
+
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)

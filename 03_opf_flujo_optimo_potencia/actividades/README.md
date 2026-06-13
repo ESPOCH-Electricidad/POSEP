@@ -1,6 +1,8 @@
 # Actividades — 03 opf flujo optimo potencia
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](../modelos/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 Actividades — 03 Flujo óptimo de potencia
 
@@ -24,3 +26,6 @@ Evaluación integradora de OPF-DC y extensión conceptual/numerica a OPF-AC.
 4. Implementar `.mod` y `.run`.
 5. Generar `.out`.
 6. Elaborar Excel e informe PDF.
+---
+
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

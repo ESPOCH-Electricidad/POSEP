@@ -1,5 +1,8 @@
 # Catálogo de modelos
 
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+
+
 [Inicio del sitio](index.md) | [README principal](../README.md)
 
 Este catálogo permite navegar por los modelos documentados. Cada modelo incluye teoría introductoria, tabla de interpretación, formulación matemática y guía de implementación.
@@ -11,3 +14,6 @@ Este catálogo permite navegar por los modelos documentados. Cada modelo incluye
 | OPF | [OPF-DC y OPF-AC](../03_opf_flujo_optimo_potencia/modelos/README.md) |
 | TNEP | [Expansión de transmisión](../04_tnep_expansion_transmision/modelos/README.md) |
 | GEP | [Expansión de generación](../05_gep_expansion_generacion/modelos/README.md) |
+---
+
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)

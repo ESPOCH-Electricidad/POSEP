@@ -1,114 +1,72 @@
 # Modelo GEP con bloques de carga
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/gep_horizonte_inversion.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-El modelo con bloques conecta la inversión con operación aproximada durante el año mediante bloques de duración.
+Relaciona inversión con operación anual aproximada mediante bloques de carga y duración.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Decisión principal | Nueva capacidad por tecnología y periodo. |
-| Operación | Generación por bloque o año. |
-| Confiabilidad | Reserva firme y energía no servida. |
-| Trade-off | Inversión vs operación vs ENS. |
+| Conjuntos | $Y$: años; $B$: bloques; $K$: tecnologías candidatas; $E$: existentes. |
+| Parámetros | $D_{y,b}$, $h_b$, $CAPEX_k$, $FOM_k$, $c_k$, $AF_k$, $FC_k$, $VOLL$, $RM$. |
+| Variables | $Build_{k,y}$, $Cap_{k,y}$, $Gen_{k,y,b}$, $ENS_{y,b}$. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Objetivo
 
-- `Y`: años.
-- `B`: bloques de demanda.
-- `K`: tecnologías candidatas.
-- `E`: plantas existentes.
+Minimizar inversión, costos fijos, operación y ENS.
 
-### 3.2 Índices
+$$
+\min Z=\sum_{k,y}CAPEX_k Build_{k,y}+\sum_{k,y}FOM_k Cap_{k,y}+\sum_{k,y,b}c_k Gen_{k,y,b}+\sum_{y,b}VOLL\,ENS_{y,b}
+$$
 
-- `y ∈ Y`: año.
-- `b ∈ B`: bloque.
-- `k ∈ K`: tecnología.
-- `e ∈ E`: planta existente.
+### Balance por bloque
 
-### 3.3 Parámetros
+Generación y ENS cubren demanda.
 
-- `Demand_{y,b}`.
-- `Duration_b`.
-- `CAPEX_k`.
-- `FOM_k`.
-- `VarCost_k`.
-- `Avail_k`.
-- `FirmCredit_k`.
-- `VOLL`.
-- `ReserveMargin`.
+$$
+\sum_k Gen_{k,y,b}+\sum_e Gen_{e,y,b}+ENS_{y,b}=D_{y,b}
+$$
 
-### 3.4 Variables de decisión
+### Capacidad acumulada
 
-- `Build_{k,y}`: nueva capacidad.
-- `Cap_{k,y}`: capacidad acumulada.
-- `Gen_{k,y,b}`: generación.
-- `ENS_{y,b}`: energía no servida.
+La capacidad crece con inversiones previas.
 
-### 3.5 Función objetivo
+$$
+Cap_{k,y}=Cap_{k,y-1}+Build_{k,y}
+$$
 
-Minimizar inversión, costos fijos, costos operativos y penalización por energía no servida.
+### Límite de generación
 
-### 3.6 Restricciones
+La generación queda limitada por capacidad y disponibilidad.
 
-### R1. Balance por bloque
+$$
+Gen_{k,y,b}\leq AF_k Cap_{k,y}h_b
+$$
 
-Generación y ENS cubren demanda en cada bloque.
+### Reserva firme
 
-```text
-sum_k Gen_{k,y,b} + ENS_{y,b} = Demand_{y,b}
-```
-### R2. Capacidad disponible
+La capacidad firme cubre demanda pico y margen.
 
-La generación está limitada por capacidad y disponibilidad.
+$$
+\sum_k FC_k Cap_{k,y}+\sum_e FC_e Cap^0_e\geq(1+RM)D^{peak}_y
+$$
 
-```text
-Gen_{k,y,b} <= Cap_{k,y} Avail_k Duration_b
-```
-### R3. Evolución de capacidad
+## 4. Interpretación técnica
 
-La capacidad acumulada incluye inversiones previas.
+El análisis debe diferenciar capacidad nueva, capacidad acumulada, energía generada, reserva, ENS y costo total.
 
-```text
-Cap_{k,y} = Cap_{k,y-1} + Build_{k,y}
-```
-### R4. Reserva firme
+## 5. Actividad relacionada
 
-La capacidad firme cubre demanda pico más margen.
+- [Ir a la actividad](../actividades/actividad_05_gep_multianual.md)
+---
 
-```text
-sum_k FirmCredit_k Cap_{k,y} >= (1+RM) PeakDemand_y
-```
-### R5. Presupuesto o máximo de construcción
-
-Limita inversiones por tecnología/año si aplica.
-
-```text
-Build_{k,y} <= BuildMax_{k,y}
-```
-
-## 4. Construcción del archivo `.dat`
-
-El `.dat` debe declarar años, bloques, tecnologías, demanda, duración, costos, disponibilidad, crédito firme y VOLL. Se recomienda estandarizar todo en USD o kUSD y documentarlo.
-
-## 5. Interpretación del archivo `.out`
-
-El `.out` debe separar nueva capacidad, capacidad acumulada, generación, ENS, costos y emisiones si existen.
-
-## 6. Errores frecuentes
-
-- Confundir potencia MW con energía MWh.
-- No multiplicar por duración de bloque.
-- Confundir capacidad nueva con acumulada.
-- Asignar crédito firme completo a renovables variables sin justificarlo.
-
-## 7. Actividades relacionadas
-
-- [Actividad 05](../actividades/actividad_05_gep_multianual.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

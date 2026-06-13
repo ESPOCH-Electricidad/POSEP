@@ -1,6 +1,8 @@
 # Actividades — 04 tnep expansion transmision
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](../modelos/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 Actividades — 04 Planificación de expansión de transmisión
 
@@ -23,3 +25,6 @@ Evaluación integradora TNEP con formulaciones de transporte, DC, híbrida y lin
 4. Implementar `.mod` y `.run`.
 5. Generar `.out`.
 6. Elaborar Excel e informe PDF.
+---
+
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

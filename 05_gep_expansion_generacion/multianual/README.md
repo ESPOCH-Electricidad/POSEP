@@ -1,5 +1,8 @@
 # GEP multianual
 
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 Datos y actividades para estudiar decisiones de inversión distribuidas en varios periodos de planificación.
 
 ## Uso didáctico
@@ -9,3 +12,6 @@ Datos y actividades para estudiar decisiones de inversión distribuidas en vario
 3. Formular el problema matemático asociado.
 4. Ejecutar la herramienta computacional indicada en clase.
 5. Interpretar resultados y comparar escenarios.
+---
+
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

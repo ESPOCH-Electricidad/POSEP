@@ -1,88 +1,56 @@
 # Cascada hidroeléctrica con restricciones de rampa
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/hidrotermico.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-Extiende la operación de cascadas incorporando límites de variación temporal en generación o caudal turbinado.
+Agrega límites de variación temporal para representar cambios máximos de turbinamiento o generación entre periodos.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Horizonte | Corto plazo: horas o días. |
-| Decisión | Generación, estado o uso de recursos por periodo. |
-| Salida clave | Costo operativo, despacho, ENS y restricciones activas. |
+| Conjuntos | $R$: embalses; $T$: periodos. |
+| Parámetros | $RU_r$, $RD_r$, límites hidráulicos. |
+| Variables | $Q_{r,t}$, $V_{r,t}$, $H_{r,t}$. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Rampa subida
 
-- `R`: embalses.
-- `T`: periodos.
+El caudal no puede aumentar bruscamente.
 
-### 3.2 Índices
+$$
+Q_{r,t}-Q_{r,t-1}\leq RU_r
+$$
 
-- `g`: generador
-- `t`: periodo horario
-- `h`: unidad hidroeléctrica si aplica
+### Rampa bajada
 
-### 3.3 Parámetros
+El caudal no puede disminuir bruscamente.
 
-- `RampUp_r`, `RampDown_r`: rampas.
-- `TurbMin_r`, `TurbMax_r`: límites de turbinamiento.
+$$
+Q_{r,t-1}-Q_{r,t}\leq RD_r
+$$
 
-### 3.4 Variables de decisión
+### Balance hídrico
 
-- `Turb_{r,t}`
-- `Vol_{r,t}`
-- `Ph_{r,t}`
+Se mantiene conservación de agua.
 
-### 3.5 Función objetivo
+$$
+V_{r,t}=V_{r,t-1}+A_{r,t}-Q_{r,t}-S_{r,t}
+$$
 
-Optimizar operación respetando dinámica hidráulica y rampas.
+## 4. Interpretación técnica
 
-### 3.6 Restricciones
+La solución suaviza la operación y puede aumentar costo térmico si restringe el uso hidro en horas críticas.
 
-### R1. Rampa subida
+## 5. Actividad relacionada
 
-El turbinamiento no puede aumentar más que la rampa permitida.
+- [Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+---
 
-```text
-Turb[r,t] - Turb[r,t-1] <= RampUp[r]
-```
-### R2. Rampa bajada
-
-El turbinamiento no puede disminuir más que la rampa permitida.
-
-```text
-Turb[r,t-1] - Turb[r,t] <= RampDown[r]
-```
-### R3. Balance hídrico
-
-Se mantiene la conservación de volumen.
-
-```text
-Vol[r,t] = Vol[r,t-1] + Inflow[r,t] - Turb[r,t] - Spill[r,t]
-```
-
-## 4. Construcción del archivo `.dat`
-
-El `.dat` debe separar demanda horaria, datos técnicos de unidades, costos y parámetros temporales. Use unidades explícitas: MW, MWh, USD/MWh.
-
-## 5. Interpretación del archivo `.out`
-
-El `.out` debe reportar generación por hora, costo total, energía no servida, estados binarios y uso de recursos hídricos cuando aplique.
-
-## 6. Errores frecuentes
-
-- No vincular generación y estado binario en UC.
-- No revisar rampas entre horas.
-- Mezclar MW y MWh.
-- No interpretar la energía hidro como recurso limitado.
-
-## 7. Actividades relacionadas
-
-- [Actividad 02](../actividades/actividad_02_operacion_corto_plazo.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

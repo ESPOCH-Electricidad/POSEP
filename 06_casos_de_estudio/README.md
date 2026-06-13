@@ -1,32 +1,37 @@
 # 06 — Casos de estudio
 
-[Inicio](../README.md) | [Sitio](../docs/index.md) | [Bloque anterior](../05_gep_expansion_generacion/README.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
 
-![Figura del bloque](assets/figuras/catalogo_casos.svg)
 
-## Propósito del bloque
 
-Agrupa los datos reutilizables empleados en los modelos y actividades. Cada caso debe documentar su propósito, fuente, estado de adaptación, datos disponibles y modelos recomendados.
+![Mapa visual del bloque](../docs/assets/img/bloques/06_casos.svg)
 
-## Mapa de contenidos
+## 1. Propósito del bloque
 
-| Sección | Acceso |
-|---|---|
-| Garver 6 barras | [garver_6_barras/README.md](garver_6_barras/README.md) |
-| IEEE 14 barras | [ieee_14_barras/README.md](ieee_14_barras/README.md) |
-| IEEE 24 RTS | [ieee_24_rts/README.md](ieee_24_rts/README.md) |
-| IEEE 30 barras | [ieee_30_barras/README.md](ieee_30_barras/README.md) |
-| Plantillas | [plantillas/README.md](plantillas/README.md) |
-| Actividades | [actividades/README.md](actividades/README.md) |
+Los casos de estudio permiten reutilizar datos entre modelos. Un mismo sistema puede servir para estudiar despacho, OPF, expansión de transmisión o expansión de generación, siempre que los datos sean adaptados correctamente.
 
-## Secuencia sugerida
+![Casos transversales](assets/figuras/teoria/casos_transversales.svg)
 
-1. Revisar los modelos matemáticos documentados.
-2. Explorar los datos disponibles en casos o actividades.
-3. Ejecutar los notebooks de exploración, cuando corresponda.
-4. Desarrollar la actividad integradora del bloque.
-5. Preparar informe técnico y archivo Excel de interpretación.
+## 2. Casos disponibles
 
-## Resultado esperado
+| Caso | Uso principal | Acceso |
+|---|---|---|
+| Garver 6 barras | TNEP y GEP | [Abrir](garver_6_barras/README.md) |
+| IEEE 14 barras | OPF | [Abrir](ieee_14_barras/README.md) |
+| IEEE 24 RTS | TNEP / confiabilidad | [Abrir](ieee_24_rts/README.md) |
+| IEEE 30 barras | OPF | [Abrir](ieee_30_barras/README.md) |
+| Operación 3 generadores | ED y ED por tramos | [Abrir](operacion_3_generadores/README.md) |
+| Hidrotérmico didáctico | Hidrotérmico y cascadas | [Abrir](hidrotermico_didactico/README.md) |
 
-Al finalizar este bloque, el estudiante debe poder explicar el problema, formular el modelo, construir datos, ejecutar la implementación computacional y defender técnicamente los resultados.
+## 3. Criterio de uso
+
+Antes de usar un caso, el estudiante debe identificar:
+
+1. qué datos están disponibles;
+2. qué modelo puede usarlos directamente;
+3. qué datos requieren adaptación;
+4. qué unidades se emplean;
+5. qué supuestos se introducen.
+---
+
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)

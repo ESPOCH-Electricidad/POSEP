@@ -1,33 +1,49 @@
 # 04 — Planificación de expansión de transmisión
 
-[Inicio](../README.md) | [Sitio](../docs/index.md) | [Bloque anterior](../03_opf_flujo_optimo_potencia/README.md) | [Bloque siguiente](../05_gep_expansion_generacion/README.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
 
-![Figura del bloque](assets/figuras/red_tnep_garver.svg)
 
-## Propósito del bloque
 
-Presenta formulaciones para decidir nuevas líneas de transmisión. Se comparan modelos de transporte, DC, híbrido, lineal disyuntivo y multietapa, usando casos tipo Garver e IEEE 24.
+![Mapa visual del bloque](../docs/assets/img/bloques/04_tnep.svg)
 
-## Mapa de contenidos
+## 1. Propósito del bloque
 
-| Sección | Acceso |
+La planificación de expansión de transmisión decide qué líneas o circuitos deben construirse para permitir que la generación abastezca la demanda de forma segura y económica. El problema combina decisiones de inversión y operación de red.
+
+![Formulaciones TNEP](assets/figuras/teoria/tnep_formulaciones.svg)
+
+## 2. Formulación conceptual
+
+La decisión de inversión se representa mediante variables como:
+
+$$
+n_\ell \in \mathbb{Z}_+
+$$
+
+donde $n_\ell$ es el número de circuitos nuevos en el corredor $\ell$. El costo de inversión es:
+
+$$
+C^{inv} = \sum_{\ell \in L} c_\ell n_\ell
+$$
+
+y el flujo queda limitado por la capacidad total existente y construida:
+
+$$
+-\overline{F}_\ell (n^0_\ell+n_\ell)
+\leq F_\ell \leq
+\overline{F}_\ell (n^0_\ell+n_\ell)
+$$
+
+## 3. Modelos del bloque
+
+| Modelo | Acceso |
 |---|---|
-| Modelos matemáticos | [modelos/README.md](modelos/README.md) |
-| Transporte | [transporte/README.md](transporte/README.md) |
-| DC | [DC/README.md](DC/README.md) |
-| Híbrido | [hibrido/README.md](hibrido/README.md) |
-| Lineal disyuntivo | [lineal_disyuntivo/README.md](lineal_disyuntivo/README.md) |
-| Notebooks | [notebooks/](notebooks/) |
-| Actividades | [actividades/README.md](actividades/README.md) |
+| Transporte | [Abrir](modelos/01_modelo_transporte_expansion_transmision.md) |
+| Constructivo | [Abrir](modelos/02_modelo_constructivo_refuerzo_red.md) |
+| DC | [Abrir](modelos/03_modelo_dc_expansion_transmision.md) |
+| Híbrido | [Abrir](modelos/04_modelo_hibrido_expansion_transmision.md) |
+| Lineal disyuntivo | [Abrir](modelos/05_modelo_lineal_disyuntivo_expansion_transmision.md) |
+| Multietapa | [Abrir](modelos/06_modelo_multietapa_expansion_transmision.md) |
+---
 
-## Secuencia sugerida
-
-1. Revisar los modelos matemáticos documentados.
-2. Explorar los datos disponibles en casos o actividades.
-3. Ejecutar los notebooks de exploración, cuando corresponda.
-4. Desarrollar la actividad integradora del bloque.
-5. Preparar informe técnico y archivo Excel de interpretación.
-
-## Resultado esperado
-
-Al finalizar este bloque, el estudiante debe poder explicar el problema, formular el modelo, construir datos, ejecutar la implementación computacional y defender técnicamente los resultados.
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)

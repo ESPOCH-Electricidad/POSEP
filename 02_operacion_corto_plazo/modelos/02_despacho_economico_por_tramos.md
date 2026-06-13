@@ -1,89 +1,56 @@
 # Despacho económico con costos por tramos
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/despacho_economico.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-Este modelo aproxima curvas de costo no lineales mediante segmentos lineales. Permite representar que los primeros MW de una unidad pueden ser más baratos que los últimos.
+Representa costos crecientes mediante segmentos lineales. Es útil cuando la curva real de costo no es estrictamente lineal.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Horizonte | Corto plazo: horas o días. |
-| Decisión | Generación, estado o uso de recursos por periodo. |
-| Salida clave | Costo operativo, despacho, ENS y restricciones activas. |
+| Conjuntos | $G$: generadores; $K$: tramos; $T$: periodos. |
+| Parámetros | $c_{g,k}$, $\overline{P}_{g,k}$, $D_t$. |
+| Variables | $P_{g,k,t}$: generación del tramo. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Objetivo
 
-- `G`: generadores.
-- `K`: tramos de costo.
-- `T`: periodos.
+Minimizar costo por segmentos.
 
-### 3.2 Índices
+$$
+\min Z=\sum_{t}\sum_{g}\sum_{k} c_{g,k}P_{g,k,t}
+$$
 
-- `g`: generador
-- `t`: periodo horario
-- `h`: unidad hidroeléctrica si aplica
+### Balance
 
-### 3.3 Parámetros
+La suma de todos los tramos cubre demanda.
 
-- `c_{g,k}`: costo del tramo.
-- `PmaxSeg_{g,k}`: capacidad del tramo.
-- `D_t`: demanda.
+$$
+\sum_g\sum_k P_{g,k,t}=D_t \quad \forall t
+$$
 
-### 3.4 Variables de decisión
+### Límite por tramo
 
-- `PgSeg_{g,k,t}`: generación del tramo.
-- `Pg_{g,t}`: generación total.
+Cada tramo tiene capacidad máxima.
 
-### 3.5 Función objetivo
+$$
+0\leq P_{g,k,t}\leq \overline{P}_{g,k}
+$$
 
-Minimizar el costo total por segmentos.
+## 4. Interpretación técnica
 
-### 3.6 Restricciones
+El orden de uso de tramos revela cómo el sistema utiliza primero segmentos de menor costo.
 
-### R1. Balance
+## 5. Actividad relacionada
 
-La suma de segmentos cubre la demanda.
+- [Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+---
 
-```text
-sum_g sum_k PgSeg[g,k,t] = D[t]
-```
-### R2. Límite por tramo
-
-Cada segmento no supera su capacidad.
-
-```text
-0 <= PgSeg[g,k,t] <= PmaxSeg[g,k]
-```
-### R3. Generación total
-
-La generación de unidad es suma de tramos.
-
-```text
-Pg[g,t] = sum_k PgSeg[g,k,t]
-```
-
-## 4. Construcción del archivo `.dat`
-
-El `.dat` debe separar demanda horaria, datos técnicos de unidades, costos y parámetros temporales. Use unidades explícitas: MW, MWh, USD/MWh.
-
-## 5. Interpretación del archivo `.out`
-
-El `.out` debe reportar generación por hora, costo total, energía no servida, estados binarios y uso de recursos hídricos cuando aplique.
-
-## 6. Errores frecuentes
-
-- No vincular generación y estado binario en UC.
-- No revisar rampas entre horas.
-- Mezclar MW y MWh.
-- No interpretar la energía hidro como recurso limitado.
-
-## 7. Actividades relacionadas
-
-- [Actividad 02](../actividades/actividad_02_operacion_corto_plazo.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

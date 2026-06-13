@@ -1,32 +1,46 @@
 # 05 — Planificación de expansión de generación
 
-[Inicio](../README.md) | [Sitio](../docs/index.md) | [Bloque anterior](../04_tnep_expansion_transmision/README.md) | [Bloque siguiente](../06_casos_de_estudio/README.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
 
-![Figura del bloque](assets/figuras/horizonte_gep.svg)
 
-## Propósito del bloque
 
-Estudia decisiones de inversión en capacidad de generación. El bloque avanza desde un GEP base hasta formulaciones con bloques de demanda y horizonte multianual, incorporando reserva, energía no servida y escenarios.
+![Mapa visual del bloque](../docs/assets/img/bloques/05_gep.svg)
 
-## Mapa de contenidos
+## 1. Propósito del bloque
 
-| Sección | Acceso |
+El GEP decide qué capacidad de generación instalar, cuándo instalarla y cómo operarla de manera representativa para cubrir demanda futura, reserva y criterios económicos o ambientales.
+
+![Decisiones GEP](assets/figuras/teoria/gep_decisiones.svg)
+
+## 2. Estructura conceptual
+
+La capacidad acumulada de una tecnología candidata $k$ en el año $y$ puede escribirse como:
+
+$$
+Cap_{k,y} = Cap_{k,y-1} + Build_{k,y}
+$$
+
+El balance por bloque de carga es:
+
+$$
+\sum_{k \in K} Gen_{k,y,b} + \sum_{e \in E} Gen_{e,y,b} + ENS_{y,b}
+= D_{y,b}
+$$
+
+La reserva firme exige:
+
+$$
+\sum_{k \in K} FC_k Cap_{k,y} + \sum_{e \in E} FC_e Cap^0_e
+\geq (1+RM)D^{peak}_{y}
+$$
+
+## 3. Modelos del bloque
+
+| Modelo | Acceso |
 |---|---|
-| Modelos matemáticos | [modelos/README.md](modelos/README.md) |
-| GEP base | [base/README.md](base/README.md) |
-| GEP estático con bloques | [estatico_bloques/README.md](estatico_bloques/README.md) |
-| GEP multianual | [multianual/README.md](multianual/README.md) |
-| Notebooks | [notebooks/](notebooks/) |
-| Actividades | [actividades/README.md](actividades/README.md) |
+| GEP estático | [Abrir](modelos/01_modelo_gep_estatico_capacidad.md) |
+| GEP con bloques | [Abrir](modelos/02_modelo_gep_bloques_carga.md) |
+| GEP multianual | [Abrir](modelos/03_modelo_gep_multianual.md) |
+---
 
-## Secuencia sugerida
-
-1. Revisar los modelos matemáticos documentados.
-2. Explorar los datos disponibles en casos o actividades.
-3. Ejecutar los notebooks de exploración, cuando corresponda.
-4. Desarrollar la actividad integradora del bloque.
-5. Preparar informe técnico y archivo Excel de interpretación.
-
-## Resultado esperado
-
-Al finalizar este bloque, el estudiante debe poder explicar el problema, formular el modelo, construir datos, ejecutar la implementación computacional y defender técnicamente los resultados.
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)

@@ -1,5 +1,8 @@
 # Evaluación por bloques
 
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+
+
 [Inicio del sitio](index.md) | [README principal](../README.md)
 
 La evaluación está distribuida dentro de cada bloque, en la carpeta `actividades/`.
@@ -21,3 +24,6 @@ La evaluación está distribuida dentro de cada bloque, en la carpeta `actividad
 - Archivo `.out` generado por AMPL.
 - Excel de resultados y gráficos.
 - Informe técnico en PDF.
+---
+
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)

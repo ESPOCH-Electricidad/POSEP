@@ -1,5 +1,8 @@
 # Manual del laboratorio de modelación
 
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+
+
 [Inicio del sitio](index.md) | [README principal](../README.md)
 
 ## Flujo de trabajo
@@ -22,3 +25,6 @@ Un resultado computacional no es suficiente. El estudiante debe demostrar que en
 - qué unidades usa cada parámetro;
 - qué cambia al modificar un escenario;
 - qué limitaciones tiene el modelo.
+---
+
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)

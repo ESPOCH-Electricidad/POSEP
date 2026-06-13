@@ -1,6 +1,8 @@
 # Modelos — Fundamentos de optimización
 
-[Inicio](../../README.md) | [Bloque 01](../README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 Este bloque introduce la lógica de modelación antes de estudiar aplicaciones eléctricas. Los modelos no se presentan como archivos sueltos, sino como estructuras matemáticas que luego pueden implementarse en AMPL.
 
@@ -11,3 +13,11 @@ Este bloque introduce la lógica de modelación antes de estudiar aplicaciones e
 | Modelo de transporte de energía | [03_modelo_transporte_energia.md](03_modelo_transporte_energia.md) | Entender flujos entre oferta y demanda |
 | Modelo binario de localización y cobertura | [04_modelo_binario_localizacion_cobertura.md](04_modelo_binario_localizacion_cobertura.md) | Introducir variables binarias de inversión |
 | Forma matricial de un programa lineal | [05_forma_matricial_programa_lineal.md](05_forma_matricial_programa_lineal.md) | Relacionar formulación algebraica y estructura computacional |
+
+
+## Cómo leer los modelos
+
+Cada página de modelo sigue una estructura homogénea: intuición, elementos de formulación, ecuaciones matemáticas, interpretación técnica y enlace a la actividad correspondiente. Las ecuaciones se escriben en notación matemática para que se rendericen en GitHub.
+---
+
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

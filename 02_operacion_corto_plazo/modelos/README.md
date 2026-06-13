@@ -1,6 +1,8 @@
 # Modelos — Operación de corto plazo
 
-[Inicio](../../README.md) | [Bloque 02](../README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 | Modelo | Enlace | Propósito |
 |---|---|---|
@@ -10,3 +12,11 @@
 | Operación de cascada hidroeléctrica | [04_operacion_cascada_hidroelectrica.md](04_operacion_cascada_hidroelectrica.md) | Modelar balance de embalses |
 | Cascada hidroeléctrica con restricciones de rampa | [05_cascada_hidroelectrica_con_rampas.md](05_cascada_hidroelectrica_con_rampas.md) | Incorporar restricciones temporales de operación |
 | Compromiso de unidades térmicas | [06_compromiso_unidades_termicas.md](06_compromiso_unidades_termicas.md) | Decidir encendido, arranque y generación |
+
+
+## Cómo leer los modelos
+
+Cada página de modelo sigue una estructura homogénea: intuición, elementos de formulación, ecuaciones matemáticas, interpretación técnica y enlace a la actividad correspondiente. Las ecuaciones se escriben en notación matemática para que se rendericen en GitHub.
+---
+
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

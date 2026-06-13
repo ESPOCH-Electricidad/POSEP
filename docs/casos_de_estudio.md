@@ -1,5 +1,8 @@
 # Casos de estudio
 
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+
+
 [Inicio del sitio](index.md) | [README principal](../README.md)
 
 | Caso | Enlace | Estado |
@@ -11,3 +14,6 @@
 | Operación 3 generadores | [Abrir](../06_casos_de_estudio/operacion_3_generadores/README.md) | Completo |
 | Operación 101 generadores | [Abrir](../06_casos_de_estudio/operacion_101_generadores/README.md) | Completo |
 | Hidrotérmico didáctico | [Abrir](../06_casos_de_estudio/hidrotermico_didactico/README.md) | Completo |
+---
+
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)

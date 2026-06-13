@@ -1,101 +1,72 @@
 # Flujo óptimo de potencia DC
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/opf_red_dc_ac.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-El OPF-DC es una aproximación lineal del flujo de potencia activa. Se asume magnitud de tensión cercana a 1 p.u., ángulos pequeños y resistencia despreciable. Es útil para estudiar congestión, despacho económico con red y precios nodales aproximados.
+El OPF-DC optimiza el despacho considerando red de transmisión bajo una aproximación lineal. Permite analizar congestión y redispatch sin modelar potencia reactiva ni pérdidas.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Decisión | Generación activa y ángulos de barra. |
-| Restricción física | Flujo proporcional a diferencia angular. |
-| Ventaja | Lineal y rápido. |
-| Limitación | No representa potencia reactiva, pérdidas ni magnitudes de tensión. |
+| Conjuntos | $N$: barras; $L$: líneas; $G$: generadores. |
+| Parámetros | $P^D_n$, $c_g$, $x_\ell$, $\overline{F}_\ell$, $\underline{P}_g$, $\overline{P}_g$. |
+| Variables | $P_g$, $\theta_n$, $F_\ell$, $ENS_n$. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Objetivo
 
-- `N`: barras.
-- `L`: líneas.
-- `G`: generadores.
+Minimizar costo y ENS.
 
-### 3.2 Índices
+$$
+\min Z=\sum_{g\in G}c_gP_g+\sum_{n\in N}VOLL\,ENS_n
+$$
 
-- `n ∈ N`: barra.
-- `l ∈ L`: línea.
-- `g ∈ G`: generador.
+### Balance nodal
 
-### 3.3 Parámetros
+Cada barra equilibra inyección y flujos.
 
-- `Pd_n`: demanda.
-- `Pmin_g`, `Pmax_g`.
-- `c_g`: costo.
-- `x_l`: reactancia.
-- `Fmax_l`: límite.
+$$
+\sum_{g\in G_n}P_g-P^D_n+ENS_n=\sum_{\ell\in L}A_{n,\ell}F_\ell
+$$
 
-### 3.4 Variables de decisión
+### Flujo DC
 
-- `Pg_g`: generación.
-- `theta_n`: ángulo.
-- `F_l`: flujo.
-- `ENS_n`: energía no servida.
+El flujo depende de diferencia angular.
 
-### 3.5 Función objetivo
+$$
+F_\ell=\frac{\theta_i-\theta_j}{x_\ell}
+$$
 
-Minimizar costo de generación y penalización de ENS.
-
-### 3.6 Restricciones
-
-### R1. Balance nodal
-
-La inyección neta en cada barra se equilibra con los flujos incidentes.
-
-```text
-sum_{g en n} Pg_g - Pd_n + ENS_n = sum_{l incidentes n} A_{n,l} F_l
-```
-### R2. Flujo DC
-
-El flujo depende de la diferencia angular.
-
-```text
-F_l = (theta_i - theta_j)/x_l
-```
-### R3. Límite térmico
+### Límite de línea
 
 Cada línea respeta su capacidad.
 
-```text
--Fmax_l <= F_l <= Fmax_l
-```
-### R4. Referencia angular
+$$
+-\overline{F}_\ell\leq F_\ell\leq\overline{F}_\ell
+$$
 
-Una barra fija el ángulo de referencia.
+### Referencia
 
-```text
-theta_ref = 0
-```
+Una barra define el ángulo cero.
 
-## 4. Construcción del archivo `.dat`
+$$
+\theta_{ref}=0
+$$
 
-El `.dat` debe indicar barras, generadores, líneas, origen, destino, reactancia y límites.
+## 4. Interpretación técnica
 
-## 5. Interpretación del archivo `.out`
+Debe revisarse qué líneas se saturan, cómo cambia el despacho y si aparece ENS en barras específicas.
 
-El `.out` debe reportar generación, ángulos, flujos, líneas saturadas, ENS y costo total.
+## 5. Actividad relacionada
 
-## 6. Errores frecuentes
+- [Ir a la actividad](../actividades/actividad_03_opf_dc_ac.md)
+---
 
-- No fijar barra de referencia.
-- Invertir signos de incidencia.
-- Usar reactancia cero.
-- Interpretar OPF-DC como flujo AC completo.
-
-## 7. Actividades relacionadas
-
-- [Actividad 03](../actividades/actividad_03_opf_dc_ac.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

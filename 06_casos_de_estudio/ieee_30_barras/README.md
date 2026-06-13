@@ -1,6 +1,8 @@
 # Caso IEEE 30 barras
 
-[Inicio](../../README.md) | [Casos de estudio](../README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ## Estado
 
@@ -29,3 +31,6 @@ Sistema de prueba para OPF-AC con mayor dimensión que IEEE 14.
 2. Verificar unidades y escalas económicas.
 3. Documentar toda adaptación realizada.
 4. Comparar los resultados con el comportamiento esperado del sistema.
+---
+
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

@@ -1,91 +1,65 @@
 # Modelo de transporte de energía
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/modelo_transporte_energia.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-El modelo de transporte asigna flujos desde fuentes hacia centros de demanda al menor costo. Es uno de los modelos más útiles para introducir balance, oferta, demanda y costos por arco antes de pasar a redes eléctricas con leyes físicas.
+El modelo de transporte asigna flujos desde fuentes de oferta hacia nodos de demanda. Es una formulación previa a los modelos de red, porque considera capacidad y demanda, pero no representa leyes eléctricas como ángulos o reactancias.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Fuentes | Centrales o nodos con capacidad de suministro. |
-| Destinos | Ciudades o nodos con demanda. |
-| Variable | Flujo enviado de cada fuente a cada destino. |
-| Analogía | Base conceptual para modelos de transporte en TNEP. |
+| Conjuntos | $I$: fuentes; $J$: demandas. |
+| Índices | $i \in I$, $j \in J$. |
+| Parámetros | $S_i$: oferta; $D_j$: demanda; $c_{i,j}$: costo de transporte. |
+| Variable | $f_{i,j}$: flujo enviado desde $i$ hacia $j$. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Objetivo
 
-- `I`: fuentes de oferta.
-- `J`: centros de demanda.
+Minimizar costo total de transporte.
 
-### 3.2 Índices
+$$
+\min Z = \sum_{i \in I}\sum_{j \in J} c_{i,j} f_{i,j}
+$$
 
-- `i ∈ I`: fuente.
-- `j ∈ J`: destino.
+### Oferta
 
-### 3.3 Parámetros
+Cada fuente no puede enviar más que su capacidad.
 
-- `S_i`: oferta máxima.
-- `D_j`: demanda.
-- `c_{i,j}`: costo unitario de transporte.
-- `α`: factor de reserva o disponibilidad.
+$$
+\sum_{j \in J} f_{i,j} \leq S_i \quad \forall i \in I
+$$
 
-### 3.4 Variables de decisión
-
-- `f_{i,j} ≥ 0`: flujo enviado de fuente `i` a destino `j`.
-
-### 3.5 Función objetivo
-
-Minimizar el costo total de transporte:  
-
-```text
-min Z = sum_{i in I} sum_{j in J} c_{i,j} f_{i,j}
-```
-
-### 3.6 Restricciones
-
-### R1. Oferta
-
-El flujo total desde cada fuente no puede superar su oferta disponible.
-
-```text
-sum_{j in J} f_{i,j} <= α S_i
-```
-### R2. Demanda
+### Demanda
 
 Cada destino debe recibir su demanda.
 
-```text
-sum_{i in I} f_{i,j} >= D_j
-```
-### R3. No negatividad
+$$
+\sum_{i \in I} f_{i,j} \geq D_j \quad \forall j \in J
+$$
 
-No existen flujos negativos.
+### No negatividad
 
-```text
-f_{i,j} >= 0
-```
+Los flujos no pueden ser negativos.
 
-## 4. Construcción del archivo `.dat`
+$$
+f_{i,j} \geq 0 \quad \forall i,j
+$$
 
-El `.dat` debe declarar `I`, `J`, oferta, demanda y matriz de costos. Se recomienda revisar si la oferta total es suficiente.
+## 4. Interpretación técnica
 
-## 5. Interpretación del archivo `.out`
+El resultado identifica rutas de transporte utilizadas y fuentes marginales. Es útil para comprender después el modelo de transporte en expansión de transmisión.
 
-El `.out` debe permitir identificar rutas usadas, rutas no usadas, costo total y destinos críticos.
+## 5. Actividad relacionada
 
-## 6. Errores frecuentes
+- [Ir a la actividad](../actividades/actividad_01_fundamentos_optimizacion.md)
+---
 
-- Olvidar declarar combinaciones origen-destino.
-- No verificar factibilidad oferta-demanda.
-- Interpretar el modelo como red eléctrica física; aquí no hay ángulos ni reactancias.
-
-## 7. Actividades relacionadas
-
-- [Actividad 01](../actividades/actividad_01_fundamentos_optimizacion.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

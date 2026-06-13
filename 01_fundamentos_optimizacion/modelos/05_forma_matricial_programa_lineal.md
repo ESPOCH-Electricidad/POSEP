@@ -1,83 +1,57 @@
 # Forma matricial de un programa lineal
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/modelo_forma_matricial.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-La forma matricial resume un programa lineal en vectores y matrices. Es útil para comprender cómo los solvers reciben el problema y para analizar factibilidad, optimalidad y sensibilidad.
+La forma matricial resume un problema lineal usando vectores y matrices. Es útil para entender cómo los solvers organizan la información y por qué es importante mantener consistencia dimensional.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Vector de variables | Agrupa todas las decisiones. |
-| Vector de costos | Define el peso de cada variable en el objetivo. |
-| Matriz técnica | Relaciona variables y restricciones. |
-| Vector derecho | Representa límites o requerimientos. |
+| Conjuntos | $I$: restricciones; $J$: variables. |
+| Índices | $i \in I$, $j \in J$. |
+| Parámetros | $c_j$: costo; $A_{i,j}$: coeficiente; $b_i$: lado derecho. |
+| Variable | $x_j$: decisión. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Objetivo
 
-- `I`: restricciones.
-- `J`: variables.
+Minimizar costo lineal.
 
-### 3.2 Índices
+$$
+\min Z = \sum_{j \in J} c_j x_j
+$$
 
-- `i ∈ I`: restricción.
-- `j ∈ J`: variable.
+### Restricciones
 
-### 3.3 Parámetros
+Cada fila de la matriz representa una restricción.
 
-- `c_j`: costo de variable `j`.
-- `A_{i,j}`: coeficiente tecnológico.
-- `b_i`: lado derecho de restricción.
+$$
+\sum_{j \in J} A_{i,j}x_j \geq b_i \quad \forall i \in I
+$$
 
-### 3.4 Variables de decisión
+### Dominio
 
-- `x_j ≥ 0`: variable de decisión.
+Variables continuas no negativas.
 
-### 3.5 Función objetivo
+$$
+x_j \geq 0 \quad \forall j \in J
+$$
 
-Forma estándar de minimización:  
+## 4. Interpretación técnica
 
-```text
-min Z = sum_{j in J} c_j x_j
-```
+Esta formulación permite reconocer que modelos eléctricos grandes son extensiones estructuradas de matrices de balance, límites y costos.
 
-### 3.6 Restricciones
+## 5. Actividad relacionada
 
-### R1. Restricciones matriciales
+- [Ir a la actividad](../actividades/actividad_01_fundamentos_optimizacion.md)
+---
 
-Cada fila de la matriz define una restricción.
-
-```text
-sum_{j in J} A_{i,j} x_j >= b_i
-```
-### R2. No negatividad
-
-Dominio básico de variables continuas.
-
-```text
-x_j >= 0
-```
-
-## 4. Construcción del archivo `.dat`
-
-El `.dat` debe declarar matriz `A`, vector `c` y vector `b`. Es importante controlar el sentido de cada restricción.
-
-## 5. Interpretación del archivo `.out`
-
-El `.out` debe interpretarse como vector solución y valor objetivo. Si el solver reporta infactibilidad, se debe revisar matriz y signos.
-
-## 6. Errores frecuentes
-
-- Mezclar restricciones `<=`, `>=` y `=` sin documentarlo.
-- No ordenar variables e índices.
-- Perder interpretación física por usar notación compacta.
-
-## 7. Actividades relacionadas
-
-- [Actividad 01](../actividades/actividad_01_fundamentos_optimizacion.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

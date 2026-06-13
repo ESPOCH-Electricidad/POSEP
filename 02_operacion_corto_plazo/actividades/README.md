@@ -1,6 +1,8 @@
 # Actividades — 02 operacion corto plazo
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](../modelos/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 Actividades — 02 Operación de corto plazo
 
@@ -24,3 +26,6 @@ Evaluación integradora de despacho económico, compromiso de unidades y coordin
 4. Implementar `.mod` y `.run`.
 5. Generar `.out`.
 6. Elaborar Excel e informe PDF.
+---
+
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

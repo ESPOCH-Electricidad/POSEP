@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="70" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Tipos de modelos de optimización</text>
+<text x="70" y="90" font-family="Arial" font-size="19" fill="#475569">Clasificación útil para sistemas eléctricos de potencia</text>
+<rect x="480" y="130" width="320" height="80" rx="18" fill="#dbeafe" stroke="#1e3a8a" stroke-width="3"/>
+<text x="640" y="177" text-anchor="middle" font-family="Arial" font-size="24" font-weight="bold">Optimización</text>
+<line x1="640" y1="210" x2="640" y2="260" stroke="#475569" stroke-width="3"/>
+<line x1="260" y1="260" x2="1020" y2="260" stroke="#475569" stroke-width="3"/>
+<line x1="260" y1="260" x2="260" y2="315" stroke="#475569" stroke-width="3"/>
+<line x1="520" y1="260" x2="520" y2="315" stroke="#475569" stroke-width="3"/>
+<line x1="780" y1="260" x2="780" y2="315" stroke="#475569" stroke-width="3"/>
+<line x1="1020" y1="260" x2="1020" y2="315" stroke="#475569" stroke-width="3"/>
+<rect x="120" y="315" width="280" height="210" rx="18" fill="#dcfce7" stroke="#166534" stroke-width="3"/>
+<text x="260" y="355" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">PL / LP</text>
+<text x="150" y="395" font-family="Arial" font-size="16">Variables continuas</text>
+<text x="150" y="425" font-family="Arial" font-size="16">Objetivo lineal</text>
+<text x="150" y="455" font-family="Arial" font-size="16">Restricciones lineales</text>
+<text x="150" y="495" font-family="Arial" font-size="15" fill="#475569">Ej.: despacho económico lineal</text>
+<rect x="380" y="315" width="280" height="210" rx="18" fill="#fef3c7" stroke="#854d0e" stroke-width="3"/>
+<text x="520" y="355" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">MILP</text>
+<text x="410" y="395" font-family="Arial" font-size="16">Continuas + binarias</text>
+<text x="410" y="425" font-family="Arial" font-size="16">Decisiones discretas</text>
+<text x="410" y="455" font-family="Arial" font-size="16">Mayor complejidad</text>
+<text x="410" y="495" font-family="Arial" font-size="15" fill="#475569">Ej.: UC, TNEP, GEP</text>
+<rect x="640" y="315" width="280" height="210" rx="18" fill="#ffedd5" stroke="#9a3412" stroke-width="3"/>
+<text x="780" y="355" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">NLP</text>
+<text x="670" y="395" font-family="Arial" font-size="16">Ecuaciones no lineales</text>
+<text x="670" y="425" font-family="Arial" font-size="16">Puede no ser convexo</text>
+<text x="670" y="455" font-family="Arial" font-size="16">Solución más difícil</text>
+<text x="670" y="495" font-family="Arial" font-size="15" fill="#475569">Ej.: OPF-AC</text>
+<rect x="900" y="315" width="280" height="210" rx="18" fill="#f3e8ff" stroke="#86198f" stroke-width="3"/>
+<text x="1040" y="355" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">MINLP</text>
+<text x="930" y="395" font-family="Arial" font-size="16">Binarias + no linealidad</text>
+<text x="930" y="425" font-family="Arial" font-size="16">Alta complejidad</text>
+<text x="930" y="455" font-family="Arial" font-size="16">Uso avanzado</text>
+<text x="930" y="495" font-family="Arial" font-size="15" fill="#475569">Ej.: expansión con AC</text>
+</svg>

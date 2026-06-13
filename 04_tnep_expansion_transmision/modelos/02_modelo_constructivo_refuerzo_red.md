@@ -1,104 +1,72 @@
 # Modelo constructivo de refuerzo de red
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/tnep_garver_inversion.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-El enfoque constructivo agrega refuerzos de forma iterativa a partir de congestiones, infactibilidades o indicadores de sobrecarga. No sustituye la optimización completa, pero ayuda a interpretar soluciones.
+El enfoque constructivo identifica refuerzos de manera iterativa a partir de congestión o infactibilidad, y ayuda a interpretar la lógica de expansión.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Decisión principal | Construcción de nuevos circuitos o corredores. |
-| Variable clave | Número de circuitos nuevos o binaria de inversión. |
-| Indicador | Costo de inversión, ENS y congestión. |
-| Validación | Comparar flujo, inversión y factibilidad. |
+| Conjuntos | $N$: barras; $L$: corredores; $T$: periodos si aplica. |
+| Parámetros | $D_n$, $G^{max}_n$, $c_\ell$, $\overline{F}_\ell$, $x_\ell$, $n^0_\ell$, $\overline{n}_\ell$. |
+| Variables | $n_\ell$, $F_\ell$, $\theta_n$, $P_n$, $ENS_n$. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Objetivo
 
-- `N`: barras.
-- `C`: corredores.
-- `T`: periodos si aplica.
+Minimizar inversión y penalización por ENS.
 
-### 3.2 Índices
+$$
+\min Z=\sum_{\ell\in L}c_\ell n_\ell+\sum_{n\in N}VOLL\,ENS_n
+$$
 
-- `n ∈ N`: barra.
-- `c ∈ C`: corredor.
-- `t ∈ T`: periodo.
+### Balance nodal
 
-### 3.3 Parámetros
+Generación, demanda, ENS y flujos se equilibran.
 
-- `D_n`: demanda.
-- `Gmax_n`: generación máxima.
-- `Cost_c`: costo de circuito.
-- `Fmax_c`: capacidad.
-- `x_c`: reactancia.
-- `Nexist_c`: circuitos existentes.
-- `Nmax_c`: máximo de circuitos nuevos.
+$$
+P_n-D_n+ENS_n=\sum_{\ell\in L}A_{n,\ell}F_\ell
+$$
 
-### 3.4 Variables de decisión
+### Capacidad de corredor
 
-- `nnew_c`: circuitos construidos.
-- `F_c`: flujo.
-- `theta_n`: ángulo.
-- `Pg_n`: generación.
-- `ENS_n`: energía no servida.
+La capacidad depende de circuitos existentes y construidos.
 
-### 3.5 Función objetivo
+$$
+-\overline{F}_\ell(n^0_\ell+n_\ell)\leq F_\ell\leq \overline{F}_\ell(n^0_\ell+n_\ell)
+$$
 
-Minimizar inversión en transmisión y penalización por energía no servida.
+### Límite de construcción
 
-### 3.6 Restricciones
+No se construye más que el máximo permitido.
 
-### R1. Balance nodal
+$$
+0\leq n_\ell\leq\overline{n}_\ell
+$$
 
-La generación, demanda, ENS y flujos se equilibran por barra.
+### Relación DC si aplica
 
-```text
-Pg_n - D_n + ENS_n = sum_c A_{n,c} F_c
-```
-### R2. Capacidad de corredor
+En formulaciones DC, el flujo depende de ángulos.
 
-El flujo queda limitado por circuitos existentes y nuevos.
+$$
+F_\ell=\frac{(n^0_\ell+n_\ell)(\theta_i-\theta_j)}{x_\ell}
+$$
 
-```text
--Fmax_c (Nexist_c+nnew_c) <= F_c <= Fmax_c (Nexist_c+nnew_c)
-```
-### R3. Límite de construcción
+## 4. Interpretación técnica
 
-No se puede construir más del máximo permitido.
+La solución debe analizar corredores seleccionados, costo de inversión, ENS, congestión y diferencias entre formulaciones.
 
-```text
-0 <= nnew_c <= Nmax_c
-```
-### R4. Flujo DC si aplica
+## 5. Actividad relacionada
 
-El flujo se relaciona con ángulos y reactancia.
+- [Ir a la actividad](../actividades/actividad_04_tnep_garver.md)
+---
 
-```text
-F_c = (Nexist_c+nnew_c)(theta_i-theta_j)/x_c
-```
-
-## 4. Construcción del archivo `.dat`
-
-El `.dat` debe separar barras, demanda, generación, corredores existentes/candidatos, costos, capacidades y reactancias.
-
-## 5. Interpretación del archivo `.out`
-
-El `.out` debe mostrar circuitos construidos, flujos por corredor, ENS, costo de inversión y costo total.
-
-## 6. Errores frecuentes
-
-- Aceptar una solución de transporte sin validar física.
-- No limitar máximo de circuitos.
-- Usar big-M excesivo sin analizar estabilidad.
-- No distinguir corredor existente y candidato.
-
-## 7. Actividades relacionadas
-
-- [Actividad 04](../actividades/actividad_04_tnep_garver.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

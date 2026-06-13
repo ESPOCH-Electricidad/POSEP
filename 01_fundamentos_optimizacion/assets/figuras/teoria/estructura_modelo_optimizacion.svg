@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="650" viewBox="0 0 1280 650">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="70" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Estructura general de un modelo de optimización</text>
+<text x="70" y="90" font-family="Arial" font-size="19" fill="#475569">De los datos técnicos a la solución computacional</text>
+<rect x="70" y="145" width="230" height="110" rx="18" fill="#dbeafe" stroke="#1e3a8a" stroke-width="3"/>
+<text x="185" y="190" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">Datos</text>
+<text x="185" y="220" text-anchor="middle" font-family="Arial" font-size="16">parámetros, índices</text>
+<rect x="385" y="145" width="230" height="110" rx="18" fill="#dcfce7" stroke="#166534" stroke-width="3"/>
+<text x="500" y="190" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">Variables</text>
+<text x="500" y="220" text-anchor="middle" font-family="Arial" font-size="16">decisiones</text>
+<rect x="700" y="145" width="230" height="110" rx="18" fill="#fef3c7" stroke="#854d0e" stroke-width="3"/>
+<text x="815" y="190" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">Modelo</text>
+<text x="815" y="220" text-anchor="middle" font-family="Arial" font-size="16">objetivo + restricciones</text>
+<rect x="1015" y="145" width="200" height="110" rx="18" fill="#f3e8ff" stroke="#86198f" stroke-width="3"/>
+<text x="1115" y="190" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">Solución</text>
+<text x="1115" y="220" text-anchor="middle" font-family="Arial" font-size="16">decisión óptima</text>
+<line x1="300" y1="200" x2="380" y2="200" stroke="#475569" stroke-width="4"/><polygon points="370,190 390,200 370,210" fill="#475569"/>
+<line x1="615" y1="200" x2="695" y2="200" stroke="#475569" stroke-width="4"/><polygon points="685,190 705,200 685,210" fill="#475569"/>
+<line x1="930" y1="200" x2="1010" y2="200" stroke="#475569" stroke-width="4"/><polygon points="1000,190 1020,200 1000,210" fill="#475569"/>
+<rect x="160" y="350" width="960" height="210" rx="22" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+<text x="210" y="400" font-family="Arial" font-size="24" font-weight="bold" fill="#0f172a">Lectura matemática</text>
+<text x="210" y="440" font-family="Arial" font-size="19" fill="#334155">Minimizar o maximizar una función objetivo sujeta a restricciones técnicas, económicas y operativas.</text>
+<text x="210" y="482" font-family="Arial" font-size="19" fill="#334155">La solución debe interpretarse físicamente: generación, flujo, inversión, ENS, costos y restricciones activas.</text>
+<text x="210" y="524" font-family="Arial" font-size="19" fill="#334155">El modelo no termina en el solver: termina en la explicación técnica de por qué esa decisión es razonable.</text>
+</svg>

@@ -1,99 +1,72 @@
 # Flujo óptimo de potencia AC
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/opf_red_dc_ac.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-El OPF-AC representa el comportamiento eléctrico completo mediante ecuaciones no lineales de potencia activa y reactiva. Permite analizar tensión, potencia reactiva, pérdidas y límites operativos más cercanos a la operación real.
+El OPF-AC representa potencia activa, potencia reactiva, tensiones y pérdidas. Es más fiel al sistema eléctrico, pero resulta no lineal y puede ser más difícil de resolver.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Decisión | Generación activa/reactiva, tensiones y ángulos. |
-| Restricción física | Ecuaciones no lineales de flujo AC. |
-| Ventaja | Representación eléctrica más completa. |
-| Limitación | Problema no lineal y más difícil de resolver. |
+| Conjuntos | $N$: barras; $G$: generadores. |
+| Parámetros | $P^D_i$, $Q^D_i$, $G_{ij}$, $B_{ij}$, límites de tensión y generación. |
+| Variables | $P_g$, $Q_g$, $V_i$, $\theta_i$. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Objetivo
 
-- `N`: barras.
-- `L`: líneas.
-- `G`: generadores.
+Minimizar costo de generación.
 
-### 3.2 Índices
+$$
+\min Z=\sum_{g\in G}c_gP_g
+$$
 
-- `i,j ∈ N`: barras conectadas.
-- `g ∈ G`: generador.
+### Balance activo
 
-### 3.3 Parámetros
+Balance no lineal de potencia activa.
 
-- `Pd_i`, `Qd_i`.
-- `G_ij`, `B_ij`: admitancia.
-- `Vmin_i`, `Vmax_i`.
-- `Pmin_g`, `Pmax_g`, `Qmin_g`, `Qmax_g`.
+$$
+P_i^G-P_i^D=V_i\sum_{j\in N}V_j\left(G_{ij}\cos\theta_{ij}+B_{ij}\sin\theta_{ij}\right)
+$$
 
-### 3.4 Variables de decisión
+### Balance reactivo
 
-- `Pg_g`, `Qg_g`.
-- `V_i`: magnitud de tensión.
-- `theta_i`: ángulo.
-- `Pij`, `Qij`: flujos.
+Balance no lineal de potencia reactiva.
 
-### 3.5 Función objetivo
+$$
+Q_i^G-Q_i^D=V_i\sum_{j\in N}V_j\left(G_{ij}\sin\theta_{ij}-B_{ij}\cos\theta_{ij}\right)
+$$
 
-Minimizar costo de generación sujeto a ecuaciones AC y límites operativos.
+### Tensión
 
-### 3.6 Restricciones
+La tensión debe mantenerse en rango.
 
-### R1. Balance activo
+$$
+\underline{V}_i\leq V_i\leq\overline{V}_i
+$$
 
-Generación activa menos demanda activa igual a inyección AC.
+### Generación reactiva
 
-```text
-Pg_i - Pd_i = P_i(V,theta)
-```
-### R2. Balance reactivo
+Los generadores tienen límites de reactivos.
 
-Generación reactiva menos demanda reactiva igual a inyección reactiva.
+$$
+\underline{Q}_g\leq Q_g\leq\overline{Q}_g
+$$
 
-```text
-Qg_i - Qd_i = Q_i(V,theta)
-```
-### R3. Límites de tensión
+## 4. Interpretación técnica
 
-Cada barra mantiene tensión dentro de rango.
+El resultado debe interpretar tensiones, reactivos, pérdidas, límites activos y diferencias frente a OPF-DC.
 
-```text
-Vmin_i <= V_i <= Vmax_i
-```
-### R4. Límites de generación
+## 5. Actividad relacionada
 
-Generadores respetan límites P y Q.
+- [Ir a la actividad](../actividades/actividad_03_opf_dc_ac.md)
+---
 
-```text
-Pmin_g <= Pg_g <= Pmax_g; Qmin_g <= Qg_g <= Qmax_g
-```
-
-## 4. Construcción del archivo `.dat`
-
-El `.dat` debe incluir datos eléctricos completos: r, x, b, límites de tensión y límites de reactivos.
-
-## 5. Interpretación del archivo `.out`
-
-El `.out` debe reportar tensiones, ángulos, P/Q de generadores, flujos, pérdidas y posibles límites activos.
-
-## 6. Errores frecuentes
-
-- Usar datos DC incompletos para AC.
-- No inicializar variables de tensión/ángulo.
-- Ignorar límites de reactivos.
-- Comparar DC y AC sin considerar pérdidas.
-
-## 7. Actividades relacionadas
-
-- [Actividad 03](../actividades/actividad_03_opf_dc_ac.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)

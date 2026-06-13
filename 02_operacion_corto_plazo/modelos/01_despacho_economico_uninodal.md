@@ -1,89 +1,56 @@
 # Despacho económico uninodal
 
-[Inicio](../../README.md) | [Bloque](../README.md) | [Modelos](README.md) | [Actividades](../actividades/README.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+
+
 
 ![Esquema del modelo](../assets/figuras/modelos/despacho_economico.svg)
 
-## 1. Idea del modelo
+## 1. Intuición del modelo
 
-El despacho económico uninodal decide la generación de cada unidad para cubrir la demanda total del sistema sin representar restricciones de red. Es el primer modelo operativo porque permite entender costo marginal, límites de generación y balance de potencia.
+El despacho económico asigna generación para cubrir demanda al menor costo sin representar la red. Es el modelo operativo más básico.
 
-## 2. Lectura didáctica previa
+## 2. Elementos de la formulación
 
-| Elemento | Interpretación |
+| Elemento | Descripción |
 |---|---|
-| Horizonte | Corto plazo: horas o días. |
-| Decisión | Generación, estado o uso de recursos por periodo. |
-| Salida clave | Costo operativo, despacho, ENS y restricciones activas. |
+| Conjuntos | $G$: generadores; $T$: periodos. |
+| Parámetros | $c_g$, $\underline{P}_g$, $\overline{P}_g$, $D_t$, $VOLL$. |
+| Variables | $P_{g,t}$, $ENS_t$. |
 
 ## 3. Formulación matemática
 
-### 3.1 Conjuntos
+### Objetivo
 
-- `G`: conjunto de generadores.
-- `T`: periodos de operación.
+Minimizar costo operativo y ENS.
 
-### 3.2 Índices
+$$
+\min Z=\sum_{t\in T}\sum_{g\in G} c_g P_{g,t}+\sum_{t\in T}VOLL\,ENS_t
+$$
 
-- `g`: generador
-- `t`: periodo horario
-- `h`: unidad hidroeléctrica si aplica
+### Balance
 
-### 3.3 Parámetros
+Generación y ENS cubren demanda.
 
-- `c_g`: costo variable.
-- `Pmin_g`, `Pmax_g`: límites de generación.
-- `D_t`: demanda.
-- `VOLL`: penalización ENS.
+$$
+\sum_{g\in G}P_{g,t}+ENS_t=D_t \quad \forall t
+$$
 
-### 3.4 Variables de decisión
+### Límites
 
-- `Pg_{g,t}`: generación.
-- `ENS_t`: energía no servida.
+Cada unidad respeta límites técnicos.
 
-### 3.5 Función objetivo
+$$
+\underline{P}_g \leq P_{g,t}\leq \overline{P}_g \quad \forall g,t
+$$
 
-Minimizar costo variable más penalización por ENS.
+## 4. Interpretación técnica
 
-### 3.6 Restricciones
+El resultado permite identificar la unidad marginal, el costo horario y la necesidad de ENS si no hay capacidad suficiente.
 
-### R1. Balance
+## 5. Actividad relacionada
 
-La generación total más ENS cubre demanda.
+- [Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+---
 
-```text
-sum_g Pg[g,t] + ENS[t] = D[t]
-```
-### R2. Límites de generación
-
-Cada unidad opera dentro de sus límites.
-
-```text
-Pmin[g] <= Pg[g,t] <= Pmax[g]
-```
-### R3. No negatividad ENS
-
-La energía no servida no puede ser negativa.
-
-```text
-ENS[t] >= 0
-```
-
-## 4. Construcción del archivo `.dat`
-
-El `.dat` debe separar demanda horaria, datos técnicos de unidades, costos y parámetros temporales. Use unidades explícitas: MW, MWh, USD/MWh.
-
-## 5. Interpretación del archivo `.out`
-
-El `.out` debe reportar generación por hora, costo total, energía no servida, estados binarios y uso de recursos hídricos cuando aplique.
-
-## 6. Errores frecuentes
-
-- No vincular generación y estado binario en UC.
-- No revisar rampas entre horas.
-- Mezclar MW y MWh.
-- No interpretar la energía hidro como recurso limitado.
-
-## 7. Actividades relacionadas
-
-- [Actividad 02](../actividades/actividad_02_operacion_corto_plazo.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
