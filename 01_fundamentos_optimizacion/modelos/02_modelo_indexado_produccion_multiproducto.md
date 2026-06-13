@@ -1,77 +1,70 @@
 # Modelo indexado de producción multiproducto
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/modelo_produccion_lineal.svg)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-El problema anterior puede crecer rápidamente. En lugar de escribir una ecuación por cada producto, se usa notación indexada. Esta es la forma natural de construir modelos de sistemas eléctricos con decenas de generadores, barras o líneas.
+El modelo muestra cómo escalar una formulación usando conjuntos e índices, evitando escribir manualmente ecuaciones repetidas.
 
 ## 2. Enunciado guía
 
-Reformule el problema usando conjuntos e índices para que el número de productos pueda cambiar sin modificar la estructura matemática.
+Formular una producción multiproducto con varios recursos y demanda mínima.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- conjunto de alternativas;\n- matriz de consumo por recurso;\n- disponibilidad de cada recurso;\n- requerimiento o demanda mínima.
+![Figura conceptual](../assets/figuras/01_mapa_modelo_optimizacion.svg)
 
-## 4. Intuición del modelo
-
-La formulación indexada permite pasar de un ejemplo pequeño a un modelo escalable. En sistemas eléctricos, esta idea se usa para agregar generadores, líneas, tecnologías, periodos o escenarios sin reescribir todas las ecuaciones.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $P$: productos; $R$: recursos. |
-| Índices | $p \in P$, $r \in R$. |
-| Parámetros | $c_p$, $a_{r,p}$, $B_r$, $D$, $\overline{x}_p$. |
-| Variable | $x_p$: producción del producto $p$. |
+| Conjuntos | $P$: productos, $R$: recursos. |
+| Índices | $p\in P$, $r\in R$. |
+| Parámetros | $a_{r,p}$, $B_r$, $c_p$, $D$. |
+| Variables | $x_p$. |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
-### Objetivo
-
-Minimizar costo total de producción.
+### Función objetivo
 
 $$
-\min Z = \sum_{p \in P} c_p x_p
+\min Z=\sum_{p\in P}c_px_p
 $$
 
-### Demanda mínima
-
-La producción agregada cubre un requerimiento.
+### Demanda
 
 $$
-\sum_{p \in P} x_p \geq D
+\sum_{p\in P}x_p\geq D
 $$
 
-### Recursos múltiples
+La producción agregada cumple un requerimiento.
 
-Cada recurso limita la producción total.
-
-$$
-\sum_{p \in P} a_{r,p}x_p \leq B_r \quad \forall r \in R
-$$
-
-### Dominio
-
-Producción no negativa y acotada.
+### Recursos
 
 $$
-0 \leq x_p \leq \overline{x}_p \quad \forall p \in P
+\sum_{p\in P}a_{r,p}x_p\leq B_r\quad \forall r\in R
 $$
 
-## 7. Interpretación técnica
+Cada recurso tiene disponibilidad limitada.
 
-La ventaja principal es la escalabilidad. El estudiante debe reconocer que el mismo modelo funciona con dos productos o con cientos de alternativas.
+## 6. Interpretación técnica
 
-## 8. Actividad relacionada
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-- [Ir a la actividad](../actividades/actividad_01_fundamentos_optimizacion.md)
+## 7. Qué resultado debe graficarse
+
+Uso de recursos por tipo y producción óptima por producto.
+
+## 8. Errores frecuentes
+
+- Omitir índices.
+- No declarar toda la matriz de parámetros.
+- Duplicar ecuaciones manualmente.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_01A_produccion_lineal.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

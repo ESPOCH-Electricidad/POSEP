@@ -1,85 +1,78 @@
 # Modelo binario de localización y cobertura
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/modelo_localizacion_binaria.svg)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-Algunas decisiones no son continuas. En planificación eléctrica es común decidir si se construye una línea, si se instala una central o si se ubica un equipo de medición. Este modelo introduce la lógica binaria.
+El modelo introduce decisiones discretas: instalar o no instalar. Esta lógica prepara al estudiante para UC, TNEP y GEP.
 
 ## 2. Enunciado guía
 
-Seleccione los sitios de instalación que permiten cubrir todos los elementos requeridos al menor costo.
+Seleccionar sitios de instalación para cubrir todos los elementos requeridos al menor costo.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- sitios candidatos;\n- elementos a cubrir;\n- matriz de cobertura;\n- costos fijos de instalación;\n- restricciones de cobertura mínima.
+![Figura conceptual](../assets/figuras/modelos/modelo_localizacion_binaria.svg)
 
-## 4. Intuición del modelo
-
-Este modelo introduce variables binarias. La decisión ya no es solo cuánto producir, sino si instalar o no un activo. Esta lógica aparece luego en unit commitment, expansión de transmisión y expansión de generación.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $A$: sitios candidatos; $M$: elementos a cubrir. |
-| Índices | $a \in A$, $m \in M$. |
-| Parámetros | $C_a$: costo de instalación; $q_{m,a}$: cobertura posible. |
-| Variables | $y_a$: instalación; $z_{m,a}$: asignación de cobertura. |
+| Conjuntos | $A$: sitios, $M$: elementos. |
+| Índices | $a\in A$, $m\in M$. |
+| Parámetros | $C_a$, $q_{m,a}$. |
+| Variables | $y_a$, $z_{m,a}$ binarias. |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
-### Objetivo
-
-Minimizar costo de instalación.
+### Función objetivo
 
 $$
-\min Z = \sum_{a \in A} C_a y_a
+\min Z=\sum_{a\in A}C_ay_a
 $$
 
 ### Cobertura
 
-Cada elemento debe estar cubierto por al menos un sitio.
+$$
+\sum_{a\in A}z_{m,a}\geq 1\quad \forall m
+$$
 
-$$
-\sum_{a \in A} z_{m,a} \geq 1 \quad \forall m \in M
-$$
+Cada elemento queda cubierto.
 
 ### Activación
 
-Un sitio solo cubre si fue instalado.
+$$
+z_{m,a}\leq y_a\quad \forall m,a
+$$
 
-$$
-z_{m,a} \leq y_a \quad \forall m,a
-$$
+Solo se cubre desde sitios instalados.
 
 ### Elegibilidad
 
-La asignación solo existe si el sitio puede cubrir al elemento.
-
 $$
-z_{m,a} \leq q_{m,a} \quad \forall m,a
+z_{m,a}\leq q_{m,a}\quad \forall m,a
 $$
 
-### Dominio binario
+Solo se permite cobertura técnicamente válida.
 
-Las decisiones son binarias.
+## 6. Interpretación técnica
 
-$$
-y_a,z_{m,a} \in \{0,1\}
-$$
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-## 7. Interpretación técnica
+## 7. Qué resultado debe graficarse
 
-El resultado debe interpretarse como una decisión de inversión. En sistemas eléctricos, esta estructura es análoga a construir líneas o instalar nueva capacidad.
+Mapa de sitios instalados, elementos cubiertos y costo total.
 
-## 8. Actividad relacionada
+## 8. Errores frecuentes
 
-- [Ir a la actividad](../actividades/actividad_01_fundamentos_optimizacion.md)
+- Confundir cobertura posible con decisión.
+- No imponer dominio binario.
+- No justificar redundancia.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_01C_localizacion_binaria.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

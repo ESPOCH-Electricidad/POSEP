@@ -1,84 +1,77 @@
 # Flujo óptimo de potencia DC
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/opf_red_dc_ac.svg)
+> [Menú principal](../../README.md) · [Volver a OPF](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-El despacho económico puede proponer una solución barata que no es transportable por la red. El OPF-DC incorpora barras, líneas, ángulos y límites de transmisión.
+El OPF-DC incorpora red mediante balance nodal, ángulos y límites de línea.
 
 ## 2. Enunciado guía
 
-Determine el despacho óptimo respetando balance nodal y límites de líneas.
+Determinar despacho mínimo costo respetando transmisión.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- barras;\n- líneas;\n- reactancias;\n- límites térmicos;\n- generadores;\n- demanda por barra.
+![Figura conceptual](../assets/figuras/03_opf_dc_flujo_angulo.svg)
 
-## 4. Intuición del modelo
-
-El OPF-DC optimiza el despacho considerando red de transmisión bajo una aproximación lineal. Permite analizar congestión y redispatch sin modelar potencia reactiva ni pérdidas.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $N$: barras; $L$: líneas; $G$: generadores. |
-| Parámetros | $P^D_n$, $c_g$, $x_\ell$, $\overline{F}_\ell$, $\underline{P}_g$, $\overline{P}_g$. |
-| Variables | $P_g$, $\theta_n$, $F_\ell$, $ENS_n$. |
+| Conjuntos | $N$: barras, $L$: líneas, $G$: generadores. |
+| Parámetros | $P^D_n$, $x_l$, $F^{max}_l$, $c_g$. |
+| Variables | $P_g$, $F_l$, $\theta_n$, $ENS_n$. |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
-### Objetivo
-
-Minimizar costo y ENS.
+### Función objetivo
 
 $$
-\min Z=\sum_{g\in G}c_gP_g+\sum_{n\in N}VOLL\,ENS_n
+\min Z=\sum_g c_gP_g+\sum_nVOLL\,ENS_n
 $$
 
 ### Balance nodal
 
-Cada barra equilibra inyección y flujos.
+$$
+\sum_{g\in G_n}P_g-P^D_n+ENS_n=\sum_{\ell}A_{n,\ell}F_\ell
+$$
 
-$$
-\sum_{g\in G_n}P_g-P^D_n+ENS_n=\sum_{\ell\in L}A_{n,\ell}F_\ell
-$$
+Balance por barra.
 
 ### Flujo DC
-
-El flujo depende de diferencia angular.
 
 $$
 F_\ell=\frac{\theta_i-\theta_j}{x_\ell}
 $$
 
-### Límite de línea
+Flujo lineal.
 
-Cada línea respeta su capacidad.
-
-$$
--\overline{F}_\ell\leq F_\ell\leq\overline{F}_\ell
-$$
-
-### Referencia
-
-Una barra define el ángulo cero.
+### Límite
 
 $$
-\theta_{ref}=0
+-\overline{F}_\ell\leq F_\ell\leq \overline{F}_\ell
 $$
 
-## 7. Interpretación técnica
+Capacidad de línea.
 
-Debe revisarse qué líneas se saturan, cómo cambia el despacho y si aparece ENS en barras específicas.
+## 6. Interpretación técnica
 
-## 8. Actividad relacionada
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-- [Ir a la actividad](../actividades/actividad_03_opf_dc_ac.md)
+## 7. Qué resultado debe graficarse
+
+Mapa de flujos, ángulos y líneas congestionadas.
+
+## 8. Errores frecuentes
+
+- No fijar barra slack.
+- Invertir signos de incidencia.
+- No revisar congestión.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_03_opf_dc_ac.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a OPF](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

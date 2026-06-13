@@ -1,6 +1,6 @@
 # Manual del laboratorio de modelación
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/ruta_aprendizaje.md) · [Modelos](../docs/mapa_modelos.md) · [Casos](../docs/mapa_casos.md) · [Evaluación](../docs/evaluacion.md)
 
 
 [Inicio del sitio](index.md) | [README principal](../README.md)
@@ -27,4 +27,4 @@ Un resultado computacional no es suficiente. El estudiante debe demostrar que en
 - qué limitaciones tiene el modelo.
 ---
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/ruta_aprendizaje.md) · [Modelos](../docs/mapa_modelos.md) · [Casos](../docs/mapa_casos.md) · [Evaluación](../docs/evaluacion.md)

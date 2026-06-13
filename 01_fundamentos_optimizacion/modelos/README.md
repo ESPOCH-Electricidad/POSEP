@@ -1,23 +1,17 @@
 # Modelos — Fundamentos de optimización
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Fundamentos de optimización](../README.md) · [Modelos del bloque](../modelos/README.md) · [Actividades](../actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)
 
+Cada modelo incluye contexto, enunciado guía, figura conceptual, nomenclatura, ecuaciones, interpretación técnica y actividad relacionada.
 
-
-Este bloque introduce la lógica de modelación antes de estudiar aplicaciones eléctricas. Los modelos no se presentan como archivos sueltos, sino como estructuras matemáticas que luego pueden implementarse en AMPL.
-
-| Modelo | Enlace | Propósito |
+| Modelo | Uso didáctico | Acceso |
 |---|---|---|
-| Modelo lineal de producción con recursos limitados | [01_modelo_lineal_produccion_recursos.md](01_modelo_lineal_produccion_recursos.md) | Entender variables continuas, objetivo y restricciones |
-| Modelo indexado de producción multiproducto | [02_modelo_indexado_produccion_multiproducto.md](02_modelo_indexado_produccion_multiproducto.md) | Pasar de ecuaciones explícitas a formulación escalable |
-| Modelo de transporte de energía | [03_modelo_transporte_energia.md](03_modelo_transporte_energia.md) | Entender flujos entre oferta y demanda |
-| Modelo binario de localización y cobertura | [04_modelo_binario_localizacion_cobertura.md](04_modelo_binario_localizacion_cobertura.md) | Introducir variables binarias de inversión |
-| Forma matricial de un programa lineal | [05_forma_matricial_programa_lineal.md](05_forma_matricial_programa_lineal.md) | Relacionar formulación algebraica y estructura computacional |
+| Producción con recursos limitados | PL y región factible | [Abrir](01_modelo_lineal_produccion_recursos.md) |
+| Producción multiproducto indexada | conjuntos e índices | [Abrir](02_modelo_indexado_produccion_multiproducto.md) |
+| Transporte de energía | oferta, demanda y flujos | [Abrir](03_modelo_transporte_energia.md) |
+| Localización y cobertura | variables binarias | [Abrir](04_modelo_binario_localizacion_cobertura.md) |
+| Forma matricial | estructura de solver | [Abrir](05_forma_matricial_programa_lineal.md) |
 
-
-## Cómo leer los modelos
-
-Cada página de modelo sigue una estructura homogénea: intuición, elementos de formulación, ecuaciones matemáticas, interpretación técnica y enlace a la actividad correspondiente. Las ecuaciones se escriben en notación matemática para que se rendericen en GitHub.
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Fundamentos de optimización](../README.md) · [Modelos del bloque](../modelos/README.md) · [Actividades](../actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)

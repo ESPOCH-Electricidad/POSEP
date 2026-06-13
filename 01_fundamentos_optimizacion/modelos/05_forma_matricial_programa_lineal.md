@@ -1,69 +1,70 @@
 # Forma matricial de un programa lineal
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/modelo_forma_matricial.svg)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-Los solvers no interpretan el problema como una historia, sino como matrices, vectores y dominios. La forma matricial permite entender la estructura computacional detrás de modelos grandes.
+Los solvers organizan el modelo como matrices, vectores y dominios. Esta vista permite entender escala, estructura y sensibilidad.
 
 ## 2. Enunciado guía
 
-Exprese un problema lineal en forma compacta usando vector de costos, matriz de restricciones y vector del lado derecho.
+Representar un PL en forma compacta con matriz de restricciones y vector de costos.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- vector de variables;\n- matriz de coeficientes;\n- vector de costos;\n- vector de requerimientos;\n- sentido de cada restricción.
+![Figura conceptual](../assets/figuras/05_dualidad_sensibilidad.svg)
 
-## 4. Intuición del modelo
-
-La forma matricial resume un problema lineal usando vectores y matrices. Es útil para entender cómo los solvers organizan la información y por qué es importante mantener consistencia dimensional.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $I$: restricciones; $J$: variables. |
-| Índices | $i \in I$, $j \in J$. |
-| Parámetros | $c_j$: costo; $A_{i,j}$: coeficiente; $b_i$: lado derecho. |
-| Variable | $x_j$: decisión. |
+| Conjuntos | $I$: restricciones, $J$: variables. |
+| Índices | $i\in I$, $j\in J$. |
+| Parámetros | $A_{i,j}$, $b_i$, $c_j$. |
+| Variables | $x_j$. |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
-### Objetivo
-
-Minimizar costo lineal.
+### Función objetivo
 
 $$
-\min Z = \sum_{j \in J} c_j x_j
+\min Z=\sum_{j\in J}c_jx_j
 $$
 
 ### Restricciones
 
-Cada fila de la matriz representa una restricción.
+$$
+\sum_{j\in J}A_{i,j}x_j\geq b_i\quad \forall i
+$$
 
-$$
-\sum_{j \in J} A_{i,j}x_j \geq b_i \quad \forall i \in I
-$$
+Cada fila representa una restricción.
 
 ### Dominio
 
+$$
+x_j\geq 0\quad \forall j
+$$
+
 Variables continuas no negativas.
 
-$$
-x_j \geq 0 \quad \forall j \in J
-$$
+## 6. Interpretación técnica
 
-## 7. Interpretación técnica
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-Esta formulación permite reconocer que modelos eléctricos grandes son extensiones estructuradas de matrices de balance, límites y costos.
+## 7. Qué resultado debe graficarse
 
-## 8. Actividad relacionada
+Diagrama de matriz, variables activas, holguras y duales.
 
-- [Ir a la actividad](../actividades/actividad_01_fundamentos_optimizacion.md)
+## 8. Errores frecuentes
+
+- No controlar sentido de restricciones.
+- Perder unidades.
+- No relacionar matriz con interpretación física.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_01A_produccion_lineal.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

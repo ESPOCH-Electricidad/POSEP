@@ -1,6 +1,6 @@
 # Casos de estudio
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/ruta_aprendizaje.md) · [Modelos](../docs/mapa_modelos.md) · [Casos](../docs/mapa_casos.md) · [Evaluación](../docs/evaluacion.md)
 
 ![Casos por tema](../06_casos_de_estudio/assets/figuras/casos_por_tema.svg)
 
@@ -17,4 +17,4 @@
 
 ---
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/ruta_aprendizaje.md) · [Modelos](../docs/mapa_modelos.md) · [Casos](../docs/mapa_casos.md) · [Evaluación](../docs/evaluacion.md)

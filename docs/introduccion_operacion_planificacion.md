@@ -1,6 +1,6 @@
 # Introducción a la operación y planificación de SEP
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/ruta_aprendizaje.md) · [Modelos](../docs/mapa_modelos.md) · [Casos](../docs/mapa_casos.md) · [Evaluación](../docs/evaluacion.md)
 
 
 ![Clasificación](assets/img/clasificacion_operacion_planificacion.svg)
@@ -22,4 +22,4 @@ La planificación estudia decisiones de mediano y largo plazo: expansión de gen
 Un plan de expansión debe ser validado mediante modelos de operación. Por ejemplo, una expansión de generación puede ser económicamente atractiva, pero su factibilidad debe analizarse considerando red, restricciones operativas, reserva y escenarios de demanda.
 ---
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/ruta_aprendizaje.md) · [Modelos](../docs/mapa_modelos.md) · [Casos](../docs/mapa_casos.md) · [Evaluación](../docs/evaluacion.md)

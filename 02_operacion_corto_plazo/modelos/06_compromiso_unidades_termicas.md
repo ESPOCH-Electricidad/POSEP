@@ -1,76 +1,69 @@
 # Compromiso de unidades térmicas
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/unit_commitment.svg)
+> [Menú principal](../../README.md) · [Volver a Operación](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-En operación real no todas las unidades pueden estar disponibles continuamente. Encender una unidad tiene costo, tiempos y restricciones.
+El operador decide encender unidades y generar respetando arranques, mínimos y rampas.
 
 ## 2. Enunciado guía
 
-Decida qué unidades encender y cuánto generar en cada periodo.
+Formular un MILP de encendido y despacho.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- demanda;\n- costos variables;\n- costos de arranque;\n- rampas;\n- mínimos técnicos;\n- estados iniciales.
+![Figura conceptual](../assets/figuras/04_unit_commitment_timeline.svg)
 
-## 4. Intuición del modelo
-
-Decide qué unidades se encienden, cuándo arrancan y cuánto generan. Es un MILP por sus variables binarias.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $G$: unidades; $T$: horas. |
-| Parámetros | $c_g$, $SU_g$, $\underline{P}_g$, $\overline{P}_g$, $RU_g$, $RD_g$, $D_t$. |
-| Variables | $P_{g,t}$, $u_{g,t}$, $v_{g,t}$, $ENS_t$. |
+| Conjuntos e índices | $G$: unidades; $T$: horas |
+| Parámetros | demanda, costos, límites técnicos, disponibilidad |
+| Variables | $P_{g,t}$, $u_{g,t}$, $v_{g,t}$ |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
-### Objetivo
-
-Minimizar generación, arranques y ENS.
+### Función objetivo
 
 $$
-\min Z=\sum_{g,t}c_gP_{g,t}+\sum_{g,t}SU_gv_{g,t}+\sum_t VOLL\,ENS_t
+\min Z=\sum_{g,t}c_gP_{g,t}+\sum_{g,t}SU_gv_{g,t}
 $$
 
-### Límites con estado
-
-La generación depende de si la unidad está encendida.
+### Estado
 
 $$
-\underline{P}_g u_{g,t}\leq P_{g,t}\leq \overline{P}_g u_{g,t}
+\underline{P}_gu_{g,t}\leq P_{g,t}\leq \overline{P}_gu_{g,t}
 $$
+
+Generación ligada al encendido.
 
 ### Arranque
-
-La variable de arranque captura transición de apagado a encendido.
 
 $$
 v_{g,t}\geq u_{g,t}-u_{g,t-1}
 $$
 
-### Rampa
+Detecta encendido.
 
-La generación no cambia más que la rampa permitida.
+## 6. Interpretación técnica
 
-$$
-P_{g,t}-P_{g,t-1}\leq RU_g
-$$
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-## 7. Interpretación técnica
+## 7. Qué resultado debe graficarse
 
-El resultado debe analizar estados, arranques, rampas activas, reserva y costo operativo.
+Cronograma de encendido y generación por unidad.
 
-## 8. Actividad relacionada
+## 8. Errores frecuentes
 
-- [Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+- No revisar límites.
+- No interpretar ENS.
+- No graficar resultados horarios.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a Operación](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

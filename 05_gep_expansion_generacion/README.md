@@ -1,56 +1,94 @@
 # 05 — Expansión de generación
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Expansión de generación](./README.md) · [Modelos del bloque](./modelos/README.md) · [Actividades](./actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)
 
-![Mapa visual del bloque](../docs/assets/img/bloques/05_gep.svg)
+## 1. Propósito y contexto
 
-## 1. Contexto y propósito
+El GEP decide qué capacidad instalar, cuánto instalar y cuándo instalarla para cubrir demanda futura, reserva y operación representativa, minimizando inversión, operación y energía no servida.
 
-La expansión de generación decide qué tecnologías instalar, en qué cantidad y en qué periodo. El bloque integra crecimiento de demanda, costos de inversión, costos operativos, reserva, energía no servida y escenarios.
+## 2. Figuras y conceptos principales
 
-La pregunta central es: **qué capacidad debe instalarse para abastecer demanda futura con costo y riesgo aceptables?**
+![Demanda futura](assets/figuras/01_demanda_futura.svg)
 
-![Figura conceptual](assets/figuras/conceptos/gep_decisiones.svg)
+Explica demanda pico y energía futura.
 
-## 2. Conceptos que se desarrollan
+![Curva de duración de carga](assets/figuras/02_curva_duracion_carga.svg)
 
-| Concepto | Uso didáctico |
-|---|---|
-| GEP estático | Decisión de capacidad en un periodo representativo. |
-| Bloques de carga | Vincular inversión con operación anual aproximada. |
-| Multianual | Acumular capacidad y decisiones en varios años. |
-| Escenarios | Analizar demanda, costos, hidrología y emisiones. |
+Introduce bloques de carga.
 
-## 3. Ecuación base del bloque
+![Screening curve](assets/figuras/03_screening_curve.svg)
 
-La estructura común de los modelos puede leerse como una optimización de costo o inversión sujeta a balance, límites y reglas operativas:
+Compara tecnologías por inversión y costo variable.
+
+![Capacidad acumulada](assets/figuras/04_capacidad_acumulada.svg)
+
+Muestra inversión acumulada por año.
+
+![Reserva firme](assets/figuras/05_reserva_firme.svg)
+
+Distingue capacidad nominal y aporte firme.
+
+## 3. Ecuaciones principales
+
+### Capacidad acumulada
 
 $$
-\min \; C^{op} + C^{inv} + C^{ENS}
+Cap_{k,y}=Cap_{k,y-1}+Build_{k,y}
 $$
 
-sujeto a restricciones de balance, capacidad, disponibilidad, reserva y factibilidad técnica. Cada modelo del bloque especializa esta estructura general.
+La inversión se acumula en el horizonte.
+
+### Balance por bloque
+
+$$
+\sum_k Gen_{k,y,b}+\sum_e Gen_{e,y,b}+ENS_{y,b}=D_{y,b}
+$$
+
+La generación cubre demanda por bloque.
+
+### Disponibilidad
+
+$$
+Gen_{k,y,b}\leq AF_k Cap_{k,y}h_b
+$$
+
+La generación depende de disponibilidad y duración.
+
+### Reserva firme
+
+$$
+\sum_k FC_kCap_{k,y}+\sum_eFC_eCap_e^0\geq(1+RM)D_y^{peak}
+$$
+
+Capacidad firme cubre demanda pico y margen.
 
 ## 4. Modelos del bloque
 
-| Modelo | Acceso |
-|---|---|
-| GEP estático de capacidad | [Abrir](modelos/01_modelo_gep_estatico_capacidad.md) |
-| GEP con bloques de carga | [Abrir](modelos/02_modelo_gep_bloques_carga.md) |
-| GEP multianual | [Abrir](modelos/03_modelo_gep_multianual.md) |
+| Modelo | Qué enseña | Acceso |
+|---|---|---|
+| GEP estático | capacidad en un periodo | [Abrir](modelos/01_modelo_gep_estatico_capacidad.md) |
+| GEP con bloques | inversión y operación representativa | [Abrir](modelos/02_modelo_gep_bloques_carga.md) |
+| GEP multianual | capacidad acumulada y escenarios | [Abrir](modelos/03_modelo_gep_multianual.md) |
 
-## 5. Actividad principal
+## 5. Casos recomendados
 
-- [Abrir actividad del bloque](actividades/actividad_05_gep_multianual.md)
+| Caso | Uso en este bloque | Acceso |
+|---|---|---|
+| Garver 6 barras | GEP base, bloques y multianual | [Abrir](../06_casos_de_estudio/garver_6_barras/README.md) |
 
-## 6. Preguntas de control
+## 6. Actividades
 
-1. ¿Cuál es la decisión principal del modelo?
-2. ¿Qué parámetros condicionan más la solución?
-3. ¿Qué restricciones podrían volverse activas?
-4. ¿Qué resultado debe graficarse para interpretar la solución?
-5. ¿Qué limitaciones tiene la formulación?
+| Actividad | Tipo | Acceso |
+|---|---|---|
+| Actividad 05 — GEP multianual | capacidad y bloques | [Abrir](actividades/actividad_05_gep_multianual.md) |
+
+## 7. Siguiente paso recomendado
+
+1. Revisar demanda futura y bloques.
+2. Abrir GEP estático.
+3. Pasar a bloques.
+4. Resolver actividad GEP multianual.
 
 ---
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Expansión de generación](./README.md) · [Modelos del bloque](./modelos/README.md) · [Actividades](./actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)

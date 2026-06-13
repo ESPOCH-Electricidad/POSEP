@@ -1,6 +1,6 @@
 # Actividades — 05 gep expansion generacion
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/ruta_aprendizaje.md) · [Modelos](../../docs/mapa_modelos.md) · [Casos](../../docs/mapa_casos.md) · [Evaluación](../../docs/evaluacion.md)
 
 
 
@@ -28,4 +28,4 @@ Evaluación integradora GEP con caso multianual, bloques de demanda, reserva, EN
 6. Elaborar Excel e informe PDF.
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/ruta_aprendizaje.md) · [Modelos](../../docs/mapa_modelos.md) · [Casos](../../docs/mapa_casos.md) · [Evaluación](../../docs/evaluacion.md)

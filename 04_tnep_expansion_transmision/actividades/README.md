@@ -1,6 +1,6 @@
 # Actividades — 04 tnep expansion transmision
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/ruta_aprendizaje.md) · [Modelos](../../docs/mapa_modelos.md) · [Casos](../../docs/mapa_casos.md) · [Evaluación](../../docs/evaluacion.md)
 
 
 
@@ -27,4 +27,4 @@ Evaluación integradora TNEP con formulaciones de transporte, DC, híbrida y lin
 6. Elaborar Excel e informe PDF.
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/ruta_aprendizaje.md) · [Modelos](../../docs/mapa_modelos.md) · [Casos](../../docs/mapa_casos.md) · [Evaluación](../../docs/evaluacion.md)

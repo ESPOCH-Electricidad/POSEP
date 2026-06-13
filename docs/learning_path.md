@@ -1,6 +1,6 @@
 # Learning Path
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/ruta_aprendizaje.md) · [Modelos](../docs/mapa_modelos.md) · [Casos](../docs/mapa_casos.md) · [Evaluación](../docs/evaluacion.md)
 
 
 ## Phase 1 — Mathematical foundations
@@ -19,4 +19,4 @@ Transmission (TNEP) and generation (GEP).
 All models converge in case studies such as Garver and IEEE test systems.
 ---
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/ruta_aprendizaje.md) · [Modelos](../docs/mapa_modelos.md) · [Casos](../docs/mapa_casos.md) · [Evaluación](../docs/evaluacion.md)

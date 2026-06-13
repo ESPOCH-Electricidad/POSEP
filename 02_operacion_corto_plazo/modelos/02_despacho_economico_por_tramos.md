@@ -1,68 +1,69 @@
 # Despacho económico con costos por tramos
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/despacho_economico.svg)
+> [Menú principal](../../README.md) · [Volver a Operación](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-Las curvas de costo de generación pueden aproximarse mediante tramos. Esto permite representar costos crecientes sin usar una función no lineal.
+Las curvas de costo se aproximan mediante segmentos lineales.
 
 ## 2. Enunciado guía
 
-Asigne generación por tramos para cubrir demanda minimizando costo.
+Despachar segmentos de generación minimizando costo.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- generadores;\n- tramos;\n- costo por tramo;\n- capacidad por tramo;\n- demanda.
+![Figura conceptual](../assets/figuras/03_costos_por_tramos.svg)
 
-## 4. Intuición del modelo
-
-Representa costos crecientes mediante segmentos lineales. Es útil cuando la curva real de costo no es estrictamente lineal.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $G$: generadores; $K$: tramos; $T$: periodos. |
-| Parámetros | $c_{g,k}$, $\overline{P}_{g,k}$, $D_t$. |
-| Variables | $P_{g,k,t}$: generación del tramo. |
+| Conjuntos e índices | $G$: generadores; $K$: tramos; $T$: periodos |
+| Parámetros | demanda, costos, límites técnicos, disponibilidad |
+| Variables | $P_{g,k,t}$ |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
-### Objetivo
-
-Minimizar costo por segmentos.
+### Función objetivo
 
 $$
-\min Z=\sum_{t}\sum_{g}\sum_{k} c_{g,k}P_{g,k,t}
+\min Z=\sum_{t,g,k}c_{g,k}P_{g,k,t}
 $$
 
 ### Balance
 
-La suma de todos los tramos cubre demanda.
-
 $$
-\sum_g\sum_k P_{g,k,t}=D_t \quad \forall t
+\sum_g\sum_kP_{g,k,t}=D_t
 $$
 
-### Límite por tramo
+La suma de tramos cubre demanda.
 
-Cada tramo tiene capacidad máxima.
+### Tramo
 
 $$
 0\leq P_{g,k,t}\leq \overline{P}_{g,k}
 $$
 
-## 7. Interpretación técnica
+Cada tramo tiene capacidad.
 
-El orden de uso de tramos revela cómo el sistema utiliza primero segmentos de menor costo.
+## 6. Interpretación técnica
 
-## 8. Actividad relacionada
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-- [Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+## 7. Qué resultado debe graficarse
+
+Barras apiladas por tramo y costo total.
+
+## 8. Errores frecuentes
+
+- No revisar límites.
+- No interpretar ENS.
+- No graficar resultados horarios.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a Operación](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

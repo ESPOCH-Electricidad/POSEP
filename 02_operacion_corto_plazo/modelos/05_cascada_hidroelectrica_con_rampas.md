@@ -1,68 +1,69 @@
 # Cascada hidroeléctrica con restricciones de rampa
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/hidrotermico.svg)
+> [Menú principal](../../README.md) · [Volver a Operación](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-La operación hidroeléctrica real no puede cambiar bruscamente. Las rampas limitan variaciones de caudal o generación.
+Los caudales o generación no pueden cambiar abruptamente entre periodos.
 
 ## 2. Enunciado guía
 
-Extienda la cascada incorporando límites de variación entre periodos.
+Incorporar rampas a la operación de cascada.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- rampas;\n- caudales;\n- volúmenes;\n- generación;\n- límites hidráulicos.
+![Figura conceptual](../assets/figuras/05_balance_hidrotermico.svg)
 
-## 4. Intuición del modelo
-
-Agrega límites de variación temporal para representar cambios máximos de turbinamiento o generación entre periodos.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $R$: embalses; $T$: periodos. |
-| Parámetros | $RU_r$, $RD_r$, límites hidráulicos. |
-| Variables | $Q_{r,t}$, $V_{r,t}$, $H_{r,t}$. |
+| Conjuntos e índices | $R$: embalses; $T$: periodos |
+| Parámetros | demanda, costos, límites técnicos, disponibilidad |
+| Variables | $Q_{r,t}$, $V_{r,t}$ |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
+
+### Función objetivo
+
+$$
+\min Z=C^{op}
+$$
 
 ### Rampa subida
-
-El caudal no puede aumentar bruscamente.
 
 $$
 Q_{r,t}-Q_{r,t-1}\leq RU_r
 $$
 
-### Rampa bajada
+Cambio máximo hacia arriba.
 
-El caudal no puede disminuir bruscamente.
+### Rampa bajada
 
 $$
 Q_{r,t-1}-Q_{r,t}\leq RD_r
 $$
 
-### Balance hídrico
+Cambio máximo hacia abajo.
 
-Se mantiene conservación de agua.
+## 6. Interpretación técnica
 
-$$
-V_{r,t}=V_{r,t-1}+A_{r,t}-Q_{r,t}-S_{r,t}
-$$
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-## 7. Interpretación técnica
+## 7. Qué resultado debe graficarse
 
-La solución suaviza la operación y puede aumentar costo térmico si restringe el uso hidro en horas críticas.
+Series temporales de caudal y rampas activas.
 
-## 8. Actividad relacionada
+## 8. Errores frecuentes
 
-- [Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+- No revisar límites.
+- No interpretar ENS.
+- No graficar resultados horarios.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_02_operacion_corto_plazo.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a Operación](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

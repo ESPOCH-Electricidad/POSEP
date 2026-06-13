@@ -1,21 +1,12 @@
 # Actividad 01C — Localización binaria de equipos de monitoreo
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](../modelos/README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
-## 1. Contexto
+## Contexto
 
-Una empresa eléctrica debe instalar equipos de monitoreo en puntos candidatos para observar alimentadores críticos. Cada punto candidato tiene un costo de instalación y puede cubrir ciertos alimentadores. El objetivo es cubrir todos los alimentadores al menor costo.
+Una empresa debe instalar equipos de monitoreo para cubrir alimentadores críticos al menor costo.
 
-Esta actividad introduce variables binarias y prepara al estudiante para decisiones discretas de unit commitment, TNEP y GEP.
-
-## 2. Datos
-
-| Sitio candidato | Costo instalación [USD] |
-|---|---:|
-| S1 | 850 |
-| S2 | 700 |
-| S3 | 920 |
-| S4 | 600 |
+## Datos
 
 | Alimentador | S1 | S2 | S3 | S4 |
 |---|---:|---:|---:|---:|
@@ -25,41 +16,29 @@ Esta actividad introduce variables binarias y prepara al estudiante para decisio
 | A4 | 0 | 0 | 1 | 1 |
 | A5 | 1 | 0 | 0 | 1 |
 
-## 3. Trabajo solicitado
+## Trabajo solicitado
 
-Formule un MILP que decida qué sitios instalar para cubrir todos los alimentadores. Luego realice dos variantes:
+1. Formular conjuntos, parámetros, variables, función objetivo y restricciones.
+2. Construir el archivo de datos.
+3. Resolver el caso base.
+4. Evaluar al menos dos cambios de sensibilidad.
+5. Presentar una tabla y una figura de resultados.
 
-1. exigir que A3 tenga cobertura redundante por al menos dos sitios;
-2. limitar el presupuesto máximo a 1600 USD y permitir un alimentador no cubierto con penalización.
+## Preguntas de análisis
 
-## 4. Preguntas de análisis
-
-1. ¿Qué sitios se instalan en el caso base?
-2. ¿Qué cambia al exigir redundancia?
-3. ¿Qué significa introducir penalización por alimentador no cubierto?
-4. ¿Por qué este modelo es MILP y no PL?
-
+1. ¿Qué sitios se instalan?
+2. ¿Qué cambia si A3 requiere redundancia?
+3. ¿Por qué el modelo es MILP?
 
 ## Entregables
 
-- `.dat`: datos construidos desde las tablas.
-- `.mod`: formulación desarrollada por el estudiante.
-- `.run`: archivo de ejecución.
-- `.out`: salida del solver.
-- `.xlsx`: resultados y gráficos.
-- `.pdf`: informe técnico breve.
-
-## Criterios de evaluación
-
-| Criterio | Peso |
-|---|---:|
-| Interpretación del enunciado y datos | 20 % |
-| Formulación matemática | 30 % |
-| Implementación computacional | 20 % |
-| Resultados y gráficos | 15 % |
-| Análisis de sensibilidad | 15 % |
-
+- `.dat`
+- `.mod`
+- `.run`
+- `.out`
+- Excel de resultados
+- Informe técnico breve
 
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](../modelos/README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

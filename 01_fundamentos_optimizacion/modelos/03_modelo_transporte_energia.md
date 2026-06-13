@@ -1,77 +1,70 @@
 # Modelo de transporte de energía
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/modelo_transporte_energia.svg)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-Una red simplificada tiene puntos de oferta y puntos de demanda. El objetivo es transportar energía desde las fuentes hacia las cargas con el menor costo posible, sin representar todavía leyes eléctricas de flujo.
+El modelo asigna flujos desde fuentes hacia cargas. Todavía no representa leyes eléctricas, pero permite estudiar balances, capacidad y costos.
 
 ## 2. Enunciado guía
 
-Determine los flujos desde cada fuente hacia cada carga que minimizan el costo y cubren demanda.
+Determinar flujos de energía entre fuentes y cargas minimizando costo de transporte.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- fuentes y capacidades;\n- cargas y demandas;\n- matriz de costos;\n- rutas permitidas o prohibidas.
+![Figura conceptual](../assets/figuras/modelos/modelo_transporte_energia.svg)
 
-## 4. Intuición del modelo
-
-El modelo de transporte asigna flujos desde fuentes de oferta hacia nodos de demanda. Es una formulación previa a los modelos de red, porque considera capacidad y demanda, pero no representa leyes eléctricas como ángulos o reactancias.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $I$: fuentes; $J$: demandas. |
-| Índices | $i \in I$, $j \in J$. |
-| Parámetros | $S_i$: oferta; $D_j$: demanda; $c_{i,j}$: costo de transporte. |
-| Variable | $f_{i,j}$: flujo enviado desde $i$ hacia $j$. |
+| Conjuntos | $I$: fuentes, $J$: cargas. |
+| Índices | $i\in I$, $j\in J$. |
+| Parámetros | $S_i$, $D_j$, $c_{i,j}$. |
+| Variables | $f_{i,j}$. |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
-### Objetivo
-
-Minimizar costo total de transporte.
+### Función objetivo
 
 $$
-\min Z = \sum_{i \in I}\sum_{j \in J} c_{i,j} f_{i,j}
+\min Z=\sum_{i\in I}\sum_{j\in J}c_{i,j}f_{i,j}
 $$
 
 ### Oferta
 
-Cada fuente no puede enviar más que su capacidad.
+$$
+\sum_{j\in J}f_{i,j}\leq S_i\quad \forall i
+$$
 
-$$
-\sum_{j \in J} f_{i,j} \leq S_i \quad \forall i \in I
-$$
+La fuente no excede su capacidad.
 
 ### Demanda
 
-Cada destino debe recibir su demanda.
-
 $$
-\sum_{i \in I} f_{i,j} \geq D_j \quad \forall j \in J
+\sum_{i\in I}f_{i,j}\geq D_j\quad \forall j
 $$
 
-### No negatividad
+Cada carga recibe energía suficiente.
 
-Los flujos no pueden ser negativos.
+## 6. Interpretación técnica
 
-$$
-f_{i,j} \geq 0 \quad \forall i,j
-$$
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-## 7. Interpretación técnica
+## 7. Qué resultado debe graficarse
 
-El resultado identifica rutas de transporte utilizadas y fuentes marginales. Es útil para comprender después el modelo de transporte en expansión de transmisión.
+Mapa de flujos, rutas usadas y costo por ruta.
 
-## 8. Actividad relacionada
+## 8. Errores frecuentes
 
-- [Ir a la actividad](../actividades/actividad_01_fundamentos_optimizacion.md)
+- Confundir transporte con OPF.
+- No verificar capacidad total.
+- No explicar rutas no usadas.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_01B_transporte_energia.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

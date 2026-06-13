@@ -1,55 +1,95 @@
 # 03 — Flujo óptimo de potencia
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Flujo óptimo de potencia](./README.md) · [Modelos del bloque](./modelos/README.md) · [Actividades](./actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)
 
-![Mapa visual del bloque](../docs/assets/img/bloques/03_opf.svg)
+## 1. Propósito y contexto
 
-## 1. Contexto y propósito
+El OPF incorpora la red al despacho económico. La ubicación de generación y demanda importa porque las líneas tienen límites, reactancias, tensiones y pérdidas.
 
-El OPF extiende el despacho económico incorporando la red eléctrica. Aquí la ubicación de la generación y la demanda importa: una unidad barata puede no abastecer una carga si las líneas se congestionan o si las tensiones violan límites.
+## 2. Figuras y conceptos principales
 
-La pregunta central es: **¿cuál es el despacho óptimo cuando la red impone restricciones físicas?**
+![Del ED al OPF](assets/figuras/01_de_ed_a_opf.svg)
 
-![Figura conceptual](assets/figuras/conceptos/opf_de_ed_a_red.svg)
+Explica por qué la red modifica el despacho.
 
-## 2. Conceptos que se desarrollan
+![Balance nodal](assets/figuras/02_balance_nodal.svg)
 
-| Concepto | Uso didáctico |
-|---|---|
-| OPF-DC | Modelo lineal de potencia activa, ángulos y congestión. |
-| OPF-AC | Modelo no lineal con tensiones, reactivos y pérdidas. |
-| Congestión | Límites de líneas que cambian el despacho. |
-| Interpretación nodal | Balance por barra y efecto de ubicación. |
+Introduce balance por barra.
 
-## 3. Ecuación base del bloque
+![OPF-DC](assets/figuras/03_opf_dc_flujo_angulo.svg)
 
-La estructura común de los modelos puede leerse como una optimización de costo o inversión sujeta a balance, límites y reglas operativas:
+Relaciona flujo y ángulos.
+
+![OPF-AC](assets/figuras/04_opf_ac_tension_reactivos.svg)
+
+Incluye tensión, reactivos y pérdidas.
+
+![Congestión y LMP](assets/figuras/05_congestion_lmp.svg)
+
+Relaciona restricciones de línea y señales marginales.
+
+## 3. Ecuaciones principales
+
+### Balance nodal DC
 
 $$
-\min \; C^{op} + C^{inv} + C^{ENS}
+\sum_{g\in G_n}P_g-P_n^D+ENS_n=\sum_{\ell\in L}A_{n,\ell}F_\ell
 $$
 
-sujeto a restricciones de balance, capacidad, disponibilidad, reserva y factibilidad técnica. Cada modelo del bloque especializa esta estructura general.
+Balance de potencia por barra.
+
+### Flujo DC
+
+$$
+F_\ell=\frac{\theta_i-\theta_j}{x_\ell}
+$$
+
+Aproximación lineal del flujo activo.
+
+### Balance AC activo
+
+$$
+P_i=V_i\sum_jV_j(G_{ij}\cos\theta_{ij}+B_{ij}\sin\theta_{ij})
+$$
+
+Ecuación no lineal de potencia activa.
+
+### Balance AC reactivo
+
+$$
+Q_i=V_i\sum_jV_j(G_{ij}\sin\theta_{ij}-B_{ij}\cos\theta_{ij})
+$$
+
+Ecuación no lineal de potencia reactiva.
 
 ## 4. Modelos del bloque
 
-| Modelo | Acceso |
-|---|---|
-| Flujo óptimo de potencia DC | [Abrir](modelos/01_flujo_optimo_potencia_dc.md) |
-| Flujo óptimo de potencia AC | [Abrir](modelos/02_flujo_optimo_potencia_ac.md) |
+| Modelo | Qué enseña | Acceso |
+|---|---|---|
+| OPF-DC | congestión lineal y ángulos | [Abrir](modelos/01_flujo_optimo_potencia_dc.md) |
+| OPF-AC | tensión, reactivos y pérdidas | [Abrir](modelos/02_flujo_optimo_potencia_ac.md) |
 
-## 5. Actividad principal
+## 5. Casos recomendados
 
-- [Abrir actividad del bloque](actividades/actividad_03_opf_dc_ac.md)
+| Caso | Uso en este bloque | Acceso |
+|---|---|---|
+| OPF-DC didáctico | primer análisis de balance nodal | [Abrir](../06_casos_de_estudio/opf_dc_didactico/README.md) |
+| IEEE 14 barras | OPF-AC introductorio | [Abrir](../06_casos_de_estudio/ieee_14_barras/README.md) |
+| IEEE 30 barras | OPF-AC de mayor escala | [Abrir](../06_casos_de_estudio/ieee_30_barras/README.md) |
 
-## 6. Preguntas de control
+## 6. Actividades
 
-1. ¿Cuál es la decisión principal del modelo?
-2. ¿Qué parámetros condicionan más la solución?
-3. ¿Qué restricciones podrían volverse activas?
-4. ¿Qué resultado debe graficarse para interpretar la solución?
-5. ¿Qué limitaciones tiene la formulación?
+| Actividad | Tipo | Acceso |
+|---|---|---|
+| Actividad 03 — OPF DC y AC | comparación de formulaciones | [Abrir](actividades/actividad_03_opf_dc_ac.md) |
+
+## 7. Siguiente paso recomendado
+
+1. Leer comparación DC/AC.
+2. Abrir OPF-DC.
+3. Usar caso OPF-DC didáctico.
+4. Comparar con OPF-AC.
 
 ---
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Flujo óptimo de potencia](./README.md) · [Modelos del bloque](./modelos/README.md) · [Actividades](./actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)

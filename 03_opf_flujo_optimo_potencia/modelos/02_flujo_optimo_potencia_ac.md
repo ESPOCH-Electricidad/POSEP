@@ -1,84 +1,77 @@
 # Flujo óptimo de potencia AC
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/opf_red_dc_ac.svg)
+> [Menú principal](../../README.md) · [Volver a OPF](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-El OPF-AC incorpora tensiones, potencia reactiva y pérdidas, por lo que se aproxima mejor al comportamiento físico del sistema.
+El OPF-AC representa tensiones, reactivos, ángulos y pérdidas mediante ecuaciones no lineales.
 
 ## 2. Enunciado guía
 
-Resuelva o analice el flujo óptimo considerando ecuaciones AC.
+Determinar operación óptima con restricciones eléctricas completas.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- datos de líneas;\n- admitancias;\n- límites de tensión;\n- límites de P y Q;\n- demanda activa y reactiva.
+![Figura conceptual](../assets/figuras/04_opf_ac_tension_reactivos.svg)
 
-## 4. Intuición del modelo
-
-El OPF-AC representa potencia activa, potencia reactiva, tensiones y pérdidas. Es más fiel al sistema eléctrico, pero resulta no lineal y puede ser más difícil de resolver.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $N$: barras; $G$: generadores. |
-| Parámetros | $P^D_i$, $Q^D_i$, $G_{ij}$, $B_{ij}$, límites de tensión y generación. |
+| Conjuntos | $N$: barras, $G$: generadores. |
+| Parámetros | admitancias, demandas P/Q, límites V/P/Q. |
 | Variables | $P_g$, $Q_g$, $V_i$, $\theta_i$. |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
-### Objetivo
-
-Minimizar costo de generación.
+### Función objetivo
 
 $$
-\min Z=\sum_{g\in G}c_gP_g
+\min Z=\sum_g c_gP_g
 $$
 
 ### Balance activo
 
-Balance no lineal de potencia activa.
+$$
+P_i^G-P_i^D=V_i\sum_jV_j(G_{ij}\cos\theta_{ij}+B_{ij}\sin\theta_{ij})
+$$
 
-$$
-P_i^G-P_i^D=V_i\sum_{j\in N}V_j\left(G_{ij}\cos\theta_{ij}+B_{ij}\sin\theta_{ij}\right)
-$$
+Potencia activa.
 
 ### Balance reactivo
 
-Balance no lineal de potencia reactiva.
+$$
+Q_i^G-Q_i^D=V_i\sum_jV_j(G_{ij}\sin\theta_{ij}-B_{ij}\cos\theta_{ij})
+$$
 
-$$
-Q_i^G-Q_i^D=V_i\sum_{j\in N}V_j\left(G_{ij}\sin\theta_{ij}-B_{ij}\cos\theta_{ij}\right)
-$$
+Potencia reactiva.
 
 ### Tensión
 
-La tensión debe mantenerse en rango.
-
 $$
-\underline{V}_i\leq V_i\leq\overline{V}_i
+\underline{V}_i\leq V_i\leq \overline{V}_i
 $$
 
-### Generación reactiva
+Rango admisible.
 
-Los generadores tienen límites de reactivos.
+## 6. Interpretación técnica
 
-$$
-\underline{Q}_g\leq Q_g\leq\overline{Q}_g
-$$
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-## 7. Interpretación técnica
+## 7. Qué resultado debe graficarse
 
-El resultado debe interpretar tensiones, reactivos, pérdidas, límites activos y diferencias frente a OPF-DC.
+Perfil de tensión, reactivos, pérdidas y límites activos.
 
-## 8. Actividad relacionada
+## 8. Errores frecuentes
 
-- [Ir a la actividad](../actividades/actividad_03_opf_dc_ac.md)
+- Usar datos incompletos.
+- No comparar con DC.
+- Ignorar límites de Q.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_03_opf_dc_ac.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a OPF](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

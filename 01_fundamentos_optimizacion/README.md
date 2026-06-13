@@ -1,104 +1,102 @@
 # 01 — Fundamentos de optimización
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Fundamentos de optimización](./README.md) · [Modelos del bloque](./modelos/README.md) · [Actividades](./actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)
 
-![Mapa visual del bloque](../docs/assets/img/bloques/01_fundamentos.svg)
+## 1. Propósito y contexto
 
-## 1. Propósito del bloque
+Este bloque introduce la base matemática necesaria para todos los modelos posteriores. El estudiante debe aprender a identificar decisiones, parámetros, restricciones, factibilidad, optimalidad y sensibilidad antes de abordar problemas eléctricos de mayor escala.
 
-Este bloque introduce los fundamentos de optimización que se requieren para construir modelos de operación y planificación de sistemas eléctricos de potencia. Antes de estudiar despacho económico, OPF, TNEP o GEP, el estudiante debe comprender qué es una decisión, cómo se define una función objetivo, qué significa una restricción y cómo se interpreta una solución óptima.
+## 2. Figuras y conceptos principales
 
-La intención no es comenzar directamente con un caso eléctrico grande. La secuencia pedagógica es: teoría general, ejemplo pequeño, formulación matemática, implementación computacional y actividad alternativa.
+![Mapa de formulación](assets/figuras/01_mapa_modelo_optimizacion.svg)
 
-![Ruta de fundamentos](assets/figuras/conceptos/ruta_fundamentos_modelos.svg)
+Muestra cómo pasar de un problema técnico a un modelo matemático.
 
-## 2. ¿Qué es un problema de optimización?
+![Región factible](assets/figuras/02_region_factible.svg)
 
-Un problema de optimización busca seleccionar la mejor alternativa dentro de un conjunto de decisiones factibles. En sistemas eléctricos, estas decisiones pueden ser operativas, como cuánto genera una unidad, o de planificación, como qué línea construir o qué tecnología instalar.
+Permite explicar restricciones activas, vértices, holguras y solución óptima.
 
-La forma general es:
+![Tipos de programación](assets/figuras/03_tipos_programacion.svg)
+
+Diferencia PL, MILP, NLP y MINLP.
+
+![Condiciones KKT](assets/figuras/04_kkt_condiciones_optimalidad.svg)
+
+Resume factibilidad, estacionariedad, dualidad y complementariedad.
+
+![Dualidad y sensibilidad](assets/figuras/05_dualidad_sensibilidad.svg)
+
+Conecta precios sombra y cambios marginales con interpretación técnica.
+
+![Del modelo general al SEP](assets/figuras/06_del_modelo_general_al_sep.svg)
+
+Relaciona variables matemáticas con generación, flujos, inversión y ENS.
+
+## 3. Ecuaciones principales
+
+### Problema general
 
 $$
 \min_x f(x)
 $$
 
-sujeto a:
+El objetivo representa el criterio de decisión.
+
+### Restricciones
 
 $$
-g_i(x) \leq 0, \quad i \in I
+g_i(x)\leq 0,\quad h_j(x)=0
 $$
 
-$$
-h_j(x)=0, \quad j \in J
-$$
+Las restricciones definen el conjunto factible.
+
+### Lagrangiano
 
 $$
-x \in \mathcal{X}
+\mathcal{L}(x,\lambda,\mu)=f(x)+\sum_i\lambda_i g_i(x)+\sum_j\mu_j h_j(x)
 $$
 
-donde $x$ representa las decisiones, $f(x)$ el criterio de optimización, $g_i(x)$ restricciones de desigualdad, $h_j(x)$ restricciones de igualdad y $\mathcal{X}$ el dominio de las variables.
+Base para interpretar condiciones KKT.
 
-## 3. Elementos básicos del modelo
+### Complementariedad
 
-| Elemento | Pregunta didáctica | Ejemplo en sistemas eléctricos |
+$$
+\lambda_i g_i(x^*)=0
+$$
+
+Una restricción no activa tiene multiplicador cero.
+
+## 4. Modelos del bloque
+
+| Modelo | Qué enseña | Acceso |
 |---|---|---|
-| Conjuntos | ¿Qué elementos existen? | generadores, barras, líneas, periodos |
-| Índices | ¿Cómo se recorre cada conjunto? | $g$, $n$, $\ell$, $t$, $y$ |
-| Parámetros | ¿Qué datos son conocidos? | demanda, costos, límites, reactancias |
-| Variables | ¿Qué decisiones se toman? | generación, flujo, inversión, ENS |
-| Función objetivo | ¿Qué criterio se optimiza? | costo, inversión, emisiones, ENS |
-| Restricciones | ¿Qué condiciones deben cumplirse? | balance, capacidad, reserva, presupuesto |
+| Producción con recursos limitados | PL, región factible, restricciones activas | [Abrir](modelos/01_modelo_lineal_produccion_recursos.md) |
+| Producción multiproducto indexada | conjuntos, índices y escalabilidad | [Abrir](modelos/02_modelo_indexado_produccion_multiproducto.md) |
+| Transporte de energía | flujos, oferta, demanda y costos | [Abrir](modelos/03_modelo_transporte_energia.md) |
+| Localización y cobertura | variables binarias e inversión | [Abrir](modelos/04_modelo_binario_localizacion_cobertura.md) |
+| Forma matricial | estructura algebraica de un PL | [Abrir](modelos/05_forma_matricial_programa_lineal.md) |
 
-## 4. Tipos de programación matemática
+## 5. Casos recomendados
 
-![Tipos de programación](assets/figuras/conceptos/tipos_programacion.svg)
-
-| Tipo | Descripción | Ejemplo que se verá después |
+| Caso | Uso en este bloque | Acceso |
 |---|---|---|
-| Programación lineal (PL / LP) | Variables continuas, objetivo y restricciones lineales | despacho económico lineal, transporte |
-| Programación lineal entera mixta (MILP) | Combina variables continuas con variables binarias o enteras | unit commitment, TNEP, GEP discreto |
-| Programación no lineal (NLP) | Incluye al menos una ecuación no lineal | OPF-AC, pérdidas no lineales |
-| Programación no lineal entera mixta (MINLP) | Combina no linealidad y variables discretas | expansión avanzada con red AC |
+| Operación 3 generadores | puente hacia despacho económico | [Abrir](../06_casos_de_estudio/operacion_3_generadores/README.md) |
 
-## 5. Factibilidad, optimalidad y sensibilidad
+## 6. Actividades
 
-Una solución es **factible** si cumple todas las restricciones. Es **óptima** si, además de ser factible, entrega el mejor valor de la función objetivo. En sistemas eléctricos, una solución puede ser matemáticamente óptima pero técnicamente poco útil si los datos o supuestos son incorrectos.
-
-El análisis de sensibilidad permite responder preguntas como:
-
-- ¿qué ocurre si aumenta la demanda?
-- ¿qué recurso o restricción limita la solución?
-- ¿qué alternativa entra o sale de la solución cuando cambia su costo?
-- ¿qué tan robusta es la decisión frente a cambios de parámetros?
-
-## 6. Modelos del bloque
-
-| Modelo | Propósito | Acceso |
-|---|---|---|
-| Producción con recursos limitados | Comprender PL, restricciones activas y solución óptima | [Abrir](modelos/01_modelo_lineal_produccion_recursos.md) |
-| Producción multiproducto indexada | Aprender a escalar un modelo con conjuntos | [Abrir](modelos/02_modelo_indexado_produccion_multiproducto.md) |
-| Transporte de energía | Entender flujos, oferta, demanda y costos | [Abrir](modelos/03_modelo_transporte_energia.md) |
-| Localización y cobertura | Introducir variables binarias de decisión | [Abrir](modelos/04_modelo_binario_localizacion_cobertura.md) |
-| Forma matricial | Conectar notación algebraica y solver | [Abrir](modelos/05_forma_matricial_programa_lineal.md) |
-
-## 7. Actividades del bloque
-
-La evaluación de fundamentos se divide en tres ejercicios progresivos. Cada ejercicio deriva de un modelo revisado, pero exige una variante para que el estudiante formule y analice por su cuenta.
-
-| Actividad | Tipo | Enlace |
+| Actividad | Tipo | Acceso |
 |---|---|---|
 | 01A — Producción lineal de componentes eléctricos | PL | [Abrir](actividades/actividad_01A_produccion_lineal.md) |
-| 01B — Transporte de energía entre fuentes y cargas | PL de transporte | [Abrir](actividades/actividad_01B_transporte_energia.md) |
+| 01B — Transporte de energía entre fuentes y cargas | PL transporte | [Abrir](actividades/actividad_01B_transporte_energia.md) |
 | 01C — Localización binaria de equipos de monitoreo | MILP | [Abrir](actividades/actividad_01C_localizacion_binaria.md) |
 
-## 8. Preguntas de control
+## 7. Siguiente paso recomendado
 
-1. ¿Qué diferencia existe entre parámetro y variable?
-2. ¿Por qué una variable binaria cambia la naturaleza del problema?
-3. ¿Qué significa que una restricción esté activa?
-4. ¿Por qué la factibilidad debe revisarse antes de interpretar el costo?
-5. ¿Cómo se reconoce si un problema es PL, MILP, NLP o MINLP?
+1. Leer esta página completa.
+2. Abrir el modelo de producción con recursos limitados.
+3. Resolver la actividad 01A.
+4. Continuar con transporte y localización binaria.
 
 ---
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Fundamentos de optimización](./README.md) · [Modelos del bloque](./modelos/README.md) · [Actividades](./actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)

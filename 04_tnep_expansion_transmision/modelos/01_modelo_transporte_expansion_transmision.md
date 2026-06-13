@@ -1,84 +1,77 @@
 # Modelo de transporte para expansión de transmisión
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/tnep_garver_inversion.svg)
+> [Menú principal](../../README.md) · [Volver a TNEP](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-La expansión de transmisión puede iniciar con una aproximación de transporte, útil para detectar corredores relevantes sin usar ángulos.
+Aproximación inicial que usa balance y capacidad sin ángulos.
 
 ## 2. Enunciado guía
 
-Decida circuitos nuevos minimizando inversión y energía no servida.
+Decidir circuitos nuevos con modelo de transporte.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- barras;\n- demanda;\n- generación;\n- corredores;\n- costos;\n- capacidades.
+![Figura conceptual](../assets/figuras/02_tnep_transporte_vs_dc.svg)
 
-## 4. Intuición del modelo
-
-El modelo de transporte decide inversiones considerando capacidad de corredores, sin imponer relación flujo-ángulo. Es una primera aproximación económica.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $N$: barras; $L$: corredores; $T$: periodos si aplica. |
-| Parámetros | $D_n$, $G^{max}_n$, $c_\ell$, $\overline{F}_\ell$, $x_\ell$, $n^0_\ell$, $\overline{n}_\ell$. |
-| Variables | $n_\ell$, $F_\ell$, $\theta_n$, $P_n$, $ENS_n$. |
+| Conjuntos | $N$: barras, $L$: corredores, $T$: periodos. |
+| Parámetros | demanda, generación, costos, capacidades, reactancias. |
+| Variables | $n_l$, $y_l$, $F_l$, $\theta_n$, $ENS_n$. |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
-### Objetivo
-
-Minimizar inversión y penalización por ENS.
+### Función objetivo
 
 $$
-\min Z=\sum_{\ell\in L}c_\ell n_\ell+\sum_{n\in N}VOLL\,ENS_n
+\min Z=\sum_{\ell}c_\ell n_\ell+\sum_nVOLL\,ENS_n
 $$
 
-### Balance nodal
-
-Generación, demanda, ENS y flujos se equilibran.
+### Balance
 
 $$
-P_n-D_n+ENS_n=\sum_{\ell\in L}A_{n,\ell}F_\ell
+P_n-D_n+ENS_n=\sum_\ell A_{n,\ell}F_\ell
 $$
 
-### Capacidad de corredor
+Balance nodal.
 
-La capacidad depende de circuitos existentes y construidos.
-
-$$
--\overline{F}_\ell(n^0_\ell+n_\ell)\leq F_\ell\leq \overline{F}_\ell(n^0_\ell+n_\ell)
-$$
-
-### Límite de construcción
-
-No se construye más que el máximo permitido.
+### Capacidad
 
 $$
-0\leq n_\ell\leq\overline{n}_\ell
+-\overline{F}_\ell(n_\ell^0+n_\ell)\leq F_\ell\leq \overline{F}_\ell(n_\ell^0+n_\ell)
 $$
 
-### Relación DC si aplica
+Capacidad total.
 
-En formulaciones DC, el flujo depende de ángulos.
+### Límite de inversión
 
 $$
-F_\ell=\frac{(n^0_\ell+n_\ell)(\theta_i-\theta_j)}{x_\ell}
+0\leq n_\ell\leq \overline{n}_\ell
 $$
 
-## 7. Interpretación técnica
+Máximo de circuitos nuevos.
 
-La solución debe analizar corredores seleccionados, costo de inversión, ENS, congestión y diferencias entre formulaciones.
+## 6. Interpretación técnica
 
-## 8. Actividad relacionada
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-- [Ir a la actividad](../actividades/actividad_04_tnep_garver.md)
+## 7. Qué resultado debe graficarse
+
+Corredores construidos, flujos, ENS y costo de inversión.
+
+## 8. Errores frecuentes
+
+- No diferenciar existente y candidato.
+- No comparar formulaciones.
+- No revisar ENS.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_04_tnep_garver.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a TNEP](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

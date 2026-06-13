@@ -1,60 +1,94 @@
 # 04 — Expansión de transmisión
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Expansión de transmisión](./README.md) · [Modelos del bloque](./modelos/README.md) · [Actividades](./actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)
 
-![Mapa visual del bloque](../docs/assets/img/bloques/04_tnep.svg)
+## 1. Propósito y contexto
 
-## 1. Contexto y propósito
+El TNEP decide qué líneas o circuitos construir para que la generación pueda abastecer la demanda bajo límites técnicos y económicos. Compara formulaciones con distinto nivel de fidelidad física.
 
-La expansión de transmisión decide qué corredores reforzar o construir para que la generación pueda llegar a los centros de carga de manera segura y económica. El bloque compara formulaciones con distinto nivel de detalle físico.
+## 2. Figuras y conceptos principales
 
-La pregunta central es: **¿qué líneas deben construirse y cómo cambia la decisión según la formulación de red?**
+![Red base y candidatos](assets/figuras/01_red_base_y_candidatos.svg)
 
-![Figura conceptual](assets/figuras/conceptos/tnep_formulaciones.svg)
+Distingue red existente y expansión posible.
 
-## 2. Conceptos que se desarrollan
+![Transporte vs DC](assets/figuras/02_tnep_transporte_vs_dc.svg)
 
-| Concepto | Uso didáctico |
-|---|---|
-| Transporte | Aproximación de capacidad sin ángulos. |
-| DC | Flujos lineales con ángulos y reactancias. |
-| Híbrido | Representación mixta entre detalle y simplificación. |
-| Disyuntivo | Activación lógica de líneas candidatas. |
-| Multietapa | Decidir qué construir y cuándo construir. |
+Compara formulaciones de red.
 
-## 3. Ecuación base del bloque
+![Big-M disyuntivo](assets/figuras/03_big_m_disyuntivo.svg)
 
-La estructura común de los modelos puede leerse como una optimización de costo o inversión sujeta a balance, límites y reglas operativas:
+Explica activación de líneas candidatas.
+
+![Multietapa](assets/figuras/04_expansion_multietapa.svg)
+
+Introduce temporalidad de inversión.
+
+## 3. Ecuaciones principales
+
+### Costo de inversión
 
 $$
-\min \; C^{op} + C^{inv} + C^{ENS}
+C^{inv}=\sum_{\ell\in L}c_\ell n_\ell
 $$
 
-sujeto a restricciones de balance, capacidad, disponibilidad, reserva y factibilidad técnica. Cada modelo del bloque especializa esta estructura general.
+Costo de construir circuitos.
+
+### Capacidad de corredor
+
+$$
+-\overline{F}_\ell(n_\ell^0+n_\ell)\leq F_\ell\leq \overline{F}_\ell(n_\ell^0+n_\ell)
+$$
+
+Límite de flujo con circuitos existentes y nuevos.
+
+### Activación binaria
+
+$$
+-My_\ell\leq F_\ell\leq My_\ell
+$$
+
+Línea candidata solo transporta si se construye.
+
+### Acumulación multietapa
+
+$$
+N_{\ell,t}=N_{\ell,t-1}+n_{\ell,t}
+$$
+
+La inversión se acumula en el tiempo.
 
 ## 4. Modelos del bloque
 
-| Modelo | Acceso |
-|---|---|
-| Transporte para expansión | [Abrir](modelos/01_modelo_transporte_expansion_transmision.md) |
-| Refuerzo constructivo | [Abrir](modelos/02_modelo_constructivo_refuerzo_red.md) |
-| DC de expansión | [Abrir](modelos/03_modelo_dc_expansion_transmision.md) |
-| Híbrido | [Abrir](modelos/04_modelo_hibrido_expansion_transmision.md) |
-| Lineal disyuntivo | [Abrir](modelos/05_modelo_lineal_disyuntivo_expansion_transmision.md) |
-| Multietapa | [Abrir](modelos/06_modelo_multietapa_expansion_transmision.md) |
+| Modelo | Qué enseña | Acceso |
+|---|---|---|
+| Transporte para expansión | aproximación sin ángulos | [Abrir](modelos/01_modelo_transporte_expansion_transmision.md) |
+| Refuerzo constructivo | heurística de congestión | [Abrir](modelos/02_modelo_constructivo_refuerzo_red.md) |
+| Modelo DC | flujos con ángulos | [Abrir](modelos/03_modelo_dc_expansion_transmision.md) |
+| Modelo híbrido | detalle físico parcial | [Abrir](modelos/04_modelo_hibrido_expansion_transmision.md) |
+| Lineal disyuntivo | activación de candidatos | [Abrir](modelos/05_modelo_lineal_disyuntivo_expansion_transmision.md) |
+| Multietapa | temporalidad de inversión | [Abrir](modelos/06_modelo_multietapa_expansion_transmision.md) |
 
-## 5. Actividad principal
+## 5. Casos recomendados
 
-- [Abrir actividad del bloque](actividades/actividad_04_tnep_garver.md)
+| Caso | Uso en este bloque | Acceso |
+|---|---|---|
+| Garver 6 barras | caso principal TNEP | [Abrir](../06_casos_de_estudio/garver_6_barras/README.md) |
+| IEEE 24 RTS | caso avanzado TNEP | [Abrir](../06_casos_de_estudio/ieee_24_rts/README.md) |
 
-## 6. Preguntas de control
+## 6. Actividades
 
-1. ¿Cuál es la decisión principal del modelo?
-2. ¿Qué parámetros condicionan más la solución?
-3. ¿Qué restricciones podrían volverse activas?
-4. ¿Qué resultado debe graficarse para interpretar la solución?
-5. ¿Qué limitaciones tiene la formulación?
+| Actividad | Tipo | Acceso |
+|---|---|---|
+| Actividad 04 — TNEP Garver | comparación de formulaciones | [Abrir](actividades/actividad_04_tnep_garver.md) |
+
+## 7. Siguiente paso recomendado
+
+1. Revisar red base y candidatos.
+2. Abrir modelo de transporte.
+3. Comparar con DC.
+4. Resolver actividad TNEP.
 
 ---
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Expansión de transmisión](./README.md) · [Modelos del bloque](./modelos/README.md) · [Actividades](./actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)

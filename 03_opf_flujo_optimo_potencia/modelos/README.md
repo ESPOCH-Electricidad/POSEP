@@ -1,18 +1,14 @@
 # Modelos — Flujo óptimo de potencia
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Flujo óptimo de potencia](../README.md) · [Modelos del bloque](../modelos/README.md) · [Actividades](../actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)
 
+Cada modelo incluye contexto, enunciado guía, figura conceptual, nomenclatura, ecuaciones, interpretación técnica y actividad relacionada.
 
-
-| Modelo | Enlace | Propósito |
+| Modelo | Uso didáctico | Acceso |
 |---|---|---|
-| Flujo óptimo de potencia DC | [01_flujo_optimo_potencia_dc.md](01_flujo_optimo_potencia_dc.md) | Representar despacho con red mediante aproximación lineal |
-| Flujo óptimo de potencia AC | [02_flujo_optimo_potencia_ac.md](02_flujo_optimo_potencia_ac.md) | Incorporar tensión, reactivos, pérdidas y no linealidad |
+| OPF-DC | balance nodal y congestión | [Abrir](01_flujo_optimo_potencia_dc.md) |
+| OPF-AC | tensión, reactivos y pérdidas | [Abrir](02_flujo_optimo_potencia_ac.md) |
 
-
-## Cómo leer los modelos
-
-Cada página de modelo sigue una estructura homogénea: intuición, elementos de formulación, ecuaciones matemáticas, interpretación técnica y enlace a la actividad correspondiente. Las ecuaciones se escriben en notación matemática para que se rendericen en GitHub.
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Flujo óptimo de potencia](../README.md) · [Modelos del bloque](../modelos/README.md) · [Actividades](../actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)

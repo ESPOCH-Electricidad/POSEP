@@ -1,84 +1,77 @@
 # Modelo GEP con bloques de carga
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/gep_horizonte_inversion.svg)
+> [Menú principal](../../README.md) · [Volver a GEP](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-Los bloques de carga permiten aproximar operación anual sin modelar las 8760 horas.
+Relaciona inversión con operación aproximada por bloques.
 
 ## 2. Enunciado guía
 
-Vincule inversión con despacho por bloques de duración.
+Decidir inversión y generación por bloque.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- bloques;\n- duración;\n- demanda;\n- tecnologías;\n- costos variables.
+![Figura conceptual](../assets/figuras/02_curva_duracion_carga.svg)
 
-## 4. Intuición del modelo
-
-Relaciona inversión con operación anual aproximada mediante bloques de carga y duración.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjuntos | $Y$: años; $B$: bloques; $K$: tecnologías candidatas; $E$: existentes. |
-| Parámetros | $D_{y,b}$, $h_b$, $CAPEX_k$, $FOM_k$, $c_k$, $AF_k$, $FC_k$, $VOLL$, $RM$. |
+| Conjuntos | $Y$: años, $B$: bloques, $K$: tecnologías. |
+| Parámetros | demanda, duración, CAPEX, FOM, costo variable, AF, FC. |
 | Variables | $Build_{k,y}$, $Cap_{k,y}$, $Gen_{k,y,b}$, $ENS_{y,b}$. |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
-### Objetivo
-
-Minimizar inversión, costos fijos, operación y ENS.
+### Función objetivo
 
 $$
-\min Z=\sum_{k,y}CAPEX_k Build_{k,y}+\sum_{k,y}FOM_k Cap_{k,y}+\sum_{k,y,b}c_k Gen_{k,y,b}+\sum_{y,b}VOLL\,ENS_{y,b}
+\min Z=C^{inv}+C^{fix}+C^{op}+C^{ENS}
 $$
 
-### Balance por bloque
-
-Generación y ENS cubren demanda.
+### Balance
 
 $$
-\sum_k Gen_{k,y,b}+\sum_e Gen_{e,y,b}+ENS_{y,b}=D_{y,b}
+\sum_kGen_{k,y,b}+\sum_eGen_{e,y,b}+ENS_{y,b}=D_{y,b}
 $$
 
-### Capacidad acumulada
+Demanda por bloque.
 
-La capacidad crece con inversiones previas.
+### Capacidad
 
 $$
 Cap_{k,y}=Cap_{k,y-1}+Build_{k,y}
 $$
 
-### Límite de generación
+Capacidad acumulada.
 
-La generación queda limitada por capacidad y disponibilidad.
-
-$$
-Gen_{k,y,b}\leq AF_k Cap_{k,y}h_b
-$$
-
-### Reserva firme
-
-La capacidad firme cubre demanda pico y margen.
+### Reserva
 
 $$
-\sum_k FC_k Cap_{k,y}+\sum_e FC_e Cap^0_e\geq(1+RM)D^{peak}_y
+\sum_kFC_kCap_{k,y}\geq(1+RM)D_y^{peak}
 $$
 
-## 7. Interpretación técnica
+Margen firme.
 
-El análisis debe diferenciar capacidad nueva, capacidad acumulada, energía generada, reserva, ENS y costo total.
+## 6. Interpretación técnica
 
-## 8. Actividad relacionada
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-- [Ir a la actividad](../actividades/actividad_05_gep_multianual.md)
+## 7. Qué resultado debe graficarse
+
+Capacidad nueva, capacidad acumulada, generación por bloque y ENS.
+
+## 8. Errores frecuentes
+
+- Confundir MW y MWh.
+- No usar duración de bloque.
+- No separar nueva capacidad y acumulada.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_05_gep_multianual.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a GEP](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

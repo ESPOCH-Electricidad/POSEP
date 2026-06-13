@@ -1,59 +1,99 @@
 # 02 — Operación de corto plazo
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Operación de corto plazo](./README.md) · [Modelos del bloque](./modelos/README.md) · [Actividades](./actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)
 
-![Mapa visual del bloque](../docs/assets/img/bloques/02_operacion.svg)
+## 1. Propósito y contexto
 
-## 1. Contexto y propósito
+Este bloque estudia decisiones horarias o diarias: cuánto genera cada unidad, qué unidad se enciende, cómo se cumple la reserva y cómo se usa el agua en sistemas hidrotérmicos.
 
-La operación de corto plazo estudia decisiones horarias o diarias para abastecer demanda eléctrica. Este bloque conecta la teoría de optimización con decisiones operativas reales: generación por unidad, encendido y apagado, rampas, reserva y uso de agua en sistemas hidrotermales.
+## 2. Figuras y conceptos principales
 
-La pregunta central del bloque es: **¿cómo se opera el sistema al menor costo sin violar límites técnicos?**
+![Demanda horaria](assets/figuras/01_curva_demanda_horaria.svg)
 
-![Figura conceptual](assets/figuras/conceptos/operacion_corto_plazo.svg)
+Ubica la operación en un horizonte temporal.
 
-## 2. Conceptos que se desarrollan
+![Orden de mérito](assets/figuras/02_orden_merito_despacho.svg)
 
-| Concepto | Uso didáctico |
-|---|---|
-| Despacho económico | Asignar generación al menor costo en un horizonte corto. |
-| Costos por tramos | Aproximar curvas de costo mediante segmentos lineales. |
-| Unit Commitment | Decidir qué unidades están encendidas y cuándo arrancan. |
-| Hidrotérmico | Coordinar energía hidroeléctrica limitada y generación térmica. |
+Explica despacho económico y unidad marginal.
 
-## 3. Ecuación base del bloque
+![Costos por tramos](assets/figuras/03_costos_por_tramos.svg)
 
-La estructura común de los modelos puede leerse como una optimización de costo o inversión sujeta a balance, límites y reglas operativas:
+Introduce aproximación lineal de curvas de costo.
+
+![Unit commitment](assets/figuras/04_unit_commitment_timeline.svg)
+
+Muestra decisiones binarias acopladas en el tiempo.
+
+![Hidrotérmico](assets/figuras/05_balance_hidrotermico.svg)
+
+Explica balance de embalse y valor del agua.
+
+## 3. Ecuaciones principales
+
+### Balance de potencia
 
 $$
-\min \; C^{op} + C^{inv} + C^{ENS}
+\sum_{g\in G}P_{g,t}+ENS_t=D_t
 $$
 
-sujeto a restricciones de balance, capacidad, disponibilidad, reserva y factibilidad técnica. Cada modelo del bloque especializa esta estructura general.
+La demanda debe cubrirse en cada periodo.
+
+### Límites de generación
+
+$$
+\underline{P}_g u_{g,t}\leq P_{g,t}\leq \overline{P}_g u_{g,t}
+$$
+
+Vincula estado y generación en UC.
+
+### Arranque
+
+$$
+v_{g,t}\geq u_{g,t}-u_{g,t-1}
+$$
+
+Detecta transición de apagado a encendido.
+
+### Balance hídrico
+
+$$
+V_{h,t}=V_{h,t-1}+A_{h,t}-Q_{h,t}-S_{h,t}
+$$
+
+Representa la dinámica del embalse.
 
 ## 4. Modelos del bloque
 
-| Modelo | Acceso |
-|---|---|
-| Despacho económico uninodal | [Abrir](modelos/01_despacho_economico_uninodal.md) |
-| Despacho económico por tramos | [Abrir](modelos/02_despacho_economico_por_tramos.md) |
-| Despacho hidrotérmico simple | [Abrir](modelos/03_despacho_hidrotermico_simple.md) |
-| Cascada hidroeléctrica | [Abrir](modelos/04_operacion_cascada_hidroelectrica.md) |
-| Cascada con rampas | [Abrir](modelos/05_cascada_hidroelectrica_con_rampas.md) |
-| Compromiso de unidades térmicas | [Abrir](modelos/06_compromiso_unidades_termicas.md) |
+| Modelo | Qué enseña | Acceso |
+|---|---|---|
+| Despacho económico uninodal | costo marginal y balance | [Abrir](modelos/01_despacho_economico_uninodal.md) |
+| Despacho económico por tramos | curva de costos linealizada | [Abrir](modelos/02_despacho_economico_por_tramos.md) |
+| Despacho hidrotérmico simple | uso de agua y térmica | [Abrir](modelos/03_despacho_hidrotermico_simple.md) |
+| Cascada hidroeléctrica | balances de embalses conectados | [Abrir](modelos/04_operacion_cascada_hidroelectrica.md) |
+| Cascada con rampas | restricciones intertemporales | [Abrir](modelos/05_cascada_hidroelectrica_con_rampas.md) |
+| Compromiso de unidades | MILP operativo | [Abrir](modelos/06_compromiso_unidades_termicas.md) |
 
-## 5. Actividad principal
+## 5. Casos recomendados
 
-- [Abrir actividad del bloque](actividades/actividad_02_operacion_corto_plazo.md)
+| Caso | Uso en este bloque | Acceso |
+|---|---|---|
+| Operación 3 generadores | ED y costos por tramos | [Abrir](../06_casos_de_estudio/operacion_3_generadores/README.md) |
+| Hidrotérmico didáctico | despacho hidrotérmico y cascadas | [Abrir](../06_casos_de_estudio/hidrotermico_didactico/README.md) |
+| Operación 101 generadores | ED escalable | [Abrir](../06_casos_de_estudio/operacion_101_generadores/README.md) |
 
-## 6. Preguntas de control
+## 6. Actividades
 
-1. ¿Cuál es la decisión principal del modelo?
-2. ¿Qué parámetros condicionan más la solución?
-3. ¿Qué restricciones podrían volverse activas?
-4. ¿Qué resultado debe graficarse para interpretar la solución?
-5. ¿Qué limitaciones tiene la formulación?
+| Actividad | Tipo | Acceso |
+|---|---|---|
+| Actividad 02 — Operación de corto plazo | ED + UC + hidrotérmico | [Abrir](actividades/actividad_02_operacion_corto_plazo.md) |
+
+## 7. Siguiente paso recomendado
+
+1. Revisar orden de mérito.
+2. Abrir despacho económico.
+3. Resolver actividad 02.
+4. Comparar con hidrotérmico y UC.
 
 ---
 
-> [Menú principal](../README.md) · [Índice del sitio](../docs/index.md) · [Ruta de aprendizaje](../docs/learning_path.md) · [Modelos](../docs/modelos.md) · [Casos](../docs/casos_de_estudio.md) · [Evaluación](../docs/evaluacion.md)
+> [Menú principal](../README.md) · [Volver a Operación de corto plazo](./README.md) · [Modelos del bloque](./modelos/README.md) · [Actividades](./actividades/README.md) · [Casos](../06_casos_de_estudio/README.md)

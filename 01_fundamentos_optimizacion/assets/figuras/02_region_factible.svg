@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="70" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Región factible, vértices y restricciones activas</text>
+<text x="70" y="88" font-family="Arial" font-size="18" fill="#475569">Una solución óptima lineal se interpreta desde la geometría de las restricciones</text>
+<line x1="145" y1="630" x2="900" y2="630" stroke="#0f172a" stroke-width="3"/>
+<line x1="145" y1="630" x2="145" y2="150" stroke="#0f172a" stroke-width="3"/>
+<text x="890" y="670" font-family="Arial" font-size="20">x₁</text>
+<text x="100" y="160" font-family="Arial" font-size="20">x₂</text>
+<polygon points="145,630 145,350 330,230 610,260 820,465 880,630" fill="#dbeafe" stroke="#1e40af" stroke-width="4" opacity="0.88"/>
+<line x1="145" y1="350" x2="880" y2="630" stroke="#475569" stroke-width="2.5" stroke-dasharray="8,8"/>
+<line x1="330" y1="230" x2="820" y2="465" stroke="#475569" stroke-width="2.5" stroke-dasharray="8,8"/>
+<line x1="610" y1="260" x2="880" y2="630" stroke="#475569" stroke-width="2.5" stroke-dasharray="8,8"/>
+<circle cx="820" cy="465" r="12" fill="#dc2626"/>
+<text x="845" y="470" font-family="Arial" font-size="19" fill="#991b1b" font-weight="bold">Óptimo</text>
+<text x="280" y="460" font-family="Arial" font-size="22" font-weight="bold" fill="#1e3a8a">Región factible</text>
+<rect x="690" y="145" width="470" height="205" rx="18" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+<text x="720" y="190" font-family="Arial" font-size="22" font-weight="bold" fill="#0f172a">Lectura didáctica</text>
+<text x="720" y="225" font-family="Arial" font-size="17" fill="#334155">• Restricción activa: holgura cero</text>
+<text x="720" y="255" font-family="Arial" font-size="17" fill="#334155">• Vértice: intersección de restricciones</text>
+<text x="720" y="285" font-family="Arial" font-size="17" fill="#334155">• Precio sombra: valor marginal del recurso</text>
+<text x="720" y="315" font-family="Arial" font-size="17" fill="#334155">• Sensibilidad: robustez ante cambios de datos</text>
+</svg>

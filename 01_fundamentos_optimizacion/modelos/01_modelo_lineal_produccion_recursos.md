@@ -1,69 +1,70 @@
 # Modelo lineal de producción con recursos limitados
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
-
-
-
-![Esquema del modelo](../assets/figuras/modelos/modelo_produccion_lineal.svg)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)
 
 ## 1. Contexto del problema
 
-Una organización debe asignar recursos limitados entre varias alternativas productivas. Aunque el ejemplo no representa una red eléctrica completa, reproduce la lógica básica de muchos problemas eléctricos: decidir cuánto producir, cuánto generar o cuánto invertir bajo limitaciones técnicas.
+Una organización debe decidir cómo usar recursos escasos entre alternativas. El ejemplo es pequeño, pero reproduce la estructura de despacho, asignación de capacidad e inversión.
 
 ## 2. Enunciado guía
 
-Determine la cantidad óptima de cada alternativa para maximizar beneficio o minimizar costo, respetando disponibilidad de recursos y límites de producción.
+Determinar la cantidad óptima de cada producto maximizando beneficio o minimizando costo bajo límites de recursos.
 
-## 3. Datos que debe reconocer el estudiante
+## 3. Figura conceptual del modelo
 
-- alternativas o productos;\n- beneficio o costo unitario;\n- consumo de recursos;\n- disponibilidad total;\n- límites mínimos o máximos.
+![Figura conceptual](../assets/figuras/02_region_factible.svg)
 
-## 4. Intuición del modelo
-
-Este modelo permite introducir la programación lineal mediante una decisión de asignación de recursos. Cada alternativa consume capacidad y aporta beneficio o costo. El objetivo es encontrar la combinación factible que optimiza el criterio económico.
-
-## 5. Elementos de la formulación
+## 4. Datos que debe reconocer el estudiante
 
 | Elemento | Descripción |
 |---|---|
-| Conjunto | $P$: productos o alternativas. |
-| Índice | $p \in P$. |
-| Parámetros | $c_p$: beneficio; $a_p$: consumo de recurso; $R$: recurso disponible; $\overline{x}_p$: producción máxima. |
-| Variable | $x_p$: cantidad producida del producto $p$. |
+| Conjuntos | $P$: productos. |
+| Índices | $p\in P$. |
+| Parámetros | $c_p$, $a_p$, $R$, $\overline{x}_p$. |
+| Variables | $x_p$: producción. |
 
-## 6. Formulación matemática
+## 5. Formulación matemática
 
 ### Función objetivo
 
-Maximizar beneficio total.
-
 $$
-\max Z = \sum_{p \in P} c_p x_p
+\max Z=\sum_{p\in P}c_px_p
 $$
 
-### Recurso disponible
-
-El consumo total no puede superar el recurso disponible.
+### Recurso
 
 $$
-\sum_{p \in P} a_p x_p \leq R
+\sum_{p\in P}a_px_p\leq R
 $$
 
-### Límite de producción
+El consumo total no supera la disponibilidad.
 
-Cada alternativa respeta su capacidad máxima.
+### Límite
 
 $$
-0 \leq x_p \leq \overline{x}_p \quad \forall p \in P
+0\leq x_p\leq \overline{x}_p
 $$
 
-## 7. Interpretación técnica
+Cada producto tiene cota técnica.
 
-La solución muestra qué alternativas son económicamente atractivas y qué restricción limita el sistema. Si la restricción de recurso está activa, aumentar $R$ podría mejorar el objetivo.
+## 6. Interpretación técnica
 
-## 8. Actividad relacionada
+La solución no debe interpretarse solo como un valor objetivo. El estudiante debe explicar qué decisiones se activan, qué restricciones quedan vinculantes y qué implicación física o económica tiene el resultado.
 
-- [Ir a la actividad](../actividades/actividad_01_fundamentos_optimizacion.md)
+## 7. Qué resultado debe graficarse
+
+Gráfico de región factible, producción por alternativa y holgura de recursos.
+
+## 8. Errores frecuentes
+
+- No revisar unidades.
+- Confundir parámetro con variable.
+- No analizar restricciones activas.
+
+## 9. Actividad relacionada
+
+[Ir a la actividad](../actividades/actividad_01A_produccion_lineal.md)
+
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Volver a Fundamentos](../README.md) · [Modelos del bloque](README.md) · [Actividades](../actividades/README.md) · [Casos](../../06_casos_de_estudio/README.md)

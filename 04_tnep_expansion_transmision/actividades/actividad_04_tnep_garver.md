@@ -1,6 +1,6 @@
 # Actividad 04 — TNEP: expansión de transmisión en sistema Garver simplificado
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/ruta_aprendizaje.md) · [Modelos](../../docs/mapa_modelos.md) · [Casos](../../docs/mapa_casos.md) · [Evaluación](../../docs/evaluacion.md)
 
 
 ## 0. Revisión previa obligatoria
@@ -153,4 +153,4 @@ Barras, generación, demanda y corredores.
 Consultar `rubrica_actividad_04.csv`.
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/ruta_aprendizaje.md) · [Modelos](../../docs/mapa_modelos.md) · [Casos](../../docs/mapa_casos.md) · [Evaluación](../../docs/evaluacion.md)

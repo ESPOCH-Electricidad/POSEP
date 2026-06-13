@@ -1,48 +1,40 @@
-# Caso hidrotérmico didáctico
+# Hidrotérmico didáctico
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Mapa de casos](../README.md) · [Ruta de aprendizaje](../../docs/ruta_aprendizaje.md)
 
-## 1. Tema asociado
+## Tema asociado
 
-**Tema principal:** Despacho hidrotérmico
+**Operación hidrotérmica**
 
-## 2. Contexto del caso
+## Uso recomendado
 
-Conjunto de casos progresivos para estudiar coordinación hidrotermal, cascadas y rampas.
+Este caso se usa para estudiar **embalse, agua, térmica**. No debe seleccionarse de forma aislada: su uso recomendado está vinculado al bloque indicado en el mapa de casos.
 
-## 3. ¿Cuándo usar este caso?
+## Archivos de datos
 
-| Bloque | Uso recomendado |
+| Archivo | Uso |
 |---|---|
-| 02 Operación | hidrotérmico simple, cascadas y rampas |
-| 06 Integrador | comparación de operación térmica e hidro |
+| `cascada_base.dat` | datos del caso |
+| `cascada_rampas.dat` | datos del caso |
+| `hidrotermico_simple.dat` | datos del caso |
 
-## 4. Datos disponibles
+## Resultados esperados
 
-| Archivo | Descripción |
+El estudiante debe producir: **volumen, turbinamiento, generación**.
+
+## Gráficos recomendados
+
+| Tema | Figura sugerida |
 |---|---|
-| `cascada_base.dat` | Datos disponibles para el caso |
-| `cascada_rampas.dat` | Datos disponibles para el caso |
-| `hidrotermico_simple.dat` | Datos disponibles para el caso |
+| Operación | barras o áreas de generación |
+| OPF | red con flujos y límites activos |
+| TNEP | corredores construidos |
+| GEP | capacidad nueva y acumulada |
 
-## 5. Flujo de trabajo sugerido
+## Volver
 
-1. Revisar qué modelo se desea aplicar.
-2. Identificar datos disponibles y unidades.
-3. Adaptar los datos al `.dat` del modelo correspondiente.
-4. Ejecutar el modelo y verificar factibilidad.
-5. Graficar resultados: generación, flujos, inversión, ENS o tensiones según corresponda.
-6. Comparar el caso base con al menos un escenario de sensibilidad.
-
-## 6. Resultados que debe producir el estudiante
-
-| Tipo de análisis | Resultado mínimo |
-|---|---|
-| Operación | generación, costo, ENS, unidad marginal |
-| OPF | flujos, límites activos, tensiones o ángulos |
-| TNEP | corredores construidos, costo de inversión, ENS |
-| GEP | capacidad nueva, capacidad acumulada, generación por bloque |
+[Volver al mapa de casos](../README.md)
 
 ---
 
-> [Menú principal](../../README.md) · [Índice del sitio](../../docs/index.md) · [Ruta de aprendizaje](../../docs/learning_path.md) · [Modelos](../../docs/modelos.md) · [Casos](../../docs/casos_de_estudio.md) · [Evaluación](../../docs/evaluacion.md)
+> [Menú principal](../../README.md) · [Mapa de casos](../README.md)
