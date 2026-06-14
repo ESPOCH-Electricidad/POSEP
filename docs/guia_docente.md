@@ -2,25 +2,17 @@
 
 [Menú principal](../README.md)
 
-Esta guía resume el uso recomendado del repositorio en clase.
+## Uso recomendado
 
-## Uso sugerido
+1. Presentar la pregunta guía del módulo.
+2. Desarrollar la teoría antes de mostrar el modelo.
+3. Revisar una figura técnica central.
+4. Identificar conjuntos, parámetros y variables.
+5. Construir el `.dat` desde el README del modelo.
+6. Ejecutar o discutir el modelo.
+7. Validar resultados con criterios técnicos.
+8. Solicitar interpretación, no solo valores numéricos.
 
-1. Iniciar cada unidad con el README del módulo.
-2. Discutir la teoría y las ecuaciones.
-3. Revisar el ejemplo o modelo principal.
-4. Ejecutar o construir los datos asociados.
-5. Resolver la actividad.
-6. Solicitar un breve informe técnico.
+## Criterio pedagógico de la v15
 
-## Enfoque
-
-El repositorio separa:
-
-- teoría;
-- datos;
-- ejemplos/modelos;
-- actividades;
-- casos integradores.
-
-No se publican soluciones completas ni archivos de salida generados por los estudiantes.
+La versión v15 evita figuras aisladas y listas mecánicas. Cada figura debe responder una pregunta del módulo y estar conectada al texto.

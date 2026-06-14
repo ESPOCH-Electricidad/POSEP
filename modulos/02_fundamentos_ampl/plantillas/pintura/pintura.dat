@@ -1,0 +1,5 @@
+set P := azul negra;
+param price := azul 10 negra 15;
+param rate := azul 40 negra 30;
+param market := azul 1000 negra 860;
+param Hours := 40;

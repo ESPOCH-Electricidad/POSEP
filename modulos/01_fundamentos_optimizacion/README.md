@@ -2,100 +2,63 @@
 
 [Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
 
-## Introducción conceptual
+## Pregunta guía
 
-La optimización sirve para seleccionar la mejor alternativa entre varias decisiones posibles cuando existen objetivos y restricciones. En sistemas eléctricos, esta lógica aparece al decidir cuánto generar, qué unidad encender, qué línea construir, qué tecnología instalar o cómo usar recursos limitados.
+¿Cómo se transforma una decisión técnica en un modelo matemático que pueda resolverse de manera sistemática?
 
-## Fundamentos del tema
+## Contexto técnico
 
-Un modelo de optimización se construye identificando variables de decisión, parámetros conocidos, función objetivo, restricciones y dominio de las variables. El estudiante debe reconocer si el problema es lineal, entero mixto, no lineal o convexo; también debe interpretar región factible, restricciones activas, multiplicadores duales y sensibilidad.
+Una empresa, un operador eléctrico o un planificador rara vez decide con libertad total. Normalmente decide bajo límites: presupuesto, capacidad, demanda, disponibilidad, seguridad, red eléctrica o recursos naturales. La optimización permite representar esa situación mediante variables de decisión, una función objetivo y restricciones.
 
-## Figuras técnicas principales
+El módulo inicia con problemas simples que incluso pueden explorarse en Excel. Luego introduce la idea de región factible, optimalidad, restricciones activas, problemas no lineales y condiciones KKT. El objetivo no es memorizar conceptos aislados, sino entender cuándo aparecen y para qué sirven.
 
-![Proceso de modelado](figuras/01_proceso_modelado_matematico.svg)
+## Secuencia conceptual
 
-Resume el paso desde el problema real hasta la interpretación de resultados.
+```text
+decisión técnica
+→ variables de decisión
+→ función objetivo
+→ restricciones
+→ datos
+→ región factible
+→ solución óptima
+→ interpretación y sensibilidad
+```
 
-![Región factible](figuras/02_region_factible.svg)
+## Primer hilo conductor: el ejemplo de pintura
 
-Explica factibilidad, vértices, holguras y restricciones activas.
+La fábrica de pintura permite ver todos los elementos básicos: variables, objetivo, restricciones, datos, región factible e interpretación económica.
 
-![Óptimos locales/globales](figuras/03_optimo_local_global.svg)
+![Región factible desde el ejemplo de pintura](figuras/02_region_factible_pintura.png)
 
-Diferencia optimalidad local y global.
+## De programación lineal a problemas no lineales
 
-![Gradiente y Hessiana](figuras/04_gradiente_hessiana.svg)
+En programación lineal, el óptimo suele ubicarse en un vértice de la región factible. Sin embargo, muchos problemas de ingeniería no son lineales: pérdidas eléctricas, OPF-AC, costos cuadráticos o relaciones hidráulicas. En esos casos aparecen derivadas, gradiente, Hessiana y condiciones de optimalidad.
 
-Introduce pendiente y curvatura.
+## Clasificación de problemas
 
-![Convexidad](figuras/05_convexidad_no_convexidad.svg)
-
-Distingue problemas convexos y no convexos.
-
-![Tipos de programación](figuras/06_tipos_programacion.svg)
-
-Clasifica LP, MILP, QP, NLP, MINLP y relajaciones.
-
-![Condiciones KKT](figuras/07_kkt.svg)
-
-Resume factibilidad, estacionariedad y complementariedad.
-
-![Dualidad y sensibilidad](figuras/08_dualidad_sensibilidad.svg)
-
-Conecta restricciones activas con precios sombra.
-
-## Ecuaciones base
-
-### Problema general
-
-$$
-\min_x f(x)
-$$
-
-Representa el criterio de decisión.
-
-### Restricciones generales
-
-$$
-g_i(x)\leq 0,\quad h_j(x)=0,\quad x\in\mathcal{X}
-$$
-
-Definen factibilidad y dominio.
-
-### Lagrangiano
-
-$$
-\mathcal{L}(x,\lambda,\mu)=f(x)+\sum_i\lambda_i g_i(x)+\sum_j\mu_jh_j(x)
-$$
-
-Permite formular condiciones KKT.
-
-### Complementariedad
-
-$$
-\lambda_i g_i(x^*)=0
-$$
-
-Si una restricción no está activa, su multiplicador es cero.
-
-## Ejemplos o modelos del módulo
-
-| Recurso | Qué aporta | Acceso |
+| Tipo | Qué significa | Ejemplo del curso |
 |---|---|---|
-| Fábrica de pintura | programación lineal y región factible | [Abrir](ejemplos/01_fabrica_pintura.md) |
-| Producción de acero | programación lineal con datos industriales | [Abrir](ejemplos/02_produccion_acero.md) |
-| Transporte de energía | flujos, oferta y demanda | [Abrir](ejemplos/03_transporte_energia.md) |
-| Localización de antenas | programación entera mixta | [Abrir](ejemplos/04_localizacion_antenas.md) |
-| Forma matricial | estructura algebraica de un solver | [Abrir](ejemplos/05_forma_matricial.md) |
+| LP | lineal y continuo | pintura, acero, transporte |
+| MILP | lineal con variables binarias/enteras | antenas, unit commitment, TNEP |
+| QP | objetivo cuadrático | despacho con costos cuadráticos |
+| NLP | funciones no lineales | OPF-AC |
+| MINLP | no lineal con enteras | expansión avanzada |
+| SOCP/SDP | relajaciones convexas | OPF avanzado |
 
+## Ejemplos del módulo
 
-## Capa de datos de la v14
+| Ejemplo | Propósito | Enlace |
+|---|---|---|
+| Fábrica de pintura | LP y región factible | [Abrir](ejemplos/01_fabrica_pintura.md) |
+| Producción de acero | LP con datos industriales | [Abrir](ejemplos/02_produccion_acero.md) |
+| Transporte de energía | balances y costos | [Abrir](ejemplos/03_transporte_energia.md) |
+| Localización de antenas | variables binarias | [Abrir](ejemplos/04_localizacion_antenas.md) |
+| Forma matricial | estructura algebraica | [Abrir](ejemplos/05_forma_matricial.md) |
 
-Las páginas de ejemplos/modelos del módulo incluyen datos suficientes para construir archivos de datos de trabajo. En los modelos AMPL se incluye una plantilla `.dat` sugerida en el propio README del modelo; en el módulo de demanda se especifican plantillas CSV para Python y archivos de salida hacia TNEP/GEP.
+## Validación del aprendizaje
 
-## Actividad del módulo
-
-Revise [actividades/README.md](actividades/README.md) y desarrolle la actividad principal: **Actividad 01 — Fundamentos de optimización**.
+Al terminar este módulo, el estudiante debe poder identificar qué se decide, qué se optimiza, qué restricciones limitan la decisión, qué datos se requieren, qué significa factibilidad y qué tipo de problema se está formulando.
 
 ---
 

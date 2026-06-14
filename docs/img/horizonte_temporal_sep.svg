@@ -1,30 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
-<rect width="100%" height="100%" fill="#ffffff"/>
-<text x="60" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Horizonte temporal de decisiones en sistemas eléctricos</text>
-<text x="60" y="88" font-family="Arial" font-size="18" fill="#475569">De la operación horaria a la expansión de largo plazo</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="820" viewBox="0 0 1500 820">
 
-<line x1="120" y1="470" x2="1140" y2="470" stroke="#0f172a" stroke-width="4"/>
-<polygon points="1140,470 1115,455 1115,485" fill="#0f172a"/>
-<text x="115" y="520" font-family="Arial" font-size="17">minutos</text>
-<text x="300" y="520" font-family="Arial" font-size="17">horas</text>
-<text x="485" y="520" font-family="Arial" font-size="17">días</text>
-<text x="665" y="520" font-family="Arial" font-size="17">meses</text>
-<text x="845" y="520" font-family="Arial" font-size="17">años</text>
-<text x="1040" y="520" font-family="Arial" font-size="17">décadas</text>
-<rect x="130" y="190" width="250" height="90" rx="18" fill="#dbeafe" stroke="#1e40af" stroke-width="3"/>
-<text x="155" y="228" font-family="Arial" font-size="21" font-weight="bold">Operación</text>
-<text x="155" y="258" font-family="Arial" font-size="16">ED, UC, reserva</text>
-<rect x="300" y="310" width="250" height="90" rx="18" fill="#dcfce7" stroke="#166534" stroke-width="3"/>
-<text x="325" y="348" font-family="Arial" font-size="21" font-weight="bold">OPF</text>
-<text x="325" y="378" font-family="Arial" font-size="16">red, flujos, tensión</text>
-<rect x="555" y="190" width="250" height="90" rx="18" fill="#fef3c7" stroke="#854d0e" stroke-width="3"/>
-<text x="580" y="228" font-family="Arial" font-size="21" font-weight="bold">Demanda</text>
-<text x="580" y="258" font-family="Arial" font-size="16">proyección y escenarios</text>
-<rect x="765" y="310" width="250" height="90" rx="18" fill="#ede9fe" stroke="#6d28d9" stroke-width="3"/>
-<text x="790" y="348" font-family="Arial" font-size="21" font-weight="bold">TNEP</text>
-<text x="790" y="378" font-family="Arial" font-size="16">red futura</text>
-<rect x="925" y="190" width="250" height="90" rx="18" fill="#fee2e2" stroke="#991b1b" stroke-width="3"/>
-<text x="950" y="228" font-family="Arial" font-size="21" font-weight="bold">GEP</text>
-<text x="950" y="258" font-family="Arial" font-size="16">capacidad futura</text>
+<rect width="1500" height="820" fill="#ffffff"/>
+<text x="70" y="70" font-family="Arial" font-size="38" font-weight="bold" fill="#0f172a">Horizonte temporal de decisiones en sistemas eléctricos</text>
+<text x="70" y="110" font-family="Arial" font-size="20" fill="#475569">El curso avanza desde decisiones operativas hasta decisiones de expansión multianual.</text>
+<line x1="120" y1="610" x2="1380" y2="610" stroke="#0f172a" stroke-width="5"/>
+<polygon points="1380,610 1348,592 1348,628" fill="#0f172a"/>
+<g font-family="Arial" fill="#334155" font-size="18">
+<text x="100" y="655">segundos</text><text x="270" y="655">minutos</text><text x="455" y="655">horas</text>
+<text x="630" y="655">días</text><text x="800" y="655">meses</text><text x="980" y="655">años</text><text x="1195" y="655">décadas</text>
+</g>
+<g font-family="Arial">
+<rect x="95" y="395" width="180" height="95" rx="16" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+<text x="120" y="430" font-size="18" font-weight="bold">Protección</text><text x="120" y="462" font-size="15">seguridad inmediata</text>
+<rect x="280" y="300" width="240" height="105" rx="16" fill="#eff6ff" stroke="#1e40af" stroke-width="3"/>
+<text x="305" y="338" font-size="20" font-weight="bold">Operación económica</text><text x="305" y="370" font-size="16">despacho · reserva</text>
+<rect x="455" y="450" width="250" height="105" rx="16" fill="#dcfce7" stroke="#166534" stroke-width="3"/>
+<text x="480" y="488" font-size="20" font-weight="bold">Unit commitment</text><text x="480" y="520" font-size="16">encendido · rampas</text>
+<rect x="570" y="245" width="230" height="105" rx="16" fill="#fce7f3" stroke="#9d174d" stroke-width="3"/>
+<text x="595" y="283" font-size="20" font-weight="bold">OPF</text><text x="595" y="315" font-size="16">red · flujos · tensión</text>
+<rect x="770" y="395" width="280" height="105" rx="16" fill="#fef3c7" stroke="#854d0e" stroke-width="3"/>
+<text x="795" y="433" font-size="20" font-weight="bold">Proyección de demanda</text><text x="795" y="465" font-size="16">escenarios de expansión</text>
+<rect x="980" y="245" width="230" height="105" rx="16" fill="#ede9fe" stroke="#6d28d9" stroke-width="3"/>
+<text x="1005" y="283" font-size="20" font-weight="bold">TNEP</text><text x="1005" y="315" font-size="16">red futura</text>
+<rect x="1165" y="420" width="230" height="105" rx="16" fill="#fee2e2" stroke="#991b1b" stroke-width="3"/>
+<text x="1190" y="458" font-size="20" font-weight="bold">GEP</text><text x="1190" y="490" font-size="16">capacidad futura</text>
+</g>
 
 </svg>

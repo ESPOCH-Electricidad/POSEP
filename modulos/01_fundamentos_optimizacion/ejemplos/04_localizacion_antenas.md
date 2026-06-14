@@ -145,6 +145,22 @@ El estudiante debe reportar antenas seleccionadas, costo total, medidores cubier
 
 [Actividad 01C](../actividades/actividad_01_localizacion_antenas.md)
 
+
+## 12. Validación mínima
+
+- Verifique que todas las unidades sean consistentes.
+- Compruebe que todos los conjuntos usados en la formulación tengan datos.
+- Revise que el balance principal cierre.
+- Identifique restricciones activas.
+- Compare el resultado contra una estimación manual simple.
+
+## 13. Preguntas de análisis
+
+1. ¿Qué restricción limita principalmente la solución?
+2. ¿Qué parámetro tendría mayor impacto si cambia?
+3. ¿El resultado es técnicamente razonable?
+4. ¿Qué dato adicional se necesitaría para aplicar el modelo a un sistema real?
+
 ---
 
 [Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)

@@ -1,0 +1,10 @@
+reset;
+model ../pintura/pintura.mod;
+
+# Ejemplo conceptual con amplxl:
+# load amplxl.dll;
+# table Products IN "amplxl" "../../excel/pintura_ampl.xlsx" "products":
+#     P <- [PRODUCT], price, rate, market;
+# read table Products;
+
+# Recomendación docente: usar Python/pandas para generar .dat cuando se requiera portabilidad.
