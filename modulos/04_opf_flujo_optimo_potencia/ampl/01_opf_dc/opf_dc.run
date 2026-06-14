@@ -1,0 +1,8 @@
+reset;
+model opf_dc.mod;
+data opf_dc.dat;
+option solver highs;
+solve;
+display solve_result, TotalCost, Pg, theta, f;
+printf "line,period,flow\n" > "opf_dc_flows.csv";
+printf {(i,j) in L, t in T} "%s-%s,%s,%g\n", i, j, t, f[i,j,t] >> "opf_dc_flows.csv";

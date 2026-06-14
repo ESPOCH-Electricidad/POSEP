@@ -1,44 +1,24 @@
-# 03 — Operación de corto plazo
+# Módulo 03 — Operación de corto plazo y despacho económico
 
-[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
+Este módulo desarrolla la economía operativa del sistema eléctrico. La demanda se considera dada y la decisión principal es qué unidades generan, cuánto generan y con qué restricciones técnicas.
 
-## Pregunta guía
+## Resultado de aprendizaje
 
-¿Cómo decide un operador qué unidades generan en cada hora para cubrir la demanda al menor costo, respetando límites técnicos y seguridad operativa?
+El estudiante será capaz de:
 
-## Contexto técnico
+- calcular costos variables a partir de heat rate, combustible, O&M variable y emisiones;
+- formular despacho económico uninodal, por tramos y con pérdidas;
+- interpretar costo marginal, unidad marginal y orden de mérito;
+- formular compromiso de unidades con variables binarias;
+- incluir rampas, reserva, mínimos técnicos y costos de arranque;
+- formular balances hidrotermales simples y costo de oportunidad del agua.
 
-En operación de corto plazo, la demanda se toma como dato de entrada. La decisión central es asignar generación disponible en el tiempo. El problema empieza con el despacho económico y evoluciona hacia modelos con restricciones operativas, encendido de unidades, reserva, rampas y coordinación hidrotérmica.
+## Secuencia sugerida
 
-## Desarrollo conceptual
-
-```text
-demanda horaria → balance generación-demanda → costo variable → orden de mérito → costo marginal → límites técnicos → unit commitment → despacho hidrotérmico
-```
-
-## Figura central
-
-![Orden de mérito](figuras/02_orden_merito_con_demanda.png)
-
-## Formulación base
-
-$$
-\min \sum_{g,t} c_g P_{g,t} + \sum_{g,t} SU_g v_{g,t}
-$$
-
-sujeto a balance, límites técnicos, rampas y reserva.
-
-## Modelos incluidos
-
-| Modelo | Enlace |
-| --- | --- |
-| Modelo 01 — Despacho económico uninodal | [Abrir](modelos/01_despacho_economico_uninodal.md) |
-| Modelo 02 — Despacho económico por tramos | [Abrir](modelos/02_despacho_economico_por_tramos.md) |
-| Modelo 03 — Despacho económico con pérdidas | [Abrir](modelos/03_despacho_con_perdidas.md) |
-| Modelo 04 — Compromiso de unidades térmicas | [Abrir](modelos/04_compromiso_unidades_termicas.md) |
-| Modelo 05 — Despacho hidrotérmico simple | [Abrir](modelos/05_despacho_hidrotermico_simple.md) |
-| Modelo 06 — Operación de cascada hidroeléctrica | [Abrir](modelos/06_operacion_cascada_hidroelectrica.md) |
-
-## Validación de resultados
-
-La demanda debe estar cubierta en cada periodo; ningún generador debe violar Pmin/Pmax; una unidad apagada no puede generar; las rampas no deben superar los límites; y en hidrotérmico el balance de embalse debe cerrar.
+1. `teoria/01_costos_operativos_generacion.md`
+2. `teoria/02_despacho_economico_costo_marginal.md`
+3. `teoria/03_costos_cuadraticos_y_tramos.md`
+4. `teoria/04_unit_commitment_reservas_rampas.md`
+5. `teoria/05_hidrotermico_valor_agua.md`
+6. `teoria/06_voll_energia_no_servida.md`
+7. `ampl/`

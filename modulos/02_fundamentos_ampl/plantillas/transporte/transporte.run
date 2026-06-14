@@ -1,0 +1,7 @@
+reset;
+model transporte.mod;
+data transporte.dat;
+option solver highs;
+solve;
+
+display TotalCost, x;

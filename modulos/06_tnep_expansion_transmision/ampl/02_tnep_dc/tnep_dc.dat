@@ -1,0 +1,14 @@
+set N := n1 n2 n3;
+set G := G1 G2;
+set L := (n1,n2) (n1,n3) (n2,n3);
+param ref := n1;
+param bus := G1 n1 G2 n3;
+param demand := n1 0 n2 180 n3 50;
+param Pmax := G1 250 G2 100;
+param cvar := G1 20 G2 55;
+param B := [n1,n2] 10 [n1,n3] 5 [n2,n3] 8;
+param Fmax := [n1,n2] 100 [n1,n3] 80 [n2,n3] 90;
+param existing := [n1,n2] 1 [n1,n3] 0 [n2,n3] 1;
+param invcost := [n1,n2] 0 [n1,n3] 1200 [n2,n3] 0;
+param M := 10000;
+param VOLL := 5000;

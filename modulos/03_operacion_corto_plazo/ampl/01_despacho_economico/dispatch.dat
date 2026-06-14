@@ -1,0 +1,24 @@
+set G := G1 G2 G3;
+set T := h1 h2 h3;
+
+param demand :=
+h1 250
+h2 340
+h3 410;
+
+param Pmin :=
+G1 0
+G2 0
+G3 0;
+
+param Pmax :=
+G1 120
+G2 200
+G3 150;
+
+param cvar :=
+G1 18
+G2 35
+G3 60;
+
+param VOLL := 5000;

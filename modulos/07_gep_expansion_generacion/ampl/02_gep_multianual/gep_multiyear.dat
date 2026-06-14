@@ -1,0 +1,34 @@
+set K := solar wind gas;
+set B := peak mid offpeak;
+set Y := 2025 2030 2035;
+
+param hours := peak 800 mid 3000 offpeak 4960;
+param existing_cap := solar 50 wind 60 gas 350;
+param fom := solar 15 wind 35 gas 18;
+param vom := solar 1 wind 2 gas 55;
+param firm_credit := solar 0.25 wind 0.20 gas 0.90;
+param VOLL := 5000;
+
+param peak_demand := 2025 500 2030 620 2035 760;
+param reserve_margin := 2025 0.15 2030 0.15 2035 0.15;
+
+param demand :=
+[peak,2025] 500 [mid,2025] 360 [offpeak,2025] 220
+[peak,2030] 620 [mid,2030] 450 [offpeak,2030] 280
+[peak,2035] 760 [mid,2035] 570 [offpeak,2035] 340;
+
+param max_new_cap default 500;
+
+param inv_ann :=
+[solar,2025] 95 [solar,2030] 85 [solar,2035] 78
+[wind,2025] 130 [wind,2030] 120 [wind,2035] 110
+[gas,2025] 110 [gas,2030] 115 [gas,2035] 120;
+
+param af default 0.90;
+param af :=
+[solar,peak,2025] 0.40 [solar,mid,2025] 0.25 [solar,offpeak,2025] 0.00
+[solar,peak,2030] 0.40 [solar,mid,2030] 0.25 [solar,offpeak,2030] 0.00
+[solar,peak,2035] 0.40 [solar,mid,2035] 0.25 [solar,offpeak,2035] 0.00
+[wind,peak,2025] 0.30 [wind,mid,2025] 0.35 [wind,offpeak,2025] 0.40
+[wind,peak,2030] 0.30 [wind,mid,2030] 0.35 [wind,offpeak,2030] 0.40
+[wind,peak,2035] 0.30 [wind,mid,2035] 0.35 [wind,offpeak,2035] 0.40;

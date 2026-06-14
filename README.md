@@ -1,60 +1,49 @@
 # Planificación y Operación de Sistemas Eléctricos de Potencia
 
-![Portada académica](docs/img/portada_academica_v15.svg)
+Paquete académico v16 reorganizado con la siguiente lógica docente:
 
-[Guía docente](docs/guia_docente.md) · [Ruta de aprendizaje](docs/ruta_aprendizaje.md) · [Evaluación](docs/evaluacion.md) · [Auditoría](docs/AUDITORIA_V15.md)
+1. **Presentación principal del curso**: mapa general, horizonte temporal, relación operación–planificación y flujo de herramientas.
+2. **Módulo 01 — Optimización matemática aplicada**: formulación, LP, MILP, QP/NLP, dualidad, KKT, solvers y validación.
+3. **Módulo 02 — AMPL aplicado**: implementación computacional, `.mod/.dat/.run`, control de flujo, conexión con Excel/CSV, Python y exportación.
+4. **Módulo 03 — Operación de corto plazo**: despacho económico, costo marginal, compromiso de unidades, rampas, reservas, hidrotérmico y VOLL.
+5. **Módulo 04 — Flujo óptimo de potencia**: OPF DC/AC, balance nodal, congestión, límites térmicos y precios sombra.
+6. **Módulo 05 — Proyección de demanda**: energía, pico, perfiles, regresión, series de tiempo, escenarios y exportación a modelos.
+7. **Módulo 06 — Expansión de transmisión**: modelo transporte, DC-TNEP, big-M, candidatos y expansión multietapa.
+8. **Módulo 07 — Expansión de generación**: GEP estático, bloques de carga, multianual, reserva, CRF, LCOE y screening curves.
 
-## Presentación
+## Criterio de rediseño
 
-Este repositorio acompaña el estudio de la operación y planificación de sistemas eléctricos de potencia mediante optimización matemática, análisis de datos, modelos computacionales y actividades reproducibles. La organización está pensada para que el estudiante avance desde la formulación de un problema de decisión hasta modelos de operación, flujo óptimo de potencia, proyección de demanda y expansión de infraestructura.
+El módulo 01 queda dedicado a optimización. La economía de la energía no se ubica como bloque inicial, sino en los módulos donde se usa: despacho económico, expansión de generación y evaluación de inversiones. El horizonte temporal se ubica en la presentación principal porque funciona como mapa conceptual del curso.
 
-La intención no es entregar únicamente archivos de datos o ecuaciones aisladas. Cada módulo plantea una pregunta técnica, desarrolla los conceptos necesarios, presenta una formulación matemática, ofrece datos completos para construir archivos de trabajo y propone actividades con criterios de validación.
+## Estructura general
 
-## Horizonte temporal de decisiones
+```text
+presentacion_principal/
+modulos/
+  01_fundamentos_optimizacion/
+  02_fundamentos_ampl/
+  03_operacion_corto_plazo/
+  04_opf_flujo_optimo_potencia/
+  05_proyeccion_demanda/
+  06_tnep_expansion_transmision/
+  07_gep_expansion_generacion/
+codigo_comun/
+casos_integradores/
+docs/
+referencias/
+```
 
-![Horizonte temporal](docs/img/horizonte_temporal_sep.svg)
+## Uso recomendado
 
-En operación, la demanda se trata normalmente como dato conocido o pronosticado de corto plazo. En planificación, la demanda se convierte en una trayectoria futura bajo incertidumbre. Por esa razón, el módulo de proyección de demanda se ubica después de OPF y antes de TNEP/GEP.
+- Iniciar con `presentacion_principal/00_presentacion_general_curso.md`.
+- En cada módulo, revisar primero `teoria/`, luego `modelos/`, después `ampl/` o `python/`, y finalmente `actividades/`.
+- Las plantillas AMPL están separadas para que el estudiante observe la relación entre formulación algebraica, datos y ejecución.
+- Los scripts Python complementan lectura de datos, generación de `.dat`, análisis de resultados y gráficos.
 
-## Ruta académica
+## Archivos clave añadidos en v16
 
-![Ruta académica](docs/img/mapa_general_curso.svg)
-
-| Módulo | Tema | Propósito | Enlace |
-|---:|---|---|---|
-| 01 | Fundamentos de optimización | formular decisiones, objetivos, restricciones y optimalidad | [Abrir](modulos/01_fundamentos_optimizacion/README.md) |
-| 02 | Fundamentos de AMPL | pasar de la formulación matemática a archivos `.mod`, `.dat`, `.run` y Excel | [Abrir](modulos/02_fundamentos_ampl/README.md) |
-| 03 | Operación de corto plazo | despacho económico, UC e hidrotérmico | [Abrir](modulos/03_operacion_corto_plazo/README.md) |
-| 04 | Flujo óptimo de potencia | red, flujos, tensión y congestión | [Abrir](modulos/04_opf_flujo_optimo_potencia/README.md) |
-| 05 | Proyección de demanda | escenarios futuros con Python | [Abrir](modulos/05_proyeccion_demanda/README.md) |
-| 06 | Expansión de transmisión | líneas candidatas y refuerzos | [Abrir](modulos/06_tnep_expansion_transmision/README.md) |
-| 07 | Expansión de generación | capacidad futura y tecnologías | [Abrir](modulos/07_gep_expansion_generacion/README.md) |
-
-## Herramientas
-
-![Flujo Python AMPL Excel](docs/img/flujo_python_ampl.svg)
-
-- **Excel**: apoyo inicial para comprender tablas, balances y sensibilidad simple.
-- **AMPL**: formulación algebraica, separación modelo/datos, ejecución con solver y reporte de resultados.
-- **Python**: análisis de datos, proyección de demanda, notebooks y visualización.
-
-## Casos integradores
-
-| Caso | Uso | Enlace |
-|---|---|---|
-| Garver 6 barras | TNEP y GEP | [Abrir](casos_integradores/garver_6_barras/README.md) |
-| IEEE 24 RTS | planificación avanzada | [Abrir](casos_integradores/ieee_24_rts/README.md) |
-
-## Cómo usar el repositorio
-
-1. Leer el README del módulo.
-2. Estudiar la pregunta guía y la formulación base.
-3. Revisar los datos completos.
-4. Construir el `.dat` o el archivo CSV solicitado.
-5. Ejecutar el flujo de trabajo propuesto.
-6. Validar resultados con los criterios del modelo.
-7. Elaborar un breve informe técnico.
-
-## Auditoría
-
-La versión v15 conserva la capa de datos completos de la v14 y agrega revisión narrativa, módulo AMPL, figuras orgánicas y criterios de validación. La verificación se encuentra en [docs/AUDITORIA_V15.md](docs/AUDITORIA_V15.md).
+- Teoría completa para cada módulo, separada en secciones.
+- Plantillas AMPL reales para despacho económico, UC, OPF DC, TNEP y GEP.
+- Scripts de automatización AMPL con `for`, `repeat while`, lectura desde Excel/CSV y exportación.
+- Presentación principal en Markdown y Beamer (`.tex`).
+- Auditoría v16 con verificación de cobertura del paquete.

@@ -1,0 +1,12 @@
+reset;
+model ../transporte/transporte.mod;
+data ../transporte/transporte.dat;
+
+if sum {i in S} supply[i] < sum {j in D} demand[j] then {
+    printf "ERROR: oferta total menor que demanda total.\n";
+    printf "Oferta=%g Demanda=%g\n", sum {i in S} supply[i], sum {j in D} demand[j];
+} else {
+    option solver highs;
+    solve;
+    display TotalCost, x;
+}

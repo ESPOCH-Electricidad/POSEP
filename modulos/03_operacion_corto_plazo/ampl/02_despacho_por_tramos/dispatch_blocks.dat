@@ -1,0 +1,17 @@
+set G := G1 G2;
+set T := h1 h2;
+set K := k1 k2 k3;
+
+param demand :=
+h1 180
+h2 260;
+
+param block_cap:
+        k1  k2  k3 :=
+G1      60  60  60
+G2      80  80  80;
+
+param block_cost:
+        k1  k2  k3 :=
+G1      20  28  40
+G2      25  35  55;

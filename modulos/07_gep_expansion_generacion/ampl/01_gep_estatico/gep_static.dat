@@ -1,0 +1,20 @@
+set K := solar wind gas;
+set B := peak mid offpeak;
+
+param demand := peak 500 mid 360 offpeak 220;
+param hours := peak 800 mid 3000 offpeak 4960;
+param existing_cap := solar 50 wind 60 gas 350;
+param max_new_cap := solar 500 wind 400 gas 300;
+param inv_ann := solar 95 wind 130 gas 110; # USD/kW-year simplificado
+param fom := solar 15 wind 35 gas 18;
+param vom := solar 1 wind 2 gas 55;
+param firm_credit := solar 0.25 wind 0.20 gas 0.90;
+param peak_demand := 500;
+param reserve_margin := 0.15;
+param VOLL := 5000;
+
+param af:
+        peak  mid  offpeak :=
+solar   0.40  0.25 0.00
+wind    0.30  0.35 0.40
+gas     0.90  0.90 0.90;

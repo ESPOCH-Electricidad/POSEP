@@ -1,65 +1,30 @@
-# 01 — Fundamentos de optimización
+# Módulo 01 — Fundamentos de optimización matemática aplicada
 
-[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
+Este módulo introduce la optimización como lenguaje para formular decisiones técnicas. No desarrolla economía de la energía ni planificación eléctrica todavía. Su objetivo es que el estudiante entienda cómo una decisión se representa mediante variables, función objetivo, restricciones y dominio de factibilidad.
 
-## Pregunta guía
+## Resultado de aprendizaje
 
-¿Cómo se transforma una decisión técnica en un modelo matemático que pueda resolverse de manera sistemática?
+Al finalizar el módulo, el estudiante será capaz de:
 
-## Contexto técnico
+- formular problemas de optimización lineal, entera mixta, cuadrática y no lineal;
+- distinguir variables continuas, enteras y binarias;
+- interpretar región factible, restricciones activas, óptimos locales/globales y sensibilidad;
+- reconocer el papel del solver y validar el estado de solución.
 
-Una empresa, un operador eléctrico o un planificador rara vez decide con libertad total. Normalmente decide bajo límites: presupuesto, capacidad, demanda, disponibilidad, seguridad, red eléctrica o recursos naturales. La optimización permite representar esa situación mediante variables de decisión, una función objetivo y restricciones.
+## Secuencia sugerida
 
-El módulo inicia con problemas simples que incluso pueden explorarse en Excel. Luego introduce la idea de región factible, optimalidad, restricciones activas, problemas no lineales y condiciones KKT. El objetivo no es memorizar conceptos aislados, sino entender cuándo aparecen y para qué sirven.
+1. `teoria/01_de_decision_a_modelo.md`
+2. `teoria/02_programacion_lineal.md`
+3. `teoria/03_forma_matricial.md`
+4. `teoria/04_dualidad_sensibilidad.md`
+5. `teoria/05_programacion_entera_mixta.md`
+6. `teoria/06_qp_nlp_kkt.md`
+7. `teoria/07_solvers_validacion.md`
+8. `ejemplos/` y `actividades/`
 
-## Secuencia conceptual
+## Conexión con los módulos siguientes
 
-```text
-decisión técnica
-→ variables de decisión
-→ función objetivo
-→ restricciones
-→ datos
-→ región factible
-→ solución óptima
-→ interpretación y sensibilidad
-```
-
-## Primer hilo conductor: el ejemplo de pintura
-
-La fábrica de pintura permite ver todos los elementos básicos: variables, objetivo, restricciones, datos, región factible e interpretación económica.
-
-![Región factible desde el ejemplo de pintura](figuras/02_region_factible_pintura.png)
-
-## De programación lineal a problemas no lineales
-
-En programación lineal, el óptimo suele ubicarse en un vértice de la región factible. Sin embargo, muchos problemas de ingeniería no son lineales: pérdidas eléctricas, OPF-AC, costos cuadráticos o relaciones hidráulicas. En esos casos aparecen derivadas, gradiente, Hessiana y condiciones de optimalidad.
-
-## Clasificación de problemas
-
-| Tipo | Qué significa | Ejemplo del curso |
-|---|---|---|
-| LP | lineal y continuo | pintura, acero, transporte |
-| MILP | lineal con variables binarias/enteras | antenas, unit commitment, TNEP |
-| QP | objetivo cuadrático | despacho con costos cuadráticos |
-| NLP | funciones no lineales | OPF-AC |
-| MINLP | no lineal con enteras | expansión avanzada |
-| SOCP/SDP | relajaciones convexas | OPF avanzado |
-
-## Ejemplos del módulo
-
-| Ejemplo | Propósito | Enlace |
-|---|---|---|
-| Fábrica de pintura | LP y región factible | [Abrir](ejemplos/01_fabrica_pintura.md) |
-| Producción de acero | LP con datos industriales | [Abrir](ejemplos/02_produccion_acero.md) |
-| Transporte de energía | balances y costos | [Abrir](ejemplos/03_transporte_energia.md) |
-| Localización de antenas | variables binarias | [Abrir](ejemplos/04_localizacion_antenas.md) |
-| Forma matricial | estructura algebraica | [Abrir](ejemplos/05_forma_matricial.md) |
-
-## Validación del aprendizaje
-
-Al terminar este módulo, el estudiante debe poder identificar qué se decide, qué se optimiza, qué restricciones limitan la decisión, qué datos se requieren, qué significa factibilidad y qué tipo de problema se está formulando.
-
----
-
-[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
+- Módulo 02 implementa estos modelos en AMPL.
+- Módulo 03 usa LP/QP/MILP en despacho económico y compromiso de unidades.
+- Módulo 04 usa LP/NLP para OPF DC/AC.
+- Módulos 06 y 07 usan MILP para decisiones de inversión.
