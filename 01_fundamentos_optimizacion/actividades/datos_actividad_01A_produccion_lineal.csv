@@ -1,9 +1,0 @@
-producto,margen_usd_u,horas_maquina_h_u,material_kg_u,produccion_max_u
-Aislador,12,0.4,1.2,180
-Conector,9,0.25,0.8,220
-Soporte,15,0.55,1.5,140
-
-recurso,disponibilidad
-horas_maquina_h,120
-material_kg,280
-produccion_min_aislador,60

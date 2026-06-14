@@ -1,5 +1,0 @@
-criterio,peso,excelente,competente,basico,insuficiente
-Formulacion GEP,40,"Modelo multianual completo con inversion, capacidad acumulada, operacion por bloques, reserva, ENS, presupuesto y emisiones.",Modelo completo con errores menores.,Modelo parcial.,No representa GEP.
-Implementacion AMPL,20,"Archivos dat, mod y run ejecutan todos los escenarios con trazabilidad.",Ejecuta caso base y varios escenarios.,Ejecucion parcial.,No ejecuta.
-Resultados y Excel,20,"Tablas y graficos claros de capacidad, generacion, costos, ENS y emisiones.",Resultados principales adecuados.,Incompletos.,Sin resultados verificables.
-Analisis tipo tesis,20,"Discute decisiones de inversion, trade-offs, sensibilidad y limitaciones con criterio tecnico.",Analisis adecuado.,Descripcion superficial.,No interpreta.

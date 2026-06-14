@@ -1,0 +1,5 @@
+parametro,valor,unidad
+ReserveMargin,0.15,p.u.
+VOLL,2000,USD/MWh
+DiscountRate,0.08,p.u.
+CRF,0.10185,p.u.

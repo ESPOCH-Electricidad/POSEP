@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="60" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Fábrica de pintura</text>
+<text x="60" y="88" font-family="Arial" font-size="18" fill="#475569">Decidir producción de pintura azul y negra</text>
+<rect x="95" y="290" width="175" height="95" rx="16" fill="#f8fafc" stroke="#334155" stroke-width="2"/><text x="115" y="345" font-family="Arial" font-size="17">40 h disponibles</text>
+<line x1="270" y1="337" x2="315" y2="337" stroke="#334155" stroke-width="3"/><polygon points="315,337 300,327 300,347" fill="#334155"/>
+<rect x="315" y="290" width="175" height="95" rx="16" fill="#f8fafc" stroke="#334155" stroke-width="2"/><text x="335" y="345" font-family="Arial" font-size="17">azul 40 L/h</text>
+<line x1="490" y1="337" x2="535" y2="337" stroke="#334155" stroke-width="3"/><polygon points="535,337 520,327 520,347" fill="#334155"/>
+<rect x="535" y="290" width="175" height="95" rx="16" fill="#f8fafc" stroke="#334155" stroke-width="2"/><text x="555" y="345" font-family="Arial" font-size="17">negra 30 L/h</text>
+<line x1="710" y1="337" x2="755" y2="337" stroke="#334155" stroke-width="3"/><polygon points="755,337 740,327 740,347" fill="#334155"/>
+<rect x="755" y="290" width="175" height="95" rx="16" fill="#f8fafc" stroke="#334155" stroke-width="2"/><text x="775" y="345" font-family="Arial" font-size="17">límites de mercado</text>
+<line x1="930" y1="337" x2="975" y2="337" stroke="#334155" stroke-width="3"/><polygon points="975,337 960,327 960,347" fill="#334155"/>
+<rect x="975" y="290" width="175" height="95" rx="16" fill="#f8fafc" stroke="#334155" stroke-width="2"/><text x="995" y="345" font-family="Arial" font-size="17">maximizar ingreso</text>
+</svg>

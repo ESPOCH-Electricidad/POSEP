@@ -1,4 +1,0 @@
-planta,tecnologia,capacidad_mw,costo_variable_usd_mwh,factor_disponibilidad,emisiones_tco2_mwh
-E_Hidro,Hidro,220,6,0.7,0.0
-E_Gas,Gas,180,35,0.9,0.45
-E_Diesel,Diesel,80,90,0.85,0.78

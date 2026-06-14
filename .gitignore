@@ -1,17 +1,9 @@
-# Archivos generados localmente
 __pycache__/
 .ipynb_checkpoints/
+*.pyc
 *.log
-*.tmp
-*.bak
-
-# Resultados y soluciones locales
 *.out
 *.sol
-resultados_locales/
-soluciones_docente/
-
-# Modelos AMPL de trabajo local
-# Si el docente decide publicar algun .mod o .run especifico, puede forzar su inclusion manualmente.
-*.mod
-*.run
+*.tmp
+.DS_Store
+.env

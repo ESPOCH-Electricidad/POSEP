@@ -1,18 +1,12 @@
-# Contributing Guidelines
+# Contribución
 
-> [Menú principal](./README.md) · [Índice del sitio](./docs/index.md) · [Ruta de aprendizaje](./docs/ruta_aprendizaje.md) · [Modelos](./docs/mapa_modelos.md) · [Casos](./docs/mapa_casos.md) · [Evaluación](./docs/evaluacion.md)
+Este repositorio está orientado a docencia universitaria. Las contribuciones deben mantener:
 
+- claridad conceptual;
+- formulaciones matemáticas verificables;
+- datos didácticos trazables;
+- figuras técnicas, no decorativas;
+- navegación simple;
+- separación entre teoría, datos, actividades y casos integradores.
 
-This repository is structured for academic teaching.
-
-## Structure rules
-- Models are documented in Markdown
-- Data cases are reusable and standardized
-- Activities are problem-based and require modeling
-
-## Do not include
-- External scripts unrelated to teaching
-- Redundant files not referenced in the documentation
----
-
-> [Menú principal](./README.md) · [Índice del sitio](./docs/index.md) · [Ruta de aprendizaje](./docs/ruta_aprendizaje.md) · [Modelos](./docs/mapa_modelos.md) · [Casos](./docs/mapa_casos.md) · [Evaluación](./docs/evaluacion.md)
+No se deben agregar archivos de salida, soluciones completas de estudiantes, archivos temporales ni carpetas duplicadas por formulación.

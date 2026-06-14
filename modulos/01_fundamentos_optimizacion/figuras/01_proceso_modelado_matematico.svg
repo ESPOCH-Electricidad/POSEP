@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="60" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Proceso de modelado matemático</text>
+<text x="60" y="88" font-family="Arial" font-size="18" fill="#475569">De un problema real a una formulación de optimización</text>
+
+<line x1="130" y1="340" x2="1130" y2="340" stroke="#334155" stroke-width="4"/>
+<g font-family="Arial" font-size="16">
+<rect x="90" y="270" width="150" height="120" rx="18" fill="#dbeafe" stroke="#1e40af" stroke-width="3"/><text x="120" y="325">Problema</text><text x="125" y="350">real</text>
+<rect x="270" y="270" width="150" height="120" rx="18" fill="#dcfce7" stroke="#166534" stroke-width="3"/><text x="295" y="325">Supuestos</text>
+<rect x="450" y="270" width="150" height="120" rx="18" fill="#fef3c7" stroke="#854d0e" stroke-width="3"/><text x="480" y="325">Variables</text>
+<rect x="630" y="270" width="150" height="120" rx="18" fill="#fce7f3" stroke="#9d174d" stroke-width="3"/><text x="655" y="315">Objetivo</text><text x="650" y="345">y restricciones</text>
+<rect x="810" y="270" width="150" height="120" rx="18" fill="#ede9fe" stroke="#6d28d9" stroke-width="3"/><text x="845" y="325">Solución</text>
+<rect x="990" y="270" width="150" height="120" rx="18" fill="#ffedd5" stroke="#9a3412" stroke-width="3"/><text x="1015" y="325">Interpretación</text>
+</g>
+
+</svg>

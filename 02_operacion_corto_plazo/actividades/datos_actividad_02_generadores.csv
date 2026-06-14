@@ -1,4 +1,0 @@
-unidad,tecnologia,costo_variable_usd_mwh,pmin_mw,pmax_mw,rampa_subida_mw_h,rampa_bajada_mw_h,costo_arranque_usd,estado_inicial
-T1,Gas ciclo combinado,32,50,180,60,60,1200,1
-T2,Vapor termico,45,40,150,50,50,1800,0
-T3,Motor diesel,70,10,80,80,80,400,0

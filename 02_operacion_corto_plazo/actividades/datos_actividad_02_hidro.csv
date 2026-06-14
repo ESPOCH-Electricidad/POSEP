@@ -1,7 +1,0 @@
-unidad,costo_variable_usd_mwh,pmin_mw,pmax_mw,energia_disponible_mwh,factor_disponibilidad
-H1,5,0,120,520,1.0
-
-parametro,reserva_minima_pct,10
-parametro,penalizacion_ens_usd_mwh,2500
-parametro,tiempo_minimo_encendido_h,2
-parametro,tiempo_minimo_apagado_h,1

@@ -1,8 +1,0 @@
-gen,tipo,tecnologia,Pmax0_MW,Pmin_MW,costo_variable,costo_inversion,credito_firme,factor_emisiones
-G1_GAS_EXIST,existente,gas,150,0,0.058,0.0,0.9,0.45
-G3_HYD_EXIST,existente,hidro,360,0,0.008,0.0,0.75,0.005
-G6_THERM_EXIST,existente,termica,600,0,0.07,0.0,0.9,0.55
-PV5_NEW,candidata,solar_fv,0,0,0.0,0.75,0.2,0.0
-WIND2_NEW,candidata,eolica,0,0,0.0,1.1,0.25,0.0
-CCGT6_NEW,candidata,ciclo_combinado,0,0,0.065,0.9,0.9,0.36
-HYD3_NEW,candidata,hidro_nueva,0,0,0.01,2.2,0.7,0.005

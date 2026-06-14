@@ -1,12 +1,12 @@
 # Ruta de aprendizaje
 
-[Menú principal](../README.md) · [Ruta de aprendizaje](../docs/ruta_aprendizaje.md) · [Mapa de modelos](../docs/mapa_modelos.md) · [Mapa de casos](../docs/mapa_casos.md) · [Evaluación](../docs/evaluacion.md)
+[Menú principal](../README.md)
 
-| Paso | Tema | Producto esperado |
+| Paso | Tema | Resultado esperado |
 |---:|---|---|
-| 1 | Fundamentos de optimización | reconocer variables, objetivo, restricciones y factibilidad |
-| 2 | Operación | formular despacho, UC e hidrotérmico |
-| 3 | OPF | comprender balance nodal, congestión y diferencias DC/AC |
-| 4 | TNEP | comparar formulaciones de expansión de transmisión |
-| 5 | GEP | modelar inversión en generación y bloques de carga |
-| 6 | Casos | seleccionar el caso adecuado para cada modelo |
+| 01 | Fundamentos de optimización | formular variables, objetivo, restricciones y condiciones de optimalidad |
+| 02 | Operación de corto plazo | resolver despacho económico, UC e hidrotérmico |
+| 03 | OPF | incorporar red, flujos, tensiones y congestión |
+| 04 | Proyección de demanda | construir escenarios de demanda futura |
+| 05 | TNEP | decidir expansión de transmisión |
+| 06 | GEP | decidir expansión de generación |

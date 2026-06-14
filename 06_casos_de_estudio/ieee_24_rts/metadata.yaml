@@ -1,7 +1,0 @@
-case_id: ieee_24_rts
-estado: documentado
-descripcion: "Caso parcial documentado para TNEP. Incluye datos en formulaciones transporte, heurística, híbrida y disyuntiva."
-formato_datos: [dat]
-fuente: "Material docente de la asignatura; verificar fuente original antes de publicación externa ampliada."
-licencia_datos: "Uso académico docente"
-ultima_actualizacion: "2026-06-13"

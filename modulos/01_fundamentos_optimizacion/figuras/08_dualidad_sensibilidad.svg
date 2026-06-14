@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="60" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Dualidad y sensibilidad</text>
+<text x="60" y="88" font-family="Arial" font-size="18" fill="#475569">Lectura económica de recursos escasos</text>
+
+<rect x="100" y="170" width="1080" height="360" rx="24" fill="#f8fafc" stroke="#334155" stroke-width="3"/>
+<text x="140" y="230" font-family="Arial" font-size="22" font-weight="bold">Restricción activa</text>
+<text x="450" y="230" font-family="Arial" font-size="18">El recurso se usa completamente.</text>
+<text x="140" y="300" font-family="Arial" font-size="22" font-weight="bold">Precio sombra</text>
+<text x="450" y="300" font-family="Arial" font-size="18">Cambio marginal del objetivo si aumenta el recurso.</text>
+<text x="140" y="370" font-family="Arial" font-size="22" font-weight="bold">Costo reducido</text>
+<text x="450" y="370" font-family="Arial" font-size="18">Señal de entrada de una variable no usada.</text>
+<text x="140" y="440" font-family="Arial" font-size="22" font-weight="bold">Sensibilidad</text>
+<text x="450" y="440" font-family="Arial" font-size="18">Rango de estabilidad de la solución ante cambios de datos.</text>
+
+</svg>

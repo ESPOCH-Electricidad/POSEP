@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="60" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Convexidad y no convexidad</text>
+<text x="60" y="88" font-family="Arial" font-size="18" fill="#475569">Un problema convexo facilita interpretar optimalidad global</text>
+
+<rect x="110" y="180" width="480" height="360" rx="24" fill="#f8fafc" stroke="#166534" stroke-width="3"/>
+<path d="M160 450 Q350 180 540 450" fill="none" stroke="#166534" stroke-width="5"/>
+<text x="185" y="235" font-family="Arial" font-size="24" font-weight="bold" fill="#14532d">Función convexa</text>
+<text x="185" y="500" font-family="Arial" font-size="17">óptimo local = óptimo global</text>
+<rect x="690" y="180" width="480" height="360" rx="24" fill="#f8fafc" stroke="#991b1b" stroke-width="3"/>
+<path d="M740 420 C830 170, 930 500, 1030 260 S1120 480, 1150 320" fill="none" stroke="#991b1b" stroke-width="5"/>
+<text x="765" y="235" font-family="Arial" font-size="24" font-weight="bold" fill="#7f1d1d">Función no convexa</text>
+<text x="765" y="500" font-family="Arial" font-size="17">puede tener varios óptimos locales</text>
+
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="650" viewBox="0 0 1280 650">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="60" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Transporte vs DC</text>
+<text x="60" y="88" font-family="Arial" font-size="18" fill="#475569">Diferencia entre modelos de red</text>
+<rect x="95" y="155" width="1090" height="52" rx="12" fill="#f8fafc" stroke="#334155" stroke-width="2"/><text x="125" y="187" font-family="Arial" font-size="17">transporte: capacidades</text>
+<rect x="95" y="230" width="1090" height="52" rx="12" fill="#f8fafc" stroke="#334155" stroke-width="2"/><text x="125" y="262" font-family="Arial" font-size="17">DC: ángulos y reactancias</text>
+<rect x="95" y="305" width="1090" height="52" rx="12" fill="#f8fafc" stroke="#334155" stroke-width="2"/><text x="125" y="337" font-family="Arial" font-size="17">flujos físicos aproximados</text>
+<rect x="95" y="380" width="1090" height="52" rx="12" fill="#f8fafc" stroke="#334155" stroke-width="2"/><text x="125" y="412" font-family="Arial" font-size="17">comparación de resultados</text>
+</svg>

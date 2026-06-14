@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="60" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Óptimo local y óptimo global</text>
+<text x="60" y="88" font-family="Arial" font-size="18" fill="#475569">Importancia de la convexidad en la interpretación de soluciones</text>
+
+<path d="M100 520 C220 260, 330 580, 460 350 S700 170, 850 400 S1050 560, 1160 250" fill="none" stroke="#1e40af" stroke-width="5"/>
+<circle cx="460" cy="350" r="10" fill="#f59e0b"/><text x="405" y="325" font-family="Arial" font-size="17">mínimo local</text>
+<circle cx="700" cy="220" r="10" fill="#dc2626"/><text x="650" y="190" font-family="Arial" font-size="17">mínimo global</text>
+<line x1="90" y1="560" x2="1160" y2="560" stroke="#334155" stroke-width="2"/>
+
+</svg>

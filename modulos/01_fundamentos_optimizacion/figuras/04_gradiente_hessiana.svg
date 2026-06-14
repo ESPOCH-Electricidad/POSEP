@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="60" y="55" font-family="Arial" font-size="34" font-weight="bold" fill="#0f172a">Gradiente y Hessiana</text>
+<text x="60" y="88" font-family="Arial" font-size="18" fill="#475569">Información local sobre pendiente y curvatura</text>
+
+<rect x="120" y="185" width="420" height="340" rx="24" fill="#eff6ff" stroke="#1e40af" stroke-width="3"/>
+<text x="160" y="245" font-family="Arial" font-size="26" font-weight="bold">Gradiente</text>
+<text x="160" y="300" font-family="Arial" font-size="20">∇f(x)</text>
+<text x="160" y="350" font-family="Arial" font-size="18">Dirección de mayor crecimiento.</text>
+<text x="160" y="395" font-family="Arial" font-size="18">Permite definir estacionariedad.</text>
+<rect x="720" y="185" width="420" height="340" rx="24" fill="#fff7ed" stroke="#9a3412" stroke-width="3"/>
+<text x="760" y="245" font-family="Arial" font-size="26" font-weight="bold">Hessiana</text>
+<text x="760" y="300" font-family="Arial" font-size="20">H_f(x)</text>
+<text x="760" y="350" font-family="Arial" font-size="18">Información de curvatura.</text>
+<text x="760" y="395" font-family="Arial" font-size="18">Ayuda a clasificar convexidad.</text>
+
+</svg>
