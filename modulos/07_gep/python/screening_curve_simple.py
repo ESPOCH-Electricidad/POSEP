@@ -1,34 +1,27 @@
 from pathlib import Path
-import numpy as np
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
-base = Path(__file__).resolve().parents[1]
-tech = pd.read_csv(base / "datos" / "gep_tecnologias.csv")
-
-name_col = "technology" if "technology" in tech.columns else "tecnologia"
-fixed_col = "fixed_cost" if "fixed_cost" in tech.columns else "fom_usd_kw_anio"
-var_col = "variable_cost" if "variable_cost" in tech.columns else "vom_usd_mwh"
-capex_col = "capex_usd_kw" if "capex_usd_kw" in tech.columns else None
-
+root = Path(__file__).resolve().parents[1]
+tech = pd.read_csv(root / 'datos' / 'gep_tecnologias.csv')
+params = pd.read_csv(root / 'datos' / 'gep_parametros.csv')
+r = float(params.loc[params['parametro'].eq('discount_rate'), 'valor'].iloc[0]) if 'parametro' in params.columns and params['parametro'].eq('discount_rate').any() else 0.1
+life = int(params.loc[params['parametro'].eq('life_years'), 'valor'].iloc[0]) if 'parametro' in params.columns and params['parametro'].eq('life_years').any() else 25
+crf = r*(1+r)**life/((1+r)**life-1)
 hours = np.linspace(0, 8760, 100)
-r = 0.10
-life = 25
-crf = r * (1 + r) ** life / ((1 + r) ** life - 1)
 
-plt.figure(figsize=(8, 4.5))
+fig, ax = plt.subplots(figsize=(8,4.8))
 for _, row in tech.iterrows():
-    fixed = float(row[fixed_col])
-    if capex_col:
-        fixed += float(row[capex_col]) * crf
-    y = fixed + float(row[var_col]) * hours / 1000.0
-    plt.plot(hours, y, label=str(row[name_col]))
-
-plt.xlabel("Horas equivalentes de operación [h/año]")
-plt.ylabel("Costo anual equivalente aproximado [USD/kW-año]")
-plt.title("Screening curve simplificada")
-plt.legend()
-plt.tight_layout()
-out = base / "figuras" / "screening_curve_generada.png"
-plt.savefig(out, dpi=200)
-print(f"Figura guardada en {out}")
+    fixed = (row['capex_usd_kw']*crf + row['fom_usd_kw_anio']) * 1000  # USD/MW-year
+    cost = fixed + row['vom_usd_mwh'] * hours
+    ax.plot(hours, cost/1000, label=row['tecnologia'])
+ax.set_xlabel('Horas de utilización [h/año]')
+ax.set_ylabel('Costo anual aproximado [kUSD/MW-año]')
+ax.set_title('Screening curve simplificada')
+ax.grid(True, alpha=0.3)
+ax.legend()
+out = root / 'figuras' / 'screening_curve_generada.png'
+fig.tight_layout()
+fig.savefig(out, dpi=180)
+print(f'Figura guardada en: {out}')

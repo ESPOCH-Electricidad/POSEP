@@ -109,6 +109,36 @@ Esto permite decidir no solo qué construir, sino cuándo construirlo. El tiempo
 
 ![Expansión multietapa](figuras/04_expansion_multietapa.svg)
 
+
+## Datos de trabajo para construir el caso
+
+Los CSV describen barras, corredores existentes, corredores candidatos, años y parámetros. El estudiante debe distinguir qué datos pertenecen al sistema existente y qué datos activan decisiones de inversión. A partir de esa lectura se construye el `.dat` y luego el `.mod` de transporte o DC-TNEP.
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `garver_tnep_base.csv` | linea,desde,hasta,fmax,costo |
+| `tnep_anios.csv` | anio,factor_demanda |
+| `tnep_barras.csv` | bus,demand_mw,genmax_mw |
+| `tnep_corredores.csv` | line,from,to,tipo,x_pu,fmax_mw,invcost_musd,maxnew |
+| `tnep_parametros.csv` | parametro,valor,unidad |
+
+### Archivos AMPL de referencia
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `tnep_dc.dat` | archivo de apoyo |
+| `tnep_dc.mod` | archivo de apoyo |
+| `tnep_dc.run` | archivo de apoyo |
+| `tnep_transport.dat` | archivo de apoyo |
+| `tnep_transport.mod` | archivo de apoyo |
+| `tnep_transport.run` | archivo de apoyo |
+
+### Scripts Python de apoyo
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `resumen_candidatos_tnep.py` | archivo de apoyo |
+
 ## Archivos incluidos
 
 | Archivo | Uso |

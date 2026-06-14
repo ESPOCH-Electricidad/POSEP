@@ -147,6 +147,45 @@ Estados frecuentes:
 
 Validar una solución implica revisar unidades, balances, límites activos, valores extremos, variables binarias, costos resultantes y coherencia física. Un solver puede entregar una solución óptima para un modelo mal planteado; por eso la interpretación técnica es parte del proceso.
 
+
+## Ejemplos y datos de trabajo
+
+La intención didáctica de este módulo es que el estudiante parta de tablas de datos y reconstruya la formulación. Los archivos CSV describen productos, recursos, costos, disponibilidades, nodos o matrices. Con esos datos debe identificar conjuntos, parámetros, variables, función objetivo y restricciones antes de escribir cualquier archivo `.mod`.
+
+Los modelos AMPL incluidos en `ampl/` son referencias mínimas para comprobación. No reemplazan el ejercicio principal: construir el `.dat` a partir de los CSV y escribir el `.mod` desde las ecuaciones del README.
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `acero.csv` | producto,utilidad_usd_t,tasa_t_h,maximo_t |
+| `acero_parametros.csv` | parametro,valor,unidad |
+| `acero_productos.csv` | producto,profit_usd_t,rate_t_h,max_prod_t |
+| `antenas_candidatas.csv` | antena,cost_usd,barrio |
+| `antenas_cobertura.csv` | medidor,A1,A2,A3,A4,A5,A6,A7,A8 |
+| `localizacion_antenas.csv` | antena,costo_usd,barrio |
+| `matriz_A_b.csv` | restriccion,x1,x2,x3,b |
+| `pintura.csv` | producto,precio_usd_l,produccion_l_h,maximo_l |
+| `pintura_parametros.csv` | parametro,valor,unidad |
+| `pintura_productos.csv` | producto,price_usd_l,rate_l_h,market_l |
+| `transporte_cargas.csv` | carga,demand_mwh |
+| `transporte_costos.csv` | fuente,carga,cost_usd_mwh |
+| `transporte_energia.csv` | fuente,carga,costo_usd_mwh |
+| `transporte_fuentes.csv` | fuente,supply_mwh |
+| `vector_c.csv` | variable,c |
+
+### Archivos AMPL de referencia
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `localizacion_antenas.dat` | archivo de apoyo |
+| `localizacion_antenas.mod` | archivo de apoyo |
+| `localizacion_antenas.run` | archivo de apoyo |
+| `pintura.dat` | archivo de apoyo |
+| `pintura.mod` | archivo de apoyo |
+| `pintura.run` | archivo de apoyo |
+| `transporte.dat` | archivo de apoyo |
+| `transporte.mod` | archivo de apoyo |
+| `transporte.run` | archivo de apoyo |
+
 ## Archivos incluidos
 
 | Archivo | Uso |

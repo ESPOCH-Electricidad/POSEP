@@ -113,6 +113,30 @@ param demand {B,Y};
 
 En Python, una tabla con columnas `bloque`, `anio` y `demanda` puede convertirse a formato `.dat`. El módulo incluye scripts para proyectar demanda básica y exportarla a modelos posteriores.
 
+
+## Datos de trabajo para construir escenarios
+
+Los datos permiten trabajar energía, demanda pico, series históricas, variables explicativas y demanda exportable hacia TNEP o GEP. El objetivo no es solo graficar una curva, sino producir insumos técnicamente consistentes para modelos de optimización.
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `demanda_gep.csv` | anio,escenario,energia_gwh,pico_mw |
+| `demanda_historica.csv` | anio,energia_gwh,pico_mw |
+| `demanda_historica_completa.csv` | anio,energia_gwh,pico_mw,poblacion_millones,pib_indice |
+| `demanda_proyectada_escenarios.csv` | anio,escenario,energia_gwh,pico_mw |
+| `demanda_regresion.csv` | anio,energia_gwh,pico_mw,poblacion_millones,pib_indice |
+| `demanda_series_tiempo.csv` | anio,energia_gwh,pico_mw |
+| `demanda_tnep.csv` | anio,escenario,pico_mw |
+| `plantilla_demanda_proyectada.csv` | anio,escenario,energia_gwh,pico_mw |
+| `variables_socioeconomicas.csv` | anio,poblacion_millones,pib_indice |
+
+### Scripts Python de apoyo
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `demand_projection_basic.py` | archivo de apoyo |
+| `export_demand_to_ampl_dat.py` | archivo de apoyo |
+
 ## Archivos incluidos
 
 | Archivo | Uso |

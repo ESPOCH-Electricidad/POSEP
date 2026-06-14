@@ -1,19 +1,10 @@
-# Lectura directa desde Excel con amplxl.
-# Requiere que el manejador amplxl esté disponible en la instalación de AMPL.
-
 reset;
-load amplxl.dll;
-model pintura.mod;
+model ../pintura/pintura.mod;
 
-table Productos IN "amplxl" "../datos/pintura_ampl.xlsx" "Productos":
-    P <- [producto], price, rate, market;
+# Ejemplo conceptual con amplxl:
+# load amplxl.dll;
+# table Products IN "amplxl" "../../excel/pintura_ampl.xlsx" "products":
+#     P <- [PRODUCT], price, rate, market;
+# read table Products;
 
-table Parametros IN "amplxl" "../datos/pintura_ampl.xlsx" "Parametros":
-    [] Hours;
-
-read table Productos;
-read table Parametros;
-
-option solver highs;
-solve;
-display x, Revenue;
+# Recomendación docente: usar Python/pandas para generar .dat cuando se requiera portabilidad.

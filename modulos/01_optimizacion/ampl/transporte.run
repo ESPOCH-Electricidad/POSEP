@@ -3,4 +3,5 @@ model transporte.mod;
 data transporte.dat;
 option solver highs;
 solve;
-display flujo, CostoTotal;
+
+display TotalCost, x;

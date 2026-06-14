@@ -3,4 +3,5 @@ model pintura.mod;
 data pintura.dat;
 option solver highs;
 solve;
-display x, BeneficioTotal;
+display x;
+display Revenue;

@@ -138,6 +138,55 @@ $$
 
 El VOLL aproxima el costo social o económico de no atender demanda. Si aparece energía no servida en la solución, debe interpretarse como señal de déficit operativo o insuficiencia de capacidad.
 
+
+## Datos de trabajo para construir el caso
+
+El caso no debe entenderse como un modelo cerrado. Los CSV permiten reconstruir el despacho económico, el despacho por tramos, el unit commitment y el hidrotérmico simple. La actividad esperada es generar el archivo `.dat` desde estas tablas y escribir el `.mod` desde la formulación matemática anterior.
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `cascada_afluencias.csv` | embalse,t1,t2,t3,t4 |
+| `cascada_embalses.csv` | embalse,v0_hm3,vmin_hm3,vmax_hm3,qmax_hm3,prod_mwh_hm3 |
+| `cascada_upstream.csv` | embalse,upstream |
+| `ed_demanda.csv` | parametro,valor,unidad |
+| `ed_generadores.csv` | gen,pmin_mw,pmax_mw,cost_usd_mwh |
+| `ed_perdidas_B.csv` | g,h,B_1_mw |
+| `ed_perdidas_demanda.csv` | parametro,valor,unidad |
+| `ed_perdidas_generadores.csv` | gen,pmin_mw,pmax_mw,cost_usd_mwh |
+| `ed_tramos.csv` | gen,tramo,segmax_mw,segcost_usd_mwh |
+| `ed_tramos_demanda.csv` | parametro,valor,unidad |
+| `hidrotermico_demanda_afluencia.csv` | periodo,demand_mw,inflow_hm3 |
+| `hidrotermico_didactico.csv` | periodo,demanda,afluencia |
+| `hidrotermico_hidro.csv` | hidro,v0_hm3,vmin_hm3,vmax_hm3,qmax_hm3,prod_mw_hm3 |
+| `hidrotermico_termicas.csv` | gen,pmax_mw,cost_usd_mwh |
+| `hidrotermico_voll.csv` | parametro,valor,unidad |
+| `operacion_3_generadores.csv` | gen,pmin,pmax,costo |
+| `uc_demanda_reserva.csv` | hora,demand_mw,reserve_mw |
+| `uc_unidades.csv` | gen,pmin_mw,pmax_mw,cost_usd_mwh,startup_usd,ru_mw_h,rd_mw_h,initial_status |
+
+### Archivos AMPL de referencia
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `dispatch.dat` | archivo de apoyo |
+| `dispatch.mod` | archivo de apoyo |
+| `dispatch.run` | archivo de apoyo |
+| `dispatch_blocks.dat` | archivo de apoyo |
+| `dispatch_blocks.mod` | archivo de apoyo |
+| `dispatch_blocks.run` | archivo de apoyo |
+| `hydrothermal.dat` | archivo de apoyo |
+| `hydrothermal.mod` | archivo de apoyo |
+| `hydrothermal.run` | archivo de apoyo |
+| `uc.dat` | archivo de apoyo |
+| `uc.mod` | archivo de apoyo |
+| `uc.run` | archivo de apoyo |
+
+### Scripts Python de apoyo
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `graficar_orden_merito.py` | archivo de apoyo |
+
 ## Archivos incluidos
 
 | Archivo | Uso |

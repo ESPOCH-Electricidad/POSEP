@@ -1,13 +1,15 @@
+set C := C1 C2 C3 C4 C5;
 set A := A1 A2 A3 A4;
-set Z := Z1 Z2 Z3 Z4 Z5 Z6;
 
-param presupuesto := 145;
+param costo :=
+A1 12
+A2 10
+A3 11
+A4 9;
 
-param costo := A1 55 A2 70 A3 60 A4 75;
-
-param cobertura:
-     Z1 Z2 Z3 Z4 Z5 Z6 :=
-A1   1  1  0  0  0  0
-A2   0  1  1  1  0  0
-A3   0  0  1  1  1  0
-A4   0  0  0  1  1  1;
+param cubrir : A1 A2 A3 A4 :=
+C1 1 1 0 0
+C2 1 0 1 0
+C3 0 1 1 0
+C4 0 0 1 1
+C5 0 1 0 1;

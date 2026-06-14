@@ -1,11 +1,16 @@
-set I := S1 S2 S3;
-set J := D1 D2 D3 D4;
+set S := S1 S2;
+set D := D1 D2 D3;
 
-param oferta := S1 80 S2 70 S3 60;
-param demanda := D1 40 D2 50 D3 70 D4 50;
+param supply :=
+S1 100
+S2 120;
 
-param costo:
-      D1 D2 D3 D4 :=
-S1     8  6 10  9
-S2     9 12 13  7
-S3    14  9 16  5;
+param demand :=
+D1 60
+D2 70
+D3 90;
+
+param cost:
+        D1  D2  D3 :=
+S1      8   6   10
+S2      9   7   4;

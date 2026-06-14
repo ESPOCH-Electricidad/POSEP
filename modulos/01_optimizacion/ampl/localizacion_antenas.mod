@@ -1,18 +1,16 @@
-set A;        # ubicaciones candidatas
-set Z;        # zonas de demanda
+# Modelo de localizacion/cobertura de antenas
+# Uso docente: reconstruir este modelo desde la formulacion MILP del README.
 
-param costo {A} >= 0;
-param cobertura {A,Z} binary;
-param presupuesto >= 0;
+set C;                 # zonas de carga o clientes
+set A;                 # ubicaciones candidatas
 
-var y {A} binary;
-var atendida {Z} binary;
+param costo {A} >= 0;  # costo de instalar una antena en la ubicacion a
+param cubrir {C,A} binary;  # 1 si la antena a cubre la zona c
 
-maximize ZonasCubiertas:
-    sum {z in Z} atendida[z];
+var y {A} binary;      # 1 si se instala antena en a
 
-subject to Presupuesto:
-    sum {a in A} costo[a] * y[a] <= presupuesto;
+minimize CostoTotal:
+    sum {a in A} costo[a] * y[a];
 
-subject to ActivarCobertura {z in Z}:
-    atendida[z] <= sum {a in A} cobertura[a,z] * y[a];
+subject to Cobertura {c in C}:
+    sum {a in A} cubrir[c,a] * y[a] >= 1;

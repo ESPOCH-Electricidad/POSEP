@@ -1,6 +1,6 @@
 reset;
-model transporte.mod;
-data transporte.dat;
+model ../transporte/transporte.mod;
+data ../transporte/transporte.dat;
 
 if sum {i in S} supply[i] < sum {j in D} demand[j] then {
     printf "ERROR: oferta total menor que demanda total.\n";

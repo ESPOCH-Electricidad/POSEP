@@ -162,6 +162,41 @@ show Pg;
 
 `expand` es especialmente útil porque muestra la restricción ya instanciada con sus índices y coeficientes.
 
+
+## Datos y plantillas de trabajo
+
+Este módulo conserva plantillas AMPL y scripts de apoyo porque su objetivo es enseñar implementación. Aquí sí es importante que el estudiante vea estructuras reales de código: separación `.mod/.dat/.run`, ciclos `for`, sensibilidad con `repeat while`, lectura desde Excel/CSV, exportación de resultados y uso de Python como puente de datos.
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `pintura_ampl.xlsx` | archivo de apoyo |
+
+### Archivos AMPL de referencia
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `dispatch_excel_read.run` | archivo de apoyo |
+| `dispatch_export_csv.run` | archivo de apoyo |
+| `exportar_resultados_csv.run` | archivo de apoyo |
+| `for_escenarios.run` | archivo de apoyo |
+| `if_validacion.run` | archivo de apoyo |
+| `pintura.dat` | archivo de apoyo |
+| `pintura.mod` | archivo de apoyo |
+| `pintura.run` | archivo de apoyo |
+| `read_excel_pintura.run` | archivo de apoyo |
+| `repeat_while_sensibilidad.run` | archivo de apoyo |
+| `transporte.dat` | archivo de apoyo |
+| `transporte.mod` | archivo de apoyo |
+| `transporte.run` | archivo de apoyo |
+
+### Scripts Python de apoyo
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `amplpy_dispatch_workflow.py` | archivo de apoyo |
+| `amplpy_pandas_excel.py` | archivo de apoyo |
+| `excel_to_dat_dispatch.py` | archivo de apoyo |
+
 ## Archivos incluidos
 
 | Archivo | Uso |

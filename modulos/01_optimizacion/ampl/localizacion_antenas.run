@@ -1,6 +1,9 @@
 reset;
 model localizacion_antenas.mod;
 data localizacion_antenas.dat;
+
 option solver highs;
 solve;
-display y, atendida, ZonasCubiertas;
+
+display y;
+display CostoTotal;

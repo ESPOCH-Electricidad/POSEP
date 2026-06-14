@@ -1,17 +1,17 @@
-set I;
-set J;
+set S;  # fuentes
+set D;  # destinos
 
-param oferta {I} >= 0;
-param demanda {J} >= 0;
-param costo {I,J} >= 0;
+param supply {S} >= 0;
+param demand {D} >= 0;
+param cost {S,D} >= 0;
 
-var flujo {I,J} >= 0;
+var x {S,D} >= 0;
 
-minimize CostoTotal:
-    sum {i in I, j in J} costo[i,j] * flujo[i,j];
+minimize TotalCost:
+    sum {i in S, j in D} cost[i,j] * x[i,j];
 
-subject to Oferta {i in I}:
-    sum {j in J} flujo[i,j] <= oferta[i];
+subject to SupplyLimit {i in S}:
+    sum {j in D} x[i,j] <= supply[i];
 
-subject to Demanda {j in J}:
-    sum {i in I} flujo[i,j] = demanda[j];
+subject to DemandBalance {j in D}:
+    sum {i in S} x[i,j] = demand[j];

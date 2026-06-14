@@ -100,6 +100,37 @@ La decisión temporal importa porque construir antes aumenta disponibilidad del 
 
 ![Screening curve](figuras/03_screening_curve.svg)
 
+
+## Datos de trabajo para construir el caso
+
+Los datos describen tecnologías, bloques de carga, años y parámetros económicos. La formulación del README permite construir el `.mod`; los CSV permiten generar el `.dat`. La lectura técnica debe separar capacidad existente, capacidad candidata, disponibilidad, crédito firme, costos de inversión y costos variables.
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `bloques_carga.csv` | bloque,demanda_mw,horas |
+| `gep_anios.csv` | anio,peak_mw,energy_gwh |
+| `gep_bloques.csv` | bloque,demand_mw,hours |
+| `gep_parametros.csv` | parametro,valor,unidad |
+| `gep_tecnologias.csv` | tecnologia,capex_usd_kw,fom_usd_kw_anio,vom_usd_mwh,af,firm_credit,existingcap_mw,candidatemax_mw |
+| `tecnologias_generacion.csv` | tecnologia,capex_usd_kw,fom_usd_kw_anio,vom_usd_mwh,af,fc |
+
+### Archivos AMPL de referencia
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `gep_multiyear.dat` | archivo de apoyo |
+| `gep_multiyear.mod` | archivo de apoyo |
+| `gep_multiyear.run` | archivo de apoyo |
+| `gep_static.dat` | archivo de apoyo |
+| `gep_static.mod` | archivo de apoyo |
+| `gep_static.run` | archivo de apoyo |
+
+### Scripts Python de apoyo
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `screening_curve_simple.py` | archivo de apoyo |
+
 ## Archivos incluidos
 
 | Archivo | Uso |

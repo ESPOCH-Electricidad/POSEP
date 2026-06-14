@@ -42,6 +42,13 @@ El flujo de trabajo recomendado es: preparar datos en hojas de cálculo o archiv
 | 06 | Expansión de transmisión | [Abrir](modulos/06_tnep/README.md) |
 | 07 | Expansión de generación | [Abrir](modulos/07_gep/README.md) |
 
+
+## Criterio didáctico del repositorio
+
+La lógica de trabajo es **datos → formulación → implementación**. Cada módulo contiene datos de entrada en CSV o XLSX y la formulación matemática directamente en su `README.md`. Con esa información, el estudiante debe poder construir su propio archivo `.dat` y su propio archivo `.mod`.
+
+Cuando se incluyen archivos AMPL de referencia, estos sirven para comprobación, discusión docente o depuración. La intención principal no es entregar modelos cerrados, sino mostrar la estructura del problema con datos suficientes para que cada estudiante reproduzca la modelación.
+
 ## Organización de cada módulo
 
 Cada módulo mantiene una estructura compacta:

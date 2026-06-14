@@ -78,6 +78,38 @@ El dual del balance nodal puede interpretarse como costo marginal local de atend
 
 Esta lectura permite entender por qué el OPF es el puente entre operación técnica, costos marginales y señales locacionales.
 
+
+## Datos de trabajo para construir el caso
+
+Los datos separan barras, líneas, generadores y parámetros. Esa separación es intencional: el estudiante debe transformar las tablas en conjuntos AMPL, construir los parámetros indexados y verificar que el balance nodal tenga sentido físico antes de resolver el OPF.
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `ieee_14_barras_resumen.csv` | dato,valor |
+| `opf_ac_barras.csv` | bus,pload_mw,qload_mvar,vmin_pu,vmax_pu |
+| `opf_ac_generadores.csv` | gen,bus,pmin_mw,pmax_mw,qmin_mvar,qmax_mvar,cost_usd_mwh |
+| `opf_ac_lineas.csv` | line,from,to,r_pu,x_pu,bsh_pu,smax_mva |
+| `opf_ac_parametros.csv` | parametro,valor,unidad |
+| `opf_dc_barras.csv` | bus,demand_mw |
+| `opf_dc_didactico.csv` | linea,desde,hasta,x,fmax |
+| `opf_dc_generadores.csv` | gen,bus,pmin_mw,pmax_mw,cost_usd_mwh |
+| `opf_dc_lineas.csv` | line,from,to,x_pu,fmax_mw |
+| `opf_dc_parametros.csv` | parametro,valor,unidad |
+
+### Archivos AMPL de referencia
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `opf_dc.dat` | archivo de apoyo |
+| `opf_dc.mod` | archivo de apoyo |
+| `opf_dc.run` | archivo de apoyo |
+
+### Scripts Python de apoyo
+
+| Archivo | Contenido/encabezado |
+|---|---|
+| `graficar_red_dc.py` | archivo de apoyo |
+
 ## Archivos incluidos
 
 | Archivo | Uso |

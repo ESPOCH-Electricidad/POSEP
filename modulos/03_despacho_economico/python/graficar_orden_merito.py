@@ -2,31 +2,22 @@ from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 
-base = Path(__file__).resolve().parents[1]
-gen = pd.read_csv(base / "datos" / "ed_generadores.csv")
+root = Path(__file__).resolve().parents[1]
+gen = pd.read_csv(root / 'datos' / 'ed_generadores.csv').sort_values('cost_usd_mwh')
+demand = float(pd.read_csv(root / 'datos' / 'ed_demanda.csv').loc[0, 'valor'])
 
-name_col = "gen" if "gen" in gen.columns else gen.columns[0]
-pmax_col = "Pmax" if "Pmax" in gen.columns else "pmax_mw"
-cost_col = "cvar" if "cvar" in gen.columns else "cost_usd_mwh"
+gen['width'] = gen['pmax_mw']
+gen['left'] = gen['width'].cumsum() - gen['width']
 
-missing = [c for c in [pmax_col, cost_col] if c not in gen.columns]
-if missing:
-    raise ValueError(f"Faltan columnas requeridas: {missing}")
-
-gen = gen.sort_values(cost_col).reset_index(drop=True)
-
-plt.figure(figsize=(8, 4.5))
-left = 0.0
-for _, row in gen.iterrows():
-    width = float(row[pmax_col])
-    plt.bar(left, float(row[cost_col]), width=width, align="edge", edgecolor="black")
-    plt.text(left + width/2, float(row[cost_col]) + 1, str(row[name_col]), ha="center", fontsize=8)
-    left += width
-
-plt.xlabel("Potencia acumulada [MW]")
-plt.ylabel("Costo variable [USD/MWh]")
-plt.title("Curva de oferta por orden de mérito")
-plt.tight_layout()
-out = base / "figuras" / "orden_merito_generado.png"
-plt.savefig(out, dpi=200)
-print(f"Figura guardada en {out}")
+fig, ax = plt.subplots(figsize=(8, 4.5))
+ax.bar(gen['left'], gen['cost_usd_mwh'], width=gen['width'], align='edge', edgecolor='black')
+ax.axvline(demand, linestyle='--', linewidth=1.5)
+ax.set_xlabel('Potencia acumulada [MW]')
+ax.set_ylabel('Costo variable [USD/MWh]')
+ax.set_title('Orden de mérito y demanda')
+ax.grid(True, axis='y', alpha=0.3)
+out = root / 'figuras' / 'orden_merito_generado.png'
+out.parent.mkdir(exist_ok=True)
+fig.tight_layout()
+fig.savefig(out, dpi=180)
+print(f'Figura guardada en: {out}')
