@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "Si utiliza este repositorio con fines académicos, cite el material docente."
+title: "Planificación y Operación de Sistemas Eléctricos de Potencia"
+authors:
+  - family-names: "Guamán"
+    given-names: "Wilian"
+version: "v13-curada"
+date-released: "2026-06-14"

@@ -1,7 +1,0 @@
-linea,desde,hasta,tipo,x_pu,fmax_mw,costo_inv_musd,max_nuevas
-L12,B1,B2,existente,0.1,100,0,0
-L23,B2,B3,existente,0.08,80,0,0
-L34,B3,B4,existente,0.11,70,0,0
-C13,B1,B3,candidato,0.12,90,40,1
-C24,B2,B4,candidato,0.1,80,35,1
-C14,B1,B4,candidato,0.15,100,55,1
