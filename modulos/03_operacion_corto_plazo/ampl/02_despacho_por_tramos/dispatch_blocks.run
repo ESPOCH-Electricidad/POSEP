@@ -1,6 +1,0 @@
-reset;
-model dispatch_blocks.mod;
-data dispatch_blocks.dat;
-option solver highs;
-solve;
-display TotalCost, p;

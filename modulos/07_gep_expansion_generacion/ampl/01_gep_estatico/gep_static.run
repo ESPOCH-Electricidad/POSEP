@@ -1,8 +1,0 @@
-reset;
-model gep_static.mod;
-data gep_static.dat;
-option solver highs;
-solve;
-display solve_result, TotalCost, NewCap, Cap, Gen, LS;
-printf "technology,new_capacity,total_capacity\n" > "gep_capacity.csv";
-printf {k in K} "%s,%g,%g\n", k, NewCap[k], Cap[k] >> "gep_capacity.csv";

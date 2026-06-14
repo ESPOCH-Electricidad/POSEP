@@ -2,10 +2,21 @@
 
 [Menú principal](../README.md)
 
-| Criterio | Peso sugerido |
-|---|---:|
-| Formulación correcta | 25 % |
-| Datos completos y unidades | 20 % |
-| Ejecución/reproducibilidad | 15 % |
-| Validación de resultados | 20 % |
-| Interpretación técnica | 20 % |
+## Entregables por actividad
+
+- Formulación matemática.
+- Archivo de datos.
+- Resultados tabulados.
+- Figura principal.
+- Análisis de sensibilidad.
+- Conclusiones técnicas.
+
+## Criterios
+
+| Criterio | Descripción |
+|---|---|
+| Formulación | variables, parámetros, objetivo y restricciones correctas |
+| Datos | unidades y consistencia |
+| Resultados | tablas y gráficos claros |
+| Interpretación | análisis técnico, no solo salida numérica |
+| Reproducibilidad | archivos ordenados y ejecutables |
