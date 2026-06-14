@@ -1,0 +1,4 @@
+gen,pmin_mw,pmax_mw,cost_usd_mwh,startup_usd,ru_mw_h,rd_mw_h,initial_status
+G1,30,120,18,500,50,50,1
+G2,20,90,24,350,40,40,0
+G3,10,60,38,120,30,30,0

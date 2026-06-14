@@ -1,0 +1,4 @@
+linea,desde,hasta,fmax,costo
+L1,B1,B2,100,50
+L2,B2,B3,80,40
+L3,B3,B4,70,35

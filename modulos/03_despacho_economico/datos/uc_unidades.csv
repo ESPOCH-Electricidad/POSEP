@@ -1,4 +1,0 @@
-gen,pmin_mw,pmax_mw,costo_usd_mwh,arranque_usd,rampa_subida_mw_h,rampa_bajada_mw_h,estado_inicial
-G1,30,120,18,500,50,50,1
-G2,20,90,24,350,40,40,0
-G3,10,60,38,120,30,30,0
