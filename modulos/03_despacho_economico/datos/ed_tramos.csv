@@ -1,0 +1,5 @@
+gen,tramo,pmax_tramo_mw,costo_tramo_usd_mwh
+G1,K1,60,14
+G1,K2,50,21
+G2,K1,70,18
+G2,K2,60,28

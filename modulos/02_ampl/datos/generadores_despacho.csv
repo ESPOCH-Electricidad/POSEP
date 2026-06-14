@@ -1,0 +1,4 @@
+gen,pmin_mw,pmax_mw,costo_usd_mwh
+G1,0,120,18
+G2,0,100,26
+G3,0,80,40

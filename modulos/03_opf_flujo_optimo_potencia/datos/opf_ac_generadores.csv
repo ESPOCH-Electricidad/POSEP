@@ -1,3 +1,0 @@
-gen,bus,pmin_mw,pmax_mw,qmin_mvar,qmax_mvar,cost_usd_mwh
-G1,B1,0,180,-80,120,20
-G2,B3,0,100,-50,80,35

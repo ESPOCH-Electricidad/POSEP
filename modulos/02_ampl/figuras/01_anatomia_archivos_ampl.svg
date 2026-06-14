@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="680" viewBox="0 0 1300 680">
+
+<rect width="1300" height="680" fill="#ffffff"/>
+<text x="60" y="60" font-family="Arial" font-size="32" font-weight="bold">Anatomía de un proyecto AMPL</text>
+<text x="60" y="95" font-family="Arial" font-size="18" fill="#475569">Separar modelo, datos y ejecución mejora reproducibilidad.</text>
+<g font-family="Arial">
+<rect x="110" y="210" width="260" height="180" rx="22" fill="#eff6ff" stroke="#1e40af" stroke-width="3"/>
+<text x="145" y="260" font-size="24" font-weight="bold">.mod</text><text x="145" y="305" font-size="17">sets · params · vars</text><text x="145" y="335" font-size="17">objective · constraints</text>
+<rect x="520" y="210" width="260" height="180" rx="22" fill="#fef3c7" stroke="#854d0e" stroke-width="3"/>
+<text x="555" y="260" font-size="24" font-weight="bold">.dat</text><text x="555" y="305" font-size="17">valores numéricos</text><text x="555" y="335" font-size="17">tablas · matrices</text>
+<rect x="930" y="210" width="260" height="180" rx="22" fill="#dcfce7" stroke="#166534" stroke-width="3"/>
+<text x="965" y="260" font-size="24" font-weight="bold">.run</text><text x="965" y="305" font-size="17">model · data · solve</text><text x="965" y="335" font-size="17">display · export</text>
+<line x1="380" y1="300" x2="510" y2="300" stroke="#334155" stroke-width="4"/><polygon points="510,300 490,288 490,312" fill="#334155"/>
+<line x1="790" y1="300" x2="920" y2="300" stroke="#334155" stroke-width="4"/><polygon points="920,300 900,288 900,312" fill="#334155"/>
+</g>
+
+</svg>
