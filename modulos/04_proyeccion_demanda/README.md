@@ -2,87 +2,74 @@
 
 [Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
 
-## Introducción conceptual
+## Propósito del módulo
 
-La proyección de demanda se introduce después de operación y OPF porque hasta ese punto la demanda se usa como parámetro. En planificación, la demanda futura se convierte en insumo estratégico para TNEP y GEP.
+En los módulos de operación, la demanda se utiliza como parámetro conocido. En planificación, en cambio, la demanda futura debe estimarse antes de decidir expansión de red o generación. Una mala proyección puede llevar a subinversión, sobreinversión o conclusiones equivocadas sobre confiabilidad.
 
-## Fundamentos del tema
+La demanda eléctrica debe estudiarse separando energía y potencia pico. La energía anual o mensual se relaciona con consumo acumulado, costos variables y generación esperada. La potencia pico condiciona capacidad instalada, reserva y dimensionamiento de red. Por eso los modelos de TNEP y GEP requieren insumos distintos: demanda por barra, demanda máxima, bloques de carga, energía anual y escenarios.
 
-El módulo se desarrolla principalmente en Python: limpieza de datos, visualización, regresión, series temporales, métricas de error, construcción de escenarios y exportación hacia modelos de optimización.
+## Datos, tendencia y validación
 
-## Figuras técnicas principales
+Una serie de demanda puede contener tendencia, estacionalidad, cambios estructurales y valores atípicos. Antes de ajustar un modelo, se debe revisar la calidad de los datos: unidades, años faltantes, saltos no explicados, coherencia entre energía y pico, y correspondencia con variables explicativas como población, actividad económica o electrificación.
+
+Las métricas de error permiten comparar alternativas de proyección. El error absoluto medio se calcula como:
+
+$$
+MAE=\frac{1}{n}\sum_{t=1}^{n}|D_t-\hat{D}_t|.
+$$
+
+El RMSE penaliza con más fuerza los errores grandes:
+
+$$
+RMSE=\sqrt{\frac{1}{n}\sum_{t=1}^{n}(D_t-\hat{D}_t)^2}.
+$$
+
+El MAPE expresa el error relativo en porcentaje:
+
+$$
+MAPE=\frac{100}{n}\sum_{t=1}^{n}\left|\frac{D_t-\hat{D}_t}{D_t}\right|.
+$$
+
+Una proyección no debe reportarse como una única curva cuando existe incertidumbre relevante. Una forma simple de construir escenarios es aplicar una desviación sobre el caso medio:
+
+$$
+D_y^{alto}=D_y^{medio}(1+\Delta_y),\qquad D_y^{bajo}=D_y^{medio}(1-\Delta_y).
+$$
+
+## Salidas hacia planificación
+
+La salida del módulo no es solo una figura de demanda. Debe producir tablas utilizables por los modelos posteriores. Para TNEP se requiere demanda por barra o por zona. Para GEP se requieren demanda pico, energía y bloques representativos. La curva de duración de carga permite transformar perfiles horarios en bloques de operación con duración asociada.
+
+## Lectura técnica de las figuras
 
 ![Energía vs demanda pico](figuras/01_energia_vs_pico.svg)
 
-Dos variables distintas para planificación
+La energía y el pico responden a preguntas diferentes. Dos sistemas con la misma energía anual pueden tener requerimientos de capacidad distintos si sus picos son diferentes.
 
 ![Tendencia y estacionalidad](figuras/02_tendencia_estacionalidad.svg)
 
-Componentes de una serie de demanda
+La tendencia explica crecimiento de largo plazo; la estacionalidad explica patrones repetitivos. Separarlas ayuda a construir escenarios razonables.
 
 ![Validación de modelos](figuras/03_metricas_validacion.svg)
 
-Medidas de error para comparar proyecciones
+La validación compara proyecciones contra datos observados. Una métrica aislada no basta: conviene revisar error medio, error en pico, sesgo y comportamiento en años recientes.
 
 ![Escenarios de demanda](figuras/04_escenarios_demanda.svg)
 
-Incertidumbre para planificación
+Los escenarios permiten evaluar robustez. En expansión, una solución que solo funciona para el promedio puede fallar bajo crecimiento alto.
 
-## Ecuaciones base
+## Modelos del módulo
 
-### MAE
-
-$$
-MAE=\frac{1}{n}\sum_{t=1}^{n}|D_t-\hat{D}_t|
-$$
-
-Error absoluto medio.
-
-### RMSE
-
-$$
-RMSE=\sqrt{\frac{1}{n}\sum_{t=1}^{n}(D_t-\hat{D}_t)^2}
-$$
-
-Penaliza errores grandes.
-
-### MAPE
-
-$$
-MAPE=\frac{100}{n}\sum_{t=1}^{n}\left|\frac{D_t-\hat{D}_t}{D_t}\right|
-$$
-
-Error porcentual medio.
-
-### Escenario
-
-$$
-D_y^{alto}=D_y^{medio}(1+\Delta_y)
-$$
-
-Construcción simple de escenario alto.
-
-## Ejemplos o modelos del módulo
-
-| Recurso | Qué aporta | Acceso |
+| Recurso | Concepto principal | Acceso |
 |---|---|---|
-| Exploración de demanda | limpieza y visualización en Python | [Abrir](modelos/01_exploracion_demanda.md) |
-| Regresión de demanda | demanda vs variables explicativas | [Abrir](modelos/02_regresion_demanda.md) |
-| Series temporales | ARIMA/SARIMAX | [Abrir](modelos/03_series_tiempo.md) |
-| Escenarios y exportación | demanda para AMPL | [Abrir](modelos/04_escenarios_exportacion.md) |
-
-
-## Capa de datos de la v14
-
-Las páginas de ejemplos/modelos del módulo incluyen datos suficientes para construir archivos de datos de trabajo. En los modelos AMPL se incluye una plantilla `.dat` sugerida en el propio README del modelo; en el módulo de demanda se especifican plantillas CSV para Python y archivos de salida hacia TNEP/GEP.
-
-## Preparación de datos para modelos AMPL
-
-Las salidas de demanda deben organizarse en tablas que luego puedan convertirse en `.dat` para TNEP o GEP. La [Guía AMPL](../../docs/guia_ampl.md) incluye una ruta de construcción de archivos `.dat` desde Excel o CSV.
+| Exploración de demanda | limpieza, gráficos y consistencia de datos | [Abrir](modelos/01_exploracion_demanda.md) |
+| Regresión de demanda | relación con variables explicativas | [Abrir](modelos/02_regresion_demanda.md) |
+| Series temporales | tendencia, estacionalidad y pronóstico | [Abrir](modelos/03_series_tiempo.md) |
+| Escenarios y exportación | tablas para TNEP y GEP | [Abrir](modelos/04_escenarios_exportacion.md) |
 
 ## Actividad del módulo
 
-Revise [actividades/README.md](actividades/README.md) y desarrolle la actividad principal: **Actividad 04 — Proyección de demanda**.
+La actividad se desarrolla desde [actividades/README.md](actividades/README.md). El estudiante debe construir una proyección base, generar al menos dos escenarios, validar errores con datos históricos y exportar tablas compatibles con los módulos de expansión.
 
 ---
 

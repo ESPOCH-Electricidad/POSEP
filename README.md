@@ -2,21 +2,25 @@
 
 ![Banner del repositorio](docs/img/banner_operacion_planificacion_sep.svg)
 
-[Guía docente](docs/guia_docente.md) · [Ruta de aprendizaje](docs/ruta_aprendizaje.md) · [Guía AMPL](docs/guia_ampl.md) · [Evaluación](docs/evaluacion.md)
+[Guía docente](docs/guia_docente.md) · [Ruta de aprendizaje](docs/ruta_aprendizaje.md) · [Evaluación](docs/evaluacion.md) · [Guía AMPL](docs/guia_ampl.md)
 
 ## Presentación
 
-Este repositorio reúne material docente para estudiar la operación y planificación de sistemas eléctricos de potencia mediante modelos de optimización, análisis de datos y casos didácticos. La estructura está pensada como un curso navegable: cada módulo inicia con teoría, luego presenta ejemplos o modelos, datos de trabajo y actividades.
+Este repositorio reúne material docente para estudiar problemas de operación y planificación de sistemas eléctricos de potencia mediante formulación matemática, datos de trabajo y modelación computacional. La intención es que cada tema pueda trabajarse como una unidad de clase: primero se revisan los fundamentos, luego se estudian los modelos, se preparan los datos y finalmente se desarrolla una actividad evaluable.
+
+El curso parte de optimización matemática y avanza hacia aplicaciones eléctricas: despacho económico, compromiso de unidades, despacho hidrotérmico, flujo óptimo de potencia, proyección de demanda, expansión de transmisión y expansión de generación. Los datos incluidos en cada módulo están pensados para que el estudiante construya sus propios archivos de entrada y verifique sus resultados con criterios técnicos.
 
 ## Operación y planificación de sistemas eléctricos
 
-La operación se ocupa de decidir cómo usar los recursos disponibles en el corto plazo: generación, reserva, encendido de unidades, flujos de potencia, tensiones y congestión. La planificación estudia decisiones de largo plazo: crecimiento de demanda, expansión de transmisión, expansión de generación, suficiencia y confiabilidad.
+En operación se decide cómo utilizar los recursos existentes para atender la demanda en el corto plazo. Las decisiones típicas son la generación de cada unidad, el encendido o apagado de centrales, la asignación de reserva, el uso del agua en embalses, el flujo por líneas y la gestión de congestión.
+
+En planificación se decide cómo preparar el sistema para condiciones futuras. La demanda deja de ser un dato fijo y se convierte en una variable de estudio; a partir de ella se evalúan refuerzos de red, nuevas tecnologías de generación, suficiencia de capacidad, confiabilidad y costo de inversión.
 
 ![Operación y planificación](docs/img/operacion_vs_planificacion.svg)
 
 ## Horizonte temporal de las decisiones
 
-La asignatura conecta decisiones que ocurren en distintos horizontes. En la operación, la demanda suele tratarse como un dato conocido o pronosticado de corto plazo. En planificación, la demanda futura se convierte en un insumo central y debe construirse mediante proyecciones y escenarios.
+Las herramientas del curso se organizan según el horizonte de decisión. En horas o días se estudian problemas de operación. En meses y años se preparan datos de demanda, disponibilidad y escenarios. En horizontes multianuales se formulan problemas de expansión de transmisión y generación.
 
 ![Horizonte temporal](docs/img/horizonte_temporal_sep.svg)
 
@@ -35,40 +39,20 @@ La asignatura conecta decisiones que ocurren en distintos horizontes. En la oper
 
 ## Python y AMPL
 
-Python se utiliza para análisis de datos, proyección de demanda, construcción de escenarios y visualización. AMPL se utiliza para formular y resolver los modelos algebraicos construidos en las actividades. Para el trabajo práctico consulte la [Guía AMPL](docs/guia_ampl.md), donde se resume la construcción de archivos `.mod`, `.dat` y `.run`, el uso de ciclos `for`, sensibilidad con `repeat while`, lectura desde Excel y exportación de resultados.
+Python se utiliza para revisar datos, preparar tablas, estimar demanda, construir escenarios y generar figuras. AMPL se utiliza para escribir modelos algebraicos de optimización y resolverlos con un solver adecuado. En las actividades, el estudiante debe traducir la formulación matemática a archivos `.mod`, preparar sus datos en `.dat` o desde tablas CSV, y ejecutar el caso con un archivo `.run`.
 
 ![Flujo Python AMPL](docs/img/flujo_python_ampl.svg)
 
-## Casos integradores
+## Cómo trabajar cada módulo
 
-Los datos básicos de cada módulo se ubican dentro de la carpeta del módulo. Solo se mantienen como casos integradores aquellos que sirven a más de un tema:
-
-| Caso | Uso |
-|---|---|
-| [Garver 6 barras](casos_integradores/garver_6_barras/README.md) | TNEP y GEP |
-| [IEEE 24 RTS](casos_integradores/ieee_24_rts/README.md) | TNEP avanzado y planificación con mayor escala |
-
-## Cómo usar este repositorio
-
-1. Leer el README principal para ubicar el curso.
-2. Entrar al módulo correspondiente.
-3. Revisar la teoría antes del modelo.
-4. Abrir los ejemplos o modelos del módulo.
-5. Construir el archivo de datos a partir de las tablas suministradas.
-6. Implementar el modelo en AMPL cuando la actividad lo requiera.
-7. Resolver la actividad.
-8. Presentar resultados con tablas, figuras y análisis técnico.
+1. Leer el README del módulo para entender el problema técnico.
+2. Revisar los ejemplos o modelos asociados.
+3. Identificar conjuntos, índices, parámetros, variables, función objetivo y restricciones.
+4. Usar los datos suministrados para preparar el archivo de entrada.
+5. Implementar el modelo en AMPL o el flujo de análisis en Python, según corresponda.
+6. Validar que los resultados respeten unidades, balances, límites técnicos y sentido económico.
+7. Presentar resultados con tablas, figuras y una interpretación técnica.
 
 ## Licencia y citación
 
 Consulte [LICENSE.md](LICENSE.md), [CITATION.cff](CITATION.cff) y [CONTRIBUTING.md](CONTRIBUTING.md).
-
-
-## Trabajo práctico con AMPL
-
-Las formulaciones de los módulos se acompañan de datos completos para que el estudiante construya sus archivos de trabajo. La [Guía AMPL](docs/guia_ampl.md) resume la sintaxis necesaria para implementar conjuntos, parámetros, variables, restricciones, ciclos de ejecución, lectura de datos y exportación de resultados.
-
-
-## Auditoría v14
-
-La verificación de datos, objetivos y restricciones se documenta en [docs/AUDITORIA_V14.md](docs/AUDITORIA_V14.md).

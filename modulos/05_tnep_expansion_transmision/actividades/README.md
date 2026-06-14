@@ -1,19 +1,9 @@
-# Actividades — 05 — Expansión de transmisión
+# Actividades — Expansión de transmisión
 
-[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/) · [Guía AMPL](../../../docs/guia_ampl.md)
 
 ## Actividad principal
 
-Actividad 05 — Expansión de transmisión
+[Actividad 05 — Expansión de transmisión](actividad_05__expansion_de_transmision.md)
 
-## Entregables
-
-- Formulación o flujo de trabajo.
-- Datos.
-- Resultados tabulados.
-- Figura principal.
-- Análisis técnico.
-
-## Trabajo computacional
-
-Cuando la actividad requiera optimización algebraica, entregue `.mod`, `.dat` y `.run`. Consulte la [Guía AMPL](../../../docs/guia_ampl.md) para la construcción de esos archivos.
+La actividad pide construir un modelo de expansión usando datos de barras, corredores existentes y candidatos.

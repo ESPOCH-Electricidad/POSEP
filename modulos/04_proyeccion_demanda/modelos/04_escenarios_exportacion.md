@@ -89,7 +89,7 @@ $$
 
 **Explicación.** Representa crecimiento acelerado.
 
-## 9. Plantilla `.dat` sugerida
+## 9. Guía para construir el archivo `.dat`
 
 Este flujo no requiere archivo `.dat` de AMPL. La salida esperada es un archivo CSV que luego alimenta modelos de optimización.
 

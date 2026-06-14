@@ -1,28 +1,25 @@
 # Actividad 01C — Localización de antenas
 
-[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/)
+
+## Competencia
+
+Formular un problema entero mixto con variables binarias de selección y restricciones de cobertura.
 
 ## Trabajo solicitado
 
-1. Leer el ejemplo asociado.
-2. Formular conjuntos, parámetros, variables, objetivo y restricciones.
-3. Construir el archivo de datos.
-4. Resolver el caso.
-5. Presentar tabla de resultados y figura.
-6. Analizar al menos un cambio de sensibilidad.
+Use el caso de localización de antenas. Defina candidatos, zonas de demanda, matriz de cobertura y costo de instalación. El objetivo es seleccionar antenas de mínimo costo garantizando cobertura mínima de todas las zonas.
 
 ## Entregables
 
-- Formulación matemática.
-- Datos utilizados.
-- Resultado óptimo.
-- Figura principal.
-- Interpretación técnica.
+1. Formulación MILP completa.
+2. Archivo `.dat` con candidatos, zonas, costos y matriz de cobertura.
+3. Antenas seleccionadas y costo total.
+4. Zonas cubiertas por cada antena seleccionada.
+5. Sensibilidad: incremente el requisito de cobertura de una zona o bloquee un candidato.
 
-## Implementación solicitada
+## Validación mínima
 
-Construya los archivos `.mod`, `.dat` y `.run` para el caso asignado. El `.mod` debe declarar conjuntos, parámetros, variables, función objetivo y restricciones. El `.dat` debe escribirse a partir de las tablas del ejemplo. El `.run` debe cargar el modelo, cargar datos, resolver y mostrar las variables principales.
-
-## Validación
-
-Verifique factibilidad, restricciones activas, valor objetivo y coherencia de unidades. En problemas con variables binarias, confirme que las decisiones toman valores 0 o 1.
+- Todas las zonas deben cumplir cobertura.
+- Las variables de selección deben ser binarias.
+- La solución debe justificar por qué no se seleccionan alternativas más costosas si no son necesarias.

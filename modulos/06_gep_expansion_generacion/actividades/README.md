@@ -1,19 +1,9 @@
-# Actividades — 06 — Expansión de generación
+# Actividades — Expansión de generación
 
-[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/) · [Guía AMPL](../../../docs/guia_ampl.md)
 
 ## Actividad principal
 
-Actividad 06 — Expansión de generación
+[Actividad 06 — Expansión de generación](actividad_06__expansion_de_generacion.md)
 
-## Entregables
-
-- Formulación o flujo de trabajo.
-- Datos.
-- Resultados tabulados.
-- Figura principal.
-- Análisis técnico.
-
-## Trabajo computacional
-
-Cuando la actividad requiera optimización algebraica, entregue `.mod`, `.dat` y `.run`. Consulte la [Guía AMPL](../../../docs/guia_ampl.md) para la construcción de esos archivos.
+La actividad integra demanda futura, tecnologías candidatas, bloques de carga, reserva firme y costos de inversión.

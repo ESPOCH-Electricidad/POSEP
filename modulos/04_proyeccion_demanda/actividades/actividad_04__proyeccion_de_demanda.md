@@ -1,17 +1,31 @@
 # Actividad 04 — Proyección de demanda
 
-[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/)
 
-Desarrolle la actividad aplicando la teoría del módulo, usando los datos disponibles en la carpeta `datos/`.
+## Competencia
 
-## Producto esperado
+Analizar datos históricos de demanda, construir una proyección y generar escenarios utilizables en modelos de planificación.
 
-Informe breve con formulación, datos, resultados, figura principal e interpretación.
+## Trabajo solicitado
 
-## Implementación solicitada
+1. Revise la serie histórica de demanda.
+2. Calcule crecimiento, tendencia y errores de validación.
+3. Genere una proyección base y dos escenarios: bajo y alto.
+4. Prepare tablas de salida para TNEP y GEP.
+5. Presente figuras de demanda histórica, proyección y escenarios.
 
-Construya las tablas de demanda proyectada y prepare al menos un archivo de salida que pueda usarse como entrada para TNEP o GEP. Cuando el docente lo solicite, convierta esa tabla en un `.dat` siguiendo la estructura del modelo de expansión.
+## Entregables
 
-## Validación
+- Script o cuaderno de Python.
+- Tabla de datos limpios.
+- Tabla de proyección por año.
+- Tabla de escenarios.
+- Métricas MAE, RMSE y MAPE cuando exista validación.
+- Figura de escenarios.
+- Comentario sobre implicaciones para expansión.
 
-Reporte energía anual, demanda pico, tasa de crecimiento, error de ajuste y diferencias entre escenarios. Revise que las unidades sean consistentes antes de exportar.
+## Validación mínima
+
+- Las unidades deben distinguir energía y potencia pico.
+- Los escenarios deben conservar orden lógico: bajo ≤ base ≤ alto.
+- Las tablas exportadas deben ser compatibles con los módulos de TNEP y GEP.

@@ -1,17 +1,31 @@
 # Actividad 03 — Flujo óptimo de potencia
 
-[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/)
 
-Desarrolle la actividad aplicando la teoría del módulo, usando los datos disponibles en la carpeta `datos/`.
+## Competencia
 
-## Producto esperado
+Formular un OPF con balance nodal, flujo por líneas, límites térmicos y despacho económico con restricciones de red.
 
-Informe breve con formulación, datos, resultados, figura principal e interpretación.
+## Trabajo solicitado
 
-## Implementación solicitada
+1. Construya un OPF-DC con los datos de barras, líneas y generadores.
+2. Defina una barra de referencia angular.
+3. Resuelva el caso base.
+4. Identifique líneas congestionadas y compare el despacho contra un caso sin límites de transmisión.
+5. Explique cómo la red modifica el costo operativo.
 
-Construya los archivos `.mod`, `.dat` y `.run` para el OPF DC. El modelo debe incluir balance nodal, generación por barra, flujo por línea, límites térmicos y barra de referencia angular.
+## Entregables
 
-## Validación
+- Formulación matemática del OPF-DC.
+- Archivos `.mod`, `.dat` y `.run`.
+- Tabla de generación por unidad.
+- Flujos por línea y ángulos por barra.
+- Identificación de congestión.
+- Figura o tabla resumen de red.
 
-Compruebe balance por barra, flujo en cada línea, límites térmicos, costo total y posibles congestiones. Explique qué restricción condiciona el resultado.
+## Validación mínima
+
+- El balance nodal debe cumplirse en todas las barras.
+- Los flujos deben respetar límites.
+- La barra de referencia debe estar fijada.
+- El costo debe aumentar o mantenerse cuando se activan restricciones de red.

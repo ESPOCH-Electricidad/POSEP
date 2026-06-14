@@ -1,17 +1,32 @@
 # Actividad 05 — Expansión de transmisión
 
-[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/)
 
-Desarrolle la actividad aplicando la teoría del módulo, usando los datos disponibles en la carpeta `datos/`.
+## Competencia
 
-## Producto esperado
+Formular y resolver un problema de expansión de transmisión, interpretando inversión, congestión, energía no servida y efecto de la demanda futura.
 
-Informe breve con formulación, datos, resultados, figura principal e interpretación.
+## Trabajo solicitado
 
-## Implementación solicitada
+1. Construya un modelo de transporte o DC-TNEP con los datos del módulo.
+2. Identifique corredores existentes y candidatos.
+3. Resuelva el caso base.
+4. Repita el análisis con demanda incrementada.
+5. Compare circuitos construidos, costo total y energía no servida.
 
-Construya los archivos `.mod`, `.dat` y `.run` para el modelo de expansión de transmisión indicado. El `.dat` debe incluir barras, demanda, generación disponible, corredores existentes, candidatos, reactancias, límites y costos.
+## Entregables
 
-## Validación
+- Formulación matemática.
+- Archivos `.mod`, `.dat` y `.run`.
+- Tabla de líneas construidas.
+- Flujos por corredor.
+- Costo de inversión y ENS.
+- Figura de red o tabla de corredores.
+- Discusión del escenario de demanda alta.
 
-Reporte líneas construidas, inversión total, flujos por corredor, barras con déficit si se permite energía no servida y restricciones activas. Compare la solución con la topología inicial.
+## Validación mínima
+
+- El balance debe cumplirse en cada barra o zona.
+- Los flujos deben respetar capacidad existente y nueva.
+- No deben construirse más circuitos que el máximo permitido.
+- La expansión debe reducir congestión o ENS respecto al caso restringido.

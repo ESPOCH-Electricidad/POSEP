@@ -1,17 +1,30 @@
 # Actividad 02 — Operación de corto plazo
 
-[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/)
 
-Desarrolle la actividad aplicando la teoría del módulo, usando los datos disponibles en la carpeta `datos/`.
+## Competencia
 
-## Producto esperado
+Formular y resolver problemas de operación de corto plazo, interpretando costo marginal, límites técnicos, reserva, estado de unidades y uso de recursos hidráulicos.
 
-Informe breve con formulación, datos, resultados, figura principal e interpretación.
+## Trabajo solicitado
 
-## Implementación solicitada
+1. Formule y resuelva un despacho económico uninodal con los datos de generadores y demanda.
+2. Extienda el modelo a tramos de costo o a compromiso de unidades, según la indicación del docente.
+3. Compare el resultado con un escenario de demanda alta o combustible caro.
+4. Presente una tabla de generación, costo total, unidad marginal y reserva disponible.
 
-Construya los archivos `.mod`, `.dat` y `.run` para el modelo de operación indicado por el docente. Incluya balance de potencia, límites técnicos y, cuando corresponda, reserva, rampas, mínimos técnicos, encendido, apagado o balance de embalse.
+## Entregables
 
-## Validación
+- Formulación matemática.
+- Archivos `.mod`, `.dat` y `.run` construidos por el estudiante.
+- Tabla de despacho por periodo.
+- Costo total y costo marginal.
+- Figura de orden de mérito o cronograma de unidades.
+- Discusión de sensibilidad.
 
-Reporte balance horario, generación por unidad, costo total, límites activos y unidad marginal. En UC, reporte estados de encendido y arranques. En hidrotérmico, reporte volumen, turbinamiento, vertimiento y energía no servida si aplica.
+## Validación mínima
+
+- El balance de potencia debe cumplirse en cada periodo.
+- La generación debe respetar mínimos y máximos.
+- Si se usa UC, la generación debe ser coherente con el estado binario.
+- La reserva debe cumplir el margen solicitado.

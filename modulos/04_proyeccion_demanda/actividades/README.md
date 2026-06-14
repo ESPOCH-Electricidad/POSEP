@@ -1,19 +1,9 @@
-# Actividades — 04 — Proyección de demanda eléctrica
+# Actividades — Proyección de demanda eléctrica
 
-[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/)
 
 ## Actividad principal
 
-Actividad 04 — Proyección de demanda
+[Actividad 04 — Proyección de demanda](actividad_04__proyeccion_de_demanda.md)
 
-## Entregables
-
-- Formulación o flujo de trabajo.
-- Datos.
-- Resultados tabulados.
-- Figura principal.
-- Análisis técnico.
-
-## Trabajo computacional
-
-Cuando la actividad requiera optimización algebraica, entregue `.mod`, `.dat` y `.run`. Consulte la [Guía AMPL](../../../docs/guia_ampl.md) para la construcción de esos archivos.
+La actividad produce insumos para expansión de transmisión y generación.

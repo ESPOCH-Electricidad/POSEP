@@ -1,19 +1,9 @@
-# Actividades — 02 — Operación de corto plazo
+# Actividades — Operación de corto plazo
 
-[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/) · [Guía AMPL](../../../docs/guia_ampl.md)
 
 ## Actividad principal
 
-Actividad 02 — Operación de corto plazo
+[Actividad 02 — Operación de corto plazo](actividad_02__operacion_de_corto_plazo.md)
 
-## Entregables
-
-- Formulación o flujo de trabajo.
-- Datos.
-- Resultados tabulados.
-- Figura principal.
-- Análisis técnico.
-
-## Trabajo computacional
-
-Cuando la actividad requiera optimización algebraica, entregue `.mod`, `.dat` y `.run`. Consulte la [Guía AMPL](../../../docs/guia_ampl.md) para la construcción de esos archivos.
+La actividad integra despacho económico, reserva, compromiso de unidades e interpretación de costo marginal. El estudiante debe construir los archivos de trabajo a partir de los datos del módulo.

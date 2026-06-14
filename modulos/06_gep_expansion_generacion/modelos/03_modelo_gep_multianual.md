@@ -138,7 +138,9 @@ $$
 
 **Explicación.** La demanda proviene del módulo de proyección de demanda.
 
-## 9. Plantilla `.dat` sugerida
+## 9. Guía para construir el archivo `.dat`
+
+A partir de las tablas anteriores, prepare el archivo de datos respetando los nombres de conjuntos, parámetros y unidades del modelo. La siguiente estructura muestra cómo debe organizarse la información.
 
 ```ampl
 set K := gas solar eolica;

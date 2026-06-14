@@ -1,90 +1,85 @@
 # 05 — Expansión de transmisión
 
-[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
+[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/) · [Guía AMPL](../../docs/guia_ampl.md)
 
-## Introducción conceptual
+## Propósito del módulo
 
-La expansión de transmisión decide qué líneas o refuerzos construir para transportar energía desde generación hacia demanda futura, minimizando inversión, operación y energía no servida.
+La expansión de transmisión decide qué líneas, circuitos o refuerzos construir para transportar energía desde los puntos de generación hacia los centros de demanda. La decisión debe equilibrar inversión, congestión, energía no servida y seguridad operativa. En planificación, la red futura debe ser capaz de atender escenarios de demanda y generación que aún no se han materializado.
 
-## Fundamentos del tema
+El TNEP puede formularse con distinto nivel de detalle. El modelo de transporte representa capacidad de transferencia sin ángulos. El modelo DC incorpora leyes aproximadas de flujo activo. Las formulaciones disyuntivas permiten activar líneas candidatas mediante variables binarias. La versión multietapa decide no solo qué construir, sino cuándo hacerlo.
 
-El módulo compara formulaciones de expansión: transporte, constructivo, DC, híbrido, lineal disyuntivo y multietapa. La demanda proyectada del módulo 04 alimenta estos modelos.
+## Modelos de red para expansión
 
-## Figuras técnicas principales
+En un modelo de transporte, el flujo por un corredor se limita por la capacidad total existente y nueva:
+
+$$
+-\overline{F}_\ell(n_\ell^0+n_\ell)\leq F_\ell\leq \overline{F}_\ell(n_\ell^0+n_\ell).
+$$
+
+El costo de inversión se calcula como:
+
+$$
+C^{inv}=\sum_{\ell}c_\ell n_\ell,
+$$
+
+donde $n_\ell$ representa el número de circuitos nuevos en el corredor $\ell$.
+
+En el modelo DC, los flujos se vinculan con ángulos:
+
+$$
+F_\ell = B_\ell(n_\ell^0+n_\ell)(\theta_i-\theta_j).
+$$
+
+Cuando una línea candidata puede existir o no existir, se usa una variable binaria $y_\ell$ y una constante de activación:
+
+$$
+-My_\ell\leq F_\ell\leq My_\ell.
+$$
+
+En expansión multietapa, la capacidad instalada se acumula:
+
+$$
+N_{\ell,t}=N_{\ell,t-1}+n_{\ell,t}.
+$$
+
+Esta ecuación evita reconstruir el mismo proyecto varias veces y permite diferir inversiones si no son necesarias en los primeros años.
+
+## Demanda, ENS y confiabilidad
+
+El balance nodal o zonal debe atender la demanda proyectada. La energía no servida puede incluirse como variable de penalización para evitar infactibilidad y medir la severidad de restricciones de red. Si el costo de ENS es demasiado bajo, el modelo puede preferir racionar demanda en lugar de construir; si es demasiado alto, forzará inversión para evitar déficit. Por eso la selección de VOLL debe discutirse técnicamente.
+
+## Lectura técnica de las figuras
 
 ![Red existente y candidatos](figuras/01_red_existente_candidatos.svg)
 
-Elementos de un problema TNEP
+La figura separa infraestructura existente y alternativas candidatas. Esta distinción define qué flujos son obligatorios, qué capacidades ya están disponibles y qué decisiones son de inversión.
 
 ![Transporte vs DC](figuras/02_transporte_vs_dc.svg)
 
-Diferencia entre modelos de red
+El modelo de transporte es útil para una primera aproximación, pero no captura el reparto físico del flujo. El modelo DC introduce ángulos y permite estudiar congestión de forma más realista.
 
 ![Big-M disyuntivo](figuras/03_big_m_disyuntivo.svg)
 
-Activación de líneas candidatas
+La constante $M$ activa o desactiva restricciones asociadas a candidatos. Su valor debe ser suficientemente grande para no cortar soluciones factibles y suficientemente moderado para evitar problemas numéricos.
 
 ![Expansión multietapa](figuras/04_expansion_multietapa.svg)
 
-Cuándo construir también importa
+En planificación temporal, construir antes puede reducir congestión, pero aumenta costo presente. Construir después puede ahorrar inversión, pero puede aumentar ENS o congestión en años intermedios.
 
-## Ecuaciones base
+## Modelos del módulo
 
-### Costo de inversión
-
-$$
-C^{inv}=\sum_{\ell}c_\ell n_\ell
-$$
-
-Costo de circuitos nuevos.
-
-### Capacidad
-
-$$
--\overline{F}_\ell(n_\ell^0+n_\ell)\leq F_\ell\leq \overline{F}_\ell(n_\ell^0+n_\ell)
-$$
-
-Límite con circuitos existentes y nuevos.
-
-### Activación
-
-$$
--My_\ell\leq F_\ell\leq My_\ell
-$$
-
-Flujo solo si la línea se construye.
-
-### Multietapa
-
-$$
-N_{\ell,t}=N_{\ell,t-1}+n_{\ell,t}
-$$
-
-Acumulación temporal.
-
-## Ejemplos o modelos del módulo
-
-| Recurso | Qué aporta | Acceso |
+| Recurso | Concepto principal | Acceso |
 |---|---|---|
-| Modelo de transporte | formulación inicial | [Abrir](modelos/01_modelo_transporte_expansion_transmision.md) |
-| Modelo constructivo | refuerzo iterativo | [Abrir](modelos/02_modelo_constructivo_refuerzo_red.md) |
-| Modelo DC | flujos con ángulos | [Abrir](modelos/03_modelo_dc_expansion_transmision.md) |
-| Modelo híbrido | fidelidad parcial | [Abrir](modelos/04_modelo_hibrido_expansion_transmision.md) |
-| Modelo lineal disyuntivo | candidatos binarios | [Abrir](modelos/05_modelo_lineal_disyuntivo_expansion_transmision.md) |
-| Modelo multietapa | planificación temporal | [Abrir](modelos/06_modelo_multietapa_expansion_transmision.md) |
-
-
-## Capa de datos de la v14
-
-Las páginas de ejemplos/modelos del módulo incluyen datos suficientes para construir archivos de datos de trabajo. En los modelos AMPL se incluye una plantilla `.dat` sugerida en el propio README del modelo; en el módulo de demanda se especifican plantillas CSV para Python y archivos de salida hacia TNEP/GEP.
-
-## Implementación en AMPL
-
-Los modelos de expansión de transmisión requieren declarar barras, corredores existentes, corredores candidatos, límites, costos y variables de construcción. Use la [Guía AMPL](../../docs/guia_ampl.md) para conjuntos de pares, restricciones indexadas y corridas de escenarios.
+| Modelo de transporte | capacidad de corredores sin ángulos | [Abrir](modelos/01_modelo_transporte_expansion_transmision.md) |
+| Modelo constructivo | refuerzo progresivo de red | [Abrir](modelos/02_modelo_constructivo_refuerzo_red.md) |
+| Modelo DC | expansión con ángulos y flujos físicos | [Abrir](modelos/03_modelo_dc_expansion_transmision.md) |
+| Modelo híbrido | aproximación intermedia para red | [Abrir](modelos/04_modelo_hibrido_expansion_transmision.md) |
+| Modelo lineal disyuntivo | activación binaria de candidatos | [Abrir](modelos/05_modelo_lineal_disyuntivo_expansion_transmision.md) |
+| Modelo multietapa | momento de construcción | [Abrir](modelos/06_modelo_multietapa_expansion_transmision.md) |
 
 ## Actividad del módulo
 
-Revise [actividades/README.md](actividades/README.md) y desarrolle la actividad principal: **Actividad 05 — Expansión de transmisión**.
+La actividad se desarrolla desde [actividades/README.md](actividades/README.md). El estudiante debe formular un problema TNEP, preparar datos de barras y corredores, resolver el caso base, identificar refuerzos seleccionados y comparar el resultado con un escenario de demanda mayor.
 
 ---
 

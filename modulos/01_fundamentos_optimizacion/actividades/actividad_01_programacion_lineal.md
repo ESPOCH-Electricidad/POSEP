@@ -1,28 +1,25 @@
 # Actividad 01A — Programación lineal
 
-[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/)
+
+## Competencia
+
+Formular un problema de programación lineal a partir de un enunciado con recursos limitados, construir los datos del caso y verificar la solución óptima mediante restricciones activas y sensibilidad.
 
 ## Trabajo solicitado
 
-1. Leer el ejemplo asociado.
-2. Formular conjuntos, parámetros, variables, objetivo y restricciones.
-3. Construir el archivo de datos.
-4. Resolver el caso.
-5. Presentar tabla de resultados y figura.
-6. Analizar al menos un cambio de sensibilidad.
+Use el ejemplo de fábrica de pintura o producción de acero. Identifique productos, recursos, disponibilidad y utilidad/costo unitario. Luego construya su propio archivo `.mod`, su archivo `.dat` y un archivo `.run` para resolver el caso.
 
 ## Entregables
 
-- Formulación matemática.
-- Datos utilizados.
-- Resultado óptimo.
-- Figura principal.
-- Interpretación técnica.
+1. Formulación matemática completa.
+2. Tabla de datos usada para el archivo `.dat`.
+3. Resultado óptimo con variables de decisión y valor objetivo.
+4. Identificación de restricciones activas y holguras.
+5. Sensibilidad: modifique la disponibilidad de un recurso en ±10% y explique el cambio.
 
-## Implementación solicitada
+## Validación mínima
 
-Construya los archivos `.mod`, `.dat` y `.run` para el caso asignado. El `.mod` debe declarar conjuntos, parámetros, variables, función objetivo y restricciones. El `.dat` debe escribirse a partir de las tablas del ejemplo. El `.run` debe cargar el modelo, cargar datos, resolver y mostrar las variables principales.
-
-## Validación
-
-Verifique factibilidad, restricciones activas, valor objetivo y coherencia de unidades. En problemas con variables binarias, confirme que las decisiones toman valores 0 o 1.
+- Ninguna variable debe violar su dominio.
+- El uso de recursos no debe exceder disponibilidad.
+- El resultado debe interpretarse en unidades del problema.
