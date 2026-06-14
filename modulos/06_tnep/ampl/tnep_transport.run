@@ -1,0 +1,6 @@
+reset;
+model tnep_transport.mod;
+data tnep_transport.dat;
+option solver highs;
+solve;
+display solve_result, TotalCost, y, f, Pg, LS;

@@ -1,0 +1,19 @@
+# Lectura directa desde Excel con amplxl.
+# Requiere que el manejador amplxl esté disponible en la instalación de AMPL.
+
+reset;
+load amplxl.dll;
+model pintura.mod;
+
+table Productos IN "amplxl" "../datos/pintura_ampl.xlsx" "Productos":
+    P <- [producto], price, rate, market;
+
+table Parametros IN "amplxl" "../datos/pintura_ampl.xlsx" "Parametros":
+    [] Hours;
+
+read table Productos;
+read table Parametros;
+
+option solver highs;
+solve;
+display x, Revenue;

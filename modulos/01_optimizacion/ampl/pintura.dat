@@ -1,0 +1,17 @@
+set P := interior exterior;
+set R := mano_obra pigmento solvente;
+
+param beneficio :=
+interior  42
+exterior  50;
+
+param recurso_disp :=
+mano_obra  120
+pigmento    80
+solvente    60;
+
+param consumo:
+             interior exterior :=
+mano_obra        2        3
+pigmento         2        1
+solvente         1        2;

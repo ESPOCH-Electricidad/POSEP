@@ -1,0 +1,12 @@
+# Exportación simple a CSV para el ejemplo pintura.
+# Puede ejecutarse de forma independiente.
+
+reset;
+model pintura.mod;
+data pintura.dat;
+option solver highs;
+solve;
+
+printf "producto,produccion\n" > "resultados_pintura.csv";
+printf {p in P} "%s,%g\n", p, x[p] >> "resultados_pintura.csv";
+printf "TOTAL,%g\n", Revenue >> "resultados_pintura.csv";

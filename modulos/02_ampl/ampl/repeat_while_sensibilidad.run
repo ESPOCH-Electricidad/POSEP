@@ -1,0 +1,18 @@
+reset;
+model pintura.mod;
+data pintura.dat;
+option solver highs;
+
+param k integer default 0;
+param factor default 0.80;
+param Hours_original := Hours;
+
+printf "factor,hours,revenue\n" > "sensibilidad_repeat_while.csv";
+
+repeat while k <= 8 {
+    let Hours := Hours_original * factor;
+    solve;
+    printf "%g,%g,%g\n", factor, Hours, Revenue >> "sensibilidad_repeat_while.csv";
+    let factor := factor + 0.05;
+    let k := k + 1;
+}

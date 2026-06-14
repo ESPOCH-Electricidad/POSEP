@@ -1,0 +1,23 @@
+set G := G1 G2 G3;
+set T := h1 h2 h3 h4;
+
+param demand :=
+h1 180
+h2 260
+h3 310
+h4 220;
+
+param reserve :=
+h1 20
+h2 25
+h3 30
+h4 20;
+
+param Pmin := G1 50 G2 40 G3 0;
+param Pmax := G1 180 G2 150 G3 100;
+param cvar := G1 28 G2 36 G3 70;
+param cstart := G1 1000 G2 700 G3 200;
+param RU := G1 90 G2 80 G3 100;
+param RD := G1 90 G2 80 G3 100;
+param u0 := G1 1 G2 0 G3 0;
+param P0 := G1 100 G2 0 G3 0;

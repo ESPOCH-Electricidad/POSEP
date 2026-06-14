@@ -1,0 +1,16 @@
+reset;
+model pintura.mod;
+data pintura.dat;
+option solver highs;
+
+set SCEN := base alto bajo;
+param factor {SCEN} := base 1.00 alto 1.10 bajo 0.90;
+param Hours_original := Hours;
+
+printf "scenario,hours,revenue\n" > "resultados_for_escenarios.csv";
+
+for {s in SCEN} {
+    let Hours := Hours_original * factor[s];
+    solve;
+    printf "%s,%g,%g\n", s, Hours, Revenue >> "resultados_for_escenarios.csv";
+}

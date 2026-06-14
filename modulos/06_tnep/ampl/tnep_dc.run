@@ -1,0 +1,6 @@
+reset;
+model tnep_dc.mod;
+data tnep_dc.dat;
+option solver highs;
+solve;
+display solve_result, TotalCost, y, f, theta, Pg, LS;

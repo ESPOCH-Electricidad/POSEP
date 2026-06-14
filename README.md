@@ -1,73 +1,73 @@
 # Planificación y Operación de Sistemas Eléctricos de Potencia
 
-![Banner del repositorio](docs/img/banner_operacion_planificacion_sep.svg)
+![Portada académica](assets/img/portada_academica_v15.png)
 
-[Guía docente](docs/guia_docente.md) · [Ruta de aprendizaje](docs/ruta_aprendizaje.md) · [Evaluación](docs/evaluacion.md)
+Este repositorio reúne material docente, modelos algebraicos, datos de prueba y scripts de apoyo para estudiar problemas de optimización aplicados a la operación y planificación de sistemas eléctricos de potencia. La secuencia inicia con la formulación matemática de problemas de optimización, continúa con la implementación en AMPL y avanza hacia aplicaciones eléctricas: despacho económico, flujo óptimo de potencia, proyección de demanda, expansión de transmisión y expansión de generación.
 
-## Presentación
+El repositorio está pensado para que el estudiante pueda recorrer el curso directamente desde los archivos `README.md`: primero lee la teoría, luego revisa la formulación matemática, identifica los datos requeridos y finalmente ejecuta los modelos o scripts correspondientes.
 
-Este repositorio reúne material docente para estudiar la operación y planificación de sistemas eléctricos de potencia mediante modelos de optimización, análisis de datos y casos didácticos. La estructura está pensada como un curso navegable: cada módulo inicia con teoría, luego presenta ejemplos o modelos, datos de trabajo y actividades.
+## Mapa general del curso
 
-## Operación y planificación de sistemas eléctricos
+![Mapa general del curso](assets/img/mapa_general_curso.png)
 
-La operación se ocupa de decidir cómo usar los recursos disponibles en el corto plazo: generación, reserva, encendido de unidades, flujos de potencia, tensiones y congestión. La planificación estudia decisiones de largo plazo: crecimiento de demanda, expansión de transmisión, expansión de generación, suficiencia y confiabilidad.
+La lógica del curso es progresiva. Primero se estudia cómo convertir una decisión técnica en un modelo matemático. Luego se implementa ese modelo en AMPL. Después se incorporan restricciones propias de los sistemas eléctricos: balance de potencia, límites de generación, restricciones de red, reserva, indisponibilidad, hidrología, demanda futura y decisiones de inversión.
 
-![Operación y planificación](docs/img/operacion_vs_planificacion.svg)
+## Horizonte temporal de los problemas eléctricos
 
-## Horizonte temporal de las decisiones
+![Horizonte temporal de SEP](assets/img/horizonte_temporal_sep.png)
 
-La asignatura conecta decisiones que ocurren en distintos horizontes. En la operación, la demanda suele tratarse como un dato conocido o pronosticado de corto plazo. En planificación, la demanda futura se convierte en un insumo central y debe construirse mediante proyecciones y escenarios.
+El horizonte temporal permite ubicar cada problema en su escala natural. La operación de corto plazo trabaja con horas o días: despacho económico, unit commitment y flujo óptimo de potencia. La planificación trabaja con meses, años o décadas: proyección de demanda, expansión de transmisión y expansión de generación. Esta separación evita mezclar decisiones operativas con decisiones de inversión, aunque ambas se conectan mediante restricciones técnicas y señales económicas.
 
-![Horizonte temporal](docs/img/horizonte_temporal_sep.svg)
+## Operación y planificación
 
-## Ruta del curso
+![Operación vs planificación](assets/img/operacion_vs_planificacion.png)
 
-![Mapa general del curso](docs/img/mapa_general_curso.svg)
+En operación, la infraestructura se considera dada y se decide cómo utilizarla. En planificación, se decide qué infraestructura construir, cuándo construirla y bajo qué escenarios de demanda, disponibilidad de recursos, costos y confiabilidad. La operación responde a la pregunta “¿cómo uso el sistema existente?”, mientras que la planificación responde “¿qué sistema necesito para atender condiciones futuras?”.
+
+## Flujo de trabajo computacional
+
+![Flujo Python AMPL](assets/img/flujo_python_ampl.png)
+
+El flujo de trabajo recomendado es: preparar datos en hojas de cálculo o archivos CSV, validar y transformar datos con Python, resolver los modelos de optimización en AMPL y analizar resultados nuevamente con Python. Esta separación reproduce una práctica habitual en estudios eléctricos: los datos se documentan, el modelo algebraico se mantiene independiente y los resultados se procesan de forma reproducible.
+
+## Navegación del repositorio
 
 | Módulo | Tema | Enlace |
-|---:|---|---|
-| 01 | Fundamentos de optimización | [Abrir](modulos/01_fundamentos_optimizacion/README.md) |
-| 02 | Operación de corto plazo | [Abrir](modulos/02_operacion_corto_plazo/README.md) |
-| 03 | Flujo óptimo de potencia | [Abrir](modulos/03_opf_flujo_optimo_potencia/README.md) |
-| 04 | Proyección de demanda eléctrica | [Abrir](modulos/04_proyeccion_demanda/README.md) |
-| 05 | Expansión de transmisión | [Abrir](modulos/05_tnep_expansion_transmision/README.md) |
-| 06 | Expansión de generación | [Abrir](modulos/06_gep_expansion_generacion/README.md) |
+|---|---|---|
+| 01 | Fundamentos de optimización | [Abrir](modulos/01_optimizacion/README.md) |
+| 02 | AMPL para modelos eléctricos | [Abrir](modulos/02_ampl/README.md) |
+| 03 | Despacho económico y operación de corto plazo | [Abrir](modulos/03_despacho_economico/README.md) |
+| 04 | Flujo óptimo de potencia | [Abrir](modulos/04_opf/README.md) |
+| 05 | Proyección de demanda | [Abrir](modulos/05_demanda/README.md) |
+| 06 | Expansión de transmisión | [Abrir](modulos/06_tnep/README.md) |
+| 07 | Expansión de generación | [Abrir](modulos/07_gep/README.md) |
 
-## Python y AMPL
+## Organización de cada módulo
 
-Python se utiliza para análisis de datos, proyección de demanda, construcción de escenarios y visualización. AMPL se utiliza para formular y resolver modelos de optimización de operación y planificación.
+Cada módulo mantiene una estructura compacta:
 
-![Flujo Python AMPL](docs/img/flujo_python_ampl.svg)
+```text
+README.md   teoría, formulación, navegación y actividad del tema
+ampl/       modelos, datos AMPL y archivos de ejecución, cuando aplica
+datos/      archivos CSV o XLSX usados como entrada
+python/     scripts auxiliares de lectura, conversión, validación o gráficos, cuando aplica
+figuras/    figuras técnicas usadas en el README del módulo
+```
 
-## Casos integradores
+La teoría se encuentra directamente en el `README.md` de cada módulo. No se usan carpetas separadas de teoría, guías, actividades o plantillas, para que el recorrido sea directo y navegable.
 
-Los datos básicos de cada módulo se ubican dentro de la carpeta del módulo. Solo se mantienen como casos integradores aquellos que sirven a más de un tema:
+## Ruta sugerida de trabajo
 
-| Caso | Uso |
-|---|---|
-| [Garver 6 barras](casos_integradores/garver_6_barras/README.md) | TNEP y GEP |
-| [IEEE 24 RTS](casos_integradores/ieee_24_rts/README.md) | TNEP avanzado y planificación con mayor escala |
+1. Abrir el `README.md` principal para ubicar el curso y el horizonte temporal.
+2. Avanzar por los módulos en orden.
+3. En cada módulo, leer primero la teoría y la formulación.
+4. Revisar los datos de entrada antes de ejecutar cualquier modelo.
+5. Ejecutar los archivos `.run` desde la carpeta `ampl/` del módulo correspondiente.
+6. Usar los scripts de Python para preparar datos, exportar archivos `.dat` o graficar resultados.
 
-## Cómo usar este repositorio
+## Requisitos mínimos
 
-1. Leer el README principal para ubicar el curso.
-2. Entrar al módulo correspondiente.
-3. Revisar la teoría antes del modelo.
-4. Abrir los ejemplos o modelos del módulo.
-5. Usar los datos del módulo.
-6. Resolver la actividad.
-7. Presentar resultados con tablas, figuras y análisis técnico.
-
-## Licencia y citación
-
-Consulte [LICENSE.md](LICENSE.md), [CITATION.cff](CITATION.cff) y [CONTRIBUTING.md](CONTRIBUTING.md).
-
-
-## Nota de versión v14
-
-Esta versión incorpora datos completos por modelo, explicación de funciones objetivo, explicación de restricciones y plantillas `.dat` sugeridas para que el estudiante pueda construir sus propios archivos de datos en AMPL a partir de la información suministrada.
-
-
-## Auditoría v14
-
-La verificación de datos, objetivos y restricciones se documenta en [docs/AUDITORIA_V14.md](docs/AUDITORIA_V14.md).
+- AMPL con un solver LP/MILP compatible, por ejemplo HiGHS, CBC, CPLEX o Gurobi.
+- Python 3.10 o superior para los scripts auxiliares.
+- Paquetes usuales de Python: `pandas`, `numpy` y `matplotlib`.
+- Editor de texto o entorno de desarrollo para revisar archivos `.mod`, `.dat`, `.run`, `.py` y `.md`.

@@ -1,0 +1,13 @@
+reset;
+model dispatch.mod;
+data dispatch.dat;
+option solver highs;
+solve;
+
+display solve_result, TotalCost, Pg, LS;
+
+printf "generator,period,power\n" > "dispatch_pg.csv";
+printf {g in G, t in T} "%s,%s,%g\n", g, t, Pg[g,t] >> "dispatch_pg.csv";
+
+printf "period,load_shedding\n" > "dispatch_ls.csv";
+printf {t in T} "%s,%g\n", t, LS[t] >> "dispatch_ls.csv";
