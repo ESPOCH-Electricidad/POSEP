@@ -79,7 +79,7 @@ $$
 
 **Explicación.** Permite calcular MAE, RMSE y MAPE.
 
-## 9. Guía para construir el archivo `.dat`
+## 9. Plantilla `.dat` sugerida
 
 Este flujo no requiere archivo `.dat` de AMPL. La salida esperada es un archivo CSV que luego alimenta modelos de optimización.
 

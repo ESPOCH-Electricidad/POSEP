@@ -1,16 +1,18 @@
 # 01 — Fundamentos de optimización
 
-[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/) · [Guía AMPL](../../docs/guia_ampl.md)
+[Menú principal](../../README.md) · [Ejemplos](ejemplos/README.md) · [Actividades](actividades/README.md) · [Datos](datos/) · [Guía AMPL](../../docs/guia_ampl.md)
 
 ## Propósito del módulo
 
-La optimización matemática permite transformar una decisión técnica en un problema resoluble. En sistemas eléctricos esta idea aparece en decisiones de despacho, transporte de energía, ubicación de equipos, selección de inversiones y operación de recursos limitados. Antes de escribir código, el estudiante debe aprender a reconocer qué se decide, qué se conoce, qué se optimiza y qué restricciones no pueden violarse.
+La optimización matemática permite transformar una decisión técnica en un problema resoluble. En sistemas eléctricos esta habilidad es central: antes de despachar generadores, calcular flujos o decidir inversiones, se debe reconocer qué variables se controlan, qué restricciones no pueden violarse y qué criterio define una solución preferible.
 
-Un modelo no inicia con el solver; inicia con el enunciado. A partir del enunciado se identifican variables de decisión, parámetros, función objetivo, restricciones y dominio de las variables. Esta separación evita confundir datos con decisiones y permite revisar si el resultado tiene sentido físico o económico.
+El módulo no inicia con redes eléctricas porque primero es necesario dominar la estructura común de los modelos: variables, función objetivo, restricciones, dominio de decisión, factibilidad, optimalidad y sensibilidad.
 
-## De la decisión al modelo
+![Proceso de modelado matemático](figuras/01_proceso_modelado_matematico.svg)
 
-Un problema general puede escribirse como:
+## De una decisión a una formulación
+
+Un problema de optimización se escribe, en forma general, como:
 
 $$
 \min_x f(x)
@@ -19,71 +21,79 @@ $$
 sujeto a:
 
 $$
-g_i(x)\leq 0,\qquad h_j(x)=0,\qquad x\in\mathcal{X}.
+g_i(x) \leq 0, \qquad h_j(x)=0, \qquad x \in X
 $$
 
-El vector $x$ contiene las decisiones. La función $f(x)$ representa el criterio de comparación entre alternativas: costo, beneficio, pérdidas, energía no servida o una combinación de estos términos. Las restricciones $g_i(x)$ y $h_j(x)$ representan límites de recursos, balances, condiciones técnicas o reglas de operación. El conjunto $\mathcal{X}$ define el dominio de las variables: continuas, enteras, binarias, no negativas o acotadas.
+La variable $x$ representa la decisión; $f(x)$ mide el desempeño; las restricciones $g_i$ y $h_j$ definen las condiciones técnicas, económicas o físicas; y $X$ establece si las variables son continuas, enteras, binarias o no negativas.
 
-En programación lineal, la función objetivo y las restricciones son lineales. En estos problemas, si existe una solución óptima finita, al menos una solución óptima se encuentra en un vértice de la región factible. Esta propiedad permite interpretar gráficamente casos pequeños y entender por qué las restricciones activas determinan la solución.
+En una formulación bien construida, cada ecuación debe responder a una pregunta: qué se decide, cuánto cuesta o beneficia, qué recurso limita, qué balance debe cumplirse y qué condiciones hacen aceptable la solución.
 
-$$
-\min c^Tx \qquad \text{sujeto a}\qquad Ax\leq b,\; x\geq 0.
-$$
+## Programación lineal
 
-La forma matricial es importante porque los lenguajes algebraicos, como AMPL, escriben modelos con índices, pero el solver recibe una estructura matricial. Por eso la consistencia de dimensiones entre conjuntos, parámetros y variables es tan importante como la ecuación matemática.
-
-## Dualidad, sensibilidad y dominio de variables
-
-El multiplicador dual de una restricción mide cómo cambia el valor óptimo cuando se modifica el lado derecho de esa restricción. En problemas eléctricos esta interpretación reaparece como valor marginal de capacidad, recurso, demanda o congestión. Una restricción activa limita la solución; una restricción con holgura no modifica el óptimo localmente.
-
-Para problemas diferenciables con restricciones, el Lagrangiano se define como:
+La programación lineal aparece cuando la función objetivo y las restricciones son lineales:
 
 $$
-\mathcal{L}(x,\lambda,\mu)=f(x)+\sum_i\lambda_i g_i(x)+\sum_j\mu_jh_j(x).
+\max \; c^T x
 $$
 
-Las condiciones KKT combinan factibilidad, estacionariedad, dualidad y complementariedad:
-
 $$
-\lambda_i g_i(x^*)=0.
+Ax \leq b, \qquad x \geq 0
 $$
 
-La programación entera mixta aparece cuando parte de las decisiones son discretas. Una variable binaria permite modelar decisiones de selección, construcción, encendido o activación:
-
-$$
-y\in\{0,1\},\qquad x\leq My.
-$$
-
-El parámetro $M$ debe escogerse con cuidado: un valor demasiado pequeño elimina soluciones factibles y uno demasiado grande puede deteriorar la solución numérica.
-
-## Lectura técnica de las figuras
-
-![Proceso de modelado](figuras/01_proceso_modelado_matematico.svg)
-
-El proceso de modelado empieza en el problema real, pasa por la definición algebraica y termina en la interpretación del resultado. La figura debe usarse para verificar que ninguna etapa se omita: datos, variables, restricciones, solución y lectura técnica.
+La región factible es el conjunto de soluciones que cumplen todas las restricciones. Si el problema tiene solución óptima finita, esta ocurre en un vértice de la región factible. Por eso los ejemplos de producción, mezcla y transporte son importantes: permiten ver cómo una restricción de capacidad, demanda o mercado puede volverse activa y determinar la solución.
 
 ![Región factible](figuras/02_region_factible.svg)
 
-La región factible muestra las combinaciones de decisión que cumplen todas las restricciones. En un problema lineal de dos variables, el óptimo se ubica en un vértice; en modelos eléctricos reales, esta idea se conserva aunque la dimensión sea mucho mayor.
+## Dualidad y sensibilidad
 
-![Tipos de programación](figuras/06_tipos_programacion.svg)
+Una restricción activa tiene valor económico porque limita la mejora de la función objetivo. En programación lineal, ese valor se interpreta mediante variables duales o precios sombra. Si una hora adicional de trabajo permite producir más, su valor marginal se mide por cuánto mejora el objetivo al relajar esa restricción.
 
-La clasificación LP, MILP, QP, NLP y MINLP no es solo formal. Define el tipo de solver, el nivel de dificultad y la forma de validar optimalidad. Un despacho lineal, un unit commitment y un OPF-AC no tienen la misma estructura matemática.
+Esta idea reaparece en sistemas eléctricos: una línea congestionada, una reserva limitada o una capacidad máxima de generación pueden tener precio sombra. Por eso la sensibilidad no es un complemento estadístico, sino una herramienta para interpretar qué restricciones gobiernan el resultado.
+
+![Dualidad y sensibilidad](figuras/08_dualidad_sensibilidad.svg)
+
+## Programación entera mixta
+
+Algunas decisiones no son continuas. Construir una línea, encender una unidad o instalar una antena son decisiones sí/no. Se representan mediante variables binarias:
+
+$$
+y_i \in \{0,1\}
+$$
+
+Una relación típica entre una decisión binaria y una variable continua es:
+
+$$
+x_i \leq M y_i
+$$
+
+Si $y_i=0$, la variable continua queda desactivada. Si $y_i=1$, puede tomar un valor hasta $M$. El valor de $M$ debe elegirse con cuidado: si es demasiado pequeño, elimina soluciones válidas; si es excesivo, debilita el modelo.
+
+## No linealidad y convexidad
+
+Los problemas cuadráticos y no lineales aparecen cuando el costo depende de la potencia al cuadrado, cuando se modelan pérdidas o cuando se representa flujo AC. En problemas convexos, un óptimo local también es global; en problemas no convexos, la solución puede depender del punto inicial y de la estrategia de solución.
+
+![Convexidad y no convexidad](figuras/05_convexidad_no_convexidad.svg)
+
+Las condiciones KKT permiten interpretar optimalidad con restricciones. No se usan solo como resultado matemático: explican equilibrio entre gradiente de la función objetivo, restricciones activas y multiplicadores.
+
+![Condiciones KKT](figuras/07_kkt.svg)
 
 ## Ejemplos del módulo
 
-| Recurso | Concepto principal | Acceso |
+| Ejemplo | Decisión principal | Acceso |
 |---|---|---|
-| Fábrica de pintura | programación lineal, recursos y utilidad | [Abrir](ejemplos/01_fabrica_pintura.md) |
-| Producción de acero | mezcla de productos y restricciones de capacidad | [Abrir](ejemplos/02_produccion_acero.md) |
-| Transporte de energía | flujos entre fuentes y cargas | [Abrir](ejemplos/03_transporte_energia.md) |
-| Localización de antenas | decisión binaria y cobertura mínima | [Abrir](ejemplos/04_localizacion_antenas.md) |
-| Forma matricial | relación entre formulación algebraica y solver | [Abrir](ejemplos/05_forma_matricial.md) |
+| Fábrica de pintura | Producción óptima bajo tiempo y mercado | [Abrir](ejemplos/01_fabrica_pintura.md) |
+| Producción de acero | Uso de capacidad semanal | [Abrir](ejemplos/02_produccion_acero.md) |
+| Transporte de energía | Asignación de oferta a demanda | [Abrir](ejemplos/03_transporte_energia.md) |
+| Localización de antenas | Selección binaria de ubicaciones | [Abrir](ejemplos/04_localizacion_antenas.md) |
+| Forma matricial | Relación entre modelo algebraico y matriz | [Abrir](ejemplos/05_forma_matricial.md) |
 
-## Actividad del módulo
+## Actividades
 
-Desarrolle las actividades del módulo desde [actividades/README.md](actividades/README.md). En cada caso, entregue la formulación, el archivo de datos construido desde las tablas, el archivo de ejecución, resultados y una validación de factibilidad.
+Las actividades del módulo exigen construir la formulación y luego implementarla. No basta con obtener un número: se debe explicar qué restricción es activa, qué recurso limita la solución y cómo cambiaría el resultado si se modifica un dato.
+
+[Ir a actividades](actividades/README.md)
 
 ---
 
-[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
+[Menú principal](../../README.md) · [Ejemplos](ejemplos/README.md) · [Actividades](actividades/README.md) · [Datos](datos/)

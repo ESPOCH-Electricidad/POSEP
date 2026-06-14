@@ -82,9 +82,7 @@ $$
 
 **Explicación.** No se permiten cantidades negativas de producción.
 
-## 9. Guía para construir el archivo `.dat`
-
-A partir de las tablas anteriores, prepare el archivo de datos respetando los nombres de conjuntos, parámetros y unidades del modelo. La siguiente estructura muestra cómo debe organizarse la información.
+## 9. Plantilla `.dat` sugerida
 
 ```ampl
 set P := azul negra;

@@ -1,76 +1,78 @@
 # 04 — Proyección de demanda eléctrica
 
-[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
+[Menú principal](../../README.md) · [Modelos](modelos/README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
 
 ## Propósito del módulo
 
-En los módulos de operación, la demanda se utiliza como parámetro conocido. En planificación, en cambio, la demanda futura debe estimarse antes de decidir expansión de red o generación. Una mala proyección puede llevar a subinversión, sobreinversión o conclusiones equivocadas sobre confiabilidad.
+La demanda es el insumo que conecta la operación con la planificación. Un modelo de expansión no decide correctamente si la demanda futura está mal construida. Por eso no basta con extrapolar una serie: se debe distinguir energía anual, demanda pico, perfil horario, estacionalidad, crecimiento económico, escenarios e incertidumbre.
 
-La demanda eléctrica debe estudiarse separando energía y potencia pico. La energía anual o mensual se relaciona con consumo acumulado, costos variables y generación esperada. La potencia pico condiciona capacidad instalada, reserva y dimensionamiento de red. Por eso los modelos de TNEP y GEP requieren insumos distintos: demanda por barra, demanda máxima, bloques de carga, energía anual y escenarios.
+## Energía y demanda pico
 
-## Datos, tendencia y validación
-
-Una serie de demanda puede contener tendencia, estacionalidad, cambios estructurales y valores atípicos. Antes de ajustar un modelo, se debe revisar la calidad de los datos: unidades, años faltantes, saltos no explicados, coherencia entre energía y pico, y correspondencia con variables explicativas como población, actividad económica o electrificación.
-
-Las métricas de error permiten comparar alternativas de proyección. El error absoluto medio se calcula como:
+La energía anual mide consumo acumulado; la demanda pico dimensiona capacidad, red y reserva. Dos sistemas pueden tener la misma energía anual y demandas pico diferentes si sus perfiles horarios son distintos. El factor de carga resume esta relación:
 
 $$
-MAE=\frac{1}{n}\sum_{t=1}^{n}|D_t-\hat{D}_t|.
+LF=\frac{E}{D^{max}\,8760}
 $$
 
-El RMSE penaliza con más fuerza los errores grandes:
+![Energía y pico](figuras/01_energia_vs_pico.svg)
+
+Un factor de carga bajo indica que la infraestructura se dimensiona para pocas horas críticas. En planificación, eso puede justificar tecnologías de punta, almacenamiento, gestión de demanda o refuerzos de red.
+
+## Tendencia, estacionalidad y variables explicativas
+
+La demanda eléctrica responde a crecimiento poblacional, actividad económica, clima, eficiencia, electrificación y cambios tarifarios. Una proyección útil debe separar tendencia de variaciones transitorias. Una forma simple es:
 
 $$
-RMSE=\sqrt{\frac{1}{n}\sum_{t=1}^{n}(D_t-\hat{D}_t)^2}.
+D_y = \alpha + \beta_1 Pop_y + \beta_2 GDP_y + \varepsilon_y
 $$
 
-El MAPE expresa el error relativo en porcentaje:
+También puede usarse crecimiento compuesto:
 
 $$
-MAPE=\frac{100}{n}\sum_{t=1}^{n}\left|\frac{D_t-\hat{D}_t}{D_t}\right|.
+D_y = D_0(1+g)^{y-y_0}
 $$
-
-Una proyección no debe reportarse como una única curva cuando existe incertidumbre relevante. Una forma simple de construir escenarios es aplicar una desviación sobre el caso medio:
-
-$$
-D_y^{alto}=D_y^{medio}(1+\Delta_y),\qquad D_y^{bajo}=D_y^{medio}(1-\Delta_y).
-$$
-
-## Salidas hacia planificación
-
-La salida del módulo no es solo una figura de demanda. Debe producir tablas utilizables por los modelos posteriores. Para TNEP se requiere demanda por barra o por zona. Para GEP se requieren demanda pico, energía y bloques representativos. La curva de duración de carga permite transformar perfiles horarios en bloques de operación con duración asociada.
-
-## Lectura técnica de las figuras
-
-![Energía vs demanda pico](figuras/01_energia_vs_pico.svg)
-
-La energía y el pico responden a preguntas diferentes. Dos sistemas con la misma energía anual pueden tener requerimientos de capacidad distintos si sus picos son diferentes.
 
 ![Tendencia y estacionalidad](figuras/02_tendencia_estacionalidad.svg)
 
-La tendencia explica crecimiento de largo plazo; la estacionalidad explica patrones repetitivos. Separarlas ayuda a construir escenarios razonables.
+## Métricas de validación
 
-![Validación de modelos](figuras/03_metricas_validacion.svg)
+La calidad de una proyección se evalúa comparando valores estimados y observados. Las métricas más usadas son:
 
-La validación compara proyecciones contra datos observados. Una métrica aislada no basta: conviene revisar error medio, error en pico, sesgo y comportamiento en años recientes.
+$$
+MAE=\frac{1}{n}\sum_t |D_t-\hat{D}_t|
+$$
+
+$$
+RMSE=\sqrt{\frac{1}{n}\sum_t(D_t-\hat{D}_t)^2}
+$$
+
+$$
+MAPE=\frac{100}{n}\sum_t \left|\frac{D_t-\hat{D}_t}{D_t}\right|
+$$
+
+![Métricas de validación](figuras/03_metricas_validacion.svg)
+
+## Escenarios para planificación
+
+El resultado de demanda debe entregarse como escenario bajo, medio y alto, porque TNEP y GEP necesitan evaluar sensibilidad de inversión. La demanda media puede ser coherente con tendencia histórica; la alta puede representar electrificación acelerada o crecimiento económico mayor; la baja puede representar eficiencia energética o menor actividad.
 
 ![Escenarios de demanda](figuras/04_escenarios_demanda.svg)
 
-Los escenarios permiten evaluar robustez. En expansión, una solución que solo funciona para el promedio puede fallar bajo crecimiento alto.
-
 ## Modelos del módulo
 
-| Recurso | Concepto principal | Acceso |
+| Recurso | Uso | Acceso |
 |---|---|---|
-| Exploración de demanda | limpieza, gráficos y consistencia de datos | [Abrir](modelos/01_exploracion_demanda.md) |
-| Regresión de demanda | relación con variables explicativas | [Abrir](modelos/02_regresion_demanda.md) |
-| Series temporales | tendencia, estacionalidad y pronóstico | [Abrir](modelos/03_series_tiempo.md) |
-| Escenarios y exportación | tablas para TNEP y GEP | [Abrir](modelos/04_escenarios_exportacion.md) |
+| Exploración de demanda | Energía, pico, factor de carga | [Abrir](modelos/01_exploracion_demanda.md) |
+| Regresión | Proyección con variables explicativas | [Abrir](modelos/02_regresion_demanda.md) |
+| Series de tiempo | Tendencia histórica y predicción | [Abrir](modelos/03_series_tiempo.md) |
+| Escenarios y exportación | Preparación para TNEP y GEP | [Abrir](modelos/04_escenarios_exportacion.md) |
 
-## Actividad del módulo
+## Actividad
 
-La actividad se desarrolla desde [actividades/README.md](actividades/README.md). El estudiante debe construir una proyección base, generar al menos dos escenarios, validar errores con datos históricos y exportar tablas compatibles con los módulos de expansión.
+La actividad exige construir una proyección con datos históricos, justificar escenarios y generar archivos de salida para los módulos de expansión.
+
+[Ir a la actividad](actividades/actividad_04__proyeccion_de_demanda.md)
 
 ---
 
-[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
+[Menú principal](../../README.md) · [Modelos](modelos/README.md) · [Actividades](actividades/README.md) · [Datos](datos/)

@@ -1,31 +1,66 @@
-# Actividad 04 — Proyección de demanda
+# Actividad 04 — Proyección de demanda eléctrica
 
 [Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/)
 
 ## Competencia
 
-Analizar datos históricos de demanda, construir una proyección y generar escenarios utilizables en modelos de planificación.
+Construir una proyección de demanda eléctrica diferenciando energía anual, demanda pico, variables explicativas, validación histórica y escenarios de planificación.
 
-## Trabajo solicitado
+## Enunciado
 
-1. Revise la serie histórica de demanda.
-2. Calcule crecimiento, tendencia y errores de validación.
-3. Genere una proyección base y dos escenarios: bajo y alto.
-4. Prepare tablas de salida para TNEP y GEP.
-5. Presente figuras de demanda histórica, proyección y escenarios.
+A partir de datos históricos de energía, demanda pico, población y PIB, construya una proyección para los años 2025, 2030 y 2035. La salida debe alimentar modelos de expansión de transmisión y generación.
 
-## Entregables
+## Datos
 
-- Script o cuaderno de Python.
-- Tabla de datos limpios.
-- Tabla de proyección por año.
-- Tabla de escenarios.
-- Métricas MAE, RMSE y MAPE cuando exista validación.
-- Figura de escenarios.
-- Comentario sobre implicaciones para expansión.
+Use:
 
-## Validación mínima
+- `demanda_historica_completa.csv` para exploración y regresión.
+- `demanda_series_tiempo.csv` para tendencia.
+- `variables_socioeconomicas.csv` para variables explicativas.
+- `plantilla_demanda_proyectada.csv` como formato de salida.
 
-- Las unidades deben distinguir energía y potencia pico.
-- Los escenarios deben conservar orden lógico: bajo ≤ base ≤ alto.
-- Las tablas exportadas deben ser compatibles con los módulos de TNEP y GEP.
+## Tareas
+
+1. Grafique energía anual y demanda pico 2018-2024.
+2. Calcule factor de carga anual:
+
+$$
+LF_y=\frac{E_y}{P_y^{peak}8760}
+$$
+
+3. Ajuste una proyección de energía y pico usando al menos dos enfoques:
+   - crecimiento compuesto;
+   - regresión con población y PIB o tendencia temporal.
+4. Evalúe el ajuste histórico con MAE, RMSE y MAPE.
+5. Construya tres escenarios: bajo, medio y alto.
+6. Exporte dos archivos:
+   - `demanda_tnep.csv`: año, escenario, pico MW;
+   - `demanda_gep.csv`: año, escenario, energía GWh, pico MW.
+7. Explique qué escenario usaría para una planificación conservadora y por qué.
+
+## Validación
+
+- La energía proyectada debe ser coherente con la trayectoria histórica.
+- El pico debe crecer de forma compatible con energía y factor de carga.
+- Los escenarios no deben cruzarse: bajo ≤ medio ≤ alto.
+- Las unidades deben permanecer en GWh y MW según corresponda.
+
+## Producto esperado
+
+| Producto | Contenido |
+|---|---|
+| Script o libro de cálculo | Procesamiento, proyección, métricas y exportación. |
+| Tablas | Histórico, métricas, escenarios. |
+| Figuras | Energía/pico histórico, proyección por escenario, factor de carga. |
+| Archivos de salida | `demanda_tnep.csv` y `demanda_gep.csv`. |
+| Informe | Supuestos, método, validación y lectura para planificación. |
+
+## Evaluación
+
+| Criterio | Peso |
+|---|---:|
+| Tratamiento correcto de energía y pico | 25 % |
+| Construcción de escenarios | 25 % |
+| Validación con métricas | 20 % |
+| Exportación útil para TNEP/GEP | 20 % |
+| Claridad de interpretación | 10 % |

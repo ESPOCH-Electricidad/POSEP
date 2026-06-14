@@ -1,98 +1,124 @@
 # 02 — Operación de corto plazo
 
-[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/) · [Guía AMPL](../../docs/guia_ampl.md)
+[Menú principal](../../README.md) · [Modelos](modelos/README.md) · [Actividades](actividades/README.md) · [Datos](datos/) · [Guía AMPL](../../docs/guia_ampl.md)
 
 ## Propósito del módulo
 
-La operación de corto plazo determina cómo atender la demanda con los recursos disponibles en horizontes de una hora, un día o una semana. En este nivel la red puede simplificarse o incorporarse parcialmente, pero la decisión principal es operativa: cuánto genera cada unidad, qué unidades se mantienen encendidas, cuánto margen de reserva se conserva y cómo se usa el agua disponible.
+La operación de corto plazo decide cómo utilizar los recursos disponibles para atender la demanda hora a hora. En este horizonte, la capacidad instalada ya existe y la pregunta central es cuánto debe generar cada unidad, qué unidades deben estar encendidas y cómo se usa el agua almacenada sin comprometer periodos futuros.
 
-El despacho económico es la primera formulación porque muestra la relación entre costo variable, demanda y unidad marginal. A partir de ese modelo se agregan tramos de costo, pérdidas, mínimos técnicos, arranques, rampas, reserva y acoplamiento temporal. El estudiante debe distinguir entre un despacho puramente continuo y un problema con decisiones binarias de encendido.
+La demanda se trata como dato operativo. Las decisiones se organizan alrededor de costos variables, límites de generación, reservas, rampas, mínimos técnicos, arranques y balances de energía.
 
-## Costos y despacho económico
+![Demanda y reserva](figuras/01_curva_demanda_reserva.svg)
 
-Para una unidad térmica, el costo variable puede construirse desde la tasa de calor y el precio del combustible:
+## Costo variable y costo marginal
 
-$$
-c_g^{fuel}=HR_g\,p_g^{fuel}.
-$$
-
-Si se incluyen operación y mantenimiento variable, y eventualmente emisiones, el costo marginal aproximado de una unidad puede escribirse como:
+En despacho económico, el costo relevante de corto plazo es el costo variable. Para una unidad térmica puede expresarse como:
 
 $$
-c_g^{var}=c_g^{fuel}+c_g^{VOM}+EF_g p^{CO_2}.
+c_g^{var}=HR_g p_g^{fuel}+c_g^{VOM}+EF_g p^{CO_2}
 $$
 
-El despacho económico lineal minimiza el costo de producción:
+El término $HR_g p_g^{fuel}$ convierte combustible en costo por MWh eléctrico; $c_g^{VOM}$ representa operación y mantenimiento variable; y $EF_g p^{CO_2}$ internaliza el costo de emisiones si existe una señal de carbono.
 
-$$
-\min \sum_{g,t} c_g P_{g,t}
-$$
-
-sujeto al balance de potencia:
-
-$$
-\sum_g P_{g,t}+ENS_t=D_t,
-$$
-
-y a límites de generación:
-
-$$
-\underline{P}_g\leq P_{g,t}\leq \overline{P}_g.
-$$
-
-El término $ENS_t$ representa energía no servida. Se permite solo cuando se penaliza con un costo suficientemente alto, como el VOLL, para evitar infactibilidad artificial y medir el costo de no atender demanda.
-
-## Compromiso de unidades y acoplamiento temporal
-
-Cuando se modelan unidades térmicas con mínimos técnicos, arranques y apagados, se requiere una variable binaria $u_{g,t}$:
-
-$$
-\underline{P}_g u_{g,t}\leq P_{g,t}\leq \overline{P}_g u_{g,t}.
-$$
-
-Esta restricción vincula el estado de la unidad con su generación. Si $u_{g,t}=0$, la unidad no genera; si $u_{g,t}=1$, debe respetar su mínimo técnico y su máximo. Las rampas agregan acoplamiento entre periodos y limitan cambios bruscos de generación.
-
-En sistemas hidroeléctricos, la operación no se decide solo por el costo térmico inmediato. Usar agua hoy reduce disponibilidad futura. El balance de embalse puede escribirse como:
-
-$$
-V_{h,t}=V_{h,t-1}+A_{h,t}-Q_{h,t}-S_{h,t},
-$$
-
-donde $V$ es volumen almacenado, $A$ afluencia, $Q$ caudal turbinado y $S$ vertimiento. Esta ecuación convierte el despacho hidrotérmico en un problema intertemporal.
-
-## Lectura técnica de las figuras
-
-![Curva de demanda y reserva](figuras/01_curva_demanda_reserva.svg)
-
-La reserva se evalúa comparando demanda y capacidad disponible. En operación, no basta con cubrir la demanda esperada; debe existir margen para contingencias, errores de pronóstico y variaciones rápidas.
+Si los costos son lineales, el despacho se ordena por mérito: primero generan las unidades de menor costo variable hasta cubrir la demanda. La unidad que atiende el último MW define el costo marginal del sistema en un modelo uninodal sin congestión.
 
 ![Orden de mérito y costo marginal](figuras/02_orden_merito_costo_marginal.svg)
 
-El orden de mérito permite interpretar la solución de un despacho lineal. Las unidades de menor costo variable entran primero y la última unidad necesaria define el costo marginal si no existen restricciones adicionales.
+## Despacho económico lineal
+
+La formulación básica es:
+
+$$
+\min \sum_{g \in G} c_g P_g
+$$
+
+sujeto a:
+
+$$
+\sum_{g \in G} P_g = D
+$$
+
+$$
+P_g^{min} \leq P_g \leq P_g^{max} \qquad \forall g \in G
+$$
+
+El balance asegura que la generación cubra la demanda. Los límites de generación representan restricciones técnicas de cada unidad. La solución debe revisarse comprobando que la suma de generación coincide con la demanda y que ninguna unidad opera fuera de rango.
+
+## Costos por tramos y costos cuadráticos
+
+Muchas unidades no se representan correctamente con un costo variable único. Una aproximación lineal por tramos permite dividir la producción de una unidad en bloques con costos crecientes. Si se usa una función cuadrática:
+
+$$
+C_g(P_g)=a_g+b_gP_g+c_gP_g^2
+$$
+
+su costo marginal es:
+
+$$
+MC_g(P_g)=b_g+2c_gP_g
+$$
+
+Esta relación conecta la operación eléctrica con la teoría de optimización no lineal y ayuda a interpretar por qué el despacho incremental iguala costos marginales bajo ciertas condiciones.
+
+## Compromiso de unidades
+
+El despacho económico asume que las unidades están disponibles. El unit commitment añade la decisión de encender o apagar cada unidad:
+
+$$
+u_{g,t}\in\{0,1\}
+$$
+
+$$
+P_g^{min}u_{g,t}\leq P_{g,t}\leq P_g^{max}u_{g,t}
+$$
+
+También deben considerarse costos de arranque, rampas y reserva:
+
+$$
+P_{g,t}-P_{g,t-1}\leq RU_g
+$$
+
+$$
+\sum_g \left(P_g^{max}u_{g,t}-P_{g,t}\right) \geq R_t
+$$
 
 ![Compromiso de unidades](figuras/03_unit_commitment_timeline.svg)
 
-El compromiso de unidades transforma el problema en MILP. La figura muestra que la decisión no es solo cuánto generar, sino también cuándo encender y mantener disponible una unidad.
+## Despacho hidrotérmico
+
+En un sistema hidrotérmico, el agua tiene costo de oportunidad. Usarla ahora puede reducir generación térmica presente, pero también puede disminuir flexibilidad futura. El balance de embalse se expresa como:
+
+$$
+S_{t+1}=S_t+I_t-Q_t-Sp_t
+$$
+
+La generación hidroeléctrica puede aproximarse mediante:
+
+$$
+P_{h,t}=\rho_h Q_{h,t}
+$$
+
+Donde $S_t$ es almacenamiento, $I_t$ afluencia, $Q_t$ caudal turbinado, $Sp_t$ vertimiento y $\rho_h$ coeficiente de producción.
 
 ![Balance de embalse](figuras/04_balance_embalse.svg)
 
-El embalse introduce memoria temporal. La decisión de turbinar en un periodo afecta la factibilidad y el costo de los periodos siguientes.
-
 ## Modelos del módulo
 
-| Recurso | Concepto principal | Acceso |
+| Modelo | Decisión que representa | Acceso |
 |---|---|---|
-| Despacho económico uninodal | costo marginal y orden de mérito | [Abrir](modelos/01_despacho_economico_uninodal.md) |
-| Despacho económico por tramos | costos lineales por segmentos | [Abrir](modelos/02_despacho_economico_por_tramos.md) |
-| Despacho con pérdidas | pérdidas como puente hacia OPF | [Abrir](modelos/03_despacho_con_perdidas.md) |
-| Compromiso de unidades | mínimos técnicos, arranques y binarios | [Abrir](modelos/04_compromiso_unidades_termicas.md) |
-| Despacho hidrotérmico simple | balance de embalse y térmicas | [Abrir](modelos/05_despacho_hidrotermico_simple.md) |
-| Operación de cascada hidroeléctrica | embalses conectados aguas arriba y abajo | [Abrir](modelos/06_operacion_cascada_hidroelectrica.md) |
+| Despacho económico uninodal | Generación por unidad en una hora | [Abrir](modelos/01_despacho_economico_uninodal.md) |
+| Despacho por tramos | Producción por segmentos de costo | [Abrir](modelos/02_despacho_economico_por_tramos.md) |
+| Despacho con pérdidas | Generación considerando pérdidas técnicas | [Abrir](modelos/03_despacho_con_perdidas.md) |
+| Compromiso de unidades | Encendido, apagado, reserva y rampas | [Abrir](modelos/04_compromiso_unidades_termicas.md) |
+| Hidrotérmico simple | Uso de agua y generación térmica | [Abrir](modelos/05_despacho_hidrotermico_simple.md) |
+| Cascada hidroeléctrica | Relación aguas arriba y aguas abajo | [Abrir](modelos/06_operacion_cascada_hidroelectrica.md) |
 
-## Actividad del módulo
+## Actividad
 
-La actividad principal se desarrolla desde [actividades/README.md](actividades/README.md). El estudiante debe construir su formulación, preparar datos, resolver al menos un caso base y comparar un escenario de sensibilidad: demanda alta, combustible caro, reserva mayor o menor disponibilidad hídrica.
+La actividad del módulo integra despacho económico, unit commitment e hidrotérmico. El estudiante debe construir archivos `.mod`, `.dat` y `.run`, resolver escenarios y justificar la solución con criterios técnicos.
+
+[Ir a la actividad](actividades/actividad_02__operacion_de_corto_plazo.md)
 
 ---
 
-[Menú principal](../../README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
+[Menú principal](../../README.md) · [Modelos](modelos/README.md) · [Actividades](actividades/README.md) · [Datos](datos/)

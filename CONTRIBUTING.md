@@ -1,5 +1,12 @@
 # Contribución
 
-Este repositorio está orientado a docencia universitaria en sistemas eléctricos de potencia. Las contribuciones deben conservar claridad conceptual, formulaciones verificables, datos trazables, figuras técnicas y navegación simple.
+Este repositorio está orientado a docencia universitaria. Las contribuciones deben mantener:
 
-No se deben agregar archivos de salida, soluciones completas de estudiantes, carpetas duplicadas ni material que sustituya la construcción del modelo por parte del estudiante. Cuando se añadan datos, deben incluir unidades, nombres consistentes y una relación clara con el enunciado correspondiente.
+- claridad conceptual;
+- formulaciones matemáticas verificables;
+- datos didácticos trazables;
+- figuras técnicas que expliquen una ecuación, una restricción o una decisión;
+- navegación simple entre módulos;
+- actividades con productos evaluables.
+
+No se deben agregar archivos de salida, soluciones completas de estudiantes, archivos temporales ni carpetas duplicadas por formulación.

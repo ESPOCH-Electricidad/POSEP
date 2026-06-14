@@ -2,8 +2,22 @@
 
 [Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/) · [Guía AMPL](../../../docs/guia_ampl.md)
 
-## Actividad principal
+La actividad principal se desarrolla a partir de los datos del módulo y exige construir archivos propios de trabajo. El resultado debe demostrar que el estudiante entiende la formulación, no solo que obtuvo una salida numérica.
 
-[Actividad 02 — Operación de corto plazo](actividad_02__operacion_de_corto_plazo.md)
+| Actividad | Producto central | Enlace |
+|---|---|---|
+| Actividad del módulo | Formulación, implementación, validación y análisis | [Abrir](actividad_02__operacion_de_corto_plazo.md) |
 
-La actividad integra despacho económico, reserva, compromiso de unidades e interpretación de costo marginal. El estudiante debe construir los archivos de trabajo a partir de los datos del módulo.
+## Entrega mínima
+
+```text
+actividad/
+  modelo.mod o script.py
+  caso.dat o datos_procesados.csv
+  ejecutar.run, notebook o libro de cálculo
+  resultados.csv
+  figuras/
+  informe.md o informe.pdf
+```
+
+El informe debe incluir enunciado resumido, formulación, datos usados, resultados, validación y sensibilidad.

@@ -4,11 +4,11 @@
 
 | Paso | Tema | Resultado esperado |
 |---:|---|---|
-| 01 | Fundamentos de optimización | formular variables, función objetivo, restricciones y dominios |
-| 02 | Operación de corto plazo | resolver despacho económico, compromiso de unidades e hidrotérmico |
-| 03 | Flujo óptimo de potencia | incorporar red, ángulos, tensiones, límites y congestión |
-| 04 | Proyección de demanda | construir escenarios de demanda futura y tablas para expansión |
-| 05 | Expansión de transmisión | decidir refuerzos de red con modelos de transporte, DC y multietapa |
-| 06 | Expansión de generación | decidir tecnologías, capacidad y operación representativa en el horizonte de planificación |
+| 01 | Optimización | Formular variables, objetivo, restricciones, región factible y decisiones binarias. |
+| 02 | Operación de corto plazo | Construir modelos de despacho, compromiso de unidades y operación hidrotérmica simple. |
+| 03 | OPF | Incorporar balance nodal, flujos, límites de transmisión y congestión. |
+| 04 | Demanda | Proyectar energía y pico, construir escenarios y preparar datos para expansión. |
+| 05 | TNEP | Formular expansión de transmisión con corredores candidatos y restricciones de red. |
+| 06 | GEP | Formular expansión de generación con bloques de carga, reserva firme y capacidad acumulada. |
 
-La ruta está pensada para que el estudiante pase de formular modelos pequeños a construir modelos eléctricos con datos completos.
+La ruta está ordenada para que AMPL no se aprenda como sintaxis aislada. Primero se identifica el modelo; después se transforma en archivos reproducibles.

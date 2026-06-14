@@ -2,8 +2,22 @@
 
 [Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Datos](../datos/) · [Guía AMPL](../../../docs/guia_ampl.md)
 
-## Actividad principal
+La actividad principal se desarrolla a partir de los datos del módulo y exige construir archivos propios de trabajo. El resultado debe demostrar que el estudiante entiende la formulación, no solo que obtuvo una salida numérica.
 
-[Actividad 03 — Flujo óptimo de potencia](actividad_03__flujo_optimo_de_potencia.md)
+| Actividad | Producto central | Enlace |
+|---|---|---|
+| Actividad del módulo | Formulación, implementación, validación y análisis | [Abrir](actividad_03__flujo_optimo_de_potencia.md) |
 
-La actividad se centra en formular un OPF-DC, resolverlo con datos de red y analizar congestión.
+## Entrega mínima
+
+```text
+actividad/
+  modelo.mod o script.py
+  caso.dat o datos_procesados.csv
+  ejecutar.run, notebook o libro de cálculo
+  resultados.csv
+  figuras/
+  informe.md o informe.pdf
+```
+
+El informe debe incluir enunciado resumido, formulación, datos usados, resultados, validación y sensibilidad.

@@ -4,21 +4,21 @@
 
 ## Entregables por actividad
 
-- Enunciado resumido y supuestos usados.
-- Formulación matemática: conjuntos, parámetros, variables, función objetivo y restricciones.
-- Archivo de datos construido a partir de las tablas del módulo.
-- Resultados tabulados.
-- Figura principal.
-- Validación técnica.
-- Comentario de sensibilidad o escenario.
-
-## Criterios
-
-| Criterio | Descripción |
+| Entregable | Contenido mínimo |
 |---|---|
-| Formulación | El modelo representa correctamente el problema físico o económico. |
-| Datos | Las unidades, índices y valores coinciden con el enunciado. |
-| Implementación | El archivo de trabajo reproduce la formulación sin errores de dimensión. |
-| Resultados | Las salidas cumplen balances, límites y dominios de variables. |
-| Interpretación | El análisis explica el resultado y no se limita a reportar números. |
-| Reproducibilidad | Los archivos se entregan ordenados y pueden ejecutarse nuevamente. |
+| Formulación matemática | Conjuntos, índices, parámetros, variables, función objetivo y restricciones. |
+| Archivo de datos | Datos ordenados con unidades, sin valores ambiguos y con nombres consistentes. |
+| Implementación | Archivo `.mod` y `.run` en módulos de optimización; script o libro de cálculo en demanda. |
+| Resultados | Tablas de decisión, costos, generación, flujos, inversión o demanda, según el módulo. |
+| Validación | Revisión de balances, límites, unidades, variables activas y coherencia económica. |
+| Análisis | Interpretación técnica de resultados y sensibilidad principal. |
+
+## Rúbrica sugerida
+
+| Criterio | Peso |
+|---|---:|
+| Formulación correcta y completa | 30 % |
+| Datos consistentes y reproducibles | 20 % |
+| Implementación y ejecución | 20 % |
+| Validación técnica | 15 % |
+| Interpretación, tablas y figuras | 15 % |

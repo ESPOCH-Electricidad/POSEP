@@ -2,68 +2,99 @@
 
 [Menú principal](../README.md)
 
-AMPL se utiliza para escribir la formulación algebraica de los modelos. En este curso no basta con ejecutar un archivo: el estudiante debe pasar del enunciado a los conjuntos, parámetros, variables, función objetivo y restricciones.
-
-## Estructura de trabajo
-
-Para cada actividad de optimización se recomienda preparar tres archivos:
+AMPL se utilizará como lenguaje algebraico para convertir una formulación matemática en un modelo computacional. En las actividades se construyen tres archivos coherentes:
 
 ```text
-nombre_modelo.mod   formulación algebraica
-nombre_modelo.dat   datos del caso
-nombre_modelo.run   comandos de ejecución
+modelo.mod   estructura algebraica: conjuntos, parámetros, variables, objetivo y restricciones
+caso.dat     datos del caso: conjuntos, tablas, escalares y parámetros indexados
+ejecutar.run comandos de ejecución: cargar, resolver y reportar
 ```
 
-El archivo `.mod` no debe contener datos numéricos del caso; esos datos deben estar en el `.dat` o ser leídos desde tablas externas. Esta separación permite reutilizar el mismo modelo con otros escenarios.
+## Del modelo matemático al archivo `.mod`
 
-## Elementos básicos
+Un archivo `.mod` debe declarar primero los conjuntos, después los parámetros, luego las variables y finalmente la función objetivo y restricciones. La estructura mínima es:
 
 ```ampl
 set G;
-param Pmax {G} >= 0;
-param cvar {G} >= 0;
-var Pg {G} >= 0;
+set T;
+
+param demand {T} >= 0;
+param pmax {G} >= 0;
+param cost {G} >= 0;
+
+var Pg {G,T} >= 0;
+
+minimize TotalCost:
+    sum {g in G, t in T} cost[g] * Pg[g,t];
+
+subject to Balance {t in T}:
+    sum {g in G} Pg[g,t] = demand[t];
 ```
 
-`set` declara conjuntos, `param` declara datos conocidos y `var` declara decisiones. Una restricción indexada se escribe una vez y AMPL la expande para todos los elementos del conjunto.
+La sintaxis AMPL debe conservar la lógica de la formulación. Si una restricción se escribe para todo generador y todo periodo, en AMPL debe indexarse como `{g in G, t in T}`. Si un parámetro tiene dos dimensiones, el archivo `.dat` debe proveer datos compatibles con esas dos dimensiones.
+
+## Construcción del archivo `.dat`
+
+Los datos del caso se deben tomar de las tablas del módulo. Un parámetro escalar se escribe como:
 
 ```ampl
-subject to LimiteGeneracion {g in G}:
-    Pg[g] <= Pmax[g];
+param ReserveMargin := 0.15;
 ```
 
-## Archivo de ejecución mínimo
+Un parámetro indexado se escribe como:
+
+```ampl
+set G := G1 G2 G3;
+
+param pmax :=
+G1 100
+G2 80
+G3 60
+;
+```
+
+Una tabla bidimensional puede escribirse con pares de índices:
+
+```ampl
+param cost :=
+F1 C1 5
+F1 C2 7
+F2 C1 6
+F2 C2 4
+;
+```
+
+## Archivo `.run`
+
+El archivo `.run` debe permitir reproducir la solución:
 
 ```ampl
 reset;
-model actividad.mod;
-data actividad.dat;
+model modelo.mod;
+data caso.dat;
 option solver highs;
 solve;
-display Pg;
+display TotalCost;
 ```
 
-El archivo `.run` debe mostrar las variables necesarias para validar el resultado. Para problemas con red, conviene mostrar también flujos, ángulos y restricciones activas. Para problemas de expansión, conviene mostrar inversión, capacidad acumulada, energía no servida y costo total.
+Cuando el modelo incluya varias salidas, use `display` para exploración y `printf` para reportes ordenados.
 
-## Bucles para escenarios
+## Automatización de escenarios
 
-Cuando una actividad pide comparar demanda base, alta y baja, se puede resolver el mismo modelo varias veces cambiando un parámetro.
+Para estudiar sensibilidad, se puede recorrer un conjunto de escenarios:
 
 ```ampl
-set S := bajo base alto;
-param mult_demanda {S};
-param escenario symbolic;
+set S;
+param demand_scenario {S};
 
 for {s in S} {
-    let escenario := s;
+    let Demand := demand_scenario[s];
     solve;
-    printf "%s,%f\n", s, TotalCost >> "resultados_escenarios.csv";
+    printf "%s %.4f\n", s, TotalCost >> "resultados.csv";
 }
 ```
 
-La salida debe revisarse con una tabla que permita comparar costo, inversión, energía no servida y variables relevantes.
-
-## Sensibilidad con `repeat while`
+Para variar un parámetro de forma incremental:
 
 ```ampl
 param rm default 0.10;
@@ -71,43 +102,12 @@ param k integer default 0;
 
 repeat while k < 5 {
     solve;
-    printf "%f,%f\n", rm, TotalCost >> "sensibilidad_reserva.csv";
-    let rm := rm + 0.02;
+    printf "%g %.4f\n", rm, TotalCost >> "sensibilidad_reserva.csv";
+    let rm := rm + 0.025;
     let k := k + 1;
 }
 ```
 
-Este patrón es útil para margen de reserva, VOLL, tasa de descuento, demanda, costo de combustible o capacidad máxima de candidatos.
+## Revisión antes de entregar
 
-## Lectura desde hojas de cálculo
-
-Cuando el entorno tenga habilitado el manejador de hojas de cálculo, AMPL puede leer datos desde archivos `.xlsx`. En laboratorios donde esa opción no esté disponible, se recomienda convertir las tablas a `.dat` o `.csv` con Python.
-
-```ampl
-load amplxl.dll;
-
-table Generadores IN "amplxl" "datos.xlsx" "Generadores":
-    G <- [GEN], Pmax, cvar;
-
-read table Generadores;
-```
-
-## Conversión desde Python
-
-Python puede usarse para validar tablas y escribir un archivo `.dat` con nombres consistentes.
-
-```python
-from pathlib import Path
-import pandas as pd
-
-gen = pd.read_csv("datos/ed_generadores.csv")
-
-with Path("actividad.dat").open("w", encoding="utf-8") as f:
-    f.write("set G := " + " ".join(gen["generador"]) + ";\n")
-    f.write("param Pmax :=\n")
-    for _, row in gen.iterrows():
-        f.write(f"{row['generador']} {row['pmax_mw']}\n")
-    f.write(";\n")
-```
-
-Antes de resolver, verifique que los nombres de columnas, conjuntos e índices coincidan con los usados en el `.mod`.
+Antes de reportar resultados, verifique que los nombres de conjuntos coincidan entre `.mod` y `.dat`, que los parámetros tengan las unidades correctas, que no existan restricciones sin índice y que las salidas permitan comprobar balance y límites.
