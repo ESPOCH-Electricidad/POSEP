@@ -1,3 +1,0 @@
-# Ejecutar después de resolver un modelo con variables Pg[g,t]
-printf "generator,period,power\n" > "dispatch_results.csv";
-printf {g in G, t in T} "%s,%s,%g\n", g, t, Pg[g,t] >> "dispatch_results.csv";

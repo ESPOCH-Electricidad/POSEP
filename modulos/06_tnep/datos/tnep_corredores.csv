@@ -1,4 +1,4 @@
-line,from,to,tipo,x_pu,fmax_mw,invcost_musd,maxnew
+linea,desde,hasta,tipo,x_pu,fmax_mw,costo_inv_musd,max_nuevas
 L12,B1,B2,existente,0.1,100,0,0
 L23,B2,B3,existente,0.08,80,0,0
 L34,B3,B4,existente,0.11,70,0,0

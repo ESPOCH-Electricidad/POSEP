@@ -1,4 +1,4 @@
-line,from,to,r_pu,x_pu,bsh_pu,smax_mva
+linea,desde,hasta,r_pu,x_pu,bsh_pu,smax_mva
 L12,B1,B2,0.02,0.1,0.02,120
 L23,B2,B3,0.015,0.08,0.015,100
 L13,B1,B3,0.025,0.12,0.025,90

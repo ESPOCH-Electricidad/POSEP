@@ -2,29 +2,15 @@
 
 # Módulo 01 — Fundamentos de optimización
 
-## Objetivo del módulo
+## Objetivo
 
-El objetivo del módulo es construir la base matemática necesaria para formular problemas de operación y planificación de sistemas eléctricos. Antes de usar AMPL, Python o un solver, el estudiante debe poder identificar variables de decisión, función objetivo, restricciones, parámetros, unidades, dominio de las variables y criterio de optimalidad.
+Formular problemas de decisión mediante conjuntos, parámetros, variables, función objetivo y restricciones. El módulo trabaja con programación lineal, forma matricial y variables binarias antes de pasar a modelos eléctricos.
 
-Este módulo no trata todavía economía de la energía ni planificación eléctrica. Su propósito es entender la optimización como lenguaje técnico para representar decisiones sujetas a restricciones.
+![Proceso de modelado](figuras/01_proceso_modelado_matematico.svg)
 
-## Contenidos
+## Estructura general
 
-1. [De una decisión técnica a un modelo matemático](#de-una-decisión-técnica-a-un-modelo-matemático)
-2. [Programación lineal](#programación-lineal)
-3. [Forma matricial](#forma-matricial)
-4. [Dualidad y sensibilidad](#dualidad-y-sensibilidad)
-5. [Programación entera mixta](#programación-entera-mixta)
-6. [QP, NLP y condiciones KKT](#qp-nlp-y-condiciones-kkt)
-7. [Solvers y validación](#solvers-y-validación)
-8. [Archivos incluidos](#archivos-incluidos)
-9. [Actividad propuesta](#actividad-propuesta)
-
-## De una decisión técnica a un modelo matemático
-
-Un problema de optimización aparece cuando existe una decisión que puede tomar varios valores posibles y se requiere elegir la mejor alternativa bajo un criterio explícito. En ingeniería eléctrica, la decisión puede ser cuánto generar, qué línea construir, qué tecnología instalar, qué demanda asignar a cada fuente o qué combinación de recursos utilizar.
-
-La forma general de un modelo es:
+Un problema de optimización se escribe como:
 
 $$
 \min_x f(x)
@@ -33,179 +19,309 @@ $$
 sujeto a:
 
 $$
-g_i(x) \leq 0, \qquad h_j(x)=0, \qquad x \in X
-$$
-
-donde $x$ representa las variables de decisión, $f(x)$ es la función objetivo, $g_i(x)$ son restricciones de desigualdad, $h_j(x)$ son restricciones de igualdad y $X$ define el dominio: variables continuas, enteras, binarias, no negativas o acotadas.
-
-La parte más importante de la formulación no es escribir ecuaciones largas, sino reconocer qué representa cada ecuación. Una restricción de balance impone conservación. Una restricción de capacidad impone límite físico. Una restricción lógica activa o desactiva una decisión. Una restricción de presupuesto limita recursos disponibles. Si una ecuación no tiene interpretación técnica clara, probablemente el modelo está mal formulado.
-
-![Proceso de modelado](figuras/01_proceso_modelado_matematico.svg)
-
-## Programación lineal
-
-Un problema lineal tiene función objetivo lineal y restricciones lineales. Su forma compacta es:
-
-$$
-\min c^T x
-$$
-
-sujeto a:
-
-$$
-Ax \leq b, \qquad x \geq 0
-$$
-
-La linealidad implica proporcionalidad y aditividad. Si producir una unidad consume dos horas de un recurso, producir diez unidades consume veinte horas. Esta hipótesis permite representar muchos problemas de asignación, mezcla, transporte, balance de energía y despacho simplificado.
-
-La región factible es el conjunto de soluciones que cumplen todas las restricciones. En un problema lineal convexo, si existe una solución óptima finita, al menos una solución óptima se encuentra en un vértice de la región factible. Esta propiedad explica por qué los métodos simplex y de punto interior pueden resolver problemas lineales de gran tamaño.
-
-![Región factible](figuras/02_region_factible.svg)
-
-Una restricción activa es una restricción que se cumple con igualdad en la solución óptima. Técnicamente indica que el recurso asociado está agotado o que el límite físico se alcanzó. En modelos eléctricos, esto se observará más adelante en límites de generación, límites térmicos de líneas, restricciones de reserva o límites de inversión.
-
-## Forma matricial
-
-La forma matricial permite entender que un modelo escrito con índices se transforma en una matriz para el solver. Por ejemplo:
-
-$$
-\min c^T x
+g_i(x) \leq 0 \quad \forall i
 $$
 
 $$
-Ax=b
+h_j(x) = 0 \quad \forall j
 $$
 
 $$
-l \leq x \leq u
+x \in X
 $$
 
-Aquí $A$ contiene los coeficientes técnicos, $b$ los valores del lado derecho, $c$ los coeficientes de la función objetivo y $l,u$ las cotas inferiores y superiores. AMPL, GAMS, Pyomo o JuMP permiten escribir el modelo con conjuntos e índices; internamente, el solver recibe una representación matricial.
+La variable $x$ contiene las decisiones; $f(x)$ mide el desempeño; las restricciones representan límites físicos, económicos o lógicos; y $X$ define el dominio de las variables.
 
-Esta idea es esencial para evitar errores de dimensión. Si una restricción está indexada por periodos, debe existir un balance por cada periodo. Si una variable está indexada por generadores y horas, el número de variables crece como $|G|\times|T|$. En planificación, agregar años, escenarios y bloques de carga aumenta rápidamente el tamaño del modelo.
+## Caso 1. Producción de pinturas
 
-## Dualidad y sensibilidad
+### Enunciado
 
-La dualidad asocia a cada restricción del problema primal una variable dual. En términos prácticos, una variable dual mide cuánto cambiaría el valor objetivo si se relaja marginalmente una restricción. Por eso se interpreta como precio sombra o valor marginal de un recurso.
+Una planta fabrica pintura azul y pintura negra. Cada litro vendido genera un ingreso distinto y cada producto requiere una cantidad diferente de tiempo de fabricación. La planta dispone de un número limitado de horas por semana y existe una demanda máxima por producto. Se requiere determinar la producción semanal que maximiza el ingreso.
 
-En un problema de minimización con una restricción de demanda, el dual puede interpretarse como el costo marginal de atender una unidad adicional. En una restricción de capacidad, puede indicar cuánto se reduciría el costo si se incrementa la capacidad disponible. Esta lectura será clave en despacho económico, OPF y expansión.
+### Datos completos
 
-La sensibilidad analiza la estabilidad de la solución ante cambios en datos: costos, demanda, capacidad, disponibilidad o presupuesto. Un modelo con solución muy sensible debe revisarse con escenarios, rangos de parámetros o análisis de robustez.
+**Productos**
 
-![Dualidad y sensibilidad](figuras/08_dualidad_sensibilidad.svg)
+| producto   |   precio_usd_l |   produccion_l_h |   demanda_max_l |
+|:-----------|---------------:|-----------------:|----------------:|
+| azul       |             10 |               40 |            1000 |
+| negra      |             15 |               30 |             860 |
 
-## Programación entera mixta
+**Parámetros generales**
 
-La programación entera mixta incorpora variables continuas y variables discretas. Una variable binaria se define como:
+| parametro         |   valor | unidad   |
+|:------------------|--------:|:---------|
+| horas_disponibles |      40 | h/semana |
 
-$$
-y \in \{0,1\}
-$$
+### Modelo matemático
 
-Esta variable representa decisiones sí/no: construir una línea, encender una unidad, instalar una tecnología, seleccionar una ubicación o activar una alternativa. El modelo se vuelve más difícil porque la región factible deja de ser puramente continua.
-
-Una relación común es:
-
-$$
-x \leq M y
-$$
-
-Si $y=0$, entonces $x=0$. Si $y=1$, entonces $x$ puede tomar valores hasta $M$. Esta formulación se conoce como activación mediante Big-M. El valor de $M$ debe ser suficientemente grande para no cortar soluciones factibles, pero no excesivo, porque puede debilitar la relajación lineal y dificultar la solución del MILP.
-
-La programación entera mixta se resolverá mediante métodos como branch-and-bound o branch-and-cut. El solver explora decisiones discretas y resuelve relajaciones lineales para probar optimalidad.
-
-## QP, NLP y condiciones KKT
-
-No todos los problemas eléctricos son lineales. Los costos térmicos pueden representarse con funciones cuadráticas:
+Conjunto:
 
 $$
-C(P)=a+bP+cP^2
+p \in P
 $$
 
-El costo marginal asociado es:
+Parámetros:
 
 $$
-MC(P)=\frac{dC}{dP}=b+2cP
+r_p: \text{ ingreso unitario [USD/L]}, \qquad a_p: \text{ tasa de producción [L/h]}, \qquad \bar{x}_p: \text{ demanda máxima [L]}
 $$
 
-Si la función objetivo es cuadrática y las restricciones son lineales, se tiene un QP. Si existen ecuaciones no lineales, como las de flujo AC, pérdidas o restricciones trigonométricas, se tiene un NLP.
+$$
+H: \text{ horas disponibles [h]}
+$$
 
-Las condiciones KKT combinan factibilidad primal, factibilidad dual, estacionariedad y complementariedad. En problemas convexos, estas condiciones caracterizan el óptimo global. En problemas no convexos, pueden describir óptimos locales, por lo que la inicialización y la estructura del modelo importan.
+Variable:
 
-## Solvers y validación
+$$
+x_p \geq 0 \qquad \forall p \in P
+$$
 
-El modelador escribe el problema; el solver lo resuelve. AMPL no es el solver, sino el lenguaje algebraico que comunica el modelo al solver. Por eso se debe distinguir entre errores de formulación, errores de datos, errores de sintaxis y límites del método de solución.
+Función objetivo:
 
-Estados frecuentes:
+$$
+\max Z = \sum_{p \in P} r_p x_p
+$$
 
-| Estado | Lectura técnica |
-|---|---|
-| `optimal` | Se encontró una solución óptima bajo los supuestos del modelo. |
-| `infeasible` | No existe solución que cumpla todas las restricciones. |
-| `unbounded` | El objetivo puede mejorar indefinidamente. |
-| `locally optimal` | En NLP se encontró un óptimo local. |
+Restricciones:
 
-Validar una solución implica revisar unidades, balances, límites activos, valores extremos, variables binarias, costos resultantes y coherencia física. Un solver puede entregar una solución óptima para un modelo mal planteado; por eso la interpretación técnica es parte del proceso.
+$$
+\sum_{p \in P} \frac{x_p}{a_p} \leq H
+$$
 
+$$
+x_p \leq \bar{x}_p \qquad \forall p \in P
+$$
 
-## Ejemplos y datos de trabajo
+### Actividad
 
-La intención didáctica de este módulo es que el estudiante parta de tablas de datos y reconstruya la formulación. Los archivos CSV describen productos, recursos, costos, disponibilidades, nodos o matrices. Con esos datos debe identificar conjuntos, parámetros, variables, función objetivo y restricciones antes de escribir cualquier archivo `.mod`.
+Construya `pintura.mod`, `pintura.dat` y `pintura.run` a partir de la formulación y las tablas.
 
-Los modelos AMPL incluidos en `ampl/` son referencias mínimas para comprobación. No reemplazan el ejercicio principal: construir el `.dat` a partir de los CSV y escribir el `.mod` desde las ecuaciones del README.
+## Caso 2. Producción de acero
 
-| Archivo | Contenido/encabezado |
-|---|---|
-| `acero.csv` | producto,utilidad_usd_t,tasa_t_h,maximo_t |
-| `acero_parametros.csv` | parametro,valor,unidad |
-| `acero_productos.csv` | producto,profit_usd_t,rate_t_h,max_prod_t |
-| `antenas_candidatas.csv` | antena,cost_usd,barrio |
-| `antenas_cobertura.csv` | medidor,A1,A2,A3,A4,A5,A6,A7,A8 |
-| `localizacion_antenas.csv` | antena,costo_usd,barrio |
-| `matriz_A_b.csv` | restriccion,x1,x2,x3,b |
-| `pintura.csv` | producto,precio_usd_l,produccion_l_h,maximo_l |
-| `pintura_parametros.csv` | parametro,valor,unidad |
-| `pintura_productos.csv` | producto,price_usd_l,rate_l_h,market_l |
-| `transporte_cargas.csv` | carga,demand_mwh |
-| `transporte_costos.csv` | fuente,carga,cost_usd_mwh |
-| `transporte_energia.csv` | fuente,carga,costo_usd_mwh |
-| `transporte_fuentes.csv` | fuente,supply_mwh |
-| `vector_c.csv` | variable,c |
+### Enunciado
 
-### Archivos AMPL de referencia
+Una acería produce láminas y bobinas. Cada producto tiene una utilidad por tonelada, una tasa de producción y un límite de venta. La planta dispone de 40 horas semanales. Se requiere maximizar la utilidad semanal.
 
-| Archivo | Contenido/encabezado |
-|---|---|
-| `localizacion_antenas.dat` | archivo de apoyo |
-| `localizacion_antenas.mod` | archivo de apoyo |
-| `localizacion_antenas.run` | archivo de apoyo |
-| `pintura.dat` | archivo de apoyo |
-| `pintura.mod` | archivo de apoyo |
-| `pintura.run` | archivo de apoyo |
-| `transporte.dat` | archivo de apoyo |
-| `transporte.mod` | archivo de apoyo |
-| `transporte.run` | archivo de apoyo |
+### Datos completos
 
-## Archivos incluidos
+**Productos**
 
-| Archivo | Uso |
-|---|---|
-| [ampl/pintura.mod](ampl/pintura.mod) | Ejemplo LP de mezcla de productos. |
-| [ampl/transporte.mod](ampl/transporte.mod) | Ejemplo LP de transporte y asignación. |
-| [ampl/localizacion_antenas.mod](ampl/localizacion_antenas.mod) | Ejemplo MILP de selección de ubicaciones. |
-| [datos/](datos/) | Datos CSV de apoyo para los ejemplos. |
-| [figuras/](figuras/) | Figuras conceptuales del módulo. |
+| producto   |   utilidad_usd_t |   produccion_t_h |   demanda_max_t |
+|:-----------|-----------------:|-----------------:|----------------:|
+| laminas    |               25 |               20 |             500 |
+| bobinas    |               30 |               15 |             450 |
 
-## Cómo ejecutar
+**Parámetros generales**
 
-Desde la carpeta `ampl/`:
+| parametro         |   valor | unidad   |
+|:------------------|--------:|:---------|
+| horas_disponibles |      40 | h/semana |
 
-```bash
-ampl pintura.run
-ampl transporte.run
-ampl localizacion_antenas.run
-```
+### Modelo matemático
 
-## Actividad propuesta
+$$
+\max Z = \sum_{p \in P} u_p x_p
+$$
 
-Formule un problema de asignación de recursos con al menos dos productos, tres recursos limitados y una función objetivo económica o técnica. Identifique variables, parámetros, función objetivo, restricciones y unidades. Luego impleméntelo como LP en AMPL y evalúe qué restricciones quedan activas en la solución óptima.
+$$
+\sum_{p \in P} \frac{x_p}{a_p} \leq H
+$$
+
+$$
+0 \leq x_p \leq \bar{x}_p \qquad \forall p \in P
+$$
+
+### Actividad
+
+Use el mismo archivo `.mod` del caso de pinturas y construya un nuevo `.dat` para acero. Explique qué parte del modelo permanece y qué parte cambia.
+
+## Caso 3. Transporte de energía
+
+### Enunciado
+
+Tres fuentes pueden abastecer tres cargas. Cada fuente tiene una oferta máxima de energía y cada carga requiere una demanda fija. El costo de enviar energía depende del par fuente–carga. Se debe minimizar el costo total de suministro.
+
+### Datos completos
+
+**Fuentes**
+
+| fuente   |   oferta_mwh |
+|:---------|-------------:|
+| F1       |          120 |
+| F2       |          100 |
+| F3       |           90 |
+
+**Cargas**
+
+| carga   |   demanda_mwh |
+|:--------|--------------:|
+| C1      |            80 |
+| C2      |           110 |
+| C3      |            90 |
+
+**Costos**
+
+| fuente   | carga   |   costo_usd_mwh |
+|:---------|:--------|----------------:|
+| F1       | C1      |               5 |
+| F1       | C2      |               7 |
+| F1       | C3      |               9 |
+| F2       | C1      |               6 |
+| F2       | C2      |               4 |
+| F2       | C3      |               8 |
+| F3       | C1      |               9 |
+| F3       | C2      |               6 |
+| F3       | C3      |               3 |
+
+### Modelo matemático
+
+Conjuntos:
+
+$$
+i \in I, \qquad j \in J
+$$
+
+Parámetros: $s_i$ oferta, $d_j$ demanda y $c_{ij}$ costo unitario.
+
+Variable:
+
+$$
+x_{ij} \geq 0
+$$
+
+Función objetivo:
+
+$$
+\min Z=\sum_{i\in I}\sum_{j\in J}c_{ij}x_{ij}
+$$
+
+Restricciones:
+
+$$
+\sum_{j\in J}x_{ij}\leq s_i \qquad \forall i\in I
+$$
+
+$$
+\sum_{i\in I}x_{ij}=d_j \qquad \forall j\in J
+$$
+
+### Actividad
+
+Construya `transporte.mod`, `transporte.dat` y `transporte.run`. Verifique si la oferta total permite cubrir la demanda total.
+
+## Caso 4. Forma matricial
+
+### Enunciado
+
+Considere un problema lineal en forma matricial. Se requiere minimizar un costo sujeto a tres restricciones de recursos.
+
+### Datos completos
+
+**Matriz A y vector b**
+
+| restriccion   |   x1 |   x2 |   x3 |   b |
+|:--------------|-----:|-----:|-----:|----:|
+| R1            |    2 |    1 |    1 |  60 |
+| R2            |    1 |    3 |    2 |  90 |
+| R3            |    2 |    2 |    3 | 120 |
+
+**Vector c**
+
+| variable   |   costo |
+|:-----------|--------:|
+| x1         |       8 |
+| x2         |       6 |
+| x3         |       5 |
+
+### Modelo matemático
+
+$$
+\min Z=c^Tx
+$$
+
+$$
+Ax\leq b
+$$
+
+$$
+x\geq 0
+$$
+
+### Actividad
+
+Escriba la formulación indexada equivalente y construya el `.dat` desde las tablas.
+
+## Caso 5. Localización de antenas
+
+### Enunciado
+
+Se desea instalar el menor costo de antenas para cubrir diez medidores inteligentes. Una antena cubre un medidor si la matriz de cobertura toma valor 1. Cada medidor debe quedar cubierto por al menos una antena.
+
+### Datos completos
+
+**Antenas candidatas**
+
+| antena   |   costo_usd | sector   |
+|:---------|------------:|:---------|
+| A1       |        1500 | B1       |
+| A2       |         800 | B1       |
+| A3       |        1200 | B2       |
+| A4       |        1700 | B2       |
+| A5       |         900 | B3       |
+| A6       |        1100 | B3       |
+| A7       |         600 | B4       |
+| A8       |        1000 | B4       |
+
+**Matriz de cobertura**
+
+| medidor   |   A1 |   A2 |   A3 |   A4 |   A5 |   A6 |   A7 |   A8 |
+|:----------|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
+| M1        |    1 |    1 |    0 |    0 |    0 |    0 |    0 |    0 |
+| M2        |    1 |    0 |    1 |    0 |    0 |    0 |    0 |    0 |
+| M3        |    0 |    1 |    1 |    1 |    0 |    0 |    0 |    0 |
+| M4        |    0 |    0 |    1 |    1 |    1 |    0 |    0 |    0 |
+| M5        |    0 |    0 |    0 |    1 |    1 |    1 |    0 |    0 |
+| M6        |    0 |    0 |    0 |    0 |    1 |    1 |    1 |    0 |
+| M7        |    0 |    0 |    0 |    0 |    0 |    1 |    1 |    1 |
+| M8        |    0 |    0 |    0 |    0 |    0 |    0 |    1 |    1 |
+| M9        |    1 |    0 |    0 |    0 |    0 |    0 |    0 |    1 |
+| M10       |    0 |    1 |    0 |    0 |    0 |    0 |    0 |    1 |
+
+### Modelo matemático
+
+Conjuntos:
+
+$$
+a\in A, \qquad m\in M
+$$
+
+Parámetros: $c_a$ costo de antena y $cov_{ma}$ cobertura binaria.
+
+Variable:
+
+$$
+y_a\in\{0,1\}
+$$
+
+Función objetivo:
+
+$$
+\min Z=\sum_{a\in A}c_a y_a
+$$
+
+Restricción de cobertura:
+
+$$
+\sum_{a\in A}cov_{ma}y_a\geq 1 \qquad \forall m\in M
+$$
+
+### Actividad
+
+Construya el MILP y verifique que cada medidor tenga cobertura.
+
+## Entregables
+
+1. Archivos `.mod`, `.dat` y `.run` construidos por el estudiante.
+2. Tabla con variables óptimas y valor objetivo.
+3. Interpretación de restricciones activas, holguras y factibilidad.

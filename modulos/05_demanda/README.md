@@ -1,161 +1,119 @@
 [← Inicio](../../README.md) | [← Módulo anterior](../04_opf/README.md) | [Siguiente módulo →](../06_tnep/README.md)
 
-# Módulo 05 — Proyección de demanda y construcción de escenarios
+# Módulo 05 — Proyección de demanda
 
-## Objetivo del módulo
+## Objetivo
 
-El módulo estudia cómo preparar demanda eléctrica para modelos de operación y planificación. La demanda no es solo un dato escalar: puede representarse como energía anual, demanda máxima, perfil horario, bloques de carga, demanda por barra, escenarios de crecimiento o trayectorias de largo plazo.
-
-## Contenidos
-
-1. [Energía, potencia pico y perfiles](#energía-potencia-pico-y-perfiles)
-2. [Tendencia y estacionalidad](#tendencia-y-estacionalidad)
-3. [Variables explicativas](#variables-explicativas)
-4. [Modelos de proyección](#modelos-de-proyección)
-5. [Métricas de validación](#métricas-de-validación)
-6. [Escenarios de demanda](#escenarios-de-demanda)
-7. [Exportación hacia AMPL](#exportación-hacia-ampl)
-8. [Archivos incluidos](#archivos-incluidos)
-9. [Actividad propuesta](#actividad-propuesta)
-
-## Energía, potencia pico y perfiles
-
-La energía mide consumo acumulado en un periodo, por ejemplo MWh o GWh. La potencia pico mide la máxima demanda instantánea o promedio en una ventana específica, por ejemplo MW. Ambas magnitudes son necesarias, pero responden a preguntas distintas.
-
-La energía anual afecta costos variables, consumo de combustible y balance energético. La demanda pico condiciona capacidad instalada, reserva, transformación, líneas y confiabilidad.
+Construir insumos de demanda para operación, TNEP y GEP. El módulo distingue energía anual, potencia pico, factor de carga, variables explicativas y escenarios.
 
 ![Energía vs pico](figuras/01_energia_vs_pico.svg)
 
-El factor de carga resume la relación entre demanda media y demanda máxima:
+## Caso 1. Base histórica
+
+### Datos completos
+
+|   anio |   energia_gwh |   pico_mw |   poblacion_millones |   pib_indice |
+|-------:|--------------:|----------:|---------------------:|-------------:|
+|   2018 |         25000 |      4200 |                 16.9 |          100 |
+|   2019 |         25800 |      4350 |                 17.1 |          101 |
+|   2020 |         25200 |      4280 |                 17.3 |           96 |
+|   2021 |         26800 |      4480 |                 17.5 |          100 |
+|   2022 |         27900 |      4650 |                 17.7 |          104 |
+|   2023 |         29100 |      4820 |                 17.9 |          107 |
+|   2024 |         30300 |      4990 |                 18.1 |          110 |
+
+### Cálculos
+
+Demanda media anual:
 
 $$
-LF = \frac{D_{media}}{D_{max}} = \frac{E/T}{D_{max}}
+\bar{D}_y=\frac{E_y}{8760}
 $$
 
-Un sistema con bajo factor de carga requiere capacidad para atender picos que ocurren durante pocas horas. Esto incrementa la importancia de tecnologías de punta, almacenamiento o gestión de demanda.
-
-## Tendencia y estacionalidad
-
-Una serie de demanda puede contener tendencia de largo plazo, patrones estacionales, variación diaria, efectos climáticos, cambios económicos y eventos atípicos. Antes de proyectar, se debe observar la serie, revisar faltantes, detectar valores extremos y confirmar unidades.
-
-![Tendencia y estacionalidad](figuras/02_tendencia_estacionalidad.svg)
-
-Una proyección sin diagnóstico puede reproducir errores históricos o producir curvas incompatibles con el sistema. Por ejemplo, proyectar solo energía anual no garantiza una demanda pico coherente; proyectar solo pico no garantiza balance energético.
-
-## Variables explicativas
-
-Los modelos de demanda pueden usar variables como población, producto interno bruto, temperatura, electrificación, urbanización, número de clientes, eficiencia energética o penetración de nuevas cargas. La selección de variables debe responder a causalidad plausible, disponibilidad de datos y estabilidad temporal.
-
-Una regresión múltiple puede escribirse como:
+Factor de carga:
 
 $$
-D_t = \beta_0 + \beta_1 X_{1,t}+\beta_2 X_{2,t}+\cdots+\varepsilon_t
+LF_y=\frac{\bar{D}_y}{D_y^{max}}
 $$
 
-El coeficiente $\beta_i$ representa el cambio esperado en demanda ante cambios en la variable explicativa $X_i$, manteniendo las demás constantes. La interpretación debe ser técnica; no basta obtener un ajuste estadístico alto.
-
-## Modelos de proyección
-
-Los métodos usuales incluyen:
-
-| Método | Uso principal |
-|---|---|
-| Crecimiento compuesto | Escenarios simples de largo plazo. |
-| Regresión | Relación demanda–variables explicativas. |
-| Series de tiempo | Tendencia, autocorrelación y estacionalidad. |
-| Modelos híbridos | Combinación de señales históricas y restricciones técnicas. |
-
-Un crecimiento compuesto se calcula como:
+Crecimiento compuesto:
 
 $$
-D_y = D_0(1+g)^y
+CAGR=\left(\frac{X_T}{X_0}\right)^{1/T}-1
 $$
 
-Este método es transparente y fácil de auditar, pero puede ser insuficiente cuando existen cambios estructurales en consumo, clima o electrificación.
+### Actividad
 
-## Métricas de validación
+Calcule demanda media, factor de carga y crecimiento anual. Explique el efecto de la caída de demanda en 2020.
 
-Las métricas permiten comparar modelos:
+## Caso 2. Regresión con variables explicativas
 
-$$
-MAE=\frac{1}{n}\sum_{t=1}^{n}|D_t-\hat{D}_t|
-$$
+Modelo:
 
 $$
-RMSE=\sqrt{\frac{1}{n}\sum_{t=1}^{n}(D_t-\hat{D}_t)^2}
+Y_t=\beta_0+\beta_1Pop_t+\beta_2PIB_t+\epsilon_t
 $$
 
+Use $Y_t$ como energía anual o potencia pico. Compare el ajuste contra CAGR.
+
+## Caso 3. Escenarios
+
+### Datos completos
+
+|   anio | escenario   |   energia_gwh |   pico_mw |
+|-------:|:------------|--------------:|----------:|
+|   2025 | bajo        |         30900 |      5070 |
+|   2025 | medio       |         31200 |      5120 |
+|   2025 | alto        |         31600 |      5200 |
+|   2030 | bajo        |         34000 |      5600 |
+|   2030 | medio       |         35600 |      5850 |
+|   2030 | alto        |         37400 |      6150 |
+|   2035 | bajo        |         37200 |      6100 |
+|   2035 | medio       |         40500 |      6650 |
+|   2035 | alto        |         43800 |      7200 |
+
+### Parámetros para modelos
+
 $$
-MAPE=\frac{100}{n}\sum_{t=1}^{n}\left|\frac{D_t-\hat{D}_t}{D_t}\right|
+D_{y,s}^{peak},\qquad E_{y,s}
 $$
 
-![Métricas de validación](figuras/03_metricas_validacion.svg)
+### Actividad
 
-El RMSE penaliza errores grandes, el MAE es más estable ante valores extremos y el MAPE permite una lectura porcentual, aunque puede ser problemático cuando los valores reales son cercanos a cero.
+Construya un archivo `.dat` con conjuntos $Y$ y $S$ para usar en expansión.
 
-## Escenarios de demanda
+## Salida para TNEP
 
-La planificación no debe depender de una sola trayectoria. Se recomienda construir escenarios bajo, medio y alto, asociados a distintos supuestos de crecimiento económico, electrificación, eficiencia o penetración tecnológica.
+|   anio | escenario   |   pico_mw |
+|-------:|:------------|----------:|
+|   2025 | bajo        |      5070 |
+|   2025 | medio       |      5120 |
+|   2025 | alto        |      5200 |
+|   2030 | bajo        |      5600 |
+|   2030 | medio       |      5850 |
+|   2030 | alto        |      6150 |
+|   2035 | bajo        |      6100 |
+|   2035 | medio       |      6650 |
+|   2035 | alto        |      7200 |
 
-![Escenarios de demanda](figuras/04_escenarios_demanda.svg)
+## Salida para GEP
 
-Los escenarios no son simples líneas dibujadas. Deben mantener coherencia entre energía, pico, distribución temporal y demanda por barra. En modelos de expansión, una demanda mal construida puede sobredimensionar o subdimensionar inversiones.
+|   anio | escenario   |   energia_gwh |   pico_mw |
+|-------:|:------------|--------------:|----------:|
+|   2025 | bajo        |         30900 |      5070 |
+|   2025 | medio       |         31200 |      5120 |
+|   2025 | alto        |         31600 |      5200 |
+|   2030 | bajo        |         34000 |      5600 |
+|   2030 | medio       |         35600 |      5850 |
+|   2030 | alto        |         37400 |      6150 |
+|   2035 | bajo        |         37200 |      6100 |
+|   2035 | medio       |         40500 |      6650 |
+|   2035 | alto        |         43800 |      7200 |
 
-## Exportación hacia AMPL
+## Entregables
 
-Para usar demanda en AMPL, los datos deben llegar en una forma indexada consistente. Por ejemplo:
-
-```ampl
-set B;
-set Y;
-param demand {B,Y};
-```
-
-En Python, una tabla con columnas `bloque`, `anio` y `demanda` puede convertirse a formato `.dat`. El módulo incluye scripts para proyectar demanda básica y exportarla a modelos posteriores.
-
-
-## Datos de trabajo para construir escenarios
-
-Los datos permiten trabajar energía, demanda pico, series históricas, variables explicativas y demanda exportable hacia TNEP o GEP. El objetivo no es solo graficar una curva, sino producir insumos técnicamente consistentes para modelos de optimización.
-
-| Archivo | Contenido/encabezado |
-|---|---|
-| `demanda_gep.csv` | anio,escenario,energia_gwh,pico_mw |
-| `demanda_historica.csv` | anio,energia_gwh,pico_mw |
-| `demanda_historica_completa.csv` | anio,energia_gwh,pico_mw,poblacion_millones,pib_indice |
-| `demanda_proyectada_escenarios.csv` | anio,escenario,energia_gwh,pico_mw |
-| `demanda_regresion.csv` | anio,energia_gwh,pico_mw,poblacion_millones,pib_indice |
-| `demanda_series_tiempo.csv` | anio,energia_gwh,pico_mw |
-| `demanda_tnep.csv` | anio,escenario,pico_mw |
-| `plantilla_demanda_proyectada.csv` | anio,escenario,energia_gwh,pico_mw |
-| `variables_socioeconomicas.csv` | anio,poblacion_millones,pib_indice |
-
-### Scripts Python de apoyo
-
-| Archivo | Contenido/encabezado |
-|---|---|
-| `demand_projection_basic.py` | archivo de apoyo |
-| `export_demand_to_ampl_dat.py` | archivo de apoyo |
-
-## Archivos incluidos
-
-| Archivo | Uso |
-|---|---|
-| [datos/demanda_historica.csv](datos/demanda_historica.csv) | Serie histórica base. |
-| [datos/demanda_proyectada_escenarios.csv](datos/demanda_proyectada_escenarios.csv) | Escenarios de demanda. |
-| [python/demand_projection_basic.py](python/demand_projection_basic.py) | Proyección básica con Python. |
-| [python/export_demand_to_ampl_dat.py](python/export_demand_to_ampl_dat.py) | Exportación a formato AMPL. |
-| [figuras/](figuras/) | Figuras del módulo. |
-
-## Cómo ejecutar
-
-Desde `modulos/05_demanda/`:
-
-```bash
-python python/demand_projection_basic.py
-python python/export_demand_to_ampl_dat.py
-```
-
-## Actividad propuesta
-
-Construya tres escenarios de demanda a partir de una demanda base: crecimiento bajo, medio y alto. Para cada escenario, calcule energía anual, demanda pico y factor de carga. Luego exporte la demanda a un archivo compatible con AMPL para usarlo en un modelo de expansión.
+1. Tabla histórica procesada.
+2. Proyección por CAGR.
+3. Proyección por regresión.
+4. `.dat` de demanda para TNEP.
+5. `.dat` de demanda para GEP.

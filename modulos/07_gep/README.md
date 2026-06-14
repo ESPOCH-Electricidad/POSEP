@@ -2,154 +2,133 @@
 
 # Módulo 07 — Expansión de generación
 
-## Objetivo del módulo
+## Objetivo
 
-El módulo estudia la planificación de expansión de generación. La decisión es cuánta capacidad instalar, de qué tecnología y en qué momento, para atender demanda futura con criterios de costo, reserva, disponibilidad y confiabilidad. Aquí se incorporan conceptos económicos de inversión como CAPEX, OPEX fijo, CRF y costos anualizados.
+Formular problemas de expansión de generación con tecnologías existentes y candidatas, bloques de carga, costos anualizados, disponibilidad y reserva firme.
 
-## Contenidos
+![Curva de duración y bloques](figuras/02_curva_duracion_y_bloques.png)
 
-1. [Problema de expansión de generación](#problema-de-expansión-de-generación)
-2. [Costos de inversión y anualización](#costos-de-inversión-y-anualización)
-3. [Bloques de carga](#bloques-de-carga)
-4. [Restricción de balance](#restricción-de-balance)
-5. [Disponibilidad y generación máxima](#disponibilidad-y-generación-máxima)
-6. [Reserva firme](#reserva-firme)
-7. [Modelo multianual](#modelo-multianual)
-8. [Archivos incluidos](#archivos-incluidos)
-9. [Actividad propuesta](#actividad-propuesta)
-
-## Problema de expansión de generación
-
-La expansión de generación responde a una pregunta de largo plazo: qué tecnologías deben instalarse para atender una demanda futura con suficiente capacidad y costo razonable. A diferencia del despacho, aquí la capacidad no está completamente dada; parte de ella se decide en el modelo.
-
-![Demanda futura](figuras/01_demanda_futura_energia_pico.svg)
-
-Las tecnologías candidatas pueden tener estructuras de costo muy distintas. Una central solar tiene bajo costo variable y generación dependiente del recurso. Una térmica puede tener mayor costo variable pero aportar capacidad firme. Una hidroeléctrica depende de disponibilidad hídrica y restricciones de agua. Por eso no basta comparar capacidad instalada; se debe representar energía, potencia, disponibilidad y reserva.
-
-## Costos de inversión y anualización
-
-El CAPEX se expresa normalmente en USD/kW o USD/MW. Para compararlo con costos anuales de operación, se anualiza mediante el factor de recuperación de capital:
+## Costo anual equivalente
 
 $$
 CRF=\frac{r(1+r)^T}{(1+r)^T-1}
 $$
 
-El costo anualizado de inversión es:
+## Caso 1. GEP estático
+
+### Datos completos
+
+**Tecnologías**
+
+| tecnologia   |   capex_usd_kw |   fom_usd_kw_anio |   vom_usd_mwh |   factor_disponibilidad |   credito_firme |   cap_existente_mw |   cap_candidata_max_mw |
+|:-------------|---------------:|------------------:|--------------:|------------------------:|----------------:|-------------------:|-----------------------:|
+| gas          |            900 |                20 |            55 |                    0.85 |            0.9  |                200 |                    500 |
+| solar        |            650 |                12 |             0 |                    0.25 |            0.35 |                 50 |                    400 |
+| eolica       |           1200 |                25 |             0 |                    0.38 |            0.25 |                 30 |                    300 |
+
+**Bloques de carga**
+
+| bloque   |   demanda_mw |   horas |
+|:---------|-------------:|--------:|
+| base     |          500 |    5260 |
+| medio    |          750 |    3000 |
+| pico     |         1000 |     500 |
+
+**Parámetros**
+
+| parametro      |      valor | unidad   |
+|:---------------|-----------:|:---------|
+| margen_reserva |    0.15    | p.u.     |
+| VOLL           | 2000       | USD/MWh  |
+| tasa_descuento |    0.08    | p.u.     |
+| CRF            |    0.10185 | p.u.     |
+
+### Modelo matemático
+
+Conjuntos: $g\in G$, $b\in B$.
+
+Variables:
 
 $$
-C^{ann}_{k}=CRF_k \cdot CAPEX_k
+K_g^{new}\geq 0,\qquad P_{gb}\geq 0,\qquad ENS_b\geq 0
 $$
 
-La función objetivo puede combinar inversión anualizada, O&M fijo, costos variables y penalización por energía no servida:
+Función objetivo:
 
 $$
-\min \sum_k (C_k^{ann}+FOM_k)Build_k + \sum_{k,b} VOM_k Gen_{k,b}h_b + \sum_b VOLL\cdot LS_bh_b
+\min Z=\sum_{g\in G}(CRF\cdot CAPEX_g\cdot1000+FOM_g\cdot1000)K_g^{new}
++\sum_{g\in G}\sum_{b\in B}VOM_gP_{gb}H_b
++\sum_{b\in B}VOLL\cdot ENS_bH_b
 $$
 
-## Bloques de carga
-
-Para evitar representar las 8760 horas del año, se puede usar una curva de duración de carga dividida en bloques. Cada bloque tiene una demanda representativa y un número de horas.
-
-![Curva de duración](figuras/02_curva_duracion_carga.svg)
-
-El uso de bloques reduce el tamaño del modelo y permite representar demanda alta, media y baja. Sin embargo, se pierde cronología: no se modelan rampas ni secuencia temporal, por lo que el método es más adecuado para expansión de largo plazo que para operación horaria detallada.
-
-## Restricción de balance
-
-Para cada bloque de carga:
+Balance:
 
 $$
-\sum_k Gen_{k,b}+LS_b=D_b
+\sum_{g\in G}P_{gb}+ENS_b=D_b\qquad \forall b
 $$
 
-El término $LS_b$ representa energía no servida en el bloque. Debe penalizarse fuertemente para que solo aparezca cuando la capacidad o disponibilidad es insuficiente.
-
-## Disponibilidad y generación máxima
-
-La generación de una tecnología está limitada por la capacidad instalada y su factor de disponibilidad:
+Disponibilidad:
 
 $$
-Gen_{k,b}\leq AF_{k,b}Cap_k
+P_{gb}\leq AF_g(K_g^0+K_g^{new})\qquad \forall g,b
 $$
 
-Para tecnologías renovables variables, $AF_{k,b}$ representa la disponibilidad del recurso en el bloque. Para térmicas, puede representar disponibilidad técnica o capacidad operativa.
-
-## Reserva firme
-
-La expansión debe garantizar capacidad suficiente para cubrir la demanda máxima con margen de reserva:
+Límite de expansión:
 
 $$
-\sum_k FC_k Cap_k \geq (1+RM)D^{peak}
+0\leq K_g^{new}\leq \bar{K}_g\qquad \forall g
 $$
 
-Donde $FC_k$ es el crédito de capacidad firme de cada tecnología y $RM$ el margen de reserva. Esta restricción evita que el modelo instale solo tecnologías con bajo costo energético pero baja contribución al pico.
-
-![Reserva firme](figuras/04_reserva_firme.svg)
-
-## Modelo multianual
-
-En un modelo multianual, la capacidad instalada se acumula:
+Reserva firme:
 
 $$
-Cap_{k,y}=Cap_{k,y-1}+Build_{k,y}
+\sum_{g\in G}FC_g(K_g^0+K_g^{new})\geq (1+RM)D^{peak}
 $$
 
-La demanda, disponibilidad, costos y límites de construcción pueden cambiar por año. Esta estructura permite analizar trayectorias de inversión y no solo una expansión estática.
+### Actividad
 
-La decisión temporal importa porque construir antes aumenta disponibilidad del sistema, pero también adelanta inversión. Construir tarde reduce inversión presente, pero puede aumentar costos operativos o riesgo de déficit.
+Construya el GEP estático y reporte capacidad nueva, generación por bloque y costo total.
 
-![Screening curve](figuras/03_screening_curve.svg)
+## Caso 2. Expansión multianual
 
+### Datos completos
 
-## Datos de trabajo para construir el caso
+|   anio |   pico_mw |   energia_gwh |
+|-------:|----------:|--------------:|
+|   2025 |      1000 |          6200 |
+|   2030 |      1150 |          7100 |
+|   2035 |      1350 |          8350 |
 
-Los datos describen tecnologías, bloques de carga, años y parámetros económicos. La formulación del README permite construir el `.mod`; los CSV permiten generar el `.dat`. La lectura técnica debe separar capacidad existente, capacidad candidata, disponibilidad, crédito firme, costos de inversión y costos variables.
+Variables:
 
-| Archivo | Contenido/encabezado |
-|---|---|
-| `bloques_carga.csv` | bloque,demanda_mw,horas |
-| `gep_anios.csv` | anio,peak_mw,energy_gwh |
-| `gep_bloques.csv` | bloque,demand_mw,hours |
-| `gep_parametros.csv` | parametro,valor,unidad |
-| `gep_tecnologias.csv` | tecnologia,capex_usd_kw,fom_usd_kw_anio,vom_usd_mwh,af,firm_credit,existingcap_mw,candidatemax_mw |
-| `tecnologias_generacion.csv` | tecnologia,capex_usd_kw,fom_usd_kw_anio,vom_usd_mwh,af,fc |
+$$
+K_{g,y}^{new}\geq 0
+$$
 
-### Archivos AMPL de referencia
+$$
+K_{g,y}^{avail}=K_g^0+\sum_{\tau\leq y}K_{g,\tau}^{new}
+$$
 
-| Archivo | Contenido/encabezado |
-|---|---|
-| `gep_multiyear.dat` | archivo de apoyo |
-| `gep_multiyear.mod` | archivo de apoyo |
-| `gep_multiyear.run` | archivo de apoyo |
-| `gep_static.dat` | archivo de apoyo |
-| `gep_static.mod` | archivo de apoyo |
-| `gep_static.run` | archivo de apoyo |
+Restricción de acumulación:
 
-### Scripts Python de apoyo
+$$
+K_{g,y}^{avail}=K_{g,y-1}^{avail}+K_{g,y}^{new}\qquad \forall g,y
+$$
 
-| Archivo | Contenido/encabezado |
-|---|---|
-| `screening_curve_simple.py` | archivo de apoyo |
+### Actividad
 
-## Archivos incluidos
+Extienda el modelo a 2025, 2030 y 2035.
 
-| Archivo | Uso |
-|---|---|
-| [ampl/gep_static.mod](ampl/gep_static.mod) | Modelo estático de expansión. |
-| [ampl/gep_multiyear.mod](ampl/gep_multiyear.mod) | Modelo multianual de expansión. |
-| [datos/gep_tecnologias.csv](datos/gep_tecnologias.csv) | Tecnologías candidatas. |
-| [datos/gep_bloques.csv](datos/gep_bloques.csv) | Bloques de carga. |
-| [python/screening_curve_simple.py](python/screening_curve_simple.py) | Gráfico de screening curve simplificada. |
+## Caso 3. Screening curve
 
-## Cómo ejecutar
+![Screening curve](figuras/03_screening_curve.png)
 
-Desde `modulos/07_gep/ampl/`:
+Relación de costo por horas de operación:
 
-```bash
-ampl gep_static.run
-ampl gep_multiyear.run
-```
+$$
+C_g(h)=F_g+c_gh
+$$
 
-## Actividad propuesta
+### Actividad
 
-Compare dos escenarios de expansión: uno con alta disponibilidad renovable y otro con menor disponibilidad. Analice capacidad construida, generación por tecnología, costo total y energía no servida. Explique cómo cambia la solución cuando se modifica el crédito de capacidad firme de las tecnologías variables.
+Construya las rectas de costo para gas, solar y eólica. Explique por qué esta comparación no reemplaza al GEP con reserva, bloques y disponibilidad.

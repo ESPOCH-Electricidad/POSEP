@@ -1,4 +1,4 @@
-line,from,to,x_pu,fmax_mw
+linea,desde,hasta,x_pu,fmax_mw
 L12,B1,B2,0.1,100
 L23,B2,B3,0.08,80
 L13,B1,B3,0.12,60

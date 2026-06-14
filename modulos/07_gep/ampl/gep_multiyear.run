@@ -1,8 +1,0 @@
-reset;
-model gep_multiyear.mod;
-data gep_multiyear.dat;
-option solver highs;
-solve;
-display solve_result, TotalCost, Build, Cap, LS;
-printf "technology,year,build,capacity\n" > "gep_multiyear_capacity.csv";
-printf {k in K, y in Y} "%s,%s,%g,%g\n", k, y, Build[k,y], Cap[k,y] >> "gep_multiyear_capacity.csv";

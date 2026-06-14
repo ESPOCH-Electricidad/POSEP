@@ -1,3 +1,0 @@
-# Después de solve, puede exportar resultados a CSV:
-printf {p in P} "%s,%f
-", p, x[p] > "resultados_pintura.csv";

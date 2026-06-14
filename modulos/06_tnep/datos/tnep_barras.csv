@@ -1,4 +1,4 @@
-bus,demand_mw,genmax_mw
+bus,demanda_mw,genmax_mw
 B1,0,150
 B2,80,0
 B3,120,0

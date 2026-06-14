@@ -1,9 +1,0 @@
-reset;
-model uc.mod;
-data uc.dat;
-option solver highs;
-solve;
-display solve_result, TotalCost, u, v, Pg;
-
-printf "generator,period,unit_on,startup,power\n" > "uc_results.csv";
-printf {g in G, t in T} "%s,%s,%g,%g,%g\n", g, t, u[g,t], v[g,t], Pg[g,t] >> "uc_results.csv";

@@ -1,4 +1,4 @@
-bus,pload_mw,qload_mvar,vmin_pu,vmax_pu
+bus,pdem_mw,qdem_mvar,vmin_pu,vmax_pu
 B1,0,0,0.95,1.05
 B2,80,30,0.95,1.05
 B3,60,25,0.95,1.05

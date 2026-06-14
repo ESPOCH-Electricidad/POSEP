@@ -1,6 +1,0 @@
-reset;
-model hydrothermal.mod;
-data hydrothermal.dat;
-option solver highs;
-solve;
-display solve_result, TotalCost, Pg, Ph, R, S, Spill, LS;

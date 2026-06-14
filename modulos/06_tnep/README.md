@@ -2,162 +2,137 @@
 
 # Módulo 06 — Expansión de transmisión
 
-## Objetivo del módulo
+## Objetivo
 
-El módulo estudia la planificación de expansión de transmisión. La decisión no es solo operar la red existente, sino seleccionar refuerzos o nuevas líneas para atender demanda futura, reducir congestión, evitar energía no servida y mejorar la capacidad de transporte del sistema.
-
-## Contenidos
-
-1. [Problema de expansión de transmisión](#problema-de-expansión-de-transmisión)
-2. [Modelo de transporte](#modelo-de-transporte)
-3. [Modelo DC de expansión](#modelo-dc-de-expansión)
-4. [Variables binarias de inversión](#variables-binarias-de-inversión)
-5. [Formulación Big-M](#formulación-big-m)
-6. [Expansión multietapa](#expansión-multietapa)
-7. [Archivos incluidos](#archivos-incluidos)
-8. [Actividad propuesta](#actividad-propuesta)
-
-## Problema de expansión de transmisión
-
-La expansión de transmisión decide qué corredores construir o reforzar para que la red pueda transportar energía desde zonas de generación hacia zonas de demanda. En términos de planificación, se comparan costos de inversión con beneficios operativos: menor congestión, menor generación costosa, reducción de energía no servida y mayor seguridad del suministro.
+Formular problemas de expansión de transmisión con red existente, corredores candidatos, límites de flujo, generación disponible, demanda y costos de inversión.
 
 ![Red existente y candidatos](figuras/01_red_existente_candidatos.svg)
 
-El problema se vuelve combinatorio porque cada línea candidata puede construirse o no construirse. Además, las decisiones de red modifican los flujos eléctricos y por tanto la operación económica del sistema.
+## Caso 1. Modelo de transporte
 
-## Modelo de transporte
+### Datos completos
 
-Una primera aproximación ignora ángulos eléctricos y representa la red como capacidad de transporte. La formulación típica es:
+**Barras**
 
-$$
-\min \sum_{(i,j)\in L} C_{i,j}^{inv}y_{i,j}+\sum_n VOLL\cdot LS_n
-$$
+| bus   |   demanda_mw |   genmax_mw |
+|:------|-------------:|------------:|
+| B1    |            0 |         150 |
+| B2    |           80 |           0 |
+| B3    |          120 |           0 |
+| B4    |           50 |         100 |
 
-sujeto a balance nodal:
+**Corredores**
 
-$$
-G_n + LS_n - D_n = \sum_{(n,j)} f_{n,j}-\sum_{(i,n)} f_{i,n}
-$$
+| linea   | desde   | hasta   | tipo      |   x_pu |   fmax_mw |   costo_inv_musd |   max_nuevas |
+|:--------|:--------|:--------|:----------|-------:|----------:|-----------------:|-------------:|
+| L12     | B1      | B2      | existente |   0.1  |       100 |                0 |            0 |
+| L23     | B2      | B3      | existente |   0.08 |        80 |                0 |            0 |
+| L34     | B3      | B4      | existente |   0.11 |        70 |                0 |            0 |
+| C13     | B1      | B3      | candidato |   0.12 |        90 |               40 |            1 |
+| C24     | B2      | B4      | candidato |   0.1  |        80 |               35 |            1 |
+| C14     | B1      | B4      | candidato |   0.15 |       100 |               55 |            1 |
 
-Y límites de flujo:
+**Parámetros**
 
-$$
--F_{i,j}^{max}(e_{i,j}+y_{i,j}) \leq f_{i,j} \leq F_{i,j}^{max}(e_{i,j}+y_{i,j})
-$$
+| parametro   | valor   | unidad   |
+|:------------|:--------|:---------|
+| slack       | B1      | -        |
+| VOLL        | 1000    | USD/MWh  |
 
-Este modelo es útil para introducir la lógica de expansión, aunque no representa la física DC de los flujos.
+### Modelo matemático
 
-![Transporte vs DC](figuras/02_transporte_vs_dc.svg)
+Conjuntos: $n\in N$, $l\in L$, $l\in L^C$.
 
-## Modelo DC de expansión
-
-El modelo DC agrega la relación entre flujo y ángulos:
-
-$$
-f_{i,j}=B_{i,j}(\theta_i-\theta_j)
-$$
-
-Para líneas existentes, esta relación siempre se cumple. Para líneas candidatas, solo debe cumplirse si la línea se construye. Esta condición lógica requiere variables binarias o formulaciones disyuntivas.
-
-## Variables binarias de inversión
-
-La decisión de construir una línea candidata se representa como:
+Variables:
 
 $$
-y_{i,j}\in\{0,1\}
+f_l,\qquad y_l\in\{0,1\},\qquad P_n^G\geq 0,\qquad ENS_n\geq 0
 $$
 
-Si $y_{i,j}=1$, la línea se construye y puede transportar flujo. Si $y_{i,j}=0$, el flujo debe ser cero y la ecuación DC no debe forzar relación entre ángulos de barras no conectadas.
-
-La función objetivo combina inversión y operación:
+Función objetivo:
 
 $$
-\min \sum_{(i,j)} C_{i,j}^{inv}y_{i,j}+\sum_g c_gP_g+\sum_n VOLL\cdot LS_n
+\min Z=\sum_{l\in L^C}IC_ly_l+\sum_{n\in N}VOLL\cdot ENS_n
 $$
 
-## Formulación Big-M
-
-Para líneas candidatas, una forma lineal de activar la ecuación DC es:
+Balance nodal:
 
 $$
-f_{i,j}-B_{i,j}(\theta_i-\theta_j) \leq M(1-y_{i,j})
+P_n^G+ENS_n-d_n=\sum_{l:from(l)=n}f_l-\sum_{l:to(l)=n}f_l\qquad \forall n
+$$
+
+Límites existentes:
+
+$$
+-F_l^{max}\leq f_l\leq F_l^{max}
+$$
+
+Límites candidatos:
+
+$$
+-F_l^{max}y_l\leq f_l\leq F_l^{max}y_l
+$$
+
+Generación:
+
+$$
+0\leq P_n^G\leq G_n^{max}
+$$
+
+### Actividad
+
+Construya el modelo de transporte y determine qué corredores se construyen.
+
+## Caso 2. DC-TNEP
+
+Agregue ángulos $\theta_n$ y reactancias $x_l$.
+
+Línea existente:
+
+$$
+f_l=\frac{\theta_i-\theta_j}{x_l}
+$$
+
+Corredor candidato:
+
+$$
+f_l-\frac{\theta_i-\theta_j}{x_l}\leq M(1-y_l)
 $$
 
 $$
-f_{i,j}-B_{i,j}(\theta_i-\theta_j) \geq -M(1-y_{i,j})
+f_l-\frac{\theta_i-\theta_j}{x_l}\geq -M(1-y_l)
 $$
 
-Si $y_{i,j}=1$, ambas restricciones obligan a cumplir la ecuación DC. Si $y_{i,j}=0$, el término Big-M relaja la ecuación. El valor de $M$ debe elegirse con cuidado para no deteriorar la calidad numérica del MILP.
-
-![Big-M disyuntivo](figuras/03_big_m_disyuntivo.svg)
-
-## Expansión multietapa
-
-En expansión multietapa, las decisiones se distribuyen en años:
-
 $$
-y_{i,j,y}\in\{0,1\}
+\theta_{slack}=0
 $$
 
-La disponibilidad acumulada de una línea puede representarse como:
+### Actividad
+
+Compare la solución del modelo de transporte y del DC-TNEP.
+
+## Caso 3. Expansión multietapa
+
+### Datos completos
+
+|   anio |   factor_demanda |
+|-------:|-----------------:|
+|   2025 |             1    |
+|   2030 |             1.15 |
+|   2035 |             1.35 |
+
+Variable:
 
 $$
-z_{i,j,y}=z_{i,j,y-1}+y_{i,j,y}
+y_{l,y}\in\{0,1\}
 $$
 
-Esto permite decidir no solo qué construir, sino cuándo construirlo. El tiempo importa porque adelantar una inversión puede reducir costos operativos, pero incrementa el valor presente de la inversión.
+Restricción de permanencia:
 
-![Expansión multietapa](figuras/04_expansion_multietapa.svg)
+$$
+y_{l,y}\geq y_{l,y-1}\qquad \forall l,y
+$$
 
+### Actividad
 
-## Datos de trabajo para construir el caso
-
-Los CSV describen barras, corredores existentes, corredores candidatos, años y parámetros. El estudiante debe distinguir qué datos pertenecen al sistema existente y qué datos activan decisiones de inversión. A partir de esa lectura se construye el `.dat` y luego el `.mod` de transporte o DC-TNEP.
-
-| Archivo | Contenido/encabezado |
-|---|---|
-| `garver_tnep_base.csv` | linea,desde,hasta,fmax,costo |
-| `tnep_anios.csv` | anio,factor_demanda |
-| `tnep_barras.csv` | bus,demand_mw,genmax_mw |
-| `tnep_corredores.csv` | line,from,to,tipo,x_pu,fmax_mw,invcost_musd,maxnew |
-| `tnep_parametros.csv` | parametro,valor,unidad |
-
-### Archivos AMPL de referencia
-
-| Archivo | Contenido/encabezado |
-|---|---|
-| `tnep_dc.dat` | archivo de apoyo |
-| `tnep_dc.mod` | archivo de apoyo |
-| `tnep_dc.run` | archivo de apoyo |
-| `tnep_transport.dat` | archivo de apoyo |
-| `tnep_transport.mod` | archivo de apoyo |
-| `tnep_transport.run` | archivo de apoyo |
-
-### Scripts Python de apoyo
-
-| Archivo | Contenido/encabezado |
-|---|---|
-| `resumen_candidatos_tnep.py` | archivo de apoyo |
-
-## Archivos incluidos
-
-| Archivo | Uso |
-|---|---|
-| [ampl/tnep_transport.mod](ampl/tnep_transport.mod) | Modelo de expansión tipo transporte. |
-| [ampl/tnep_dc.mod](ampl/tnep_dc.mod) | Modelo DC de expansión con candidatos. |
-| [datos/tnep_barras.csv](datos/tnep_barras.csv) | Barras del caso. |
-| [datos/tnep_corredores.csv](datos/tnep_corredores.csv) | Corredores existentes y candidatos. |
-| [python/resumen_candidatos_tnep.py](python/resumen_candidatos_tnep.py) | Revisión de candidatos. |
-
-## Cómo ejecutar
-
-Desde `modulos/06_tnep/ampl/`:
-
-```bash
-ampl tnep_transport.run
-ampl tnep_dc.run
-```
-
-## Actividad propuesta
-
-Resuelva el modelo de transporte y el modelo DC con el mismo conjunto de candidatos. Compare las líneas seleccionadas, el costo total y la energía no servida. Explique por qué el modelo de transporte puede sugerir refuerzos distintos al modelo DC.
+Use los factores de demanda para resolver los años 2025, 2030 y 2035.

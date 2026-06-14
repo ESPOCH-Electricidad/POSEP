@@ -2,132 +2,156 @@
 
 # Módulo 04 — Flujo óptimo de potencia
 
-## Objetivo del módulo
+## Objetivo
 
-El módulo introduce la operación económica con restricciones de red. A diferencia del despacho uninodal, el OPF reconoce que la generación y la demanda están ubicadas en barras, que los flujos se distribuyen por la red y que las líneas tienen límites térmicos. El caso base se formula como OPF DC para concentrarse en balance nodal, ángulos, susceptancias y congestión.
-
-## Contenidos
-
-1. [Del despacho uninodal al despacho con red](#del-despacho-uninodal-al-despacho-con-red)
-2. [Balance nodal](#balance-nodal)
-3. [Modelo DC](#modelo-dc)
-4. [Límites térmicos y congestión](#límites-térmicos-y-congestión)
-5. [Referencia angular](#referencia-angular)
-6. [Lectura económica de los duales](#lectura-económica-de-los-duales)
-7. [Archivos incluidos](#archivos-incluidos)
-8. [Actividad propuesta](#actividad-propuesta)
-
-## Del despacho uninodal al despacho con red
-
-El despacho económico uninodal supone que toda generación puede atender toda demanda sin restricciones de transporte. Esa hipótesis es útil para introducir costos marginales, pero no representa sistemas reales. En una red eléctrica, la ubicación importa: una central barata puede no abastecer una carga si las líneas cercanas están congestionadas.
+Incorporar restricciones de red al despacho mediante balance nodal, ángulos de barra, flujos y límites térmicos.
 
 ![Red de barras y líneas](figuras/01_red_barras_lineas.svg)
 
-El OPF minimiza costos de operación, pero incorpora ecuaciones de flujo y límites de red. Por eso conecta operación económica con restricciones físicas.
+## Caso 1. OPF DC de tres barras
 
-## Balance nodal
+### Datos completos
 
-Para cada barra $n$ y periodo $t$, el balance nodal se expresa como:
+**Barras**
 
-$$
-\sum_{g\in G_n} P_{g,t} - D_{n,t}
-= \sum_{(n,j)\in L} f_{n,j,t} - \sum_{(i,n)\in L} f_{i,n,t}
-$$
+| bus   |   demanda_mw |
+|:------|-------------:|
+| B1    |            0 |
+| B2    |           90 |
+| B3    |           80 |
 
-El lado izquierdo representa la inyección neta de la barra: generación menos demanda. El lado derecho representa el flujo neto que sale por las líneas. Esta ecuación es una forma de conservación de potencia activa.
+**Generadores**
 
-![Balance nodal](figuras/02_balance_nodal.svg)
+| gen   | bus   |   pmin_mw |   pmax_mw |   costo_usd_mwh |
+|:------|:------|----------:|----------:|----------------:|
+| G1    | B1    |         0 |       160 |              18 |
+| G2    | B3    |         0 |       100 |              32 |
 
-## Modelo DC
+**Líneas**
 
-El flujo DC aproxima el flujo activo entre dos barras como:
+| linea   | desde   | hasta   |   x_pu |   fmax_mw |
+|:--------|:--------|:--------|-------:|----------:|
+| L12     | B1      | B2      |   0.1  |       100 |
+| L23     | B2      | B3      |   0.08 |        80 |
+| L13     | B1      | B3      |   0.12 |        60 |
 
-$$
-f_{i,j,t}=B_{i,j}(\theta_{i,t}-\theta_{j,t})
-$$
+**Parámetros**
 
-Donde $B_{i,j}$ es la susceptancia de la línea y $\theta$ son los ángulos de tensión. El modelo DC usa supuestos simplificadores: magnitudes de tensión cercanas a 1 p.u., diferencias angulares pequeñas, resistencia despreciable y ausencia de potencia reactiva.
+| parametro   | valor   | unidad   |
+|:------------|:--------|:---------|
+| slack       | B1      | -        |
+| VOLL        | 1000    | USD/MWh  |
 
-No reemplaza al OPF AC para estudios detallados de tensión o reactivos, pero es ampliamente usado en planificación y análisis económico porque conserva la relación principal entre inyecciones, ángulos y flujos activos.
+### Modelo matemático
 
-## Límites térmicos y congestión
+Conjuntos: $n\in N$, $l\in L$, $g\in G$.
 
-Cada línea tiene un límite:
-
-$$
--F_{i,j}^{max} \leq f_{i,j,t} \leq F_{i,j}^{max}
-$$
-
-Cuando una línea alcanza su límite, se dice que está congestionada. La congestión puede obligar a reducir generación barata en una zona y aumentar generación más cara en otra. Por ello, el costo marginal puede diferir entre barras.
-
-![Flujo DC](figuras/03_flujo_dc_angulos.svg)
-
-## Referencia angular
-
-Los ángulos solo tienen significado relativo. Si se suma una constante a todos los ángulos, los flujos no cambian. Para evitar infinitas soluciones equivalentes, se fija una barra de referencia:
+Variables:
 
 $$
-\theta_{ref,t}=0
+P_g\geq 0,\qquad \theta_n,\qquad f_l,\qquad ENS_n\geq 0
 $$
 
-Esta restricción no representa una limitación física adicional; solo define el sistema de referencia matemática.
+Función objetivo:
 
-## Lectura económica de los duales
+$$
+\min Z=\sum_{g\in G}c_gP_g+\sum_{n\in N}VOLL\cdot ENS_n
+$$
 
-El dual del balance nodal puede interpretarse como costo marginal local de atender demanda en esa barra, bajo el modelo y los supuestos usados. Si no hay congestión ni pérdidas, los costos marginales nodales tienden a ser iguales. Si existe congestión, los precios sombra de las líneas modifican el valor marginal por ubicación.
+Flujo DC para una línea $l$ entre $i$ y $j$:
 
-Esta lectura permite entender por qué el OPF es el puente entre operación técnica, costos marginales y señales locacionales.
+$$
+f_l=\frac{\theta_i-\theta_j}{x_l}
+$$
 
+Balance nodal:
 
-## Datos de trabajo para construir el caso
+$$
+\sum_{g:b(g)=n}P_g+ENS_n-d_n=\sum_{l:from(l)=n}f_l-\sum_{l:to(l)=n}f_l\qquad \forall n
+$$
 
-Los datos separan barras, líneas, generadores y parámetros. Esa separación es intencional: el estudiante debe transformar las tablas en conjuntos AMPL, construir los parámetros indexados y verificar que el balance nodal tenga sentido físico antes de resolver el OPF.
+Límites:
 
-| Archivo | Contenido/encabezado |
-|---|---|
-| `ieee_14_barras_resumen.csv` | dato,valor |
-| `opf_ac_barras.csv` | bus,pload_mw,qload_mvar,vmin_pu,vmax_pu |
-| `opf_ac_generadores.csv` | gen,bus,pmin_mw,pmax_mw,qmin_mvar,qmax_mvar,cost_usd_mwh |
-| `opf_ac_lineas.csv` | line,from,to,r_pu,x_pu,bsh_pu,smax_mva |
-| `opf_ac_parametros.csv` | parametro,valor,unidad |
-| `opf_dc_barras.csv` | bus,demand_mw |
-| `opf_dc_didactico.csv` | linea,desde,hasta,x,fmax |
-| `opf_dc_generadores.csv` | gen,bus,pmin_mw,pmax_mw,cost_usd_mwh |
-| `opf_dc_lineas.csv` | line,from,to,x_pu,fmax_mw |
-| `opf_dc_parametros.csv` | parametro,valor,unidad |
+$$
+P_g^{min}\leq P_g\leq P_g^{max},\qquad -F_l^{max}\leq f_l\leq F_l^{max}
+$$
 
-### Archivos AMPL de referencia
+Referencia angular:
 
-| Archivo | Contenido/encabezado |
-|---|---|
-| `opf_dc.dat` | archivo de apoyo |
-| `opf_dc.mod` | archivo de apoyo |
-| `opf_dc.run` | archivo de apoyo |
+$$
+\theta_{slack}=0
+$$
 
-### Scripts Python de apoyo
+### Actividad
 
-| Archivo | Contenido/encabezado |
-|---|---|
-| `graficar_red_dc.py` | archivo de apoyo |
+Construya el OPF DC y reporte generación, ángulos, flujos y líneas congestionadas.
 
-## Archivos incluidos
+## Caso 2. Congestión
 
-| Archivo | Uso |
-|---|---|
-| [ampl/opf_dc.mod](ampl/opf_dc.mod) | Formulación OPF DC. |
-| [ampl/opf_dc.dat](ampl/opf_dc.dat) | Caso de prueba con barras, líneas y generadores. |
-| [ampl/opf_dc.run](ampl/opf_dc.run) | Ejecución del OPF DC. |
-| [datos/](datos/) | Datos CSV de barras, líneas y generadores. |
-| [python/graficar_red_dc.py](python/graficar_red_dc.py) | Revisión básica de datos de red. |
+Reduzca el límite de `L13` de 60 MW a 40 MW. Compare costo, generación y flujos frente al caso base.
 
-## Cómo ejecutar
+## Caso 3. Estructura de OPF AC
 
-Desde `modulos/04_opf/ampl/`:
+### Datos completos
 
-```bash
-ampl opf_dc.run
-```
+**Barras**
 
-## Actividad propuesta
+| bus   |   pdem_mw |   qdem_mvar |   vmin_pu |   vmax_pu |
+|:------|----------:|------------:|----------:|----------:|
+| B1    |         0 |           0 |      0.95 |      1.05 |
+| B2    |        80 |          30 |      0.95 |      1.05 |
+| B3    |        60 |          25 |      0.95 |      1.05 |
 
-Reduzca el límite térmico de una línea crítica y resuelva nuevamente el OPF DC. Compare costo total, generación por barra y flujos. Identifique qué línea queda activa y explique cómo la congestión modifica la operación respecto al despacho uninodal.
+**Generadores**
+
+| gen   | bus   |   pmin_mw |   pmax_mw |   qmin_mvar |   qmax_mvar |   costo_usd_mwh |
+|:------|:------|----------:|----------:|------------:|------------:|----------------:|
+| G1    | B1    |         0 |       180 |         -80 |         120 |              20 |
+| G2    | B3    |         0 |       100 |         -50 |          80 |              35 |
+
+**Líneas**
+
+| linea   | desde   | hasta   |   r_pu |   x_pu |   bsh_pu |   smax_mva |
+|:--------|:--------|:--------|-------:|-------:|---------:|-----------:|
+| L12     | B1      | B2      |  0.02  |   0.1  |    0.02  |        120 |
+| L23     | B2      | B3      |  0.015 |   0.08 |    0.015 |        100 |
+| L13     | B1      | B3      |  0.025 |   0.12 |    0.025 |         90 |
+
+**Parámetros**
+
+| parametro   | valor   | unidad   |
+|:------------|:--------|:---------|
+| slack       | B1      | -        |
+| BaseMVA     | 100     | MVA      |
+
+### Modelo matemático
+
+Variables: $V_n$, $\theta_n$, $P_g$, $Q_g$, $P_{ij}$ y $Q_{ij}$.
+
+Balances:
+
+$$
+\sum_{g:b(g)=n}P_g-P_n^D=\sum_{j\in\Omega_n}P_{nj}\qquad \forall n
+$$
+
+$$
+\sum_{g:b(g)=n}Q_g-Q_n^D=\sum_{j\in\Omega_n}Q_{nj}\qquad \forall n
+$$
+
+Límites:
+
+$$
+V_n^{min}\leq V_n\leq V_n^{max}
+$$
+
+$$
+P_g^{min}\leq P_g\leq P_g^{max},\qquad Q_g^{min}\leq Q_g\leq Q_g^{max}
+$$
+
+$$
+P_{ij}^2+Q_{ij}^2\leq (S_{ij}^{max})^2
+$$
+
+### Actividad
+
+Identifique qué ecuaciones convierten al OPF AC en un problema no lineal.
