@@ -1,85 +1,29 @@
-# 06 — Expansión de generación
+# Modelos — Expansión de generación
 
-[Menú principal](../../README.md) · [Modelos](modelos/README.md) · [Actividades](actividades/README.md) · [Datos](datos/) · [Guía AMPL](../../docs/guia_ampl.md)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
 
-## Propósito del módulo
+Este bloque contiene tres modelos GEP organizados por complejidad. No todos son multietapa: el criterio para clasificar un modelo como multietapa es que la inversión esté indexada temporalmente, que exista persistencia o acumulación de capacidad entre periodos y que el modelo pueda representar el momento de construcción.
 
-La expansión de generación decide qué tecnologías construir, cuánta capacidad instalar y en qué momento hacerlo. La decisión debe atender energía, demanda máxima y reserva, pero también debe reconocer que no toda la capacidad instalada aporta la misma firmeza. Una central térmica despachable, una planta solar y un parque eólico pueden tener el mismo MW instalado, pero no el mismo aporte en horas críticas.
+| Modelo | Tipo | Clasificación temporal | Acceso |
+|---|---|---|---|
+| GEP base por periodos | MIP simplificado | Multietapa simplificado | [Abrir](01_modelo_gep_estatico_capacidad.md) |
+| GEP estático con bloques de carga | LP/MILP estático | Estático | [Abrir](02_modelo_gep_bloques_carga.md) |
+| GEP multianual con selección tecnológica | MILP multianual | Multietapa completo | [Abrir](03_modelo_gep_multianual.md) |
 
-## Demanda futura y bloques de carga
+## Lectura recomendada
 
-El GEP no necesita representar necesariamente las 8760 horas si el objetivo es una práctica introductoria. Una curva de duración de carga permite agrupar horas con demanda similar en bloques representativos. Cada bloque $b$ tiene demanda $D_b$ y duración $h_b$.
+1. Revisar primero el modelo base por periodos para entender la acumulación de capacidad.
+2. Revisar después el modelo estático con bloques para conectar inversión y operación anual representativa.
+3. Revisar finalmente el modelo multianual, donde aparecen selección tecnológica, construcción anual, lead time, operación por bloques, emisiones, renovables, presupuesto y ENS.
 
-![Curva de duración de carga](figuras/02_curva_duracion_carga.svg)
+## Archivos AMPL asociados
 
-La energía atendida en un bloque depende de su duración. Por eso la restricción de generación no debe escribirse solo en MW si la variable representa energía:
-
-$$
-Gen_{k,b}\leq AF_k Cap_k h_b
-$$
-
-Donde $AF_k$ representa disponibilidad o factor de aporte energético de la tecnología.
-
-## Costos de inversión y costos operativos
-
-El costo de una tecnología no se mide únicamente por su CAPEX. El modelo debe combinar inversión anualizada, costo fijo, costo variable y penalización por energía no servida:
-
-$$
-\min Z=\sum_k CRF\,Capex_k\,Build_k + \sum_k FOM_k Cap_k + \sum_{k,b} VOM_k Gen_{k,b} + \sum_b VOLL\,ENS_b
-$$
-
-El CRF convierte la inversión en un costo anual equivalente. El costo fijo depende de la capacidad disponible, mientras que el costo variable depende de la energía generada. La energía no servida se penaliza para evitar que el modelo atienda demanda incumplida como si fuera una alternativa normal.
-
-## Capacidad existente, nueva inversión y capacidad acumulada
-
-La capacidad total resulta de sumar capacidad existente e inversión nueva:
-
-$$
-Cap_k=ExistingCap_k+Build_k
-$$
-
-En un modelo multianual, la capacidad depende de decisiones acumuladas:
-
-$$
-Cap_{k,y}=ExistingCap_{k,y}+\sum_{\tau\leq y} Build_{k,\tau}
-$$
-
-Esta ecuación es esencial porque una planta construida en un año sigue disponible en años posteriores, salvo que se modele retiro por vida útil.
-
-## Reserva firme y suficiencia
-
-La suficiencia de capacidad no se evalúa con capacidad instalada total, sino con capacidad firme. El crédito firme $FC_k$ mide qué fracción de la capacidad puede considerarse disponible para cubrir demanda pico:
-
-$$
-\sum_k FC_k Cap_{k,y}\geq (1+RM)D_y^{peak}
-$$
-
-![Reserva firme](figuras/04_reserva_firme.svg)
-
-Esta restricción explica por qué una tecnología barata por MWh puede no reemplazar completamente a una tecnología despachable si su aporte firme es bajo.
-
-## Screening curve
-
-Antes de resolver un GEP, las curvas de selección permiten comparar tecnologías según horas de uso. Una tecnología con alto CAPEX y bajo costo variable puede ser conveniente para muchas horas; una con bajo CAPEX y alto costo variable puede ser conveniente para pocas horas.
-
-![Screening curve](figuras/03_screening_curve.svg)
-
-Esta figura no reemplaza al modelo de expansión, pero ayuda a interpretar el resultado: base, media y punta suelen requerir tecnologías distintas.
-
-## Modelos del módulo
-
-| Modelo | Pregunta que responde | Acceso |
-|---|---|---|
-| GEP estático | Cuánta capacidad instalar en un año objetivo | [Abrir](modelos/01_modelo_gep_estatico_capacidad.md) |
-| GEP con bloques | Cómo se usa la capacidad en demanda base, media y punta | [Abrir](modelos/02_modelo_gep_bloques_carga.md) |
-| GEP multianual | Cuándo instalar capacidad durante el horizonte | [Abrir](modelos/03_modelo_gep_multianual.md) |
-
-## Actividad
-
-La actividad del módulo exige formular un GEP con tecnologías candidatas, bloques de carga y reserva firme. El estudiante debe construir su `.dat` desde las tablas disponibles, implementar el `.mod` y analizar sensibilidad de demanda, margen de reserva y costo de inversión.
-
-[Ir a la actividad](actividades/actividad_06__expansion_de_generacion.md)
+| Modelo | Archivos esperados |
+|---|---|
+| GEP base por periodos | `GEP_base_Garver.mod`, `GEP_base_Garver.dat`, `GEP_base_Garver.run`, `GEP_base_Garver.out` |
+| GEP estático con bloques | `gep_static_garver.mod`, `gep_static_garver.dat`, `gep_static_garver.run`, `gep_static_garver.out` |
+| GEP multianual | `gep_multiyear_garver.mod`, `gep_multiyear_garver.dat`, `gep_multiyear_garver.run`, `gep_multiyear_garver.out` |
 
 ---
 
-[Menú principal](../../README.md) · [Modelos](modelos/README.md) · [Actividades](actividades/README.md) · [Datos](datos/)
+[Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
