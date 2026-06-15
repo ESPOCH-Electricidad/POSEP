@@ -1,216 +1,247 @@
-# Modelo 03 — GEP multianual
+# Modelo 03 — GEP multianual con selección tecnológica
 
 [Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
 
-## 1. Contexto del problema
+## 1. Clasificación del modelo
 
-El GEP multianual decide cuándo construir capacidad considerando crecimiento de demanda futura.
+Este modelo es un **GEP multietapa completo**. Decide qué tecnologías se habilitan, en qué año se construyen, cuánta capacidad se instala y cómo opera el sistema por año y bloque de carga.
+
+| Aspecto | Descripción |
+|---|---|
+| Horizonte | Varios años ordenados |
+| Tipo temporal | Multietapa / multianual |
+| Variable de selección | `Select[c]` |
+| Variable binaria anual | `BuildOn[c,y]` |
+| Variable de inversión | `Build[c,y]` |
+| Capacidad acumulada | `Cap[i,y]` con lead time |
+| Operación | `P[i,y,b]` |
+| Archivo AMPL | `gep_multiyear_garver.mod` |
 
 ## 2. Enunciado
 
-Para 2025, 2030 y 2035, determine capacidad nueva por tecnología y año, minimizando costo presente.
+Determinar selección tecnológica, cronograma de construcción, capacidad instalada disponible, despacho por bloques, ENS, emisiones y cumplimiento de metas renovables durante varios años, minimizando el costo presente del plan.
 
+## 3. Conjuntos e índices
 
+| Símbolo | Nombre AMPL | Descripción |
+|---|---|---|
+| Y | `YEAR ordered` | Años del horizonte. |
+| B | `BLOCK` | Bloques de carga. |
+| G | `TECH` | Tecnologías existentes y candidatas. |
+| Gcand | `CAND within TECH` | Tecnologías candidatas. |
+| Gren | `REN within TECH` | Tecnologías renovables. |
+| Gtherm | `THERM within TECH` | Tecnologías térmicas. |
+| Ghyd | `HYDRO within TECH` | Tecnologías hidroeléctricas. |
+| Gvre | `VAR_REN within TECH` | Renovables variables. |
+| g | `i in TECH`, `c in CAND` | Índice de tecnología. |
+| y | `y in YEAR` | Índice de año. |
+| b | `b in BLOCK` | Índice de bloque. |
+| tau | `tau in YEAR` | Año auxiliar para acumulación de capacidad. |
 
-## 3. Conjuntos requeridos
+## 4. Parámetros
 
-| Conjunto | Descripción |
-| --- | --- |
-| K | tecnologías |
-| B | bloques de carga |
-| Y | años, si aplica |
-
-## 4. Parámetros requeridos
+### Demanda y economía
 
 | Parámetro | Unidad | Descripción |
-| --- | --- | --- |
-| Capex[k] | USD/kW | costo de inversión |
-| FOM[k] | USD/kW-año | costo fijo |
-| VOM[k] | USD/MWh | costo variable |
-| AF[k] | p.u. | factor de disponibilidad |
-| FirmCredit[k] | p.u. | crédito firme |
-| ExistingCap[k] | MW | capacidad existente |
-| CandidateMax[k] | MW | máximo construible |
-| Demand[b] | MW | demanda por bloque |
-| Hours[b] | h | duración del bloque |
-| PeakDemand | MW | demanda máxima |
-| ReserveMargin | p.u. | margen de reserva |
+|---|---|---|
+| `hours[b]` | h/año | Duración del bloque. |
+| `demand[y,b]` | MW | Demanda por año y bloque. |
+| `annual_demand[y]` | MWh | Demanda anual, calculada como sumatoria por bloques. |
+| `peak[y]` | MW | Demanda máxima anual. |
+| `discount` | p.u. | Tasa de descuento. |
+| `df[y]` | p.u. | Factor de descuento. |
+| `voll` | USD/MWh | Penalización de ENS. |
 
-## 5. Datos completos para construir el archivo de datos
+### Capacidad, operación y política
 
-### Tecnologías
+| Parámetro | Unidad | Descripción |
+|---|---|---|
+| `cap0[i]` | MW | Capacidad inicial. |
+| `retire[i,y]` | MW | Retiro acumulado. |
+| `capmax[i]` | MW | Capacidad máxima total. |
+| `af[i,b]` | p.u. | Disponibilidad por bloque. |
+| `firm[i]` | p.u. | Crédito firme. |
+| `ef[i]` | tCO2/MWh | Factor de emisión. |
+| `hydro_cf[y]` | p.u. | Disponibilidad hidroenergética anual. |
+| `fuelmax[th,y]` | MWh/año | Límite anual de energía térmica. |
+| `ren_min[y]` | p.u. | Participación renovable mínima. |
+| `emcap[y]` | tCO2/año | Límite anual de emisiones. |
+| `budget[y]` | MUSD/año | Presupuesto anual de inversión. |
 
-| tecnologia | capex_usd_kw | fom_usd_kw_anio | vom_usd_mwh | af | firm_credit | existingcap_mw | candidatemax_mw |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| gas | 900 | 20 | 55 | 0.85 | 0.9 | 200 | 500 |
-| solar | 650 | 12 | 0 | 0.25 | 0.35 | 50 | 400 |
-| eolica | 1200 | 25 | 0 | 0.38 | 0.25 | 30 | 300 |
+### Inversión
 
-### Bloques de carga
+| Parámetro | Unidad | Descripción |
+|---|---|---|
+| `invfix[c]` | MUSD | Costo fijo por seleccionar tecnología. |
+| `capex[c]` | MUSD/MW | Costo de inversión por MW. |
+| `pot[c]` | MW | Potencial máximo acumulado. |
+| `buildmin[c]` | MW/año | Construcción mínima si se activa. |
+| `buildmax[c]` | MW/año | Construcción máxima anual. |
+| `lead[c]` | periodos | Tiempo de construcción. |
 
-| bloque | demand_mw | hours |
-| --- | --- | --- |
-| base | 500 | 5260 |
-| medio | 750 | 3000 |
-| pico | 1000 | 500 |
+## 5. Variables
 
-### Años
+| Variable | Dominio | Descripción |
+|---|---|---|
+| `Select[c]` | binaria | 1 si la candidata c se habilita en el plan. |
+| `BuildOn[c,y]` | binaria | 1 si se activa construcción de c en y. |
+| `Build[c,y]` | continua >= 0 | Capacidad nueva construida. |
+| `Cap[i,y]` | continua >= 0 | Capacidad disponible acumulada. |
+| `P[i,y,b]` | continua >= 0 | Potencia generada por año y bloque. |
+| `ENS[y,b]` | continua >= 0 | Déficit por año y bloque. |
+| `Curt[v,y,b]` | continua >= 0 | Vertimiento de renovables variables. |
+| `Emis[y]` | continua >= 0 | Emisiones anuales. |
 
-| anio | peak_mw | energy_gwh |
-| --- | --- | --- |
-| 2025 | 1000 | 6200 |
-| 2030 | 1150 | 7100 |
-| 2035 | 1350 | 8350 |
-
-### Parámetros
-
-| parametro | valor | unidad |
-| --- | --- | --- |
-| ReserveMargin | 0.15 | p.u. |
-| VOLL | 2000 | USD/MWh |
-| DiscountRate | 0.08 | p.u. |
-| CRF | 0.10185 | p.u. |
-
-## 6. Variables de decisión
-
-| Variable | Unidad/dominio | Descripción |
-| --- | --- | --- |
-| Build[k] | MW | capacidad nueva |
-| Cap[k] | MW | capacidad total |
-| Gen[k,b] | MWh | generación por tecnología y bloque |
-| ENS[b] | MWh | energía no servida |
-
-## 7. Función objetivo
+## 6. Función objetivo
 
 $$
-\min Z=\sum_{y\in Y}\alpha_y(C_y^{inv}+C_y^{fix}+C_y^{var}+C_y^{ENS})
+\min Z = \sum_{c\in CAND} invfix_c Select_c
++\sum_{y\in YEAR}df_y\left(
+\sum_{c\in CAND}capex_cBuild_{c,y}
++\sum_{i\in TECH}fom_iCap_{i,y}
++\sum_{i\in TECH}\sum_{b\in BLOCK}\frac{vom_iP_{i,y,b}hours_b}{10^6}
++\sum_{b\in BLOCK}\frac{voll\,ENS_{y,b}hours_b}{10^6}
+\right)
 $$
 
-**Explicación de la función objetivo.** Minimiza inversión anualizada, costo fijo, costo variable y penalización por energía no servida.
+Incluye selección, inversión, O&M fijo, operación y ENS, todo expresado en valor presente.
 
-## 8. Restricciones del modelo
+## 7. Restricciones
 
-### Balance de energía por bloque
-
-$$
-\sum_{k\in K}Gen_{k,b}+ENS_b=Demand_b
-$$
-
-**Explicación.** La generación de tecnologías cubre la demanda del bloque o se penaliza ENS.
-
-### Límite de generación
+### Capacidad de candidatas
 
 $$
-Gen_{k,b}\leq AF_k Cap_k h_b
+Cap_{i,y}=cap0_i-retire_{i,y}+\sum_{\tau\in YEAR: ord(\tau)+lead_i\le ord(y)}Build_{i,\tau}
+\qquad \forall i\in CAND,\ y\in YEAR
 $$
 
-**Explicación.** La energía producida depende de capacidad, disponibilidad y duración del bloque.
-
-### Capacidad total
+### Capacidad de existentes
 
 $$
-Cap_k=ExistingCap_k+Build_k
+Cap_{i,y}=cap0_i-retire_{i,y}
+\qquad \forall i\in TECH\setminus CAND,\ y\in YEAR
 $$
 
-**Explicación.** La capacidad disponible suma parque existente y nueva inversión.
-
-### Reserva firme
+### Enlaces de construcción
 
 $$
-\sum_k FirmCredit_kCap_k\geq (1+ReserveMargin)PeakDemand
+Build_{c,y}\le buildmax_cBuildOn_{c,y}
+\qquad \forall c\in CAND,\ y\in YEAR
 $$
 
-**Explicación.** La capacidad firme debe cubrir demanda pico más margen de reserva.
-
-### Acumulación de capacidad
-
 $$
-Cap_{k,y}=Cap_{k,y-1}+Build_{k,y}
+Build_{c,y}\ge buildmin_cBuildOn_{c,y}
+\qquad \forall c\in CAND,\ y\in YEAR
 $$
 
-**Explicación.** La capacidad construida en un año permanece disponible en años posteriores.
-
-### Demanda anual
-
 $$
-PeakDemand_y,\ Demand_{y,b}
+BuildOn_{c,y}\le Select_c
+\qquad \forall c\in CAND,\ y\in YEAR
 $$
 
-**Explicación.** La demanda proviene del módulo de proyección de demanda.
+### Potencial máximo acumulado
 
-## 9. Plantilla `.dat` sugerida
+$$
+\sum_{y\in YEAR}Build_{c,y}\le pot_cSelect_c
+\qquad \forall c\in CAND
+$$
 
-```ampl
-set K := gas solar eolica;
-set B := base medio pico;
+### Capacidad máxima
 
-param Capex :=
-gas 900
-solar 650
-eolica 1200
-;
+$$
+Cap_{i,y}\le capmax_i
+\qquad \forall i\in TECH,\ y\in YEAR
+$$
 
-param FOM :=
-gas 20
-solar 12
-eolica 25
-;
+### Balance de demanda
 
-param VOM :=
-gas 55
-solar 0
-eolica 0
-;
+$$
+\sum_{i\in TECH}P_{i,y,b}+ENS_{y,b}=demand_{y,b}
+\qquad \forall y\in YEAR,\ b\in BLOCK
+$$
 
-param AF :=
-gas 0.85
-solar 0.25
-eolica 0.38
-;
+### Límite de producción
 
-param FirmCredit :=
-gas 0.90
-solar 0.35
-eolica 0.25
-;
+$$
+P_{i,y,b}\le af_{i,b}Cap_{i,y}
+\qquad \forall i\in TECH,\ y\in YEAR,\ b\in BLOCK
+$$
 
-param ExistingCap :=
-gas 200
-solar 50
-eolica 30
-;
+### Vertimiento renovable variable
 
-param CandidateMax :=
-gas 500
-solar 400
-eolica 300
-;
+$$
+P_{v,y,b}+Curt_{v,y,b}=af_{v,b}Cap_{v,y}
+\qquad \forall v\in VAR\_REN,\ y\in YEAR,\ b\in BLOCK
+$$
 
-param Demand :=
-base 500
-medio 750
-pico 1000
-;
+### Energía hidroeléctrica anual
 
-param Hours :=
-base 5260
-medio 3000
-pico 500
-;
+$$
+\sum_{b\in BLOCK}P_{h,y,b}hours_b\le hydro\_cf_yCap_{h,y}8760
+\qquad \forall h\in HYDRO,\ y\in YEAR
+$$
 
-param PeakDemand := 1000;
-param ReserveMargin := 0.15;
-param VOLL := 2000;
-param CRF := 0.10185;
-```
+### Límite térmico anual
 
-## 10. Resultados esperados
+$$
+\sum_{b\in BLOCK}P_{th,y,b}hours_b\le fuelmax_{th,y}
+\qquad \forall th\in THERM,\ y\in YEAR
+$$
 
-Reportar cronograma de expansión, capacidad acumulada, costo presente y margen de reserva.
+### Reserva de potencia
 
-## 11. Actividad asociada
+$$
+\sum_{i\in TECH}firm_iCap_{i,y}\ge (1+reserve\_margin)peak_y
+\qquad \forall y\in YEAR
+$$
 
-[Actividad 06](../actividades/README.md)
+### Suficiencia energética anual
+
+$$
+\sum_{i\in TECH}\sum_{b\in BLOCK}af_{i,b}Cap_{i,y}hours_b
+\ge (1+energy\_margin)annual\_demand_y
+\qquad \forall y\in YEAR
+$$
+
+### Participación renovable mínima
+
+$$
+\sum_{r\in REN}\sum_{b\in BLOCK}P_{r,y,b}hours_b
+\ge ren\_min_y annual\_demand_y
+\qquad \forall y\in YEAR
+$$
+
+### Cálculo de emisiones
+
+$$
+Emis_y=\sum_{i\in TECH}\sum_{b\in BLOCK}ef_iP_{i,y,b}hours_b
+\qquad \forall y\in YEAR
+$$
+
+### Límite anual de emisiones
+
+$$
+Emis_y\le emcap_y
+\qquad \forall y\in YEAR
+$$
+
+### Límite anual de ENS
+
+$$
+\sum_{b\in BLOCK}ENS_{y,b}hours_b\le ens\_max\_share\ annual\_demand_y
+\qquad \forall y\in YEAR
+$$
+
+### Presupuesto anual
+
+$$
+\sum_{c\in CAND}capex_cBuild_{c,y}\le budget_y
+\qquad \forall y\in YEAR
+$$
+
+## 8. Resultados esperados
+
+Reportar valor objetivo, `Select`, `BuildOn`, `Build`, `Cap`, `P`, `ENS`, `Curt`, `Emis`, cumplimiento renovable, cumplimiento de reserva, uso de presupuesto y efectos de los lead times.
 
 ---
 

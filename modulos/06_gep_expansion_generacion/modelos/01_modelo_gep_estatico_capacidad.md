@@ -1,200 +1,163 @@
-# Modelo 01 — GEP estático de capacidad
+# Modelo 01 — GEP base por periodos
 
 [Menú principal](../../../README.md) · [Volver al módulo](../README.md) · [Actividades](../actividades/README.md) · [Datos](../datos/)
 
-## 1. Contexto del problema
+## 1. Clasificación del modelo
 
-El GEP estático decide capacidad nueva para un año objetivo usando demanda pico, reserva y operación representativa.
+Este modelo es un **GEP multietapa simplificado**. Tiene periodos de planificación, inversión por periodo y capacidad acumulada. Su objetivo es introducir la relación entre construcción de nueva capacidad, demanda futura y reserva firme.
+
+| Aspecto | Descripción |
+|---|---|
+| Horizonte | 2025, 2030 y 2035 |
+| Tipo temporal | Multietapa simplificado |
+| Variable de inversión | `IC[g,t]` |
+| Capacidad acumulada | `Cap[g,t]` |
+| Operación | Despacho equivalente `P[g,t]` |
+| ENS | `ENS[t]` |
+| Archivo AMPL | `GEP_base_Garver.mod` |
+
+El modelo se considera multietapa porque la inversión tiene índice temporal y la capacidad construida en un periodo permanece disponible en los periodos posteriores. Es simplificado porque no usa bloques horarios, lead time, descuento ni selección tecnológica binaria.
 
 ## 2. Enunciado
 
-Determine cuánta capacidad instalar por tecnología para cubrir demanda, reserva y operación por bloques en un año objetivo.
+Determinar la capacidad nueva que debe incorporarse en 2025, 2030 y 2035 para cubrir la demanda pico de cada periodo, cumplir reserva firme, respetar límites de construcción, controlar emisiones y evitar ENS.
 
+## 3. Conjuntos e índices
 
+| Símbolo | Nombre AMPL | Descripción |
+|---|---|---|
+| G | `G` | Tecnologías o unidades existentes y candidatas. |
+| T | `T ordered` | Periodos de planificación. |
+| CAND | `CAND within G` | Subconjunto de tecnologías candidatas. |
+| g | `g in G` | Índice de tecnología o unidad. |
+| t | `t in T` | Índice de periodo. |
+| tau | `tau in T` | Índice auxiliar para acumulación de capacidad. |
 
-## 3. Conjuntos requeridos
-
-| Conjunto | Descripción |
-| --- | --- |
-| K | tecnologías |
-| B | bloques de carga |
-| Y | años, si aplica |
-
-## 4. Parámetros requeridos
+## 4. Parámetros
 
 | Parámetro | Unidad | Descripción |
-| --- | --- | --- |
-| Capex[k] | USD/kW | costo de inversión |
-| FOM[k] | USD/kW-año | costo fijo |
-| VOM[k] | USD/MWh | costo variable |
-| AF[k] | p.u. | factor de disponibilidad |
-| FirmCredit[k] | p.u. | crédito firme |
-| ExistingCap[k] | MW | capacidad existente |
-| CandidateMax[k] | MW | máximo construible |
-| Demand[b] | MW | demanda por bloque |
-| Hours[b] | h | duración del bloque |
-| PeakDemand | MW | demanda máxima |
-| ReserveMargin | p.u. | margen de reserva |
+|---|---|---|
+| `Pmax0[g]` | MW | Capacidad inicial de la tecnología g. |
+| `Pmin[g]` | MW | Potencia mínima de despacho equivalente. |
+| `Pdem[t]` | MW | Demanda pico del periodo t. |
+| `IC_cost[g]` | MUSD/MW | Costo de inversión por MW construido. |
+| `IC_min[g,t]` | MW | Construcción mínima permitida. |
+| `IC_max[g,t]` | MW | Construcción máxima permitida. |
+| `Cg[g]` | MUSD/MW | Costo operativo equivalente. |
+| `firm[g]` | p.u. | Crédito firme de capacidad. |
+| `ef[g]` | tCO2/MWh eq. | Factor de emisiones equivalente. |
+| `Emi_max[t]` | tCO2 eq. | Límite agregado de emisiones. |
+| `ENS_Cost` | MUSD/MW | Penalización por déficit. |
+| `ENS_max[t]` | MW | ENS máxima admisible. |
+| `reserve_margin` | p.u. | Margen de reserva de potencia. |
 
-## 5. Datos completos para construir el archivo de datos
+## 5. Variables
 
-### Tecnologías
+| Variable | Dominio | Descripción |
+|---|---|---|
+| `IC[g,t]` | entera >= 0 | Nueva capacidad instalada de g en t. |
+| `Cap[g,t]` | continua >= 0 | Capacidad acumulada disponible. |
+| `P[g,t]` | continua >= 0 | Generación o despacho equivalente. |
+| `ENS[t]` | continua >= 0 | Demanda no atendida del periodo. |
 
-| tecnologia | capex_usd_kw | fom_usd_kw_anio | vom_usd_mwh | af | firm_credit | existingcap_mw | candidatemax_mw |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| gas | 900 | 20 | 55 | 0.85 | 0.9 | 200 | 500 |
-| solar | 650 | 12 | 0 | 0.25 | 0.35 | 50 | 400 |
-| eolica | 1200 | 25 | 0 | 0.38 | 0.25 | 30 | 300 |
-
-### Bloques de carga
-
-| bloque | demand_mw | hours |
-| --- | --- | --- |
-| base | 500 | 5260 |
-| medio | 750 | 3000 |
-| pico | 1000 | 500 |
-
-### Años
-
-| anio | peak_mw | energy_gwh |
-| --- | --- | --- |
-| 2025 | 1000 | 6200 |
-| 2030 | 1150 | 7100 |
-| 2035 | 1350 | 8350 |
-
-### Parámetros
-
-| parametro | valor | unidad |
-| --- | --- | --- |
-| ReserveMargin | 0.15 | p.u. |
-| VOLL | 2000 | USD/MWh |
-| DiscountRate | 0.08 | p.u. |
-| CRF | 0.10185 | p.u. |
-
-## 6. Variables de decisión
-
-| Variable | Unidad/dominio | Descripción |
-| --- | --- | --- |
-| Build[k] | MW | capacidad nueva |
-| Cap[k] | MW | capacidad total |
-| Gen[k,b] | MWh | generación por tecnología y bloque |
-| ENS[b] | MWh | energía no servida |
-
-## 7. Función objetivo
+## 6. Función objetivo
 
 $$
-\min Z=\sum_k CRF\,Capex_k\,Build_k+\sum_kFOM_kCap_k+\sum_{k,b}VOM_kGen_{k,b}+\sum_bVOLL\,ENS_b
+\min Z=
+\sum_{g\in G}\sum_{t\in T} IC\_cost_g IC_{g,t}
++\sum_{g\in G}\sum_{t\in T} Cg_g P_{g,t}
++\sum_{t\in T} ENS\_Cost\,ENS_t
 $$
 
-**Explicación de la función objetivo.** Minimiza inversión anualizada, costo fijo, costo variable y penalización por energía no servida.
+La función objetivo suma inversión, operación equivalente y penalización por ENS.
 
-## 8. Restricciones del modelo
+## 7. Restricciones
 
-### Balance de energía por bloque
-
-$$
-\sum_{k\in K}Gen_{k,b}+ENS_b=Demand_b
-$$
-
-**Explicación.** La generación de tecnologías cubre la demanda del bloque o se penaliza ENS.
-
-### Límite de generación
+### Capacidad acumulada
 
 $$
-Gen_{k,b}\leq AF_k Cap_k h_b
+Cap_{g,t}=Pmax0_g+\sum_{\tau\in T: ord(\tau)\le ord(t)} IC_{g,\tau}
+\qquad \forall g\in G,\ t\in T
 $$
 
-**Explicación.** La energía producida depende de capacidad, disponibilidad y duración del bloque.
+La capacidad disponible en cada periodo incluye capacidad inicial y todas las inversiones realizadas hasta ese periodo.
 
-### Capacidad total
+### Balance de demanda
 
 $$
-Cap_k=ExistingCap_k+Build_k
+\sum_{g\in G}P_{g,t}+ENS_t=Pdem_t
+\qquad \forall t\in T
 $$
 
-**Explicación.** La capacidad disponible suma parque existente y nueva inversión.
+La demanda pico se atiende con generación o ENS.
+
+### Límite de despacho
+
+$$
+P_{g,t}\le Cap_{g,t}
+\qquad \forall g\in G,\ t\in T
+$$
+
+El despacho equivalente no puede superar la capacidad disponible.
+
+### Mínimo de despacho
+
+$$
+P_{g,t}\ge Pmin_g
+\qquad \forall g\in G,\ t\in T
+$$
+
+Representa mínimos técnicos o compromisos operativos simplificados.
+
+### Límites de construcción
+
+$$
+IC\_min_{g,t}\le IC_{g,t}\le IC\_max_{g,t}
+\qquad \forall g\in G,\ t\in T
+$$
+
+Controla el rango de nueva capacidad que puede entrar en cada periodo.
 
 ### Reserva firme
 
 $$
-\sum_k FirmCredit_kCap_k\geq (1+ReserveMargin)PeakDemand
+\sum_{g\in G} firm_g Cap_{g,t}\ge (1+reserve\_margin)Pdem_t
+\qquad \forall t\in T
 $$
 
-**Explicación.** La capacidad firme debe cubrir demanda pico más margen de reserva.
+La capacidad firme debe cubrir la demanda pico más el margen de reserva.
 
-## 9. Plantilla `.dat` sugerida
+### Emisiones
+
+$$
+\sum_{g\in G} ef_g P_{g,t}\le Emi\_max_t
+\qquad \forall t\in T
+$$
+
+Limita emisiones agregadas por periodo.
+
+### ENS máxima
+
+$$
+ENS_t\le ENS\_max_t
+\qquad \forall t\in T
+$$
+
+Controla el déficit máximo admisible.
+
+## 8. Plantilla `.dat` orientativa
 
 ```ampl
-set K := gas solar eolica;
-set B := base medio pico;
-
-param Capex :=
-gas 900
-solar 650
-eolica 1200
-;
-
-param FOM :=
-gas 20
-solar 12
-eolica 25
-;
-
-param VOM :=
-gas 55
-solar 0
-eolica 0
-;
-
-param AF :=
-gas 0.85
-solar 0.25
-eolica 0.38
-;
-
-param FirmCredit :=
-gas 0.90
-solar 0.35
-eolica 0.25
-;
-
-param ExistingCap :=
-gas 200
-solar 50
-eolica 30
-;
-
-param CandidateMax :=
-gas 500
-solar 400
-eolica 300
-;
-
-param Demand :=
-base 500
-medio 750
-pico 1000
-;
-
-param Hours :=
-base 5260
-medio 3000
-pico 500
-;
-
-param PeakDemand := 1000;
-param ReserveMargin := 0.15;
-param VOLL := 2000;
-param CRF := 0.10185;
+set T := 2025 2030 2035;
+set G := G1_GAS_EXIST G3_HYD_EXIST G6_THERM_EXIST PV5_NEW WIND2_NEW CCGT6_NEW HYD3_NEW;
+set CAND := PV5_NEW WIND2_NEW CCGT6_NEW HYD3_NEW;
 ```
 
-## 10. Resultados esperados
+La palabra `ordered` se declara en el `.mod`, no en el `.dat`.
 
-Reportar capacidad nueva, capacidad total, generación por tecnología, reserva firme y costo total.
+## 9. Resultados esperados
 
-## 11. Actividad asociada
-
-[Actividad 06](../actividades/README.md)
+Reportar `IC`, `Cap`, `P`, `ENS`, valor objetivo, cumplimiento de reserva, límite de emisiones y tecnologías que reciben inversión.
 
 ---
 
