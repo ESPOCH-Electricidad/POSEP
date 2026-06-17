@@ -1,8 +1,3 @@
-cff-version: 1.2.0
-message: "Si utiliza este repositorio con fines académicos, cite el material docente."
-title: "Planificación y Operación de Sistemas Eléctricos de Potencia"
-authors:
-  - family-names: "Guamán"
-    given-names: "Wilian"
-version: "v13-curada"
-date-released: "2026-06-14"
+Forma sugerida de citación
+
+Guamán Cuenca, W. (2026). POSEP: Plataforma para la enseñanza de Planificación y Operación de Sistemas Eléctricos de Potencia. Carrera de Electricidad, Escuela Superior Politécnica de Chimborazo. Repositorio GitHub: ESPOCH-Electricidad/POSEP.
